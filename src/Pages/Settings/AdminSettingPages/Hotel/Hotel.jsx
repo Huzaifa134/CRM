@@ -1690,6 +1690,9 @@ function Hotel() {
                   <CloseIcon />
                 </div>
               </div>
+              <div className="flex items-center justify-center">
+              <img src={(e)=>{e.target.image}} alt="hotel image" width={500} height={500} />
+              </div>
             </div>
           </Modal>
         </div>
