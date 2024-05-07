@@ -15,7 +15,7 @@ import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternate
 import LandScape from "../../../assets/images/lanscape.png";
 import EditIcon from "@mui/icons-material/Edit";
 import ImageModal from "../../../Components/imageModal";
-
+import dayjs from "dayjs";
 const data = [
   {
     id: "12EF34RC1",
@@ -297,7 +297,32 @@ function DayItinerary() {
     flex: 1,
     tooltipField: "name",
   };
-
+  const [hotelFields, setHotelFields] = useState({
+    property_type: "DEFAULT",
+    name: "",
+    category: "DEFAULT",
+    destination_id: "DEFAULT",
+    address: "",
+    contact_no: "",
+    details: "",
+    hotel_img: "",
+    tarif_valid_from: dayjs().format("YYYY-MM-DD"),
+    tarif_valid_to: dayjs().format("YYYY-MM-DD"),
+    contact_person: "",
+    mob_no_1: "",
+    mob_no_2: "",
+    reservation_email: "",
+    website_link: "",
+    status: "1",
+  });
+  const [errors, setErrors] = useState({ name: null, helperTxt: null });
+  const handleChange = (event) => {
+    setErrors({ name: null, helperTxt: null });
+    return setHotelFields({
+      ...hotelFields,
+      [event.target.name]: event.target.value,
+    });
+  };
   return (
     <div className="h-full">
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
@@ -365,57 +390,88 @@ function DayItinerary() {
               </div>
               <div className="flex justify-between w-full mt-4 h-[90%]">
                 <div className="flex flex-col w-[48%]">
-                  <div className="relative w-full">
-                    <TextField
+                <div className="mb-4 w-full">
+                <TextField
+                  id="outlined-basic"
+                  size="small"
+                  label="Title"
+                  variant="outlined"
+                  sx={{ width: "100%" }}
+                />
+              </div>
+              {/* Destination */}
+                 
+                  <div className="relative mt-2 w-full">
+                    <select
                       id="outlined-basic"
+                      className={`px-2 focus:outline-none w-full border h-10  focus:border  ${
+                        errors.name === "destination_id"
+                          ? "border-red-600"
+                          : "hover:border-black border-[#d8d8d8]"
+                      }  rounded-md`}
                       size="small"
                       label="Destination"
                       variant="outlined"
+                      name="destination_id"
                       sx={{ width: "100%" }}
-                      value={destinationVal}
-                      onChange={(e) => {
-                        setDestinationVal(e.target.value);
-                        setShowPicker(true);
-                      }}
-                    />
-                    {showPicker && destinationVal && matchArr.length > 0 && (
-                      <ul className="absolute z-10 bg-[#f9f9f9] w-full border rounded-b-lg p-1 border-black">
-                        {matchArr.map((match, index) => (
-                          <li
-                            className="hover:bg-blue-200 cursor-pointer rounded-sm p-1 border-b"
-                            key={index}
-                            onClick={() => {
-                              setDestinationVal(match);
-                              setShowPicker(false);
-                            }}
-                          >
-                            {match}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                      value={hotelFields.destination_id}
+                      onChange={handleChange}
+                    >
+                      <option disabled={true} value={"DEFAULT"}>
+                        Destination
+                      </option>
+                      {destinations.map((item, index) => {
+                        return (
+                           
+                            <option key={index} value={item}>
+                              {item}
+                            </option>
+                          
+                        );
+                      })}
+                    </select>
+                    <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
+                      {errors.name === "destination_id" && errors.helperTxt}
+                    </p>
                   </div>
 
-                  <div className="mt-4 w-full">
-                    <TextField
-                      id="outlined-basic"
-                      size="small"
-                      label="Title"
-                      variant="outlined"
-                      sx={{ width: "100%" }}
-                    />
-                  </div>
+                 
 
-                  <select
-                    defaultValue={"DEFAULT"}
-                    className="px-2 focus:outline-none mt-5 w-full border h-10 hover:border-black focus:border border-[#d8d8d8] rounded-md"
+                  <div className=" mt-4 flex items-center w-full justify-between">
+                  <div className="border border-slate-300 rounded-md flex justify-start items-center px-2 h-10 w-[84%]">
+                    <Input
+                      id="file-input"
+                      type="file"
+                      disabled={stat === "Edit" ? click : false}
+                      inputProps={{ multiple: true }}
+                      onChange={(e) => handleFileSelect(e)}
+                      style={{ display: "none" }}
+                    />
+                    <div className="flex items-center gap-3">
+                      <label className="cursor-pointer" htmlFor="file-input">
+                        <AddPhotoAlternateOutlinedIcon className="text-slate-500 hover:text-slate-950" />
+                      </label>
+                      <div className="hidden text-sm md:block overflow-x-auto">
+                        {itineraryImg === ""
+                          ? `Select  Image`
+                          : "Selected  "}
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setImgModal(true);
+                    }}
+                    className="border border-slate-300 text-xs rounded-md flex items-center justify-center w-[15%] underline cursor-pointer h-10"
                   >
-                    <option value="DEFAULT" disabled>
-                      Status
-                    </option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                  </select>
+                    View
+                  </button>
+                  <ImageModal
+                    setState={setImgModal}
+                    state={imgModal}
+                    image={itineraryImg}
+                  />
+                </div>
                 </div>
 
                 <div className="flex flex-col w-[48%]">
@@ -433,41 +489,18 @@ function DayItinerary() {
                     />
                   </div>
 
-                  <div className=" mt-4 flex items-center w-full justify-between">
-                    <div className="border border-slate-300 rounded-md flex justify-start items-center px-2 h-10 w-[84%]">
-                      <Input
-                        id="file-input"
-                        type="file"
-                        disabled={stat === "Edit" ? click : false}
-                        inputProps={{ multiple: true }}
-                        onChange={(e) => handleFileSelect(e)}
-                        style={{ display: "none" }}
-                      />
-                      <div className="flex items-center gap-3">
-                        <label className="cursor-pointer" htmlFor="file-input">
-                          <AddPhotoAlternateOutlinedIcon className="text-slate-500 hover:text-slate-950" />
-                        </label>
-                        <div className="hidden text-sm md:block overflow-x-auto">
-                          {itineraryImg === ""
-                            ? `Select  Image`
-                            : "Selected  "}
-                        </div>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setImgModal(true);
-                      }}
-                      className="border border-slate-300 text-xs rounded-md flex items-center justify-center w-[15%] underline cursor-pointer h-10"
-                    >
-                      View
-                    </button>
-                    <ImageModal
-                      setState={setImgModal}
-                      state={imgModal}
-                      image={itineraryImg}
-                    />
-                  </div>
+                 
+
+                  <select
+                    defaultValue={"DEFAULT"}
+                    className="px-2 focus:outline-none mt-5 w-full border h-10 hover:border-black focus:border border-[#d8d8d8] rounded-md"
+                  >
+                    <option value="DEFAULT" disabled>
+                      Status
+                    </option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
                 </div>
               </div>
               <div className="mt-4 flex justify-between items-center">

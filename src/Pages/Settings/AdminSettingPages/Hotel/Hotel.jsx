@@ -993,6 +993,7 @@ function Hotel() {
                   <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
                     {errors.name === "category" && errors.helperTxt}
                   </p>
+                  {/*Destinations  */}
                   <div className="relative mt-2 w-full">
                     <select
                       id="outlined-basic"
