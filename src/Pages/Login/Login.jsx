@@ -540,7 +540,7 @@ const Login = () => {
                   ? { opacity: 0, transition: "opacity 0.5s" }
                   : { opacity: 1, transition: "opacity 0.5s" }
               }
-              className="content h-full"
+              className="content h-full text-white"
             >
               <PersonAddAltOutlinedIcon style={{ fontSize: 100 }} />
               <h1>Hello,friend!</h1>
@@ -562,16 +562,16 @@ const Login = () => {
         </div>
 
         <div
-          className={`flex  lg:block h-full  ${isActive ? "active" : "close"}`}
+          className={`flex  lg:block h-full  ${isActive ? "active" : "close"} `}
         >
-          <div className="page back  w-[50%] absolute top-0">
+          <div className="page back  w-[50%] absolute top-0 ">
             <div
               style={
                 isActive
                   ? { opacity: 1, transition: "opacity 0.5s" }
                   : { opacity: 0, transition: "opacity 0.5s" }
               }
-              className=" content"
+              className=" content text-white"
             >
               <LogoutOutlinedIcon style={{ fontSize: 100 }} />
               <h1>Welcome Back!</h1>
@@ -607,9 +607,9 @@ const Login = () => {
                   value={fields.password}
                   name="password"
                   type="text"
-                  placeholder="pin"
+                  placeholder="password"
                 />
-                <span className="forget">Forgot password?</span>
+                
                 <span className="clearfix"></span>
                 <button
                   className="h-20"

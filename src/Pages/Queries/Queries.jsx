@@ -16,7 +16,10 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import _ from "lodash";
-
+import { FaCalendarDays } from "react-icons/fa6";
+import { FaPerson } from "react-icons/fa6";
+import { MdOutlineSmartphone } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 let destinations = [];
 let clients = [];
@@ -38,6 +41,8 @@ function Queries() {
   const [selectAssign, setSelectAssign] = useState("");
   const [selectService, setSelectService] = useState("");
   const [remarks, setRemarks] = useState("");
+  const [type, setType] = useState("");
+
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("submit");
@@ -82,6 +87,9 @@ function Queries() {
       setSelectService(value);
     } else if (name === "remarks") {
       setRemarks(value);
+    }
+    else if (name === "type") {
+      setType(value);
     }
   };
 
@@ -615,10 +623,10 @@ function Queries() {
         open={queryModal}
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
-        className="overflow-auto w-[1000px] m-auto"
+        className="overflow-auto w-[1000px] ml-[750px]"
       >
         <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white  md:w-[50%] h-fit">
-          <div className="flex justify-between mt-20 text-3xl items-center h-[10%] px-2">
+          <div className="flex justify-between mt-32 text-3xl items-center h-[10%] px-2">
             <div className="font-bold text-lg"> Create Query </div>
             <div
               className="cursor-pointer"
@@ -639,6 +647,9 @@ function Queries() {
                       : "hover:border-black border-[#d8d8d8]"
                   }  rounded-md`}
                   defaultValue={"DEFAULT"}
+                  name="type"
+                  value={type}
+                  onChange={handlefields}
                 >
                   <option value={"DEFAULT"} disabled={true}>
                     Type
@@ -673,15 +684,21 @@ function Queries() {
                       <option value="Prof">Prof.</option>
                     </select>
                   </div>
-                  <div className="w-[350px]">
+                  <div className="w-[300px]">
+                  <div className="flex border-2 rounded-md">
+                  <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                  
+                  <FaPerson className="px-1 w-5 h-5 " />
+                  </div>
                     <TextField
                       id="outlined-basic"
                       size="small"
                       error={errors.name === "single"}
-                      label={"Clients Name"}
+                      label={" Name"}
                       variant="outlined"
                       sx={{ width: "100%" }}
                     />
+                    </div>
                   </div>
                 </div>
                 <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
@@ -693,6 +710,11 @@ function Queries() {
               <div className="flex gap-5 w-[500px]">
                 {/*phone number */}
                 <div className="mt-4">
+                <div className="flex justify-center items-center border-2 rounded-md">
+                <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                <MdOutlineSmartphone className="px-1 w-5 h-5 "/>
+                  
+                  </div>
                   <div>
                     <input
                       type="number"
@@ -700,7 +722,7 @@ function Queries() {
                       onChange={handleChange}
                       onFocus={() => setIsInputFocused(true)}
                       onBlur={() => setIsInputFocused(false)}
-                      className="border-2 rounded-md py-2 px-2 w-[215px]"
+                      className=" py-2 px-2 w-[170px]"
                       placeholder="Phone/Mobile"
                     />
                     {isInputFocused && (
@@ -718,9 +740,15 @@ function Queries() {
                       </div>
                     )}
                   </div>
+                  </div>
                 </div>
                 {/*email */}
                 <div className="mt-4">
+                <div className="flex justify-center items-center border-2 rounded-md">
+                <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                <MdEmail className="px-1 w-5 h-5 "/>
+                
+                </div>
                   <input
                     type="email"
                     name="email"
@@ -728,10 +756,29 @@ function Queries() {
                     placeholder="Email"
                     value={email}
                     onChange={handlefields}
-                    className="border-2 rounded-md py-2 px-2 w-[215px]"
+                    className=" py-2 px-2 w-[170px]"
                   />
+                  </div>
                 </div>
               </div>
+              {/*Agent company and GST */} 
+              {type==="AGENT" ? (
+
+                <div className="flex gap-5 mt-3">
+               {/* company */}
+                <div className="">
+                <label htmlFor="company" >company</label>
+                <input type="text" name="company" id="company" placeholder="company name" className="border-2 px-[19px] py-2 rounded-md"  />
+                </div>
+                {/* GST */}
+                <div>
+                <label htmlFor="gst">GST</label>
+                <input type="text" name="gst" id="gst" placeholder="GST" className="border-2 px-4 py-2 rounded-md" />
+                </div>
+                </div>
+              ):""
+
+               }
               <div className="flex  w-[420px] gap-4">
                 {/* destination */}
                 <div className="mt-4  ">
@@ -770,13 +817,16 @@ function Queries() {
               <div className="flex gap-4">
                 <div className="mt-4">
                   <label htmlFor="fromdate">From Date</label>
+                  <div className="flex flex-row-reverse">
+                  
                   <input
-                    type="date"
-                    name="fromdate"
-                    id="fromdate"
-                    className="border-2 rounded-md px-3 py-2 w-[215px]"
-                    placeholder="from date"
+                  type="date"
+                  name="fromdate"
+                  id="fromdate"
+                  className="border-2 rounded-md px-3 py-2 w-[215px]"
+                  placeholder="from date"
                   />
+                  </div>
                 </div>
                 <div className="mt-4">
                   <label htmlFor="todate">To Date</label>
@@ -794,12 +844,18 @@ function Queries() {
                 {/* Adult */}
                 <div>
                   <label htmlFor="adultage">Adult</label>
+                  <div className="flex justify-center items-center border-2 rounded-md">
+                  
+                  <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                  
+                  <FaPerson className="px-1 w-5 h-5 " />
+                  </div>
                   <select
                     name="adultage"
                     id="adultage"
                     onChange={handlefields}
                     value={selectAdultage}
-                    className="border-2 rounded-md px-5 py-2 w-[135px]"
+                    className=" px-3 py-2 w-[92px]"
                   >
                     {adultage.map((item, index) => (
                       <option value={item} key={index}>
@@ -807,33 +863,45 @@ function Queries() {
                       </option>
                     ))}
                   </select>
+                  </div>
                 </div>
                 {/* Child */}
                 <div>
                   <label htmlFor="childage">Child </label>
+                  <div className="border-2 rounded-md flex">
+                  <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                  
+                  <FaPerson className="px-1 w-5 h-5 " />
+                  </div>
                   <select
-                    name="childage"
-                    id="childage"
-                    onChange={handlefields}
-                    value={selectChildage}
-                    className="border-2 rounded-md px-5 py-2 w-[135px]"
+                  name="childage"
+                  id="childage"
+                  onChange={handlefields}
+                  value={selectChildage}
+                  className=" px-3 py-2 w-[92px]"
                   >
-                    {childage.map((item, index) => (
-                      <option value={item} key={index}>
-                        {item}
-                      </option>
-                    ))}
+                  {childage.map((item, index) => (
+                    <option value={item} key={index}>
+                    {item}
+                    </option>
+                  ))}
                   </select>
+                  </div>
                 </div>
                 {/*infant  */}
                 <div>
                   <label htmlFor="infantage">Infant </label>
+                  <div className="border-2 rounded-md flex">
+                  <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                  
+                  <FaPerson className="px-1 w-5 h-5 " />
+                  </div>
                   <select
                     name="infantage"
                     id="infantage"
                     onChange={handlefields}
                     value={selectInfantage}
-                    className="border-2 rounded-md px-5 py-2 w-[135px]"
+                    className=" px-5 py-2 w-[92px]"
                   >
                     {infantage.map((item, index) => (
                       <option value={item} key={index}>
@@ -841,6 +909,7 @@ function Queries() {
                       </option>
                     ))}
                   </select>
+                  </div>
                 </div>
               </div>
 
@@ -856,7 +925,7 @@ function Queries() {
                     onChange={handlefields}
                     value={selectSource}
                   >
-                    <option value=""></option>
+                    <option value="">Select</option>
                     {source.map((item, index) => (
                       <option value={item} key={index}>
                         {item}
