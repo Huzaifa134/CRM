@@ -9,7 +9,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import { FaWhatsapp } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import CloseIcon from "@mui/icons-material/Close";
 import Modal from "@mui/material/Modal";
@@ -43,6 +43,32 @@ function Queries() {
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("");
 
+  // calculate day
+
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [days, setDays] = useState("");
+
+  useEffect(() => {
+    if (fromDate && toDate) {
+      const from = new Date(fromDate);
+      const to = new Date(toDate);
+
+      // Calculate the difference in milliseconds
+      const difference = to.getTime() - from.getTime();
+
+      // Convert milliseconds to days
+      const daysDifference = Math.ceil(difference / (1000 * 3600 * 24));
+
+      setDays(daysDifference);
+    } else {
+      setDays("");
+    }
+  }, [fromDate, toDate]);
+
+  //naviagte save
+
+  const navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("submit");
@@ -61,8 +87,12 @@ function Queries() {
       selectService,
       remarks
     );
+    navigate("/queriesDetail");
   };
 
+  const editHandler =() =>{
+    navigate('queriesDetail')
+  }
   const handlefields = (e) => {
     const { name, value } = e.target;
     if (name === "email") {
@@ -87,8 +117,7 @@ function Queries() {
       setSelectService(value);
     } else if (name === "remarks") {
       setRemarks(value);
-    }
-    else if (name === "type") {
+    } else if (name === "type") {
       setType(value);
     }
   };
@@ -395,16 +424,23 @@ function Queries() {
                     style={{ fontSize: 17 }}
                   />
                 </div>
-                <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
+                <div 
+                
+                 className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
+                  
                   <EmailOutlinedIcon
                     className="group-hover:text-white"
                     style={{ fontSize: 17 }}
                   />
                 </div>
-                <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
+                <div
+                 onClick={editHandler}
+                 className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
                   <EditOutlinedIcon
                     className="group-hover:text-white"
                     style={{ fontSize: 17 }}
+
+                    
                   />
                 </div>
                 <div
@@ -618,415 +654,440 @@ function Queries() {
         <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[95%] md:w-[70%] h-fit"></div>
       </Modal>
 
+      {/* Add Query Modal */}
+
       <Modal
         // keepMounted
         open={queryModal}
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
         className="overflow-auto w-[1000px] ml-[750px]"
+        
       >
-        <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white  md:w-[50%] h-fit">
-          <div className="flex justify-between mt-32 text-3xl items-center h-[10%] px-2">
-            <div className="font-bold text-lg"> Create Query </div>
-            <div
-              className="cursor-pointer"
-              onClick={() => {
-                handleClose("QUERY");
-              }}
-            >
-              <CloseIcon />
-            </div>
-          </div>
-          <div className="flex justify-between w-full mt-2 h-[90%]">
-            <div className="w-[49%]">
-              <div>
-                <select
-                  className={`px-2  focus:outline-none w-[450px] border h-10  focus:border  ${
-                    errors.name === "meal_plan_id"
-                      ? "border-red-600"
-                      : "hover:border-black border-[#d8d8d8]"
-                  }  rounded-md`}
-                  defaultValue={"DEFAULT"}
-                  name="type"
-                  value={type}
-                  onChange={handlefields}
-                >
-                  <option value={"DEFAULT"} disabled={true}>
-                    Type
-                  </option>
-                  <option value="CLIENT">Client</option>
-                  <option value="AGENT">Agent</option>
-                  <option value="CORPORATE">Corporate</option>
-                </select>
-                <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
-                  {errors.name === "meal_plan_id" && errors.helperTxt}
-                </p>
+        <div className="flex justify-end">
+          <div className="p-4 rounded-md absolute top-[50%] left-[40%] translate-x-[-50%] translate-y-[-50%] bg-white  md:w-[50%] h-fit max-[1200px]:left-[50%]" >
+            <div className={`flex justify-between ${type==="AGENT"?"mt-80":"mt-36"} ${type==="CORPORATE"?"mt-60":"mt-36"} ${type==="CLIENT"?"mt-60":"mt-36"} text-3xl items-center h-[10%] px-2`}>
+              <div className="font-bold text-lg"> Create Query </div>
+              <div
+                className="cursor-pointer"
+                onClick={() => {
+                  handleClose("QUERY");
+                }}
+              >
+                <CloseIcon />
               </div>
+            </div>
+            <div className="flex justify-between w-full mt-2 h-[90%]">
+              <div className="w-[49%]">
+                <div>
+                  <select
+                    className={`px-2  focus:outline-none w-[450px] border h-10  focus:border  ${
+                      errors.name === "meal_plan_id"
+                        ? "border-red-600"
+                        : "hover:border-black border-[#d8d8d8]"
+                    }  rounded-md`}
+                    defaultValue={"DEFAULT"}
+                    name="type"
+                    value={type}
+                    onChange={handlefields}
+                  >
+                    <option value={"DEFAULT"} disabled={true}>
+                      Type
+                    </option>
+                    <option value="CLIENT">Client</option>
+                    <option value="AGENT">Agent</option>
+                    <option value="CORPORATE">Corporate</option>
+                  </select>
+                  <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
+                    {errors.name === "meal_plan_id" && errors.helperTxt}
+                  </p>
+                </div>
 
-              <div className="mt-4">
-                <div className="  w-[450px] flex gap-5 justify-between items-center">
-                  <div className="">
-                    <select
-                      className={`px-2 w-[100px] focus:outline-none  border h-10  focus:border  ${
-                        errors.name === "meal_plan_id"
-                          ? "border-red-600"
-                          : "hover:border-black border-[#d8d8d8]"
-                      }  rounded-md`}
-                      defaultValue={"DEFAULT"}
-                    >
-                      <option value="DEFAULT" disabled={true}>
-                        Title
-                      </option>
-                      <option value="Mr">Mr.</option>
-                      <option value="Mrs">Mrs.</option>
-                      <option value="Ms">Ms.</option>
-                      <option value="Dr">Dr.</option>
-                      <option value="Prof">Prof.</option>
-                    </select>
+                <div className="mt-4">
+                  <div className="  w-[450px] flex gap-5 justify-between items-center">
+                    <div className="">
+                      <select
+                        className={`px-2 w-[100px] focus:outline-none  border h-10  focus:border  ${
+                          errors.name === "meal_plan_id"
+                            ? "border-red-600"
+                            : "hover:border-black border-[#d8d8d8]"
+                        }  rounded-md`}
+                        defaultValue={"DEFAULT"}
+                      >
+                        <option value="DEFAULT" disabled={true}>
+                          Title
+                        </option>
+                        <option value="Mr">Mr.</option>
+                        <option value="Mrs">Mrs.</option>
+                        <option value="Ms">Ms.</option>
+                        <option value="Dr">Dr.</option>
+                        <option value="Prof">Prof.</option>
+                      </select>
+                    </div>
+                    <div className="w-[300px]">
+                      <div className="flex border-1 rounded-md">
+                        <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                          <FaPerson className="px-1 w-5 h-5 " />
+                        </div>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          error={errors.name === "single"}
+                          label={" Name"}
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div className="w-[300px]">
-                  <div className="flex border-2 rounded-md">
-                  <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                  
-                  <FaPerson className="px-1 w-5 h-5 " />
+                  <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
+                    {errors.name === "meal_plan_id" && errors.helperTxt}
+                  </p>
+                </div>
+
+                {/*phone / email */}
+                <div className="flex gap-5 w-[500px]">
+                  {/*phone number */}
+                  <div className="mt-4">
+                    <div className="flex justify-center items-center border-2 rounded-md">
+                      <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                        <MdOutlineSmartphone className="px-1 w-5 h-5 " />
+                      </div>
+                      <div>
+                        <input
+                          type="number"
+                          value={phoneNumber}
+                          onChange={handleChange}
+                          onFocus={() => setIsInputFocused(true)}
+                          onBlur={() => setIsInputFocused(false)}
+                          className=" py-2 px-2 w-[170px]"
+                          placeholder="Phone/Mobile"
+                        />
+                        {isInputFocused && (
+                          <div className="dropdown-content">
+                            {searchResults.length > 0 ? (
+                              searchResults.map((result, index) => (
+                                <div key={index} className="dropdown-item">
+                                  {result.name}{" "}
+                                  {/* Assuming result contains name of the user */}
+                                </div>
+                              ))
+                            ) : (
+                              <p>No results found</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                    <TextField
-                      id="outlined-basic"
-                      size="small"
-                      error={errors.name === "single"}
-                      label={" Name"}
-                      variant="outlined"
-                      sx={{ width: "100%" }}
-                    />
+                  {/*email */}
+                  <div className="mt-4">
+                    <div className="flex justify-center items-center border-2 rounded-md">
+                      <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                        <MdEmail className="px-1 w-5 h-5 " />
+                      </div>
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={handlefields}
+                        className=" py-2 px-2 w-[170px]"
+                      />
                     </div>
                   </div>
                 </div>
-                <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
-                  {errors.name === "meal_plan_id" && errors.helperTxt}
-                </p>
-              </div>
-
-              {/*phone / email */}
-              <div className="flex gap-5 w-[500px]">
-                {/*phone number */}
-                <div className="mt-4">
-                <div className="flex justify-center items-center border-2 rounded-md">
-                <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                <MdOutlineSmartphone className="px-1 w-5 h-5 "/>
-                  
+                {/*Agent company and GST */}
+                {type === "AGENT" ? (
+                  <div className="flex gap-5 mt-3">
+                    {/* company */}
+                    <div className="">
+                      <label htmlFor="company">company</label>
+                      <input
+                        type="text"
+                        name="company"
+                        id="company"
+                        placeholder="company name"
+                        className="border-2 px-[19px] py-2 rounded-md"
+                      />
+                    </div>
+                    {/* GST */}
+                    <div>
+                      <label htmlFor="gst">GST</label>
+                      <input
+                        type="text"
+                        name="gst"
+                        id="gst"
+                        placeholder="GST"
+                        className="border-2 px-4 py-2 rounded-md"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <input
-                      type="number"
-                      value={phoneNumber}
+                ) : (
+                  ""
+                )}
+                <div className="flex  w-[420px] gap-4">
+                  {/* destination */}
+                  <div className="mt-4  ">
+                    <select
+                      name="destination"
+                      className="border-2 rounded-md px-3 py-2 w-[215px]"
+                      id="dstionation"
+                      value={destination}
+                      onChange={handlefields}
+                    >
+                      <option value="kashmir">kashmir</option>
+                      <option value="ladakh">ladakh</option>
+                      <option value="kashmir + ladakh">kashmir + ladakh</option>
+                    </select>
+                  </div>
+
+                  {/* months */}
+
+                  <div className="mt-4">
+                    <select
+                      name="month"
+                      className="border-2 rounded-md px-6 py-2 w-[215px]"
+                      id="month"
                       onChange={handleChange}
-                      onFocus={() => setIsInputFocused(true)}
-                      onBlur={() => setIsInputFocused(false)}
-                      className=" py-2 px-2 w-[170px]"
-                      placeholder="Phone/Mobile"
-                    />
-                    {isInputFocused && (
-                      <div className="dropdown-content">
-                        {searchResults.length > 0 ? (
-                          searchResults.map((result, index) => (
-                            <div key={index} className="dropdown-item">
-                              {result.name}{" "}
-                              {/* Assuming result contains name of the user */}
-                            </div>
-                          ))
-                        ) : (
-                          <p>No results found</p>
-                        )}
+                      value={selectedMonth}
+                    >
+                      <option value="">Select Month</option>
+                      {months.map((month, index) => (
+                        <option key={index} value={month}>
+                          {month}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* from date to date start*/}
+
+                <div>
+                  {/* from date to date */}
+                  <div className="flex gap-3">
+                    <div className="mt-4">
+                      <label htmlFor="fromdate">From Date</label>
+                      <input
+                        type="date"
+                        value={fromDate}
+                        onChange={(e) => setFromDate(e.target.value)}
+                        className="border-2 rounded-md px-3 py-2 w-[150px]"
+                        placeholder="from date"
+                      />
+                    </div>
+                    <div className="mt-4">
+                      <label htmlFor="todate">To Date</label>
+                      <input
+                        type="date"
+                        value={toDate}
+                        onChange={(e) => setToDate(e.target.value)}
+                        className="border-2 rounded-md px-3 py-2 w-[150px]"
+                        placeholder="to date"
+                      />
+                    </div>
+
+                    {/* Difference days */}
+                    <div className="mt-4">
+                      <label htmlFor="days">Days</label>
+                      <input
+                        type="text"
+                        value={days}
+                        className="border-2 rounded-md px-3 py-2 w-[120px]"
+                        placeholder="days"
+                        readOnly
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Adult child infant */}
+                <div className="flex gap-5 mt-5">
+                  {/* Adult */}
+                  <div>
+                    <label htmlFor="adultage">Adult</label>
+                    <div className="flex justify-center items-center border-2 rounded-md">
+                      <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                        <FaPerson className="px-1 w-5 h-5 " />
                       </div>
-                    )}
+                      <select
+                        name="adultage"
+                        id="adultage"
+                        onChange={handlefields}
+                        value={selectAdultage}
+                        className=" px-3 py-2 w-[92px]"
+                      >
+                        {adultage.map((item, index) => (
+                          <option value={item} key={index}>
+                            {item}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
+                  {/* Child */}
+                  <div>
+                    <label htmlFor="childage">Child </label>
+                    <div className="border-2 rounded-md flex">
+                      <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                        <FaPerson className="px-1 w-5 h-5 " />
+                      </div>
+                      <select
+                        name="childage"
+                        id="childage"
+                        onChange={handlefields}
+                        value={selectChildage}
+                        className=" px-3 py-2 w-[92px]"
+                      >
+                        {childage.map((item, index) => (
+                          <option value={item} key={index}>
+                            {item}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  {/*infant  */}
+                  <div>
+                    <label htmlFor="infantage">Infant </label>
+                    <div className="border-2 rounded-md flex">
+                      <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                        <FaPerson className="px-1 w-5 h-5 " />
+                      </div>
+                      <select
+                        name="infantage"
+                        id="infantage"
+                        onChange={handlefields}
+                        value={selectInfantage}
+                        className=" px-5 py-2 w-[92px]"
+                      >
+                        {infantage.map((item, index) => (
+                          <option value={item} key={index}>
+                            {item}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
-                {/*email */}
-                <div className="mt-4">
-                <div className="flex justify-center items-center border-2 rounded-md">
-                <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                <MdEmail className="px-1 w-5 h-5 "/>
-                
-                </div>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={handlefields}
-                    className=" py-2 px-2 w-[170px]"
-                  />
-                  </div>
-                </div>
-              </div>
-              {/*Agent company and GST */} 
-              {type==="AGENT" ? (
 
-                <div className="flex gap-5 mt-3">
-               {/* company */}
-                <div className="">
-                <label htmlFor="company" >company</label>
-                <input type="text" name="company" id="company" placeholder="company name" className="border-2 px-[19px] py-2 rounded-md"  />
+                {/* source priority Assign-to */}
+                <div className="flex gap-5 mt-5">
+                  {/* source */}
+                  <div>
+                    <label htmlFor="source">Lead Source</label>
+                    <select
+                      name="source"
+                      id="source"
+                      className="border-2 rounded-md px-1 py-2"
+                      onChange={handlefields}
+                      value={selectSource}
+                    >
+                      <option value="">Select</option>
+                      {source.map((item, index) => (
+                        <option value={item} key={index}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {/* priority */}
+                  <div>
+                    <label htmlFor="priority">Priority</label>
+                    <select
+                      name="priority"
+                      id="priority"
+                      className="border-2 rounded-md px-2 py-2"
+                      onChange={handlefields}
+                      value={selectPriority}
+                    >
+                      {priority.map((item, key) => (
+                        <option value={item} key={key}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {/* assignto */}
+                  <div>
+                    <label htmlFor="assignto">Assign To</label>
+                    <select
+                      name="assignto"
+                      id="assignto"
+                      className="border-2 rounded-md px-4 py-2"
+                      onChange={handlefields}
+                      value={selectAssign}
+                    >
+                      {assignto.map((item, key) => (
+                        <option value={item} key={key}>
+                          {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-                {/* GST */}
-                <div>
-                <label htmlFor="gst">GST</label>
-                <input type="text" name="gst" id="gst" placeholder="GST" className="border-2 px-4 py-2 rounded-md" />
-                </div>
-                </div>
-              ):""
 
-               }
-              <div className="flex  w-[420px] gap-4">
-                {/* destination */}
-                <div className="mt-4  ">
+                {/* Service */}
+                <div className="mt-5 flex flex-col">
+                  <label htmlFor="service">Service</label>
                   <select
-                    name="destination"
-                    className="border-2 rounded-md px-3 py-2 w-[215px]"
-                    id="dstionation"
-                    value={destination}
+                    name="service"
+                    id="service"
+                    className="border-2 rounded-md px-2 py-2 w-[450px]"
                     onChange={handlefields}
+                    value={selectService}
                   >
-                    <option value="kashmir">kashmir</option>
-                    <option value="ladakh">ladakh</option>
-                    <option value="kashmir + ladakh">kashmir + ladakh</option>
-                  </select>
-                </div>
-                {/* months */}
-                <div className="mt-4">
-                  <select
-                    name="month"
-                    className="border-2 rounded-md px-6 py-2 w-[215px]"
-                    id="month"
-                    onChange={handleChange}
-                    value={selectedMonth}
-                  >
-                    <option value="">Select Month</option>
-                    {months.map((month, index) => (
-                      <option key={index} value={month}>
-                        {month}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* from date to date */}
-              <div className="flex gap-4">
-                <div className="mt-4">
-                  <label htmlFor="fromdate">From Date</label>
-                  <div className="flex flex-row-reverse">
-                  
-                  <input
-                  type="date"
-                  name="fromdate"
-                  id="fromdate"
-                  className="border-2 rounded-md px-3 py-2 w-[215px]"
-                  placeholder="from date"
-                  />
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <label htmlFor="todate">To Date</label>
-                  <input
-                    type="date"
-                    name="todate"
-                    id="todate"
-                    className="border-2 rounded-md px-3 py-2 w-[215px]"
-                    placeholder="to date"
-                  />
-                </div>
-              </div>
-              {/* Adult child infant */}
-              <div className="flex gap-5 mt-5">
-                {/* Adult */}
-                <div>
-                  <label htmlFor="adultage">Adult</label>
-                  <div className="flex justify-center items-center border-2 rounded-md">
-                  
-                  <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                  
-                  <FaPerson className="px-1 w-5 h-5 " />
-                  </div>
-                  <select
-                    name="adultage"
-                    id="adultage"
-                    onChange={handlefields}
-                    value={selectAdultage}
-                    className=" px-3 py-2 w-[92px]"
-                  >
-                    {adultage.map((item, index) => (
-                      <option value={item} key={index}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                  </div>
-                </div>
-                {/* Child */}
-                <div>
-                  <label htmlFor="childage">Child </label>
-                  <div className="border-2 rounded-md flex">
-                  <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                  
-                  <FaPerson className="px-1 w-5 h-5 " />
-                  </div>
-                  <select
-                  name="childage"
-                  id="childage"
-                  onChange={handlefields}
-                  value={selectChildage}
-                  className=" px-3 py-2 w-[92px]"
-                  >
-                  {childage.map((item, index) => (
-                    <option value={item} key={index}>
-                    {item}
-                    </option>
-                  ))}
-                  </select>
-                  </div>
-                </div>
-                {/*infant  */}
-                <div>
-                  <label htmlFor="infantage">Infant </label>
-                  <div className="border-2 rounded-md flex">
-                  <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                  
-                  <FaPerson className="px-1 w-5 h-5 " />
-                  </div>
-                  <select
-                    name="infantage"
-                    id="infantage"
-                    onChange={handlefields}
-                    value={selectInfantage}
-                    className=" px-5 py-2 w-[92px]"
-                  >
-                    {infantage.map((item, index) => (
-                      <option value={item} key={index}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                  </div>
-                </div>
-              </div>
-
-              {/* source priority Assign-to */}
-              <div className="flex gap-5 mt-5">
-                {/* source */}
-                <div>
-                  <label htmlFor="source">Lead Source</label>
-                  <select
-                    name="source"
-                    id="source"
-                    className="border-2 rounded-md px-1 py-2"
-                    onChange={handlefields}
-                    value={selectSource}
-                  >
-                    <option value="">Select</option>
-                    {source.map((item, index) => (
+                    {service.map((item, index) => (
                       <option value={item} key={index}>
                         {item}
                       </option>
                     ))}
                   </select>
                 </div>
-                {/* priority */}
-                <div>
-                  <label htmlFor="priority">Priority</label>
-                  <select
-                    name="priority"
-                    id="priority"
-                    className="border-2 rounded-md px-2 py-2"
+                {/* Remarks */}
+                <div className="mt-10">
+                  <textarea
+                    name="remarks"
+                    id="remarks"
+                    placeholder="remarks"
+                    className="border-2 h-[100px] w-[450px]"
                     onChange={handlefields}
-                    value={selectPriority}
-                  >
-                    {priority.map((item, key) => (
-                      <option value={item} key={key}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {/* assignto */}
-                <div>
-                  <label htmlFor="assignto">Assign To</label>
-                  <select
-                    name="assignto"
-                    id="assignto"
-                    className="border-2 rounded-md px-4 py-2"
-                    onChange={handlefields}
-                    value={selectAssign}
-                  >
-                    {assignto.map((item, key) => (
-                      <option value={item} key={key}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
+                    value={remarks}
+                  ></textarea>
                 </div>
               </div>
-
-              {/* Service */}
-              <div className="mt-5 flex flex-col">
-                <label htmlFor="service">Service</label>
-                <select
-                  name="service"
-                  id="service"
-                  className="border-2 rounded-md px-2 py-2 w-[450px]"
-                  onChange={handlefields}
-                  value={selectService}
+              {/*<div className="w-[49%]"></div>*/}
+            </div>
+            <div className="mt-4 flex gap-5  items-center w-[450px]">
+              <div
+                onClick={() => {
+                  handleClose("QUERY");
+                }}
+                className=" rounded-md h-10 w-full"
+              >
+                <button
+                  disabled={able}
+                  className="hover:bg-[#c22626] w-full rounded-md  text-white bg-[#e51d27] h-full flex items-center justify-center"
                 >
-                  {service.map((item, index) => (
-                    <option value={item} key={index}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
+                  Cancel
+                </button>
               </div>
-              {/* Remarks */}
-              <div className="mt-10">
-                <textarea
-                  name="remarks"
-                  id="remarks"
-                  placeholder="remarks"
-                  className="border-2 h-[100px] w-[450px]"
-                  onChange={handlefields}
-                  value={remarks}
-                ></textarea>
-              </div>
-            </div>
-            {/*<div className="w-[49%]"></div>*/}
-          </div>
-          <div className="mt-4 flex gap-5  items-center w-[450px]">
-            <div
-              onClick={() => {
-                handleClose("QUERY");
-              }}
-              className=" rounded-md h-10 w-full"
-            >
-              <button
-                disabled={able}
-                className="hover:bg-[#c22626] w-full rounded-md  text-white bg-[#e51d27] h-full flex items-center justify-center"
-              >
-                Cancel
-              </button>
-            </div>
 
-            <div
-              onClick={(e) => {
-                submitHandler(e);
-              }}
-              className=" rounded-md h-10 w-full "
-            >
-              <button
-                disabled={able}
-                className=" rounded-md w-full h-full flex hover:bg-[#1a8d42] items-center justify-center text-white bg-[#04AA6D]"
+              <div
+                onClick={(e) => {
+                  submitHandler(e);
+                }}
+                className=" rounded-md h-10 w-full "
               >
-                Save
-              </button>
+                <button
+                  disabled={able}
+                  className=" rounded-md w-full h-full flex hover:bg-[#1a8d42] items-center justify-center text-white bg-[#04AA6D]"
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Clients from "./Pages/Clients/Clients";
 import Agents from "./Pages/Agents/Agents";
@@ -133,6 +133,7 @@ const App = () => {
         { path: "/mailSetting", element: <MailSetting /> },
         { path: "/weatherSetting", element: <WeatherSetting /> },
         { path: "/currency", element: <Currency /> },
+        { path: "/queriesDetail", element: <QueriesDetail/> },
       ],
     },
   ]);
