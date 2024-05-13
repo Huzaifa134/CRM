@@ -323,6 +323,8 @@ function DayItinerary() {
       [event.target.name]: event.target.value,
     });
   };
+
+  // console.log(stat);
   return (
     <div className="h-full">
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
@@ -442,7 +444,7 @@ function DayItinerary() {
                     <Input
                       id="file-input"
                       type="file"
-                      disabled={stat === "Edit" ? click : false}
+                      // disabled={stat === "Edit"}
                       inputProps={{ multiple: true }}
                       onChange={(e) => handleFileSelect(e)}
                       style={{ display: "none" }}

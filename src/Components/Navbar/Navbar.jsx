@@ -10,6 +10,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import ProfileModal from "./ProfileModal";
+import { FaUser } from "react-icons/fa";
+import { LuClock9 } from "react-icons/lu";
+import { IoMail } from "react-icons/io5";
+import { FaSignOutAlt } from "react-icons/fa";
+import { BsQuestionCircleFill } from "react-icons/bs";
+
 
 const Navbar = ({sendDataToApp}) => {
 
@@ -19,6 +26,58 @@ const Navbar = ({sendDataToApp}) => {
     setClick(!click);
     sendDataToApp(click);
   }
+
+  const mainDiv = (
+    <div>
+      <div className="bg-[#1f1f1f]  mx-2 rounded-3xl">
+          <div id="div1" className="flex text-white text-sm items-center gap-2 p-3">
+            <div className="bg-white p-3 text-black rounded-full">
+             <FaUser className="text-3xl"/>
+            </div>
+             <div>
+              <h2 className="font-semibold text-[#adadad]">TravBizz IT Solutions</h2>
+              <p className="text-[#adadad] text-xs">Email: info@travbizz.com</p>
+              <p className="text-[#adadad] text-xs">Last Login: 13/05/2024 - 04:03 PM</p>
+             </div>
+          </div>
+
+            <hr className="border-[#2d2f31] border-[1px]"/>
+          
+
+          <div id="div2" className="text-[#adadad] text-xs flex items-center gap-1 justify-center p-3">
+          <LuClock9 />
+            <p> Today's Working Hours: 10:48</p>
+          </div>
+
+          <hr className="border-[#2d2f31] border-[1px]"/>
+
+
+          <div id="div3" className="text-white p-3 flex flex-col gap-3">
+            <button className="border-[1px] border-[#adadad] w-full text-left px-2 rounded-lg p-1 hover:bg-[#2d2f31] flex items-center gap-4"><FaUser/> Manage Your Profile</button>
+            <button className="border-[1px] border-[#adadad] w-full text-left px-2 rounded-lg p-1 hover:bg-[#2d2f31] flex items-center gap-4"><IoMail /> Main Setting</button>
+          </div>
+
+          <hr className="border-[#2d2f31] border-[1px]"/>
+
+
+          <div id="div4" className="p-3">
+          <p className="text-[#adadad] text-xs">Total Remaining 230 Days</p>
+              <p className="text-[#adadad] text-xs">Expiry Date: 30-12-2024</p>
+          </div>
+      </div>
+
+      <div className="mx-6 py-3 ">
+         <button className="flex items-center gap-2 text-white p-2 px-2 w-full text-left text-sm hover:bg-[#383b3d] rounded-lg"><FaSignOutAlt /> Logout of my account</button>
+      </div>
+
+      <hr className="border-[#adadad57] mx-2"/>
+
+      <div className="text-[#adadad] text-xs flex justify-center p-3">
+        <button className="flex items-center gap-2 mt-1"><BsQuestionCircleFill /> System Support</button>
+      </div>
+
+    </div>
+  )
 
 
   return (
@@ -88,7 +147,8 @@ const Navbar = ({sendDataToApp}) => {
         </Link>
 
         <div className="cursor-pointer">
-          <AccountCircleOutlinedIcon />
+          <ProfileModal mainButton={<AccountCircleOutlinedIcon />} profileWork={mainDiv}/>
+          
         </div>
       </div>
     </div>

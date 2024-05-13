@@ -46,6 +46,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CorporateDetail from "./Pages/Corporate/CorporateDetail";
 import Login from "./Pages/Login/Login";
+import Footer from "./Components/Footer/Footer";
 
 const App = () => {
   const Layout = () => {
@@ -72,6 +73,7 @@ const App = () => {
           </div>
         </div>
         <ToastContainer position="bottom-right" autoClose={2000} />
+        <Footer/>
       </div>
     );
   };
