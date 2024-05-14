@@ -13,8 +13,6 @@ const ProfileModal = (props) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
-
-    
   };
 
 

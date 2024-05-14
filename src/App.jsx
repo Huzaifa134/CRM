@@ -49,6 +49,7 @@ import Login from "./Pages/Login/Login";
 import Footer from "./Components/Footer/Footer";
 import ManageProfile from "./Pages/Settings/AdminSettingPages/ManageProfile/ManageProfile";
 import EditProfile from "./Pages/Settings/AdminSettingPages/ManageProfile/EditProfile";
+import ProposalSent from "./Pages/Queries/NavButtons/ProposalSent";
 
 const App = () => {
   const Layout = () => {
@@ -96,6 +97,7 @@ const App = () => {
         { path: "/agents/:agentId", element: <AgentDetails /> },
         { path: "/itineraries", element: <Itineraries /> },
         { path: "/queries", element: <Queries /> },
+        { path: "/queries/proposalSent", element: <ProposalSent/> },
         { path: "/queries/:queryId/*", element: <QueriesDetail/> },
         { path: "/corporate", element: <Corporate /> },
         { path: "/corporate/:corporateId", element: <CorporateDetail /> },
