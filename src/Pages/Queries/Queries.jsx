@@ -671,7 +671,7 @@ function Queries() {
         className="overflow-y-scroll w-[1000px] ml-[50%] max-[1600px]:ml-[58%] max-[1900px]:ml-[65%] max-[1400px]:ml-[53%] max-[1300px]:ml-[49%] max-[1200px]:ml-[35%]"
       >
         <div className="flex justify-end">
-          <div className="p-4 rounded-md absolute mt-10 top-[50%] left-[40%] translate-x-[-50%] translate-y-[-50%] bg-white  md:w-[50%] h-fit max-[1200px]:left-[50%] ">
+          <div className="p-6 rounded-md absolute mt-10 top-[50%] left-[40%] translate-x-[-50%] translate-y-[-50%] bg-white  md:w-[50%] h-fit max-[1200px]:left-[50%] ">
             <div
               className={`max-[1900px]:flex justify-between mt-48 max-[1600px]:mt-20 max-[1400px]:mt-48 max-[1900px]:mt-14 ${
                 type === "AGENT" ? "mt-[17rem]" : "mt-36"
@@ -886,9 +886,9 @@ function Queries() {
 
                 {/* from date to date start*/}
 
-                <div>
+                <div className="">
                   {/* from date to date */}
-                  <div className="flex gap-3">
+                  <div className="flex gap-7">
                     <div className="mt-4">
                       <label htmlFor="fromdate">From Date</label>
                       <input
@@ -919,7 +919,7 @@ function Queries() {
                           days +
                           (nights !== 0 ? ` days, ${nights} nights` : " days")
                         }
-                        className="border-2 rounded-md text-sm px-3 py-2 w-[150px]"
+                        className="border-2 rounded-md text-sm px-3 py-2 w-[130px]"
                         placeholder="days"
                         readOnly
                       />
@@ -990,7 +990,7 @@ function Queries() {
                 </div>
 
                 {/* source priority Assign-to */}
-                <div className="flex gap-5 mt-5">
+                <div className="flex gap-2 mt-5">
                   {/* source */}
                   <div>
                     <label htmlFor="source">Lead Source</label>
