@@ -23,7 +23,6 @@ const Navbar = ({sendDataToApp}) => {
 
   function goToMailSetting() {
    navigate('/mailSetting') 
-   {<ProfileModal Iffalse={"false"}/>}
   }
   function goToManageProfile() {
     navigate('/manageProfile') 
