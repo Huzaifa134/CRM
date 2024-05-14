@@ -35,9 +35,9 @@ const Navbar = ({sendDataToApp}) => {
              <FaUser className="text-3xl"/>
             </div>
              <div>
-              <h2 className="font-semibold text-[#adadad]">TravBizz IT Solutions</h2>
-              <p className="text-[#adadad] text-xs">Email: info@travbizz.com</p>
-              <p className="text-[#adadad] text-xs">Last Login: 13/05/2024 - 04:03 PM</p>
+              <h2 className="font-semibold text-white">TravBizz IT Solutions</h2>
+              <p className="text-[#adadad] text-xs">Email: <span className="font-semibold">info@travbizz.com</span></p>
+              <p className="text-[#adadad] text-xs">Last Login: <span className="font-semibold">13/05/2024 - 04:03 PM</span></p>
              </div>
           </div>
 

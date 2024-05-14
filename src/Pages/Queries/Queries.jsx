@@ -47,7 +47,9 @@ function Queries() {
 
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
-  const [days, setDays] = useState("");
+  const [days, setDays] = useState(0);
+  const [nights, setNights] = useState(0);
+
 
   useEffect(() => {
     if (fromDate && toDate) {
@@ -60,7 +62,10 @@ function Queries() {
       // Convert milliseconds to days
       const daysDifference = Math.ceil(difference / (1000 * 3600 * 24));
 
+      const nightsDifference = Math.max(0, daysDifference - 1); // Ek din ka difference subtract karein
+
       setDays(daysDifference);
+      setNights(nightsDifference);
     } else {
       setDays("");
     }
@@ -90,11 +95,17 @@ function Queries() {
     navigate("/queriesDetail");
   };
 
-  const editHandler =() =>{
-    navigate('queriesDetail')
-  }
+  const editHandler = () => {
+    navigate("queriesDetail");
+  };
   const handlefields = (e) => {
     const { name, value } = e.target;
+    if (name === 'childage') {
+      setSelectChildage(value);
+    } else if (name === 'infantage') {
+      setSelectInfantage(value);
+    }
+
     if (name === "email") {
       setEmail(value);
     } else if (name === "destination") {
@@ -424,23 +435,19 @@ function Queries() {
                     style={{ fontSize: 17 }}
                   />
                 </div>
-                <div 
-                
-                 className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
-                  
+                <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
                   <EmailOutlinedIcon
                     className="group-hover:text-white"
                     style={{ fontSize: 17 }}
                   />
                 </div>
                 <div
-                 onClick={editHandler}
-                 className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
+                  onClick={editHandler}
+                  className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center"
+                >
                   <EditOutlinedIcon
                     className="group-hover:text-white"
                     style={{ fontSize: 17 }}
-
-                    
                   />
                 </div>
                 <div
@@ -661,12 +668,17 @@ function Queries() {
         open={queryModal}
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
-        className="overflow-auto w-[1000px] ml-[750px]"
-        
+        className="overflow-auto w-[1000px] ml-[750px] "
       >
         <div className="flex justify-end">
-          <div className="p-4 rounded-md absolute top-[50%] left-[40%] translate-x-[-50%] translate-y-[-50%] bg-white  md:w-[50%] h-fit max-[1200px]:left-[50%]" >
-            <div className={`flex justify-between ${type==="AGENT"?"mt-80":"mt-36"} ${type==="CORPORATE"?"mt-60":"mt-36"} ${type==="CLIENT"?"mt-60":"mt-36"} text-3xl items-center h-[10%] px-2`}>
+          <div className="p-4 rounded-md absolute mt-10 top-[50%] left-[40%] translate-x-[-50%] translate-y-[-50%] bg-white  md:w-[50%] h-fit max-[1200px]:left-[50%] ">
+            <div
+              className={`max-[1900px]:flex justify-between ${
+                type === "AGENT" ? "mt-[17rem]" : "mt-36"
+              } ${type === "CORPORATE" ? "mt-48" : "mt-36"} ${
+                type === "CLIENT" ? "mt-48" : "mt-36"
+              } text-3xl items-center h-[10%] px-2`} 
+            >
               <div className="font-bold text-lg"> Create Query </div>
               <div
                 className="cursor-pointer"
@@ -803,7 +815,7 @@ function Queries() {
                   <div className="flex gap-5 mt-3">
                     {/* company */}
                     <div className="">
-                      <label htmlFor="company">company</label>
+                      <label htmlFor="company">Company</label>
                       <input
                         type="text"
                         name="company"
@@ -829,37 +841,46 @@ function Queries() {
                 )}
                 <div className="flex  w-[420px] gap-4">
                   {/* destination */}
-                  <div className="mt-4  ">
-                    <select
-                      name="destination"
-                      className="border-2 rounded-md px-3 py-2 w-[215px]"
-                      id="dstionation"
-                      value={destination}
-                      onChange={handlefields}
-                    >
-                      <option value="kashmir">kashmir</option>
-                      <option value="ladakh">ladakh</option>
-                      <option value="kashmir + ladakh">kashmir + ladakh</option>
-                    </select>
+                  <div className="mt-2">
+                    <label htmlFor="fromdate ">Select Destination</label>
+
+                    <div className="mt-2">
+                      <select
+                        name="destination"
+                        className="border-2 rounded-md px-3 py-2 w-[215px]"
+                        id="dstionation"
+                        value={destination}
+                        onChange={handlefields}
+                      >
+                        <option value="Destination">none</option>
+                        <option value="kashmir">Kashmir</option>
+                        <option value="ladakh">Ladakh</option>
+                        <option value="kashmir + ladakh">
+                          Kashmir + Ladakh
+                        </option>
+                      </select>
+                    </div>
                   </div>
 
                   {/* months */}
-
-                  <div className="mt-4">
-                    <select
-                      name="month"
-                      className="border-2 rounded-md px-6 py-2 w-[215px]"
-                      id="month"
-                      onChange={handleChange}
-                      value={selectedMonth}
-                    >
-                      <option value="">Select Month</option>
-                      {months.map((month, index) => (
-                        <option key={index} value={month}>
-                          {month}
-                        </option>
-                      ))}
-                    </select>
+                  <div className="mt-2">
+                    <label htmlFor="fromdate ">Travel month</label>
+                    <div className="mt-2">
+                      <select
+                        name="month"
+                        className="border-2 rounded-md px-6 py-2 w-[215px]"
+                        id="month"
+                        onChange={handleChange}
+                        value={selectedMonth}
+                      >
+                        <option value="">Select Month</option>
+                        {months.map((month, index) => (
+                          <option key={index} value={month}>
+                            {month}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
 
@@ -874,7 +895,7 @@ function Queries() {
                         type="date"
                         value={fromDate}
                         onChange={(e) => setFromDate(e.target.value)}
-                        className="border-2 rounded-md px-3 py-2 w-[150px]"
+                        className="border-2 rounded-md text-sm px-3 py-2 w-[130px]"
                         placeholder="from date"
                       />
                     </div>
@@ -884,18 +905,21 @@ function Queries() {
                         type="date"
                         value={toDate}
                         onChange={(e) => setToDate(e.target.value)}
-                        className="border-2 rounded-md px-3 py-2 w-[150px]"
+                        className="border-2 rounded-md text-sm px-3 py-2 w-[130px]"
                         placeholder="to date"
                       />
                     </div>
 
                     {/* Difference days */}
                     <div className="mt-4">
-                      <label htmlFor="days">Days</label>
+                      <label htmlFor="days">Package Duration</label>
                       <input
                         type="text"
-                        value={days}
-                        className="border-2 rounded-md px-3 py-2 w-[120px]"
+                        value={
+                          days +
+                          (nights !== 0 ? ` days, ${nights} nights` : " days")
+                        }
+                        className="border-2 rounded-md text-sm px-3 py-2 w-[150px]"
                         placeholder="days"
                         readOnly
                       />
@@ -912,19 +936,15 @@ function Queries() {
                       <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
                         <FaPerson className="px-1 w-5 h-5 " />
                       </div>
-                      <select
+                      <input
+                        type="number"
                         name="adultage"
                         id="adultage"
+                        min="0" 
                         onChange={handlefields}
                         value={selectAdultage}
-                        className=" px-3 py-2 w-[92px]"
-                      >
-                        {adultage.map((item, index) => (
-                          <option value={item} key={index}>
-                            {item}
-                          </option>
-                        ))}
-                      </select>
+                        className=" px-3 text-sm py-2 w-[92px]"
+                      />
                     </div>
                   </div>
                   {/* Child */}
@@ -934,19 +954,15 @@ function Queries() {
                       <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
                         <FaPerson className="px-1 w-5 h-5 " />
                       </div>
-                      <select
+                      <input
+                        type="number"
                         name="childage"
                         id="childage"
+                        min="0"
                         onChange={handlefields}
                         value={selectChildage}
                         className=" px-3 py-2 w-[92px]"
-                      >
-                        {childage.map((item, index) => (
-                          <option value={item} key={index}>
-                            {item}
-                          </option>
-                        ))}
-                      </select>
+                      />
                     </div>
                   </div>
                   {/*infant  */}
