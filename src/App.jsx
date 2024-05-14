@@ -47,6 +47,8 @@ import "react-toastify/dist/ReactToastify.css";
 import CorporateDetail from "./Pages/Corporate/CorporateDetail";
 import Login from "./Pages/Login/Login";
 import Footer from "./Components/Footer/Footer";
+import ManageProfile from "./Pages/Settings/AdminSettingPages/ManageProfile/ManageProfile";
+import EditProfile from "./Pages/Settings/AdminSettingPages/ManageProfile/EditProfile";
 
 const App = () => {
   const Layout = () => {
@@ -110,6 +112,7 @@ const App = () => {
           path: "/emailTemplate/createTemplate",
           element: <CreateEmailTemplate />,
         },
+       
         { path: "/campagins", element: <Campagins /> },
         { path: "/campagins/createCampaigns", element: <CreateCampaign /> },
         { path: "/landingPages", element: <LandingPages /> },
@@ -133,6 +136,8 @@ const App = () => {
         { path: "/leadSource", element: <LeadSource /> },
         { path: "/packageTheme", element: <PackageTheme /> },
         { path: "/mailSetting", element: <MailSetting /> },
+        { path: "/manageProfile", element: <ManageProfile /> },
+        { path: "/manageProfile/editProfile", element: <EditProfile />},
         { path: "/weatherSetting", element: <WeatherSetting /> },
         { path: "/currency", element: <Currency /> },
         { path: "/queriesDetail", element: <QueriesDetail/> },

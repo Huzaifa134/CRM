@@ -8,7 +8,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import DesktopWindowsOutlinedIcon from "@mui/icons-material/DesktopWindowsOutlined";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import ProfileModal from "./ProfileModal";
 import { FaUser } from "react-icons/fa";
@@ -19,13 +19,24 @@ import { BsQuestionCircleFill } from "react-icons/bs";
 
 
 const Navbar = ({sendDataToApp}) => {
+  const navigate = useNavigate()
+
+  function goToMailSetting() {
+   navigate('/mailSetting') 
+   {<ProfileModal Iffalse={"false"}/>}
+  }
+  function goToManageProfile() {
+    navigate('/manageProfile') 
+   }
 
   const [click, setClick] = useState(false);
+
 
   const handleClick = () => {
     setClick(!click);
     sendDataToApp(click);
   }
+
 
   const mainDiv = (
     <div>
@@ -35,9 +46,9 @@ const Navbar = ({sendDataToApp}) => {
              <FaUser className="text-3xl"/>
             </div>
              <div>
-              <h2 className="font-semibold text-[#adadad]">TravBizz IT Solutions</h2>
-              <p className="text-[#adadad] text-xs">Email: info@travbizz.com</p>
-              <p className="text-[#adadad] text-xs">Last Login: 13/05/2024 - 04:03 PM</p>
+              <h2 className="font-semibold text-white">TravBizz IT Solutions</h2>
+              <p className="text-[#adadad] text-xs">Email: <span className="font-semibold">info@travbizz.com</span></p>
+              <p className="text-[#adadad] text-xs">Last Login: <span className="font-semibold">13/05/2024 - 04:03 PM</span></p>
              </div>
           </div>
 
@@ -53,8 +64,8 @@ const Navbar = ({sendDataToApp}) => {
 
 
           <div id="div3" className="text-white p-3 flex flex-col gap-3">
-            <button className="border-[1px] border-[#adadad] w-full text-left px-2 rounded-lg p-1 hover:bg-[#2d2f31] flex items-center gap-4"><FaUser/> Manage Your Profile</button>
-            <button className="border-[1px] border-[#adadad] w-full text-left px-2 rounded-lg p-1 hover:bg-[#2d2f31] flex items-center gap-4"><IoMail /> Main Setting</button>
+            <button className="border-[1px] border-[#adadad] w-full text-left px-2 rounded-lg p-1 hover:bg-[#2d2f31] flex items-center gap-4" onClick={goToManageProfile}><FaUser/> Manage Your Profile</button>
+            <button className="border-[1px] border-[#adadad] w-full text-left px-2 rounded-lg p-1 hover:bg-[#2d2f31] flex items-center gap-4" onClick={goToMailSetting}><IoMail /> Mail Setting </button>
           </div>
 
           <hr className="border-[#2d2f31] border-[1px]"/>

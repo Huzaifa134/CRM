@@ -13,6 +13,10 @@ const ProfileModal = (props) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+
+    if (props.handleCloseModal) {
+      props.handleCloseModal(); // Call handleCloseModal from props
+    }
   };
 
 
