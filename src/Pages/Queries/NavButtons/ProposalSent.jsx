@@ -26,7 +26,7 @@ let clients = [];
 let corporate = [];
 let agents = [];
 
-function Queries() {
+function ProposalSent() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -54,10 +54,10 @@ function Queries() {
   const [nights, setNights] = useState(0);
 
 
-  function goToProposals() {
-    navigate('proposalSent')
-  }
 
+function goToQueries() {
+    navigate('/queries')   
+}
 
   useEffect(() => {
     if (fromDate && toDate) {
@@ -552,7 +552,7 @@ function Queries() {
       
       `}</style>
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#f5f7f9]">
-        <div className="font-[700]"> Queries </div>
+        <div className="font-[700]"> Proposal Send </div>
         <div className="flex justify-center  sm:w-[65%] md:w-[55%] lg:w-[43%]  w-[90%] items-center gap-3 h-full">
           <input
             value={search}
@@ -580,7 +580,7 @@ function Queries() {
       </div>
 
       <div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-black rounded-md justify-center">
+        <div onClick={goToQueries} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-black rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white text-[0.65rem] font-[700] ">TOTAL</div>
         </div>
@@ -614,7 +614,7 @@ function Queries() {
           </div>
         </div>
 
-        <div onClick={goToProposals} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#cc00a9] rounded-md justify-center">
+        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#cc00a9] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">
             PROPOSAL SENT
@@ -1120,4 +1120,4 @@ function Queries() {
   );
 }
 
-export default Queries;
+export default ProposalSent;
