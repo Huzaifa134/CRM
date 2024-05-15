@@ -54,6 +54,14 @@ import ViewProposal from "./Pages/Queries/ViewProposal/ViewProposal";
 import Build from "./Pages/Queries/ViewProposal/Build";
 import Final from "./Pages/Queries/ViewProposal/Final";
 import Pricing from "./Pages/Queries/ViewProposal/Pricing";
+import Active from "./Pages/Queries/NavButtons/Active";
+import Confirmed from "./Pages/Queries/NavButtons/Confirmed";
+import FollowUp from "./Pages/Queries/NavButtons/FollowUp";
+import HotLead from "./Pages/Queries/NavButtons/HotLead";
+import Invalid from "./Pages/Queries/NavButtons/Invalid";
+import New from "./Pages/Queries/NavButtons/New";
+import NoConnect from "./Pages/Queries/NavButtons/NoConnect";
+import Canceled from "./Pages/Queries/NavButtons/Canceled";
 
 const App = () => {
   const Layout = () => {
@@ -101,6 +109,14 @@ const App = () => {
         { path: "/agents/:agentId", element: <AgentDetails /> },
         { path: "/itineraries", element: <Itineraries /> },
         { path: "/queries", element: <Queries /> },
+        { path: "/queries/active", element: <Active/> },
+        { path: "/queries/canceled", element: <Canceled/> },
+        { path: "/queries/confirmed", element: <Confirmed/> },
+        { path: "/queries/followUp", element: <FollowUp/> },
+        { path: "/queries/hotLead", element: <HotLead/> },
+        { path: "/queries/invalid", element: <Invalid/> },
+        { path: "/queries/new", element: <New/> },
+        { path: "/queries/noConnect", element: <NoConnect/> },
         { path: "/queries/proposalSent", element: <ProposalSent/> },
         { path: "/queries/proposalSent/viewProposal/", element: <Build/> },
         { path: "/queries/proposalSent/viewProposal/final", element: <Final/> },

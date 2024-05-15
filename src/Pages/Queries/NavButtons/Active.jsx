@@ -20,15 +20,14 @@ import { FaCalendarDays } from "react-icons/fa6";
 import { FaPerson } from "react-icons/fa6";
 import { MdOutlineSmartphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
-import Menu from '@mui/material/Menu';
-
+import { Menu } from "@mui/material";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 let destinations = [];
 let clients = [];
 let corporate = [];
 let agents = [];
 
-function Queries() {
+function Active() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -44,6 +43,7 @@ function Queries() {
   const [selectService, setSelectService] = useState("");
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("");
+
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,10 +63,10 @@ function Queries() {
   const [nights, setNights] = useState(0);
 
 
-  function goToProposals() {
-    navigate('proposalSent')
-  }
 
+function goToQueries() {
+    navigate('/queries')   
+}
 
   useEffect(() => {
     if (fromDate && toDate) {
@@ -563,7 +563,7 @@ function Queries() {
       
       `}</style>
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#f5f7f9]">
-        <div className="font-[700]"> Queries </div>
+        <div className="font-[700]"> Active </div>
         <div className="flex justify-center  sm:w-[65%] md:w-[55%] lg:w-[43%]  w-[90%] items-center gap-3 h-full">
           <input
             value={search}
@@ -576,7 +576,7 @@ function Queries() {
           />
           <div className="w-[40%] h-[80%]">
             <button
-              onClick= {handleClick}
+              onClick={handleClick}
               className="border w-[100%] border-slate-300 h-full bg-[#1d3f5a] text-white  text-[0.8rem] font-[700] rounded-md px-2 "
             >
               <span className="sm:block hidden">Add Queries</span>
@@ -663,7 +663,6 @@ function Queries() {
             className="Grid"
             rowHeight={120}
           />
-          
         </div>
       </div>
 
@@ -1126,8 +1125,7 @@ function Queries() {
         </div>
         </Menu>
     </div>
-    
   );
 }
 
-export default Queries;
+export default Active;
