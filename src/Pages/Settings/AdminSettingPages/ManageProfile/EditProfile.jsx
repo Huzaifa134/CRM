@@ -7,16 +7,21 @@ const EditProfile = () => {
     <>
 
 
-    <div className=' main-container flex bg-[#f8fafa]  h-[110vh] w-full p-5 items-start justify-center gap-4 flex-wrap'>
-      <div className='w-[60%] container-1 bg-white border-[#f1f1f1] border-2 rounded-xl max-[110px]:w-[200vh]'>
+
+  
+
+    <div className=' main-container flex bg-[#f8fafa]  h-auto w-full p-5 items-start justify-center gap-4 flex-wrap'>
+      <div className='w-[800px] transition-all max-[800px]:w-full container-1 bg-white border-[#f1f1f1] border-2 rounded-xl max-[110px]:w-[200vh]'>
+
         <p className=' text-blue-600 font-medium text-md p-3'>Edit Profile</p>
         <hr/>
 
 
 
-        <div className='flex justify-between items-end mx-2 mt-6 '>
 
-      <select className='p-2 text-left  border-[#ddd] border-2 rounded w-36 '>
+        <div className='flex justify-between items-end mx-2 mt-6 gap-4'>
+
+      <select className='p-2 text-left  border-[#ddd] border-2 rounded w-full'>
           <option value="Mr.">Mr.</option>
           <option value="Mr.">Mrs.</option>
           <option value="Mr.">Mr.</option>
@@ -24,12 +29,12 @@ const EditProfile = () => {
           <option value="Mr.">Prof.</option>
       </select>
       
-      <div className='flex flex-col'>
+      <div className='flex flex-col w-full'>
           <label htmlFor="Name " className="text-sm">First Name</label>
            <input type='text' placeholder='TravBizz' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
       </div>
 
-      <div className='flex flex-col'>
+      <div className='flex flex-col w-full'>
         <label htmlFor="Name " className="text-sm">Last Name</label>
         <input type='text' placeholder='TravBizz'  className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
       </div>
@@ -118,9 +123,9 @@ const EditProfile = () => {
       </div>
       </div>
 
+{/* container 2 */}
 
-
-      <div className='container-2 bg-white border-2 border-[#f1f1f1] w-[35%] rounded-xl'>
+      <div className='container-2 bg-white border-2 border-[#f1f1f1] w-[400px] max-[1200px]:w-[800px] transition-all max-[800px]:w-full rounded-xl'>
           <p className=' text-blue-600 font-medium text-md p-3'>Change Password</p>
           <hr/>
 

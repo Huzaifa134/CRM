@@ -663,6 +663,7 @@ function Queries() {
             className="Grid"
             rowHeight={120}
           />
+          
         </div>
       </div>
 
@@ -1127,6 +1128,7 @@ function Queries() {
         </div>
         </Menu>
     </div>
+    
   );
 }
 

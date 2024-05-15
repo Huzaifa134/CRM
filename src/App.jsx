@@ -50,6 +50,10 @@ import Footer from "./Components/Footer/Footer";
 import ManageProfile from "./Pages/Settings/AdminSettingPages/ManageProfile/ManageProfile";
 import EditProfile from "./Pages/Settings/AdminSettingPages/ManageProfile/EditProfile";
 import ProposalSent from "./Pages/Queries/NavButtons/ProposalSent";
+import ViewProposal from "./Pages/Queries/ViewProposal/ViewProposal";
+import Build from "./Pages/Queries/ViewProposal/Build";
+import Final from "./Pages/Queries/ViewProposal/Final";
+import Pricing from "./Pages/Queries/ViewProposal/Pricing";
 
 const App = () => {
   const Layout = () => {
@@ -98,6 +102,9 @@ const App = () => {
         { path: "/itineraries", element: <Itineraries /> },
         { path: "/queries", element: <Queries /> },
         { path: "/queries/proposalSent", element: <ProposalSent/> },
+        { path: "/queries/proposalSent/viewProposal/", element: <Build/> },
+        { path: "/queries/proposalSent/viewProposal/final", element: <Final/> },
+        { path: "/queries/proposalSent/viewProposal/pricing", element: <Pricing/> },
         { path: "/queries/:queryId/*", element: <QueriesDetail/> },
         { path: "/corporate", element: <Corporate /> },
         { path: "/corporate/:corporateId", element: <CorporateDetail /> },
