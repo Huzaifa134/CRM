@@ -20,6 +20,7 @@ import { FaCalendarDays } from "react-icons/fa6";
 import { FaPerson } from "react-icons/fa6";
 import { MdOutlineSmartphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
+import { Menu } from "@mui/material";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 let destinations = [];
 let clients = [];
@@ -42,6 +43,14 @@ function ProposalSent() {
   const [selectService, setSelectService] = useState("");
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("");
+
+
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
 
   const navigate = useNavigate()
@@ -234,6 +243,8 @@ function goToQueries() {
   const [queryModal, setQueryModal] = useState(false);
 
   const handleClose = (MODE) => {
+    setAnchorEl(null);
+
     if (MODE === "PROPOSAL") {
       return setProposalModal(!proposalModal);
     } else if (MODE === "QUERY") {
@@ -565,9 +576,7 @@ function goToQueries() {
           />
           <div className="w-[40%] h-[80%]">
             <button
-              onClick={() => {
-                setQueryModal(true);
-              }}
+              onClick={handleClick}
               className="border w-[100%] border-slate-300 h-full bg-[#1d3f5a] text-white  text-[0.8rem] font-[700] rounded-md px-2 "
             >
               <span className="sm:block hidden">Add Queries</span>
@@ -671,37 +680,42 @@ function goToQueries() {
 
       {/* Add Query Modal */}
 
-      <Modal
-        // keepMounted
-        open={queryModal}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
-        className="overflow-y-scroll w-[1000px] ml-[50%] max-[1600px]:ml-[58%] max-[1900px]:ml-[65%] max-[1400px]:ml-[53%] max-[1300px]:ml-[49%] max-[1200px]:ml-[35%]"
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+        PaperProps={{
+            style: {
+              borderRadius: 10, // Adjust this value as per your preference
+              // backgroundColor: "#2d2f31",
+              width:"100vh",
+              height: "200vh",
+              padding: "3px",
+            },
+          }}
       >
-        <div className="flex justify-end">
-          <div className="p-6 rounded-md absolute mt-10 top-[50%] left-[40%] translate-x-[-50%] translate-y-[-50%] bg-white  md:w-[50%] h-fit max-[1200px]:left-[50%] ">
+        <div className="flex justify-center">
+          <div className="p-6 rounded-md bg-white">
             <div
-              className={`max-[1900px]:flex justify-between mt-48 max-[1600px]:mt-20 max-[1400px]:mt-48 max-[1900px]:mt-14 ${
-                type === "AGENT" ? "mt-[17rem]" : "mt-36"
-              } ${type === "CORPORATE" ? "mt-48" : "mt-36"} ${
-                type === "CLIENT" ? "mt-48" : "mt-36"
-              } text-3xl items-center h-[10%] px-2`} 
+              className={` flex justify-between mb-5  `} 
             >
               <div className="font-bold text-lg"> Create Query </div>
               <div
                 className="cursor-pointer"
-                onClick={() => {
-                  handleClose("QUERY");
-                }}
+                onClick={handleClose}
               >
                 <CloseIcon />
               </div>
             </div>
             <div className="flex justify-between w-full mt-2 h-[90%]">
-              <div className="w-[49%]">
+              <div className="w-full">
                 <div>
                   <select
-                    className={`px-2  focus:outline-none w-[450px] border h-10  focus:border  ${
+                    className={`px-2  focus:outline-none w-full border h-10  focus:border  ${
                       errors.name === "meal_plan_id"
                         ? "border-red-600"
                         : "hover:border-black border-[#d8d8d8]"
@@ -724,10 +738,10 @@ function goToQueries() {
                 </div>
 
                 <div className="mt-4">
-                  <div className="  w-[450px] flex gap-5 justify-between items-center">
+                  <div className="  w-full flex gap-5 justify-between items-center">
                     <div className="">
                       <select
-                        className={`px-2 w-[100px] focus:outline-none  border h-10  focus:border  ${
+                        className={`px-2 w-[200px] focus:outline-none  border h-10  focus:border  ${
                           errors.name === "meal_plan_id"
                             ? "border-red-600"
                             : "hover:border-black border-[#d8d8d8]"
@@ -744,7 +758,7 @@ function goToQueries() {
                         <option value="Prof">Prof.</option>
                       </select>
                     </div>
-                    <div className="w-[300px]">
+                    <div className="w-full">
                       <div className="flex border-1 rounded-md">
                         <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
                           <FaPerson className="px-1 w-5 h-5 " />
@@ -766,10 +780,10 @@ function goToQueries() {
                 </div>
 
                 {/*phone / email */}
-                <div className="flex gap-5 w-[500px]">
+                <div className="flex w-full justify-between">
                   {/*phone number */}
                   <div className="mt-4">
-                    <div className="flex justify-center items-center border-2 rounded-md">
+                    <div className="flex justify-center items-center border-2 rounded-md w-full">
                       <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
                         <MdOutlineSmartphone className="px-1 w-5 h-5 " />
                       </div>
@@ -780,7 +794,7 @@ function goToQueries() {
                           onChange={handleChange}
                           onFocus={() => setIsInputFocused(true)}
                           onBlur={() => setIsInputFocused(false)}
-                          className=" py-2 px-2 w-[170px]"
+                          className=" py-2 px-2 w-full"
                           placeholder="Phone/Mobile"
                         />
                         {isInputFocused && (
@@ -802,7 +816,7 @@ function goToQueries() {
                   </div>
                   {/*email */}
                   <div className="mt-4">
-                    <div className="flex justify-center items-center border-2 rounded-md">
+                    <div className="flex justify-center items-center border-2 rounded-md w-full">
                       <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
                         <MdEmail className="px-1 w-5 h-5 " />
                       </div>
@@ -813,14 +827,14 @@ function goToQueries() {
                         placeholder="Email"
                         value={email}
                         onChange={handlefields}
-                        className=" py-2 px-2 w-[170px]"
+                        className=" py-2 px-2 w-full"
                       />
                     </div>
                   </div>
                 </div>
                 {/*Agent company and GST */}
                 {type === "AGENT" ? (
-                  <div className="flex gap-5 mt-3">
+                  <div className="flex gap-5 mt-3 justify-between">
                     {/* company */}
                     <div className="">
                       <label htmlFor="company">Company</label>
@@ -829,7 +843,7 @@ function goToQueries() {
                         name="company"
                         id="company"
                         placeholder="company name"
-                        className="border-2 px-[19px] py-2 rounded-md"
+                        className="border-2 px-[19px] py-2 rounded-md w-full"
                       />
                     </div>
                     {/* GST */}
@@ -840,22 +854,22 @@ function goToQueries() {
                         name="gst"
                         id="gst"
                         placeholder="GST"
-                        className="border-2 px-4 py-2 rounded-md"
+                        className="border-2 px-4 py-2 rounded-md w-full"
                       />
                     </div>
                   </div>
                 ) : (
                   ""
                 )}
-                <div className="flex  w-[420px] gap-4">
+                <div className="flex justify-between w-full gap-4">
                   {/* destination */}
-                  <div className="mt-2">
+                  <div className="mt-2 w-full">
                     <label htmlFor="fromdate ">Select Destination</label>
 
                     <div className="mt-2">
                       <select
                         name="destination"
-                        className="border-2 rounded-md px-3 py-2 w-[215px]"
+                        className="border-2 rounded-md px-3 py-2 w-full"
                         id="dstionation"
                         value={destination}
                         onChange={handlefields}
@@ -871,12 +885,12 @@ function goToQueries() {
                   </div>
 
                   {/* months */}
-                  <div className="mt-2">
+                  <div className="mt-2 w-full">
                     <label htmlFor="fromdate ">Travel month</label>
                     <div className="mt-2">
                       <select
                         name="month"
-                        className="border-2 rounded-md px-6 py-2 w-[215px]"
+                        className="border-2 rounded-md px-6 py-2 w-full"
                         id="month"
                         onChange={handleChange}
                         value={selectedMonth}
@@ -896,14 +910,14 @@ function goToQueries() {
 
                 <div className="">
                   {/* from date to date */}
-                  <div className="flex gap-7">
+                  <div className="flex gap-4 w-full justify-between">
                     <div className="mt-4">
                       <label htmlFor="fromdate">From Date</label>
                       <input
                         type="date"
                         value={fromDate}
                         onChange={(e) => setFromDate(e.target.value)}
-                        className="border-2 rounded-md text-sm px-3 py-2 w-[130px]"
+                        className="border-2 rounded-md text-sm px-3 py-2 w-full "
                         placeholder="from date"
                       />
                     </div>
@@ -913,7 +927,7 @@ function goToQueries() {
                         type="date"
                         value={toDate}
                         onChange={(e) => setToDate(e.target.value)}
-                        className="border-2 rounded-md text-sm px-3 py-2 w-[130px]"
+                        className="border-2 rounded-md text-sm px-3 py-2 w-full"
                         placeholder="to date"
                       />
                     </div>
@@ -927,7 +941,7 @@ function goToQueries() {
                           days +
                           (nights !== 0 ? ` days, ${nights} nights` : " days")
                         }
-                        className="border-2 rounded-md text-sm px-3 py-2 w-[130px]"
+                        className="border-2 rounded-md text-sm px-3 py-2 w-full"
                         placeholder="days"
                         readOnly
                       />
@@ -936,7 +950,7 @@ function goToQueries() {
                 </div>
 
                 {/* Adult child infant */}
-                <div className="flex gap-5 mt-5">
+                <div className="flex gap-3 mt-5">
                   {/* Adult */}
                   <div>
                     <label htmlFor="adultage">Adult</label>
@@ -951,7 +965,7 @@ function goToQueries() {
                         min="0" 
                         onChange={handlefields}
                         value={selectAdultage}
-                        className=" px-3 text-sm py-2 w-[92px]"
+                        className=" px-3 text-sm py-2 w-full"
                       />
                     </div>
                   </div>
@@ -969,7 +983,7 @@ function goToQueries() {
                         min="0"
                         onChange={handlefields}
                         value={selectChildage}
-                        className=" px-3 py-2 w-[92px]"
+                        className=" px-3 py-2 w-full"
                       />
                     </div>
                   </div>
@@ -980,32 +994,25 @@ function goToQueries() {
                       <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
                         <FaPerson className="px-1 w-5 h-5 " />
                       </div>
-                      <select
-                        name="infantage"
+                      <input  name="infantage"
                         id="infantage"
+                        min="0"
                         onChange={handlefields}
                         value={selectInfantage}
-                        className=" px-5 py-2 w-[92px]"
-                      >
-                        {infantage.map((item, index) => (
-                          <option value={item} key={index}>
-                            {item}
-                          </option>
-                        ))}
-                      </select>
+                        className=" px-5 py-2 w-full" type="number" />
                     </div>
                   </div>
                 </div>
 
                 {/* source priority Assign-to */}
-                <div className="flex gap-2 mt-5">
+                <div className="flex gap-3 mt-5 justify-between">
                   {/* source */}
                   <div>
                     <label htmlFor="source">Lead Source</label>
                     <select
                       name="source"
                       id="source"
-                      className="border-2 rounded-md px-1 py-2"
+                      className="border-2 rounded-md px-1 py-2 w-full"
                       onChange={handlefields}
                       value={selectSource}
                     >
@@ -1023,7 +1030,7 @@ function goToQueries() {
                     <select
                       name="priority"
                       id="priority"
-                      className="border-2 rounded-md px-2 py-2"
+                      className="border-2 rounded-md px-2 py-2 w-full"
                       onChange={handlefields}
                       value={selectPriority}
                     >
@@ -1040,7 +1047,7 @@ function goToQueries() {
                     <select
                       name="assignto"
                       id="assignto"
-                      className="border-2 rounded-md px-4 py-2"
+                      className="border-2 rounded-md px-4 py-2 w-full"
                       onChange={handlefields}
                       value={selectAssign}
                     >
@@ -1059,7 +1066,7 @@ function goToQueries() {
                   <select
                     name="service"
                     id="service"
-                    className="border-2 rounded-md px-2 py-2 w-[450px]"
+                    className="border-2 rounded-md px-2 py-2 w-full"
                     onChange={handlefields}
                     value={selectService}
                   >
@@ -1071,12 +1078,12 @@ function goToQueries() {
                   </select>
                 </div>
                 {/* Remarks */}
-                <div className="mt-10">
+                <div className="mt-7">
                   <textarea
                     name="remarks"
                     id="remarks"
                     placeholder="remarks"
-                    className="border-2 h-[100px] w-[450px]"
+                    className="border-2 h-[100px] w-full p-3 rounded-md"
                     onChange={handlefields}
                     value={remarks}
                   ></textarea>
@@ -1084,7 +1091,7 @@ function goToQueries() {
               </div>
               {/*<div className="w-[49%]"></div>*/}
             </div>
-            <div className="mt-4 flex gap-5  items-center w-[450px]">
+            <div className="mt-1 flex gap-8 justify-evenly px-8 items-center w-full">
               <div
                 onClick={() => {
                   handleClose("QUERY");
@@ -1115,7 +1122,7 @@ function goToQueries() {
             </div>
           </div>
         </div>
-      </Modal>
+        </Menu>
     </div>
   );
 }
