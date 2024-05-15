@@ -589,60 +589,60 @@ function Queries() {
       </div>
 
       <div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-black rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-black rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white text-[0.65rem] font-[700] ">TOTAL</div>
         </div>
 
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#655be6] rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries/new")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#655be6] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">NEW</div>
         </div>
 
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#0cb5b5] rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries/active")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#0cb5b5] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">ACTIVE</div>
         </div>
 
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#0f1f3e] rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries/noConnect")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#0f1f3e] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">
             NO CONNECT
           </div>
         </div>
 
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#e45555] rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries/hotLead")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#e45555] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">HOT LEAD</div>
         </div>
 
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#ff6700] rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries/followUp")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#ff6700] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">
             FOLLOW UP
           </div>
         </div>
 
-        <div onClick={goToProposals} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#cc00a9] rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries/proposalSent")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#cc00a9] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">
             PROPOSAL SENT
           </div>
         </div>
 
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#46cd93] rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries/confirmed")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#46cd93] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">
             CONFIRMED
           </div>
         </div>
 
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#6c757d] rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries/canceled")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#6c757d] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">CANCELED</div>
         </div>
 
-        <div className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#f9392f] rounded-md justify-center">
+        <div onClick={()=>{navigate("/queries/invalid")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#f9392f] rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">INVALID</div>
         </div>
@@ -834,7 +834,7 @@ function Queries() {
                   </div>
                 </div>
                 {/*Agent company and GST */}
-                {type === "AGENT" ? (
+                {type === "AGENT" || type === "CORPORATE" ? (
                   <div className="flex gap-5 mt-3 justify-between">
                     {/* company */}
                     <div className="">
@@ -865,7 +865,7 @@ function Queries() {
                 <div className="flex justify-between w-full gap-4">
                   {/* destination */}
                   <div className="mt-2 w-full">
-                    <label htmlFor="fromdate ">Select Destination</label>
+                    <label htmlFor="fromdate ">Travel Destination</label>
 
                     <div className="mt-2">
                       <select
@@ -875,7 +875,7 @@ function Queries() {
                         value={destination}
                         onChange={handlefields}
                       >
-                        <option value="Destination">none</option>
+                        <option value="Destination">Select Destination</option>
                         <option value="kashmir">Kashmir</option>
                         <option value="ladakh">Ladakh</option>
                         <option value="kashmir + ladakh">

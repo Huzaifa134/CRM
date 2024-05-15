@@ -27,7 +27,7 @@ let clients = [];
 let corporate = [];
 let agents = [];
 
-function ProposalSent() {
+function New() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -285,7 +285,6 @@ function goToQueries() {
     {
       cellRenderer: (params) => {
         return (
-         <>
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly   h-[45%]">
               <p className="h-5 text-blue-600 text-base hover:text-blue-800 font-semibold cursor-pointer">
@@ -306,17 +305,8 @@ function goToQueries() {
 
             <div className="h-[10%]"></div>
           </div>
-             <div>
-             <button>Grapes</button>
-         </div>
-         </>
         );
-     
       },
-   
-    
-
-    
     },
     {
       cellRenderer: (params) => {
@@ -347,7 +337,6 @@ function goToQueries() {
     {
       cellRenderer: (params) => {
         return (
-         <>
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
               <p className="text-sm font-semibold h-3">Destination</p>
@@ -371,8 +360,6 @@ function goToQueries() {
 
             <div className="h-[10%]"></div>
           </div>
-        
-         </>
         );
       },
     },
@@ -493,7 +480,6 @@ function goToQueries() {
                     style={{ fontSize: 17 }}
                   />
                 </div>
-                
               </div>
             </div>
 
@@ -508,14 +494,11 @@ function goToQueries() {
                 <span className="text-xs text-slate-600">
                   10-04-2024 - 07:42 PM
                 </span>
-                
               </span>
             </div>
 
             <div className="h-[10%]"></div>
-        
           </div>
-          
         );
       },
     },
@@ -580,7 +563,7 @@ function goToQueries() {
       
       `}</style>
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#f5f7f9]">
-        <div className="font-[700]"> Proposal Sent </div>
+        <div className="font-[700]"> New </div>
         <div className="flex justify-center  sm:w-[65%] md:w-[55%] lg:w-[43%]  w-[90%] items-center gap-3 h-full">
           <input
             value={search}
@@ -664,6 +647,7 @@ function goToQueries() {
           <div className="text-white  text-[0.65rem] font-[700] ">INVALID</div>
         </div>
       </div>
+
       <div className="h-[80%] w-full mt-[6px] px-5 overflow-x-auto ">
         <div className="ag-theme-quartz h-full xl:w-full  w-[1200px]">
           <AgGridReact
@@ -682,10 +666,6 @@ function goToQueries() {
         </div>
       </div>
 
-
-
-
-
       <Modal
         keepMounted
         onClose={() => {
@@ -697,14 +677,6 @@ function goToQueries() {
       >
         <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[95%] md:w-[70%] h-fit"></div>
       </Modal>
-
-
-
-
-
-
-
-
 
       {/* Add Query Modal */}
 
@@ -966,10 +938,10 @@ function goToQueries() {
                       <input
                         type="text"
                         value={
-                          (nights !== 0 ? `${nights} Nights, ` : "") +
-                          days +
-                          " Days"
-                        }
+                            (nights !== 0 ? `${nights} Nights, ` : "") +
+                            days +
+                            " Days"
+                          }
                         className="border-2 rounded-md text-sm px-3 py-2 w-full"
                         placeholder="days"
                         readOnly
@@ -1156,4 +1128,4 @@ function goToQueries() {
   );
 }
 
-export default ProposalSent;
+export default New;
