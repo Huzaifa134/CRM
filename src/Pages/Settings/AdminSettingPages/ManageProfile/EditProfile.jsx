@@ -5,11 +5,11 @@ import React from 'react'
 const EditProfile = () => {
   return (
     <>
-    <div className=' main-container flex bg-[#f8fafa]  h-full w-full p-5 items-start justify-center gap-4'>
-      <div className='w-[60%] container-1 bg-white border-[#f1f1f1] border-2 rounded-xl'>
+    <div className=' main-container flex bg-[#f8fafa] h-full w-full p-5 items-start justify-center gap-4 max-w-[1400px] flex-wrap'>
+      <div className='w-[60%] container-1 fl bg-white border-[#f1f1f1] border-2 rounded-xl '>
         <p className=' text-blue-600 font-medium text-md p-3'>Edit Profile</p>
         <hr/>
-        <div className='flex justify-between items-end mx-2 mt-6 flex-wrap'>
+        <div className='flex justify-between items-end mx-2 mt-6 '>
 
       <select className='p-2 text-left  border-[#ddd] border-2 rounded w-36'>
           <option value="Mr.">Mr.</option>
@@ -36,11 +36,12 @@ const EditProfile = () => {
         <input type='email' placeholder='Email'  className='p-2 w-full border-[#ddd] border-2 rounded-md  transition-all bg-[#e3e6e6]'/>
       </div>
 
-      <div className='flex mx-2 mt-2 justify-between'>
-          <div className='flex flex-col'>
-          <label htmlFor="Name " className="text-sm">Code</label>
-          <input type='text' placeholder='+91'  className='p-2 w-36 border-[#ddd] border-2 rounded-md transition-all'/>
+      <div className='flex justify-between items-end mx-2 mt-6 '>
+      <div className='rounded w-36 max-w-[1350px] flex flex-col'>
+    <label htmlFor="Name" className="text-sm">Code</label>
+    <input type='text' placeholder='+91' className='p-2 w-full border-[#ddd] border-2 rounded-md       transition-all' />
       </div>
+
 
       <div className='flex flex-col'>
         <label htmlFor="Name " className="text-sm">Mobile</label>
@@ -142,3 +143,7 @@ const EditProfile = () => {
 }
 
 export default EditProfile
+
+
+
+// p-2 text-left  border-[#ddd] border-2 rounded w-36

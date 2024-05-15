@@ -924,8 +924,9 @@ function Queries() {
                       <input
                         type="text"
                         value={
+                          (nights !== 0 ? `${nights} Nights, ` : "") +
                           days +
-                          (nights !== 0 ? ` days, ${nights} nights` : " days")
+                          " Days"
                         }
                         className="border-2 rounded-md text-sm px-3 py-2 w-[130px]"
                         placeholder="days"
@@ -974,25 +975,19 @@ function Queries() {
                     </div>
                   </div>
                   {/*infant  */}
-                  <div>
+                <div>
                     <label htmlFor="infantage">Infant </label>
-                    <div className="border-2 rounded-md flex">
-                      <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
+                        <div className="border-2 rounded-md flex">
+                    <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
                         <FaPerson className="px-1 w-5 h-5 " />
-                      </div>
-                      <select
-                        name="infantage"
-                        id="infantage"
-                        onChange={handlefields}
-                        value={selectInfantage}
-                        className=" px-5 py-2 w-[92px]"
-                      >
-                        {infantage.map((item, index) => (
-                          <option value={item} key={index}>
-                            {item}
-                          </option>
-                        ))}
-                      </select>
+                    </div>
+                          <input type="number"
+                          name="infantage"
+                          id="infantage"
+                          min="0"
+                          onChange={handlefields}
+                          value={selectInfantage}
+                          className=" px-5 py-2 w-[92px]"/>
                     </div>
                   </div>
                 </div>
