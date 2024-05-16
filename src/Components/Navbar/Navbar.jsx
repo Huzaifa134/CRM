@@ -16,19 +16,27 @@ import { LuClock9 } from "react-icons/lu";
 import { IoMail } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 import { BsQuestionCircleFill } from "react-icons/bs";
+import { MdOutlineEmail } from "react-icons/md";
 
 
 const Navbar = ({sendDataToApp}) => {
   const navigate = useNavigate()
 
+
+
   function goToMailSetting() {
    navigate('/mailSetting') 
+
+
   }
+
   function goToManageProfile() {
     navigate('/manageProfile') 
-   }
+
+  }
 
   const [click, setClick] = useState(false);
+
 
 
   const handleClick = () => {
@@ -63,7 +71,7 @@ const Navbar = ({sendDataToApp}) => {
 
 
           <div id="div3" className="text-white p-3 flex flex-col gap-3">
-            <button className="border-[1px] border-[#adadad] w-full text-left px-2 rounded-lg p-1 hover:bg-[#2d2f31] flex items-center gap-4" onClick={goToManageProfile}><FaUser/> Manage Your Profile</button>
+            <button className="border-[1px] border-[#adadad] w-full text-left px-2 rounded-lg p-1 hover:bg-[#2d2f31] flex items-center gap-4" onClick={goToManageProfile} ><FaUser/> Manage Your Profile</button>
             <button className="border-[1px] border-[#adadad] w-full text-left px-2 rounded-lg p-1 hover:bg-[#2d2f31] flex items-center gap-4" onClick={goToMailSetting}><IoMail /> Mail Setting </button>
           </div>
 
@@ -128,7 +136,7 @@ const Navbar = ({sendDataToApp}) => {
       <div className="md:w-[50%] w-[100%] h-full  flex items-center justify-end gap-3 sm:gap-5 mr-3">
 
         <button className="bg-[#078d80] flex justify-center items-center gap-1 p-1 sm:p-2 rounded-md text-white font-bold  text-xs lg:text-sm">
-          <DesktopWindowsOutlinedIcon style={{ fontSize: 18 }} /> <span className="sm:block hidden" >Market Place</span>
+          <MdOutlineEmail style={{ fontSize: 18 }} /> <span className="sm:block hidden" >Email Inbox</span>
         </button>
 
         <div className="relative group flex z-10 justify-center cursor-pointer">
