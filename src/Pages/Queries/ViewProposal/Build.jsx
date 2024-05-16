@@ -1,4 +1,3 @@
-import React from 'react'
 import ViewProposal from './ViewProposal'
 import { FaPencilAlt } from "react-icons/fa";
 import { HiPhoto } from "react-icons/hi2";
