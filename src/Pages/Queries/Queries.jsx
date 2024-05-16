@@ -109,12 +109,10 @@ function Queries() {
       selectService,
       remarks
     );
-    navigate("/queriesDetail");
+    navigate("/queries/102498");
   };
 
-  const editHandler = () => {
-    navigate("queriesDetail");
-  };
+
   const handlefields = (e) => {
     const { name, value } = e.target;
     if (name === 'childage') {
@@ -460,8 +458,9 @@ function Queries() {
                     style={{ fontSize: 17 }}
                   />
                 </div>
+                <Link to={`/queries/${params.data.id}`}>
                 <div
-                  onClick={editHandler}
+               
                   className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center"
                 >
                   <EditOutlinedIcon
@@ -469,6 +468,7 @@ function Queries() {
                     style={{ fontSize: 17 }}
                   />
                 </div>
+                </Link>
                 <div
                   onClick={() => {
                     setProposalModal(true);
