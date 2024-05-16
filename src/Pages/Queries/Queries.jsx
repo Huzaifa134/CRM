@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
@@ -51,6 +51,20 @@ function Queries() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+
+
+
+
+
+// tab function
+
+
+
+
+
+
+
 
 
   const navigate = useNavigate()
@@ -716,6 +730,9 @@ function Queries() {
               <div className="w-full">
                 <div>
                   <select
+
+
+
                     className={`px-2  focus:outline-none w-full border h-10  focus:border  ${
                       errors.name === "meal_plan_id"
                         ? "border-red-600"
@@ -725,6 +742,9 @@ function Queries() {
                     name="type"
                     value={type}
                     onChange={handlefields}
+                   
+
+            
                   >
                     <option value={"DEFAULT"} disabled={true}>
                       Type
@@ -741,7 +761,13 @@ function Queries() {
                 <div className="mt-4">
                   <div className="  w-full flex gap-5 justify-between items-center">
                     <div className="">
-                      <select
+                      <select   
+
+
+
+
+
+
                         className={`px-2 w-[200px] focus:outline-none  border h-10  focus:border  ${
                           errors.name === "meal_plan_id"
                             ? "border-red-600"
@@ -749,6 +775,8 @@ function Queries() {
                         }  rounded-md`}
                         defaultValue={"DEFAULT"}
                       >
+
+                        
                         <option value="DEFAULT" disabled={true}>
                           Title
                         </option>
@@ -771,6 +799,13 @@ function Queries() {
                           label={" Name"}
                           variant="outlined"
                           sx={{ width: "100%" }}
+
+
+
+
+
+                          
+
                         />
                       </div>
                     </div>
@@ -794,9 +829,17 @@ function Queries() {
                           value={phoneNumber}
                           onChange={handleChange}
                           onFocus={() => setIsInputFocused(true)}
-                          onBlur={() => setIsInputFocused(false)}
+                          onBlur={() => setIsInputFocused(false)}              
                           className=" py-2 px-2 w-full"
                           placeholder="Phone/Mobile"
+
+
+
+
+
+
+
+
                         />
                         {isInputFocused && (
                           <div className="dropdown-content">
@@ -809,6 +852,7 @@ function Queries() {
                               ))
                             ) : (
                               <p>No results found</p>
+                              
                             )}
                           </div>
                         )}
@@ -829,6 +873,17 @@ function Queries() {
                         value={email}
                         onChange={handlefields}
                         className=" py-2 px-2 w-full"
+
+
+
+
+
+                 
+
+                        
+
+
+
                       />
                     </div>
                   </div>
@@ -845,6 +900,12 @@ function Queries() {
                         id="company"
                         placeholder="company name"
                         className="border-2 px-[19px] py-2 rounded-md w-full"
+
+
+               
+
+
+                        
                       />
                     </div>
                     {/* GST */}
@@ -873,7 +934,9 @@ function Queries() {
                         className="border-2 rounded-md px-3 py-2 w-full"
                         id="dstionation"
                         value={destination}
+                        
                         onChange={handlefields}
+                        
                       >
                         <option value="Destination">Select Destination</option>
                         <option value="kashmir">Kashmir</option>

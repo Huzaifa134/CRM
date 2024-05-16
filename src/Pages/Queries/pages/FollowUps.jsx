@@ -23,7 +23,7 @@ const FollowUps = () => {
       <p className="text-[12px] font-semibold">TravBizz IT SolutionsDue on: 16/05/2024 - 01:00 PM</p>
       <p className="text-[14px] p-1 font-semibold">hello</p>
     </div>
-    <FaCheckSquare className="text-2xl text-[#5da334]" />
+    <FaCheckSquare  className="text-2xl text-[#5da334]" />
   </div>
 </div>
 
