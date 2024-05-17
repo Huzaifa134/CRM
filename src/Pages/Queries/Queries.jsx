@@ -711,6 +711,7 @@ function Queries() {
               padding: "3px",
             },
           }}
+          sx={{height:"115vh",marginLeft:"20px",marginTop:"13px"}}
       >
         <div className="flex justify-center">
           <div className="p-6 rounded-md bg-white">

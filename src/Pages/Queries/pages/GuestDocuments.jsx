@@ -2,7 +2,7 @@
 const GuestDocuments = () => {
   return (
     <div>
-     <div className="flex justify-between bg-[#f7f7f7] p-1 m-2 rounded-md items-center">
+     <div className="flex justify-between bg-[#f7f7f7] p-1 px-3 m-2 rounded-md items-center">
       <p className="font-semibold text-sm">Guests (1)</p>
       <button className="text-sm font-semibold bg-blue-700 text-white p-1 px-2 rounded-md">+ Add Task</button>
     </div>

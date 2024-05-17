@@ -30,15 +30,11 @@ const EditProfile = () => {
       </select>
       
       <div className='flex flex-col w-full'>
-          <label htmlFor="Name " className="text-sm">First Name</label>
+          <label htmlFor="Name " className="text-sm">Name</label>
            <input type='text' placeholder='TravBizz' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
       </div>
 
-      <div className='flex flex-col w-full'>
-        <label htmlFor="Name " className="text-sm">Last Name</label>
-        <input type='text' placeholder='TravBizz'  className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
-      </div>
-
+      
       </div>
 
 
@@ -50,23 +46,30 @@ const EditProfile = () => {
 
 
 
-      <div className='flex mx-2 mt-2 justify-between max-[1000px]:flex-wrap max-[1000px]:justify-center max-[1000px]:flex-col max-[1000px]:gap-2'>
+      <div className='flex justify-center items-center mx-2 mt-2 w-full  max-[1000px]:flex-wrap max-[1000px]:justify-center max-[1000px]:flex-col max-[1000px]:gap-2'>
 
-        <div className='flex flex-col'>
-          <label htmlFor="Name " className="text-sm">Code</label>
-          <input type='text' placeholder='+91'  className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
-      </div>
-
-
-      <div className='flex flex-col'>
+        <div className='flex flex-col justify-center items-center'>
+          
         <label htmlFor="Name " className="text-sm">Mobile</label>
-        <input type='text' placeholder='12345678'  className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
+          <select name="code" id="code" className='border-2 py-2'>
+          <option value="code">+91</option>
+          </select>
       </div>
 
 
-      <div className='flex flex-col'>
-        <label htmlFor="Name " className="text-sm">Profile image</label>
-        <input type='file' className='p-[6px] w-full border-[#ddd] border-2 rounded-md transition-all'/>
+      <div className='flex flex-col mt-[21px]'>
+        <input type='number' placeholder='12345678'  className='p-2 w-72 border-[#ddd] border-2 border-l-0 transition-all'/>
+      </div>
+
+
+      <div className='ml-14 w-full'>
+       <p className='text-sm'>Profile Image</p>
+      <label htmlFor="fileUpload" className=' flex justify-between items-center border-2 w-96'>
+        <input type="file" id="fileUpload" style={{ display: 'none' }}  />
+        Choose File
+        <span className='bg-gray-300 py-2 self-center px-3'>Browse</span>
+      </label>
+    
       </div>
 
 
@@ -144,11 +147,30 @@ const EditProfile = () => {
           <label htmlFor="Name " className="text-sm mt-2">Confirm Password</label>
           <input type='text' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
           </div>
-         <div className='flex justify-end mx-3 mt-3 mb-3'>
+         
+    </div>
+    <div className='mt-6 items-center '>
+    <div className='flex flex-col mx-2 '>
+    <label htmlFor="Name " className="text-sm">Old Pin</label>
+    <input type='number' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
+    </div>
+
+    <div className='flex flex-col mx-2 '>
+    <label htmlFor="Name " className="text-sm mt-3">New Pin</label>
+    <input type='number' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
+    </div>
+
+    <div className='flex flex-col mx-2'>
+    <label htmlFor="Name " className="text-sm mt-2">Confirm Pin</label>
+    <input type='number' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
+    </div>
+   
+
+</div>
+<div className='flex justify-end mx-3 mt-3 mb-3'>
          <button className='bg-[#2c3d3d] text-white text-base px-2 py-1 rounded '> Changes Password</button>
          </div>
 
-    </div>
       </div>
     
     </div>

@@ -2,9 +2,12 @@ import React from "react";
 import image from "../../../assets/images/lanscape.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 //3 dots MUI
 // import * as React from 'react';
-import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
 import { FaDownload } from "react-icons/fa";
 function Proposals() {
@@ -14,6 +17,8 @@ function Proposals() {
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
+  
+
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
@@ -107,6 +112,7 @@ function Proposals() {
         <FaPlus />
         Create itinerary
         </button>
+
         </div>
         {/* insert */}
         <div>
