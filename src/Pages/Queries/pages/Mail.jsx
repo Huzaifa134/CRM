@@ -13,7 +13,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: 800,
   bgcolor: 'background.paper',
   outline: "none",
   boxShadow: 24,
@@ -42,6 +42,8 @@ const Mail = () => {
     </div>
     <MdOutlineReply className="text-[#007bff] hover:text-[#0056b3] cursor-pointer"/>
   </div>
+  <hr />
+  <h4 className='text-2xl ml-2 font-semibold'>Request Received - Ref. No. 002499</h4>
   </div>
 
   return (
