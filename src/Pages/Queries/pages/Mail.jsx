@@ -1,4 +1,3 @@
-import React from 'react'
 import { GoMail } from "react-icons/go";
 import { FaInfoCircle } from "react-icons/fa";
 

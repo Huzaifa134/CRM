@@ -166,6 +166,7 @@ const App = () => {
         { path: "/weatherSetting", element: <WeatherSetting /> },
         { path: "/currency", element: <Currency /> },
         { path: "/queriesDetail", element: <QueriesDetail/> },
+        { path: "/emailInbox", element: <QueriesDetail/> },
       ],
     },
   ]);
