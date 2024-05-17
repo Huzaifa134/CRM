@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import React from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -93,6 +91,8 @@ const data = [
   },
   {
     id: "12EF34RC6",
+
+    
     date: "25-03-2024",
     fname: "Sarah",
     lname: "Johnson",
@@ -371,6 +371,7 @@ function ProfitLossReport() {
             enableBrowserTooltips={true}
             pagination={true}
             rowHeight={70}
+            domLayout="autoHeight" 
           />
         </div>
       </div>
