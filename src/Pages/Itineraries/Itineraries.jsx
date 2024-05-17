@@ -278,16 +278,16 @@ function Itineraries() {
   return (
     <div className="h-full">
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
-        <div className="font-bold"> Package Theme </div>
+        <div className="font-bold"> Itineraries </div>
         <div className="flex justify-center items-center gap-3 h-full">
-          <button
+         {/* <button
             onClick={() => {
               ExportData();
             }}
             className="px-2 bg-[#1d3f5a] text-white rounded-md flex items-center h-[80%]"
           >
             <IosShareIcon style={{ fontSize: "20" }} />
-          </button>
+          </button> */}
           <input
             value={search}
             onChange={(e) => {
@@ -305,7 +305,7 @@ function Itineraries() {
               }}
               className="border border-slate-300 h-full bg-[#1d3f5a] text-white text-xs rounded-md px-2 "
             >
-              <span className="sm:block hidden">Add Theme</span>
+              <span className="sm:block hidden lg:text-[15px] lg:w-40">Create Itninary</span>
               <span className="sm:hidden block">
                 <AddRoundedIcon />
               </span>
@@ -335,7 +335,7 @@ function Itineraries() {
           >
             <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[48%] h-fit">
               <div className="flex justify-between items-center h-[10%] px-2">
-                <div className="font-bold text-lg">{stat} Client</div>
+                <div className="font-bold text-lg">{stat} Itinerary setup</div>
                 <div className="cursor-pointer" onClick={handleClose}>
                   <CloseIcon />
                 </div>
