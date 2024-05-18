@@ -2,8 +2,120 @@ import ViewProposal from "./ViewProposal";
 import logo from "../../../assets/images/logo.png";
 import view2 from "../../../assets/images/view2.jpg";
 import FinalCard from "./FinalCard";
+import { LiaStarSolid } from "react-icons/lia";
+import { BiCalendar } from "react-icons/bi";
+import { FaHome } from "react-icons/fa";
+import final from "../../../assets/images/final.jpeg"
+import final2 from "../../../assets/images/final2.jpg"
+import final4 from "../../../assets/images/final4.jpg"
+import { FaBed } from "react-icons/fa";
+import { TbWalk } from "react-icons/tb";
+import { FaCar } from "react-icons/fa";
+
+
+
 
 const Final = () => {
+
+  const Gap = () => <span style={{ marginLeft: '10px' }}></span>;
+
+
+const mainDiv = <div>
+
+  <div className="flex gap-4 mt-2">
+            <p className="font-semibold text-2xl flex items-center gap-3"> <FaBed className="text-2xl "/>  Bur Dubai </p>
+
+            <p className="flex items-center text-lg text-[#ff9900]">  <LiaStarSolid />
+               <LiaStarSolid />
+               <LiaStarSolid />
+               <LiaStarSolid /></p>
+            </div>
+
+
+          
+
+               <hr className="border-[1px] mt-2 border-[#c7c0c0]" />
+
+
+
+            <div className="card-details flex justify-between mt-5">
+              <div>
+                <p>Check in</p>
+                <p className="flex items-center text-sm"><BiCalendar /> <span className="font-semibold text-sm">13 May 2024</span></p>
+              </div>
+              <div>
+                <p>Check out</p>
+                <p className="flex items-center text-sm"><BiCalendar /> <span className="font-semibold text-sm">13 May 2024</span></p>
+              </div>
+            </div>
+
+            <hr className="border-[1px] mt-3 border-[#c7c0c0] w-full" />
+
+        <div className="flex items-center mt-3">
+              <p className="text-sm"><span className="font-semibold text-sm">Room:</span> 1 Double <Gap />  |  </p> 
+              <p className="text-sm font-semibold flex items-center"> <span className="text-base"> </span> <Gap/>Meal: </p><Gap/>
+              <p className="text-sm flex items-center">|  <Gap/>  <span className="text-sm flex items-center font-semibold"> <span className="text-sm font-semibold flex gap-5"> <FaHome/> </span> Room Type:</span> Front Villa</p>
+        </div>
+
+        <div className="mt-3">
+          <button className="bg-[#2b93cb] px-2 text-white p-1 ">View More</button>
+        </div>
+</div>
+
+const div1 = <div>
+
+    <div className=" gap-4 mt-2">
+            <p className="font-semibold text-xl flex items-center gap-3"> <FaCar className="text-2xl "/>   Dubai : Airport to Hotel
+ </p>
+            <div >
+                <p className="flex items-center text-base"><BiCalendar /> 13 May 2024</p>
+            </div>
+            <p className="mt-3">Pick up from airport and transfer to hotel</p>   
+    </div>
+            </div>
+
+const div2 = <div>
+
+<div className=" gap-4 mt-2">
+        <p className="font-semibold text-xl flex items-center gap-3"> <TbWalk className="text-2xl "/>  AT - GOT 1 </p>
+        <div >
+            <p className="flex items-center text-base"><BiCalendar /> 13 May 2024</p>
+        </div>
+        <p className="mt-3">City Tour with Burj khalifa</p>   
+</div>
+        </div>
+
+
+
+const div3 = <div>
+
+<div className=" gap-4 mt-2">
+        <p className="font-semibold text-xl flex items-center gap-3"> <TbWalk className="text-2xl "/> Burj Khalifa </p>
+        <div >
+            <p className="flex items-center text-base"><BiCalendar /> 13 May 2024</p>
+        </div>
+        <p className="mt-3">124th Floor
+</p>   
+</div>
+        </div>
+
+
+
+const div4 = <div>
+
+<div className=" gap-4 mt-2">
+        <p className="font-semibold text-xl flex items-center gap-3"> <TbWalk className="text-2xl "/>  Dubai Desert Safari
+ </p>
+        <div >
+            <p className="flex items-center text-base"><BiCalendar /> 13 May 2024</p>
+        </div>
+        <p className="mt-3 w-[32rem]">For an adrenaline-pumping adventure sign up for a desert safari and head out for dune bashing adventure in a 4x4 vehicle filled with thrilling twists and turns.
+
+
+</p>   
+</div>
+        </div>
+
   return (
     <>
       <ViewProposal />
@@ -12,7 +124,7 @@ const Final = () => {
 
 
 
-      <div className="bg-[#f0f0f0] h-full">
+      <div className="bg-[#f0f0f0] h-auto">
 
       {/* top heading */}
 
@@ -141,7 +253,52 @@ const Final = () => {
 
   {/* card 2 start */}
 
-  <FinalCard />
+  <FinalCard image={final2} data={div1} reverse="flex-row-reverse"  between="justify-between" />
+
+
+  <FinalCard image={final} data={mainDiv} />
+
+
+{/* hr title line */}
+
+  <div className="mx-14">
+      <hr className="border-[1px] mt-5 border-[#c5c2c2]"/>
+      <p className="font-semibold text-2xl mt-3">Day 2 Tue, 14 May 2024</p>
+      <hr className="border-[1px] mt-5 border-[#c5c2c2]"/>
+  </div>
+
+
+
+  <FinalCard image={final2} data={div2} reverse="flex-row-reverse" between="justify-between"/>
+
+  <FinalCard image={final} data={div1} reverse="flex-row-reverse"  between="justify-between" />
+
+  <FinalCard image={final} data={div3} reverse="flex-row-reverse"  between="justify-between" />
+
+
+
+  {/* hr title line */}
+
+  <div className="mx-14">
+      <hr className="border-[1px] mt-5 border-[#c5c2c2]"/>
+      <p className="font-semibold text-2xl mt-3">Day 3 Wed, 15 May 2024</p>
+      <hr className="border-[1px] mt-5 border-[#c5c2c2]"/>
+  </div>
+
+
+  <FinalCard image={final4} data={div4} reverse="flex-row-reverse"  between="justify-between" />
+
+
+    {/* hr title line */}
+
+    <div className="mx-14">
+      <hr className="border-[1px] mt-5 border-[#c5c2c2]"/>
+      <p className="font-semibold text-2xl mt-3 text-center">Day 3 Wed, 15 May 2024</p>
+      <hr className="border-[1px] mt-5 border-[#c5c2c2]"/>
+  </div>
+
+
+  
 
 
 
