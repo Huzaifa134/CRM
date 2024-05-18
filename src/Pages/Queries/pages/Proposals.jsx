@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import image from "../../../assets/images/lanscape.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
@@ -10,6 +10,30 @@ import Modal from '@mui/material/Modal';
 // import * as React from 'react';
 import Popper from "@mui/material/Popper";
 import { FaDownload } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
+
+
+
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  height: "90vh",
+  transform: 'translate(-50%, -50%)',
+  width: 600,
+  bgcolor: 'background.paper',
+  outline: "none",
+  boxShadow: 24,
+  borderRadius: "8px",
+  p: 1 ,
+
+};
+
+
+
+
 function Proposals() {
   // 3dots MUI
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,9 +43,134 @@ function Proposals() {
   };
   
 
+  const [open, setOpen] = React.useState(false);
+  const [modalContent, setModalContent] = useState("");
 
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
+  const handleOpen = (content) => {
+    setModalContent(content);
+    setOpen(true);
+  };
+
+  const handleClose = () => setOpen(false);
+
+
+
+  const dropdownArr = ["2N-3D Package" , "Adventure" , "Beach" , "Economy Umrah" , "Flight Booking"]
+
+  const createItineraryModal = <div>
+    <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center'>
+    <h3>Itinerary setup</h3>
+    <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+    </div>
+    <hr />
+
+<div className="overflow-y-scroll h-[78vh]">
+
+
+    <div className="p-3 mt-5">
+      <div className='w-full'>
+        <p htmlFor="First Name" className='text-xs mb-1'>Itinerary Name</p>
+        <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+      </div>
+
+      <div className="flex gap-3 mt-4">
+          <div className='w-full'>
+            <p htmlFor="First Name" className='text-xs mb-1'>Start Date</p>
+            <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="date" />
+          </div>
+          <div className='w-full'>
+           <p htmlFor="First Name" className='text-xs mb-1'>End Date</p>
+           <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="date" />
+           </div>
+      </div>
+
+      <div className="flex mt-4 gap-3">
+          <div className='w-[150px]'>
+            <p htmlFor="First Name" className='text-xs mb-1'>Adult</p>
+            <input min={0} defaultValue={0} className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="number" />
+          </div>
+          <div className='w-[150px]'>
+              <p htmlFor="First Name" className='text-xs mb-1'>Child</p>
+             <input min={0} defaultValue={0} className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="number" />
+          </div>
+         <div className='w-full'>
+           <p htmlFor="First Name" className='text-xs mb-1'>Destinations</p>
+            <input placeholder="Enter Destinations" className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+          </div>
+      </div>
+
+      <div className='w-full mt-4'>
+           <p htmlFor="First Name" className='text-xs mb-1'>Notes</p>
+           <textarea className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" name="" id="" placeholder="Notes"></textarea>
+      </div>
+    </div>
+
+    <h3 className="text-xl font-semibold ml-2">Website Setting</h3>
+
+    <div className="p-3">
+      <div className='w-full'>
+        <p htmlFor="First Name" className='text-xs mb-1'>Theme</p>
+         <select className='outline-none  border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
+            {dropdownArr.map((item)=>{
+              return <option value="">{item}</option>
+            })}
+         </select>
+       </div>
+
+       <div className='w-full mt-4'>
+        <p htmlFor="First Name" className='text-xs mb-1'>Show on Website</p>
+         <select className='outline-none  border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
+           <option value="">No</option>
+           <option value="">Yes</option>
+         </select>
+       </div>
+
+       <div className='w-full mt-4'>
+        <p htmlFor="First Name" className='text-xs mb-1'>Per Person Price</p>
+        <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+      </div>
+
+      <div className='w-full mt-4'>
+        <p htmlFor="First Name" className='text-xs mb-1'>Validity</p>
+        <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="date" />
+      </div>
+
+      <div className='w-full mt-4'>
+        <p htmlFor="First Name" className='text-xs mb-1'>Popular</p>
+         <select className='outline-none  border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
+           <option value="">No</option>
+           <option value="">Yes</option>
+         </select>
+       </div>
+
+       <div className='w-full mt-4'>
+        <p htmlFor="First Name" className='text-xs mb-1'>Special</p>
+         <select className='outline-none  border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
+           <option value="">No</option>
+           <option value="">Yes</option>
+         </select>
+       </div>
+
+       <div className='w-full mt-4'>
+           <p htmlFor="First Name" className='text-xs mb-1'>About Package</p>
+           <textarea className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" name="" id="" ></textarea>
+      </div>
+
+      <hr className="mt-6"/>
+
+      <div className="flex justify-end gap-3">
+          <button onClick={handleClose} className='mt-5 text-sm bg-white text-black border-[1px] p-2 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#ebf6fc]'>Cancel</button>
+          <button onClick={handleClose} className='mt-5 text-sm bg-[#12344d] text-white p-2 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Save</button>
+      </div>
+
+    </div>
+        
+    </div>
+  </div>
+
+
+  const open1 = Boolean(anchorEl);
+  const id = open1 ? "simple-popper" : undefined;
   return (
     <div className="m-3 flex flex-wrap flex-col">
       <div className="flex justify-between items-center">
@@ -46,7 +195,7 @@ function Proposals() {
             <button aria-describedby={id} type="button" onClick={handleClick}>
               <BsThreeDotsVertical />
             </button>
-            <Popper id={id} open={open} anchorEl={anchorEl}>
+            <Popper id={id} open1={open1} anchorEl={anchorEl}>
               <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
                 <a href="block" className="">
                   Actions
@@ -108,7 +257,7 @@ function Proposals() {
       <div className=" bg-gray-200 rounded-md h-[550px] ml-3 flex gap-5 w-80 justify-center items-center flex-col">
         {/*create */}
         <div>
-        <button className="flex justify-center items-center text-white py-2 px-5 gap-2 w-64 bg-[#2a8bda]">
+        <button onClick={() => handleOpen(createItineraryModal)} className="flex justify-center items-center text-white py-2 px-5 gap-2 w-64 bg-[#2a8bda]">
         <FaPlus />
         Create itinerary
         </button>
@@ -123,6 +272,17 @@ function Proposals() {
         </div>
       </div>
       </div>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+           {modalContent}
+        </Box>
+      </Modal>
     </div>
   );
 }
