@@ -24,9 +24,7 @@ const ViewProposal = () => {
     }
   };
 
-useEffect(() => {
- handleOpenModal(quotationModal)
-}, [])
+
 
 
   
