@@ -684,7 +684,7 @@ function goToQueries() {
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+       
         MenuListProps={{
           'aria-labelledby': 'basic-button',
         }}
@@ -697,6 +697,7 @@ function goToQueries() {
               padding: "3px",
             },
           }}
+          sx={{height:"115vh",marginLeft:"20px",marginTop:"13px"}}
       >
         <div className="flex justify-center">
           <div className="p-6 rounded-md bg-white">

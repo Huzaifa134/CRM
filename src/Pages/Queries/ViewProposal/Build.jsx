@@ -1,3 +1,4 @@
+import React, { useState , useEffect } from 'react'
 import ViewProposal from './ViewProposal'
 import { FaPencilAlt } from "react-icons/fa";
 import { HiPhoto } from "react-icons/hi2";
@@ -13,10 +14,24 @@ import view2 from "../../../assets/images/view2.jpg"
 import view3 from "../../../assets/images/view3.png"
 import { FaPlus } from "react-icons/fa";
 import BuildCard from './BuildCard';
+import { Box, Modal } from '@mui/material';
+import { IoClose } from 'react-icons/io5';
 
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  height: "auto",
+  transform: 'translate(-50%, -50%)',
+  width: 600,
+  bgcolor: 'background.paper',
+  outline: "none",
+  boxShadow: 24,
+  borderRadius: "8px",
+  p: 1 ,
 
-
+};
 
 
 
@@ -24,7 +39,36 @@ import BuildCard from './BuildCard';
 
 const Build = () => {
 
+  const [open, setOpen] = React.useState(false);
+  const [modalContent, setModalContent] = useState("");
 
+  const handleOpen = (content) => {
+    setModalContent(content);
+    setOpen(true);
+  };
+
+  const handleClose = () => setOpen(false);
+
+const iconModal = <div>
+<div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center'>
+<h3>Day 1 Details</h3>
+<IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+</div>
+<hr />
+
+<div className='p-3'>
+  <p htmlFor="Subject" className='text-xs mb-1'>Subject</p>
+  <input className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+
+  <p htmlFor="Details" className='text-sm mb-1 font-semibold mt-4' >Details</p>
+  <textarea rows={10}  className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+
+  <div className='flex justify-end'>
+     <button onClick={handleClose} className='mt-4 text-sm bg-[#12344d] text-white p-2 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Send Mail</button>
+  </div>
+</div>
+
+</div>
 
 const obj = [
   {
@@ -63,11 +107,75 @@ const obj = [
     image: view3,
     icon:   <FaPlus/>
   }
-  
-  
+]
+
+const imageObj = [
+  {
+    image: "https://travbizz.website/crm/package_image/landcruiser1715157404.jpeg" ,
+    head: "Landcruiser"
+  },
+  {
+    image: "https://travbizz.website/crm/package_image/Butterfly1714465676.PNG" ,
+    head: "Butterfly"
+  },
+  {
+    image: "https://travbizz.website/crm/package_image/WhatsApp_Image_2023-10-11_at_11713953512.jpeg" ,
+    head: "WhatsApp Image -- at"
+  },
+  {
+    image: "https://travbizz.website/crm/package_image/25_Thailand1713339511.jpeg" ,
+    head: "Thailand"
+  },
+  {
+    image: "https://travbizz.website/crm/package_image/IMG_47711712599527.jpg" ,
+    head: "IMG"
+  },
+  {
+    image: "https://travbizz.website/crm/package_image/PDF-Image31712591174.jpg" ,
+    head: "PDF-Image"
+  },
 ]
 
 
+const changePhotoModal = <div>
+      <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center'>
+      <h3>Media library</h3>
+      <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+    </div>
+    <hr />
+
+<div className='p-3'>
+
+    <div className='flex '>
+        <h3 className='text-md p-2 cursor-pointer hover:text-black rounded-t-md px-3 text-white bg-[#2da36b] hover:bg-[#bdffe0] transition-all font-semibold flex items-center gap-1'><HiPhoto className=''/>My Uploads</h3>
+    </div>
+    <hr />
+
+    <div className='mt-5 flex items-center justify-between'>
+      <input type="text" placeholder='Search' className='outline-none border-[1px] border-[#494949] w-[420px] p-1 px-2 rounded-md' />
+      <button onClick={handleClose} className=' text-sm bg-[#12344d] text-white p-1 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Upload Photo</button>
+    </div>
+
+  <div className='flex flex-wrap justify-center gap-2'>
+    {imageObj.map((item)=>{
+      return <div className='mt-5 flex flex-col justify-center items-center'>
+        <div className='overflow-hidden h-[90px]  p-1 transition-all'>
+          <img src={item.image} className='w-[170px]' alt="" />
+        </div>
+      <p className='text-sm mt-2'>{item.head}</p>
+    </div>
+    })}
+  </div>
+
+<div className='flex justify-center mt-5 mb-3'>
+  <button className=' text-sm bg-[#12344d] text-white p-1 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Load more</button>
+</div>
+
+
+</div>
+
+
+</div>
 
   return (
     <>
@@ -81,7 +189,7 @@ const obj = [
                 <div className='bg-gradient-to-t from-[#000] to-[#fff] h-full w-full absolute z-10 opacity-80'></div>
                 <img className='absolute top-0 z-0 inset-0 w-full h-full object-cover ' src={butterfly} alt='' />
 
-                     <div className='absolute top-0 right-0 p-2 flex items-center gap-2 bg-[#00000070] bg-opacity-5 rounded-md mt-2 mr-2 z-30'>
+                     <div className='absolute top-0 right-0 p-2 flex items-center gap-2 bg-[#00000070] bg-opacity-5 rounded-md mt-2 mr-2 z-30 cursor-pointer'   onClick={() => handleOpen(changePhotoModal)}>
                     <HiPhoto className='text-white'/>
                     <button className='bg-transparent text-white'>Change Cover Photo</button>
                     </div>
@@ -198,7 +306,7 @@ const obj = [
       <div className='w--full bg-[#ffff] border-2 border-[#f1f1f1] shadow-md mx-2 p-3 mt-4 flex justify-between'>
               <p className='italic text-[#adabab] font-normal'>Enter Day Wise Details</p>
 
-              <div className='w-7 h-7 border-[1px] border-[#2e8be2] rounded-full flex items-center justify-center hover:bg-[#2e8be2] group'>
+              <div onClick={()=> handleOpen(iconModal)} className='w-7 h-7 border-[1px] border-[#2e8be2] rounded-full flex items-center justify-center hover:bg-[#2e8be2] group'>
                     <MdEdit className='text-[#2e8be2] group-hover:text-[#fff]' />
               </div>
 
@@ -257,6 +365,18 @@ const obj = [
    </div>
 
        </div>
+
+
+       <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+           {modalContent}
+        </Box>
+      </Modal>
 
        
         
