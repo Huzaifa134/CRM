@@ -62,6 +62,7 @@ import Invalid from "./Pages/Queries/NavButtons/Invalid";
 import New from "./Pages/Queries/NavButtons/New";
 import NoConnect from "./Pages/Queries/NavButtons/NoConnect";
 import Canceled from "./Pages/Queries/NavButtons/Canceled";
+import EmailInbox from "./Components/Navbar/EmailInbox";
 
 const App = () => {
   const Layout = () => {
@@ -166,7 +167,7 @@ const App = () => {
         { path: "/weatherSetting", element: <WeatherSetting /> },
         { path: "/currency", element: <Currency /> },
         { path: "/queriesDetail", element: <QueriesDetail/> },
-        { path: "/emailInbox", element: <QueriesDetail/> },
+        { path: "/emailInbox", element: <EmailInbox/> },
       ],
     },
   ]);

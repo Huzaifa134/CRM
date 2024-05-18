@@ -25,8 +25,6 @@ const ViewProposal = () => {
   };
 
 
-
-
   
 
   const handleCloseModal = () => {
