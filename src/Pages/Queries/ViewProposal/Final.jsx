@@ -11,6 +11,11 @@ import final4 from "../../../assets/images/final4.jpg"
 import { FaBed } from "react-icons/fa";
 import { TbWalk } from "react-icons/tb";
 import { FaCar } from "react-icons/fa";
+import FinalScroll from "./FinalScroll";
+import { FaUser } from "react-icons/fa";
+import { MdOutlineAdsClick } from "react-icons/md";
+
+
 
 
 
@@ -297,6 +302,120 @@ const div4 = <div>
       <hr className="border-[1px] mt-5 border-[#c5c2c2]"/>
   </div>
 
+
+  <FinalScroll />
+
+  
+    {/* hr title line */}
+
+    <div className="mx-14">
+      <hr className="border-[1px] mt-5 border-[#c5c2c2]"/>
+      <p className="font-semibold text-2xl mt-3 text-center">Comments</p>
+      <hr className="border-[1px] mt-5 border-[#c5c2c2]"/>
+  </div>
+
+
+  <div className="bg-[#ffff] mx-14 p-5 mt-5">
+    <p className="text-center">No Comment Available</p>
+
+    {/* <div className="w-full border-[1px] border-[#c5c2c2]"> */}
+      <textarea minLength="25px" placeholder="Enter your comment" className="w-full border-[1px] border-[#c5c2c2] mt-5 rounded-md"></textarea>
+    {/* </div> */}
+
+    <div className="flex justify-end">
+      <button className="bg-[#06304c] px-4 text-[#fff]  outline-none rounded p-1">Submit Comment</button>
+    </div>
+  </div>
+
+
+
+{/* footer */}
+
+<div className="bg-[#343642] mx-14 p-5 mt-5 mb-5">
+<div className="flex p-5">
+<div className="flex items-center gap-3 ">
+<FaUser className="text-[#ffff] text-3xl" />
+ <div>
+ <p className="text-[#ffff] font-semibold text-x">TravBizz IT Solutions</p>
+  <p className="text-[#ffff]">Travbizz Travel IT Solutions</p>
+ </div>
+</div>
+</div>
+<div className="flex justify-center">
+
+
+
+
+{/* horizontal div */}
+
+<div className="flex mb-7">
+
+
+<div className="flex gap-5 justify-center ">
+
+<div className="">
+<div  className="w-full">
+<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<div className="flex justify-between mt-2">
+  <p className="text-[#fff] text-sm ">Email address	</p>
+  <p className="text-[#fff] text-sm ">info@travbizz.com</p>
+</div>
+</div>
+
+<div className="w-full">
+<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<div className="flex justify-between mt-2">
+  <p className="text-[#fff] text-sm ">Phone number		</p>
+  <p className="text-[#fff] text-sm ">1234567890</p>
+</div>
+</div>
+
+
+
+<div  className="w-full">
+<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<div className="flex justify-between mt-2">
+  <p className="text-[#fff] text-sm "> Total price			</p>
+  <p className="text-[#fff] text-sm flex items-center gap-2 cursor-pointer"> <MdOutlineAdsClick/> www.travbizz.com
+  
+</p>
+
+</div>
+<hr className="border-[1px] w-[32rem] mt-4 border-[#c5c2c2]"/>
+
+</div>
+</div>
+
+
+
+<div  className="w-full">
+<div>
+<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<div className="flex justify-between mt-2">
+  <p className="text-[#fff] text-sm ">Phone number		</p>
+  <p className="text-[#fff] text-sm ">1234567890</p>
+</div>
+</div>
+
+
+
+<div className="w-full ">
+<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<div className="flex justify-between mt-2">
+  <p className="text-[#fff] text-sm "> Total price			</p>
+  <p className="text-[#fff] text-sm flex items-center gap-2 cursor-pointer"> ₹
+</p>
+</div>
+</div>
+<hr className="border-[1px] w-[32rem] mt-4  border-[#c5c2c2]"/>
+
+</div>
+
+</div>
+</div>
+</div>
+
+  </div>
 
   
 

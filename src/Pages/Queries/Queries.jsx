@@ -799,11 +799,6 @@ function Queries() {
                           label={" Name"}
                           variant="outlined"
                           sx={{ width: "100%" }}
-
-
-
-
-
                           
 
                         />
@@ -832,12 +827,6 @@ function Queries() {
                           onBlur={() => setIsInputFocused(false)}              
                           className=" py-2 px-2 w-full"
                           placeholder="Phone/Mobile"
-
-
-
-
-
-
 
 
                         />
@@ -873,16 +862,6 @@ function Queries() {
                         value={email}
                         onChange={handlefields}
                         className=" py-2 px-2 w-full"
-
-
-
-
-
-                 
-
-                        
-
-
 
                       />
                     </div>
