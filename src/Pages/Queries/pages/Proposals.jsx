@@ -105,10 +105,10 @@ function Proposals() {
       </div>
     </div>
 
-    <h3 className="text-xl font-semibold ml-2">Website Setting</h3>
+    {/* <h3 className="text-xl font-semibold ml-2">Website Setting</h3> */}
 
     <div className="p-3">
-      <div className='w-full'>
+      {/* <div className='w-full'>
         <p htmlFor="First Name" className='text-xs mb-1'>Theme</p>
          <select className='outline-none  border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
             {dropdownArr.map((item)=>{
@@ -128,9 +128,9 @@ function Proposals() {
        <div className='w-full mt-4'>
         <p htmlFor="First Name" className='text-xs mb-1'>Per Person Price</p>
         <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
-      </div>
+      </div> */}
 
-      <div className='w-full mt-4'>
+      <div className='w-full'>
         <p htmlFor="First Name" className='text-xs mb-1'>Validity</p>
         <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="date" />
       </div>

@@ -25,6 +25,7 @@ const ViewProposal = () => {
   };
 
 
+
   
 
   const handleCloseModal = () => {
@@ -38,7 +39,7 @@ const ViewProposal = () => {
       <IoClose className='cursor-pointer font-bold ' onClick={handleCloseModal}/>
     </div>
     <hr />
-    <div className='p-3'>
+    <div className='p-3 h-[500px] overflow-y-scroll'>
       <div className='flex justify-center mb-3'>
         <img src={logo} alt="" />
       </div>
@@ -51,35 +52,124 @@ const ViewProposal = () => {
 
       <table className='w-full mt-6'>
         <tr >
-          <td className='border-[1px] w-full text-sm p-1 bg-black text-white' colSpan={4}>Query Details</td>
+          <td className='border-[1px] w-full text-sm p-2 font-semibold bg-black text-white' colSpan={4}>Query Details</td>
         </tr>
         <tr className='w-full'>
-          <td className='border-[1px] text-sm p-1 font-semibold'>QueryId:</td>
-          <td className='border-[1px]  text-sm p-1'>#141391</td>
-          <td className='border-[1px] w-[50px] text-sm p-1 font-semibold'>Adult(s):</td>
-          <td className='border-[1px] w-[70px] text-sm p-1'>2</td>
+          <td className='border-[1px] text-sm p-2 font-semibold'>QueryId:</td>
+          <td className='border-[1px]  text-sm p-2'>#141391</td>
+          <td className='border-[1px] w-[50px] text-sm p-2 font-semibold'>Adult(s):</td>
+          <td className='border-[1px] w-[70px] text-sm p-2'>2</td>
         </tr>
         <tr className='w-full'>
-          <td className='border-[1px]  text-sm p-1 font-semibold'>Nights:</td>
-          <td className='border-[1px]  text-sm p-1'>2 Nights & 3 Days</td>
-          <td className='border-[1px]  text-sm p-1 font-semibold'>Child(s):</td>
-          <td className='border-[1px] text-sm p-1'>0</td>
+          <td className='border-[1px]  text-sm p-2 font-semibold'>Nights:</td>
+          <td className='border-[1px]  text-sm p-2'>2 Nights & 3 Days</td>
+          <td className='border-[1px]  text-sm p-2 font-semibold'>Child(s):</td>
+          <td className='border-[1px] text-sm p-2'>0</td>
         </tr>
         <tr>
-          <td className='border-[1px]  text-sm p-1 font-semibold'>Destination Covered:</td>
-          <td className='border-[1px]  text-sm p-1'>Dubai</td>
-          <td className='border-[1px] w-[50px] text-sm p-1 font-semibold'>Start Date:</td>
-          <td className='border-[1px] text-sm p-1'>Mon, 13 May, 2024</td>
+          <td className='border-[1px]  text-sm p-2 font-semibold'>Destination Covered:</td>
+          <td className='border-[1px]  text-sm p-2'>Dubai</td>
+          <td className='border-[1px] w-[50px] text-sm p-2 font-semibold'>Start Date:</td>
+          <td className='border-[1px] text-sm p-2'>Mon, 13 May, 2024</td>
         </tr>
         <tr>
-          <td className='border-[1px] text-sm p-1 font-semibold'>Query Date:</td>
-          <td className='border-[1px] text-sm p-1'>11-May-2024</td>
-          <td className='border-[1px] text-sm p-1 font-semibold'>End Date:</td>
-          <td className='border-[1px] text-sm p-1'>Wed, 15 May, 2024</td>
+          <td className='border-[1px] text-sm p-2 font-semibold'>Query Date:</td>
+          <td className='border-[1px] text-sm p-2'>11-May-2024</td>
+          <td className='border-[1px] text-sm p-2 font-semibold'>End Date:</td>
+          <td className='border-[1px] text-sm p-2'>Wed, 15 May, 2024</td>
         </tr>
       </table>
 
-      <h3>Nikhil Ji Dubai Trip</h3>
+      <h3 className='mt-6 font-semibold'>Nikhil Ji Dubai Trip</h3>
+
+      <table className='w-full mt-3'>
+        <tr >
+          <td className='border-[1px] w-full text-sm p-2 border-gray-300 font-semibold bg-[#4fbdff] text-white' colSpan={7}>Option 1</td>
+        </tr>
+        <tr className='w-full'>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] text-sm p-2 font-semibold'>City</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px]  text-sm p-2 font-semibold'>Hotel Name</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[50px] text-sm p-2 font-semibold'>Check In</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Check Out</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Nights</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Room Type</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Meal Plan</td>
+        </tr>
+        <tr className='w-full'>
+          <td className='border-[1px] border-gray-300  text-sm p-2 font-semibold'>Dubai</td>
+          <td className='border-[1px] border-gray-300  text-sm p-2'>Bur Dubai (5 Star) <br /> <span className='font-semibold'>Double Room: 1</span></td>
+          <td className='border-[1px] border-gray-300  text-sm p-2 w-20'>13-May-2024</td>
+          <td className='border-[1px] border-gray-300 text-sm p-2'>13-May-2024</td>
+          <td className='border-[1px] border-gray-300 text-sm p-2'>0</td>
+          <td className='border-[1px] border-gray-300 text-sm p-2'>Front Villa</td>
+          <td className='border-[1px] border-gray-300 text-sm p-2'></td>
+        </tr>
+      </table>
+
+      <h2 className='text-xl text-center font-bold mt-4'>Option 1 - Total Package Price: <span className='text-[#cc0000]'>26,775 INR</span></h2>
+
+      <table className='w-full mt-4'>
+        <tr >
+          <td className='border-[1px] w-full text-sm p-2 border-gray-300 font-semibold bg-[#04bf58] text-white' colSpan={7}>Option 1</td>
+        </tr>
+        <tr className='w-full'>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] text-sm p-2 font-semibold'>City</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px]  text-sm p-2 font-semibold'>Hotel Name</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[50px] text-sm p-2 font-semibold'>Check In</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Check Out</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Nights</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Room Type</td>
+          <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Meal Plan</td>
+        </tr>
+        <tr className='w-full'>
+          <td className='border-[1px] border-gray-300  text-sm p-2 font-semibold'>Dubai</td>
+          <td className='border-[1px] border-gray-300  text-sm p-2'>Bur Dubai (5 Star) <br /> <span className='font-semibold'>Double Room: 1</span></td>
+          <td className='border-[1px] border-gray-300  text-sm p-2 w-20'>13-May-2024</td>
+          <td className='border-[1px] border-gray-300 text-sm p-2'>13-May-2024</td>
+          <td className='border-[1px] border-gray-300 text-sm p-2'>0</td>
+          <td className='border-[1px] border-gray-300 text-sm p-2'>Front Villa</td>
+          <td className='border-[1px] border-gray-300 text-sm p-2'></td>
+        </tr>
+      </table>
+
+       <h2 className='text-xl text-center font-bold mt-4'>Option 2 - Total Package Price: <span className='text-[#cc0000]'>24,150 INR</span></h2>
+
+      <table className='w-full mt-4'>
+        <tr >
+          <td className=' w-full text-sm p-2  font-semibold bg-black text-white' colSpan={2}>Itinerary Details</td>
+        </tr>
+        <tr className='w-full'>
+          <td className='bg-[#e4e4e4] text-sm p-2 font-semibold'>13 May 2024</td>
+          <td className='bg-[#e4e4e4 w-[80%] text-sm p-2 bg-[#f4f4f4]'><span className='font-semibold'>Day 1:</span> Arrival in dubai</td>
+        </tr>
+      </table>
+
+      <p className='text-sm my-4'>Arrival in dubai and transfer to hotel via private car</p>
+      <hr />
+
+      <p className='my-4 text-sm'><span className='font-semibold'>Transport Included:</span> Dubai : Airport to Hotel - (<span className='font-semibold text-[#cc0000] cursor-pointer '>click here</span> to view package details)</p>
+
+      <table className='w-full mt-7'>
+        <tr className='w-full'>
+          <td className='bg-[#e4e4e4] text-sm p-2 font-semibold'>14 May 2024</td>
+          <td className='bg-[#e4e4e4 w-[80%] text-sm p-2 bg-[#f4f4f4]'><span className='font-semibold'>Day 2:</span></td>
+        </tr>
+      </table>
+      <p className='my-3 text-sm'><span className='font-semibold'>Activity Included:</span> Burj Khalifa - (<span className='font-semibold text-[#cc0000] cursor-pointer '>click here</span> to view package details)</p>
+
+      <table className='w-full mt-7'>
+        <tr className='w-full'>
+          <td className='bg-[#e4e4e4] text-sm p-2 font-semibold'>14 May 2024</td>
+          <td className='bg-[#e4e4e4 w-[80%] text-sm p-2 bg-[#f4f4f4]'><span className='font-semibold'>Day 2:</span></td>
+        </tr>
+      </table>
+      <p className='my-3 text-sm'><span className='font-semibold'>Activity Included:</span> Dubai Desert Safari - (<span className='font-semibold text-[#cc0000] cursor-pointer '>click here</span> to view package details)</p>
+
+
+      <div className='flex flex-col justify-center items-center gap-2 mt-16'>
+        <button className='bg-[#12344d] hover:bg-[#2a4355] py-2 rounded-md w-[120px] text-white font-semibold text-sm'>Print Quotation</button>
+        <button onClick={()=> handleOpenModal(shareModal)} className='bg-black hover:bg-[#302f2f] py-2 rounded-md w-[120px] text-white font-semibold text-sm'>Send To Email</button>
+      </div>
     </div>
   </div>
 

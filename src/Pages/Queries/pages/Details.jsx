@@ -38,12 +38,12 @@ function Details() {
   };
 
   return (
-    <div className="py-2 px-3 w-full h-full">
+    <div className="p-3 w-full h-full">
       <div className="w-full flex flex-col ">
         <div className="py-1 w-full rounded-lg bg-[#f7f7f7]">
           <span className="font-[500] text-sm pl-2">Client Information</span>
         </div>
-        <div className="flex gap-2 w-full pt-2">
+        <div className="flex gap-2 w-full pt-2 pl-1">
           <div className="w-[30%] flex flex-col ">
             <div className="text-xs">Client Name</div>
             <div className="text-sm mt-1 font-[500]">
@@ -65,7 +65,7 @@ function Details() {
         <div className="py-1 w-full rounded-lg bg-[#f7f7f7]">
           <span className="font-[500] text-sm pl-2">Query Information</span>
         </div>
-        <div className="flex w-full pt-2 gap-2">
+        <div className="flex w-full pt-2 gap-2 pl-1">
           <div className="w-[30%] flex flex-col ">
             <div className="w-full">
               <div className="text-xs">Destination</div>
