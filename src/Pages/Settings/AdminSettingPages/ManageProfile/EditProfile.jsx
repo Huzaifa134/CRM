@@ -1,5 +1,6 @@
 import { Select } from 'antd'
 import React from 'react'
+import indianFlag from "../../../../assets/images/indianFlag.webp"
 
 
 const EditProfile = () => {
@@ -52,7 +53,10 @@ const EditProfile = () => {
           
         <label htmlFor="Name " className="text-sm">Mobile</label>
           <select name="code" id="code" className='border-2 py-2'>
-          <option value="code">+91</option>
+
+          <option value="code">
+                +91 
+            </option>
           </select>
       </div>
 
@@ -128,7 +132,10 @@ const EditProfile = () => {
 
 {/* container 2 */}
 
-      <div className='container-2 bg-white border-2 border-[#f1f1f1] w-[400px] max-[1200px]:w-[800px] transition-all max-[800px]:w-full rounded-xl'>
+      <div className='container-2'>
+
+
+      <div className=' bg-white border-2 border-[#f1f1f1] w-[400px] max-[1200px]:w-[800px] transition-all max-[800px]:w-full rounded-xl'>
           <p className=' text-blue-600 font-medium text-md p-3'>Change Password</p>
           <hr/>
 
@@ -149,27 +156,44 @@ const EditProfile = () => {
           </div>
          
     </div>
-    <div className='mt-6 items-center '>
-    <div className='flex flex-col mx-2 '>
-    <label htmlFor="Name " className="text-sm">Old Pin</label>
-    <input type='number' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
-    </div>
 
-    <div className='flex flex-col mx-2 '>
-    <label htmlFor="Name " className="text-sm mt-3">New Pin</label>
-    <input type='number' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
-    </div>
-
-    <div className='flex flex-col mx-2'>
-    <label htmlFor="Name " className="text-sm mt-2">Confirm Pin</label>
-    <input type='number' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
-    </div>
    
-
-</div>
 <div className='flex justify-end mx-3 mt-3 mb-3'>
-         <button className='bg-[#2c3d3d] text-white text-base px-2 py-1 rounded '> Changes Password</button>
+         <button className='bg-[#2c3d3d] text-white text-base px-2 py-1 rounded '> New Password</button>
          </div>
+
+      </div>
+
+
+      <div className='mt-5 bg-white border-2 border-[#f1f1f1] w-[400px] max-[1200px]:w-[800px] transition-all max-[800px]:w-full rounded-xl'>
+          <p className=' text-blue-600 font-medium text-md p-3'>Change Pin</p>
+          <hr/>
+
+      <div className='mt-6 items-center '>
+          <div className='flex flex-col mx-2 '>
+          <label htmlFor="Name " className="text-sm">Old Pin</label>
+          <input type='text' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
+          </div>
+
+          <div className='flex flex-col mx-2 '>
+          <label htmlFor="Name " className="text-sm mt-3">New Pin</label>
+          <input type='text' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
+          </div>
+
+          <div className='flex flex-col mx-2'>
+          <label htmlFor="Name " className="text-sm mt-2">Confirm Pin</label>
+          <input type='text' className='p-2 w-full border-[#ddd] border-2 rounded-md transition-all'/>
+          </div>
+         
+    </div>
+
+   
+<div className='flex justify-end mx-3 mt-3 mb-3'>
+         <button className='bg-[#2c3d3d] text-white text-base px-2 py-1 rounded '> New Password</button>
+         </div>
+
+      </div>
+
 
       </div>
     

@@ -19,7 +19,7 @@ const FinalCard = (props) => {
     
   return (
     <div className={`flex mt-4 `}>
-        <div className="bg-[#ffff] w-full mx-14 border-[1px] rounded-lg border-[#c7c0c0]">
+        <div className="bg-[#ffff] w-full mx-14 border-[1px] rounded-lg border-[#eeeff0">
            <div className={`flex ${props.reverse} ${props.between}`}>
                <div>
                <img src={props.image} className="w-[35rem] rounded-lg" alt="" />

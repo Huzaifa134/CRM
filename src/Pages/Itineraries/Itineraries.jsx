@@ -16,6 +16,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { HiDotsVertical } from "react-icons/hi";
 import BasicMenu from "./menu/BasicMenu";
+import { Link } from "react-router-dom";
+
+
 
 const data = [
   {
@@ -135,7 +138,9 @@ function Itineraries() {
                 src={LandScape}
               />{" "}
             </div>
-            <div>Jaffar.com</div>
+           <Link to="/queries/proposalSent/viewProposal/final">
+           <div >Jaffar.com</div>
+           </Link>
           </div>
         );
       },

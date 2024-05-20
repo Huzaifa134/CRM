@@ -152,7 +152,7 @@ const div4 = <div>
 <div className="bg-[#fff] p-5 mx-14 mt-2 rounded-xl shadow">
 <table className="w-full ">
   <tr className=" bg-[#4fbdff] text-[#ffff]">
-    <td className="border-[1px] border-[#dbdbdb] font-medium text-sm p-1" colSpan={11}>Option1</td>
+    <td className="border-[1px] border-[#eeeff0] font-medium text-sm p-1" colSpan={11}>Option1</td>
   </tr>
           <tr className="w-full bg-[#e4e4e4] p-2">
             <td className="border-[1px] border-[#dbdbdb] font-medium text-sm p-1" colSpan={5}>
@@ -190,7 +190,7 @@ const div4 = <div>
   
 <table className="w-full ">
   <tr className=" bg-[#04bf58] text-[#ffff]">
-    <td className="border-[1px] border-[#dbdbdb] font-medium text-sm p-1" colSpan={11}>Option1</td>
+    <td className="border-[1px] border-[#eeeff0] font-medium text-sm p-1" colSpan={11}>Option1</td>
   </tr>
           <tr className="w-full bg-[#e4e4e4] p-2">
             <td className="border-[1px] border-[#dbdbdb] font-medium text-sm p-1" colSpan={5}>
@@ -241,7 +241,7 @@ const div4 = <div>
 
 {/* card start */}
 
-<div className='flex bg-[#ffff] border-2  items-start border-[#dbdbdb] justify-between mx-14 rounded-lg shadow-sm mt-8 p-3'>
+<div className='flex bg-[#ffff] border-2  items-start border-[#eeeff0] justify-between mx-14 rounded-lg shadow-sm mt-8 p-3'>
 <div className='flex items-center'>
 <div className=' rounded'>
   <img src={view2} className='w-20 h-20 rounded-lg' alt="" />
@@ -355,7 +355,7 @@ const div4 = <div>
 
 <div className="">
 <div  className="w-full">
-<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<hr className="border-[1px] w-[32rem] mt-5 border-[#eeeff0"/>
 <div className="flex justify-between mt-2">
   <p className="text-[#fff] text-sm ">Email address	</p>
   <p className="text-[#fff] text-sm ">info@travbizz.com</p>
@@ -363,7 +363,7 @@ const div4 = <div>
 </div>
 
 <div className="w-full">
-<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<hr className="border-[1px] w-[32rem] mt-5 border-[#eeeff0"/>
 <div className="flex justify-between mt-2">
   <p className="text-[#fff] text-sm ">Phone number		</p>
   <p className="text-[#fff] text-sm ">1234567890</p>
@@ -373,7 +373,7 @@ const div4 = <div>
 
 
 <div  className="w-full">
-<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<hr className="border-[1px] w-[32rem] mt-5 border-[#eeeff0"/>
 <div className="flex justify-between mt-2">
   <p className="text-[#fff] text-sm "> Total price			</p>
   <p className="text-[#fff] text-sm flex items-center gap-2 cursor-pointer"> <MdOutlineAdsClick/> www.travbizz.com
@@ -381,7 +381,7 @@ const div4 = <div>
 </p>
 
 </div>
-<hr className="border-[1px] w-[32rem] mt-4 border-[#c5c2c2]"/>
+<hr className="border-[1px] w-[32rem] mt-4 border-[#eeeff0]"/>
 
 </div>
 </div>
@@ -390,7 +390,7 @@ const div4 = <div>
 
 <div  className="w-full">
 <div>
-<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<hr className="border-[1px] w-[32rem] mt-5 border-[#eeeff0]"/>
 <div className="flex justify-between mt-2">
   <p className="text-[#fff] text-sm ">Phone number		</p>
   <p className="text-[#fff] text-sm ">1234567890</p>
@@ -400,14 +400,14 @@ const div4 = <div>
 
 
 <div className="w-full ">
-<hr className="border-[1px] w-[32rem] mt-5 border-[#c5c2c2]"/>
+<hr className="border-[1px] w-[32rem] mt-5 border-[#eeeff0]"/>
 <div className="flex justify-between mt-2">
   <p className="text-[#fff] text-sm "> Total price			</p>
   <p className="text-[#fff] text-sm flex items-center gap-2 cursor-pointer"> ₹
 </p>
 </div>
 </div>
-<hr className="border-[1px] w-[32rem] mt-4  border-[#c5c2c2]"/>
+<hr className="border-[1px] w-[32rem] mt-4  border-[#eeeff0]"/>
 
 </div>
 

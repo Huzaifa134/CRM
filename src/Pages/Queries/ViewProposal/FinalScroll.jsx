@@ -3,7 +3,7 @@ const FinalScroll = () => {
     <>
       <div className="flex justify-center">
         <div className="flex flex-wrap  gap-5 mx-14">
-          <div className="bg-[#ffff] w-[36rem] mt-10  ">
+          <div className="bg-[#ffff] w-[36rem] mt-10 border-[1px] p-3 rounded-lg border-[#eeeff0]  ">
             <p className="text-lg font-semibold mx-2 sticky z-10">
               Inclusions & Exclusions
             </p>
@@ -85,7 +85,7 @@ const FinalScroll = () => {
             </div>
           </div>
 
-          <div className="bg-[#ffff] w-[36rem] mt-10  ">
+          <div className="bg-[#ffff] w-[36rem]  border-[1px] border-[#eeeff0] p-3 rounded-lg mt-10  ">
             <p className="text-lg font-semibold mx-2 sticky z-10">
               Payment Policy & Our Scope of Service
             </p>
@@ -106,7 +106,7 @@ const FinalScroll = () => {
             </div>
           </div>
 
-          <div className="bg-[#ffff] w-[36rem] mt-10  ">
+          <div className="bg-[#ffff] w-[36rem]  border-[1px] border-[#eeeff0] p-3 rounded-lg mt-10  ">
             <p className="text-lg font-semibold mx-2 sticky z-10">
               Useful Tips Before Booking
             </p>
@@ -142,7 +142,7 @@ const FinalScroll = () => {
             </div>
           </div>
 
-          <div className="bg-[#ffff] w-[36rem] mt-10  ">
+          <div className="bg-[#ffff] w-[36rem]  border-[1px] border-[#eeeff0] p-3 rounded-lg mt-10  ">
             <p className="text-lg font-semibold mx-2 sticky z-10">
               Cancellation Policy & Airline Cancellation Policy
             </p>
