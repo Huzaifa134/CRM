@@ -281,6 +281,7 @@ function goToQueries() {
       sortable: false,
       filter: false,
       flex: 0.2,
+      cellClass: 'custom-checkbox', // Add this line to apply the custom class
     },
     {
       cellRenderer: (params) => {
@@ -1124,6 +1125,13 @@ function goToQueries() {
           </div>
         </div>
         </Menu>
+
+
+        <style jsx>{`
+        .custom-checkbox .ag-selection-checkbox {
+          margin-left: 10px; /* Adjust the value as needed */
+        }
+      `}</style>
     </div>
   );
 }

@@ -22,6 +22,7 @@ import { MdOutlineSmartphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import Menu from '@mui/material/Menu';
 
+
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 let destinations = [];
 let clients = [];
@@ -293,6 +294,7 @@ function Queries() {
       sortable: false,
       filter: false,
       flex: 0.2,
+      cellClass: 'custom-checkbox', // Add this line to apply the custom class
     },
     {
       cellRenderer: (params) => {
@@ -1169,7 +1171,14 @@ function Queries() {
           </div>
         </div>
         </Menu>
+
+        <style jsx>{`
+        .custom-checkbox .ag-selection-checkbox {
+          margin-left: 10px; /* Adjust the value as needed */
+        }
+      `}</style>
     </div>
+    
     
   );
 }
