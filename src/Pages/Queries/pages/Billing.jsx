@@ -131,7 +131,7 @@ const viewInvoice = <div>
                   <td className='border-[1px] border-t-0 border-black font-semibold p-2 align-text-top'>HSN/SAC</td>
                   <td className='border-[1px] border-t-0 border-black font-semibold p-2 align-text-top'>Quantity</td>
                   <td className='border-[1px] border-t-0 border-black font-semibold p-2 text-end'>Rate</td>
-                  <td className='border-[1px] border-t-0 border-black font-semibold p-2 align-text-top'>per</td>
+                  <td className='border-[1px] border-t-0 border-black font-semibold p-2 align-text-top text-center'>per</td>
                   <td className='border-[1px] border-t-0 border-black font-semibold p-2 text-end'>Amount</td>
                 </tr>
                 <tr>
@@ -147,10 +147,19 @@ const viewInvoice = <div>
                 <td className='border-[1px] border-black p-2 align-text-top'>25500</td>
                 <td className='border-[1px] border-black p-2 align-text-top'></td>
                 <td className='border-[1px] border-black p-2 align-text-bottom text-end'>
-                  <div className=' flex flex-col gap-4 items-end justify-end'>
+                  <div className='flex flex-col gap-4 items-end justify-end '>
+                    <p></p>
                      <p>2.5</p>
                      <p>2.5</p>
                      <p>5</p>
+                  </div>
+                </td>
+                <td className='border-[1px] border-black p-2 align-text-bottom text-center'>
+                  <div className='flex flex-col gap-4 items-center '>
+                    <p></p>
+                     <p>%</p>
+                     <p>%</p>
+                     <p>%</p>
                   </div>
                 </td>
 
