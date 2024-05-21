@@ -136,6 +136,25 @@ const PostSalesCard = (props) => {
 
   </div>
 
+  const remarkModal = <div>
+    <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center'>
+        <h3>Remark</h3>
+       <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+    </div>
+    <hr />
+
+ <div className="p-4 mt-5">
+    <div className="flex gap-3 items-start mb-3">
+        <textarea placeholder="Enter Remark..." className="border-[1px] w-full p-2 border-gray-400 outline-none focus:border-black transition-all rounded-md" name="" id=""></textarea>
+        <button className="bg-[#12344d] text-white rounded-md w-32 text-sm h-16 font-semibold hover:bg-[#243a49]">Submit</button>
+      </div>
+
+      <h2 className="text-[#999999] text-center text-sm mb-2">
+         No Remark
+      </h2>
+ </div>
+  </div> 
+
   return (
     <>
       
@@ -152,8 +171,8 @@ const PostSalesCard = (props) => {
                     {props.smallHead}
                  </div>
                  <div className="text-xs flex gap-2">
-                    <button className="bg-[#39b7c1] p-1 px-3 rounded-md text-white font-medium">Remark (0)</button>
-                    <button onClick={()=> handleOpen(updatePaymentModal , event)} className="flex items-center gap-1 bg-[#005ee2] p-1 px-3 rounded-md text-white font-medium"><RiPencilFill />Update Payment</button>
+                    <button className="bg-[#39b7c1] p-1 px-3 rounded-md text-white font-medium"  onClick={()=> handleOpen(remarkModal)}>Remark (0)</button>
+                    <button onClick={()=> handleOpen(updatePaymentModal)} className="flex items-center gap-1 bg-[#005ee2] p-1 px-3 rounded-md text-white font-medium"><RiPencilFill />Update Payment</button>
                  </div>
             </div>
 

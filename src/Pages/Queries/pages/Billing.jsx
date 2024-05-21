@@ -1,8 +1,168 @@
-import React from 'react'
+import { Box, Modal } from '@mui/material';
+import React, { useEffect, useState } from 'react'
 import { FaBriefcase } from "react-icons/fa";
-import { IoDocumentText } from 'react-icons/io5';
+import { IoClose, IoDocumentText } from 'react-icons/io5';
+import logo from "../../../assets/images/logo.png"
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  height: "auto",
+  transform: 'translate(-50%, -50%)',
+  width: "auto",
+  bgcolor: 'background.paper',
+  outline: "none",
+  boxShadow: 24,
+  borderRadius: "8px",
+  p: 1 ,
+
+};
+
 
 const Billing = () => {
+
+  const [open, setOpen] = React.useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const handleOpen = (content) => {
+    setModalContent(content);
+    setOpen(true);
+  };
+
+  const handleClose = () => setOpen(false);
+
+
+  useEffect(() => {
+    handleOpen(viewInvoice)
+  }, [])
+  
+
+
+  const sendPayment = <div>
+
+    <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center w-[400px]'>
+        <h3>Send Payment Plan To Mail</h3>
+        <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+      </div>
+       <hr />  
+
+
+      <div className='p-4'>
+             <p className='text-xs mt-4'>Mail Send To*</p>
+             <input className='mt-1 w-full p-1 px-2 border-[1px] outline-none border-gray-400 focus:border-black transition-all rounded-md' type="text" />
+
+             <p className='text-xs mt-6'>CC Mails*</p>
+             <input className='mt-1 w-full p-1 px-2 border-[1px] outline-none border-gray-400 focus:border-black transition-all rounded-md' type="text" />
+
+             <hr className='mt-8'/>
+
+            <div className='flex justify-end'>
+              <button className='mt-4 text-sm bg-[#12344d] text-white p-1 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Save</button>
+            </div>
+      </div> 
+  </div>
+
+
+const viewInvoice = <div>
+      <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center w-[900px]'>
+        <h3>View Invoice</h3>
+        <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+      </div>
+       <hr />   
+
+
+
+
+       <div className='p-4 px-9 overflow-y-scroll h-[80vh]'>
+        <div className='border-2 border-black w-full text-sm '>
+          <table className='w-full'>
+            <tr>
+              <td rowSpan={3} className='border-[1px] border-black p-2 '>
+                <img className='h-10' src={logo} alt="" />
+                <div className='mt-4'>
+                  <p className='font-semibold'>Travbizz Travel IT Solutions</p>
+                  <p>Address: Noida, India</p>
+                  <p>GSTN: 000000000000000</p>
+                  <p>State Name : UP India</p>
+                  <p>E-Mail : info@travbizz.com</p>
+                </div>
+                </td>
+              <td className='border-[1px] border-black p-2 align-text-top'>Invoice No. <br /><span className='font-semibold'>FF/24-25/1263</span></td>
+              <td className='border-[1px] border-black p-2 align-text-top'>Dated <br /><span className='font-semibold'>11 May 2024</span></td>
+            </tr>
+            <tr>
+              <td className='border-[1px] border-black p-2 align-text-top'>Delivery Note</td>
+              <td className='border-[1px] border-black p-2 align-text-top'>Mode/Terms of Payment</td>
+            </tr>
+            <tr>
+              <td className='border-[1px] border-black p-2 align-text-top'>Supplier’s Ref.</td>
+              <td className='border-[1px] border-black p-2 align-text-top'>Other Reference(s)</td>
+            </tr>
+
+
+            <tr className='align-text-top'>
+              <td rowSpan={4} className='border-[1px] border-black p-2  align-text-top w-[400px]'>
+                <div className=''>
+                  <p className='font-semibold'>Buyer</p>
+                  <p>Mr. Nikhil samar</p>
+                  <p className='font-semibold mt-5'>State Name:</p>
+                </div>
+                </td>
+              <td className='border-[1px] border-black p-2 align-text-top'>Buyer’s Order No.</td>
+              <td className='border-[1px] border-black p-2 align-text-top'>Dated</td>
+            </tr>
+            <tr>
+              <td className='border-[1px] border-black p-2 align-text-top'>Despatch Document No.</td>
+              <td className='border-[1px] border-black p-2 align-text-top'>	Delivery Note Date</td>
+            </tr>
+            <tr>
+              <td className='border-[1px] border-black p-2 align-text-top'>Despatched through</td>
+              <td className='border-[1px] border-black p-2 align-text-top'>Destination</td>
+            </tr>
+            <tr>
+               <td colSpan={2} className='border-[1px] border-black p-2 align-text-top'>Terms of Delivery</td>
+            </tr>
+          </table>
+          <table className='w-full'>
+              <tr>
+                  <td className='border-[1px] border-t-0 border-black font-semibold p-2 text-center w-10'>Sr.</td>
+                  <td className='border-[1px] border-t-0 border-black font-semibold p-2 align-text-top'>Particulars</td>
+                  <td className='border-[1px] border-t-0 border-black font-semibold p-2 align-text-top'>HSN/SAC</td>
+                  <td className='border-[1px] border-t-0 border-black font-semibold p-2 align-text-top'>Quantity</td>
+                  <td className='border-[1px] border-t-0 border-black font-semibold p-2 text-end'>Rate</td>
+                  <td className='border-[1px] border-t-0 border-black font-semibold p-2 align-text-top'>per</td>
+                  <td className='border-[1px] border-t-0 border-black font-semibold p-2 text-end'>Amount</td>
+                </tr>
+                <tr>
+                <td className='border-[1px] border-black p-2 text-center align-text-top'>1.</td>
+                <td className='border-[1px] border-black p-2'>
+                  <div className='flex flex-col gap-4'>
+                    <p>Nikhil Ji Dubai Trip</p>
+                    <p>CGST@2.5% OUTPUT</p>
+                    <p>SGST@2.5% OUTPUT</p>
+                    <p>	TCS@5% OUTPUT</p>
+                  </div>
+                </td>
+                <td className='border-[1px] border-black p-2 align-text-top'>25500</td>
+                <td className='border-[1px] border-black p-2 align-text-top'></td>
+                <td className='border-[1px] border-black p-2 align-text-bottom text-end'>
+                  <div className=' flex flex-col gap-4 items-end justify-end'>
+                     <p>2.5</p>
+                     <p>2.5</p>
+                     <p>5</p>
+                  </div>
+                </td>
+
+
+                </tr>
+          </table>
+          </div>
+       </div>
+</div>
+
+
+
   return (
     <>
       {/* <div className='flex flex-col justify-center items-center w-full h-[70%] text-[#999999]'>
@@ -43,7 +203,7 @@ const Billing = () => {
 
         <div className="flex justify-between bg-[#f7f7f7] p-1 pl-3 rounded-md items-center mt-3">
           <p className="font-semibold text-sm">Payments (3)</p>
-          <button className="text-xs font-semibold bg-blue-700 text-white p-1 px-2 rounded-md">Send Payment Plan To Mail</button>
+          <button onClick={() => handleOpen(sendPayment)} className="text-xs font-semibold bg-blue-700 text-white p-1 px-2 rounded-md">Send Payment Plan To Mail</button>
         </div>
 
         {/* table div */}
@@ -123,9 +283,21 @@ const Billing = () => {
               <p className='text-xl'>GI/23-24/001</p>
             </div>
           </div>
-          <button className='bg-[#264966] hover:bg-[#203d55] transition-all text-white p-1 px-3 text-sm rounded-md'>View Invoice</button>
+          <button onClick={() => handleOpen(viewInvoice)} className='bg-[#264966] hover:bg-[#203d55] transition-all text-white p-1 px-3 text-sm rounded-md'>View Invoice</button>
         </div>
       </div>
+
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+           {modalContent}
+        </Box>
+      </Modal>
     </>
   )
 }
