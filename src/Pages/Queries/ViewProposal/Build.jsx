@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from 'react'
 import ViewProposal from './ViewProposal'
-import { FaPencilAlt } from "react-icons/fa";
+import { FaBed, FaPencilAlt } from "react-icons/fa";
 import { HiPhoto } from "react-icons/hi2";
 import butterfly from "../../../assets/images/b.png"
 import { Bs1CircleFill } from "react-icons/bs";
@@ -16,6 +16,12 @@ import { FaPlus } from "react-icons/fa";
 import BuildCard from './BuildCard';
 import { Box, Modal } from '@mui/material';
 import { IoClose } from 'react-icons/io5';
+import { MdOutlineStarPurple500 } from "react-icons/md";
+import { BiCalendar } from 'react-icons/bi';
+import { LiaStarSolid } from 'react-icons/lia';
+import { FaHome } from "react-icons/fa";
+
+
 
 
 const style = {
@@ -157,7 +163,7 @@ const changePhotoModal = <div>
     </div>
 
   <div className='flex flex-wrap justify-center gap-2'>
-    {imageObj.map((item)=>{
+  {imageObj.map((item)=>{
       return <div className='mt-5 flex flex-col justify-center items-center'>
         <div className='overflow-hidden h-[90px]  p-1 transition-all'>
           <img src={item.image} className='w-[170px]' alt="" />
@@ -203,7 +209,7 @@ const changePhotoModal = <div>
     </div>
             <div className='grand-parent flex w-full bg-[#ffffff]'>
          <div className='grand-child-1 '>
-         <div className='w-[190px] p-2 bg-[#2fd1dd]'>
+         <div className='w-[190px] p-2 hover:bg-[#2fd1dd]'>
            <div className='w-[190px] p-2  flex items-center justify-evenly gap-2'>
            <div className='flex items-center gap-2'>
            <Bs1CircleFill className='text-2xl  border-[1px] border-[#ffff] rounded-full ' /> <p className='text-sm font-semibold'>03-June-Mon</p>
@@ -221,26 +227,7 @@ const changePhotoModal = <div>
             </div>
 
 
-            <div className='w-[190px] p-2 bg-[#2fd1dd]'>
-           <div className='w-[190px] p-2  flex items-center justify-evenly gap-2'>
-           <div className='flex items-center gap-2'>
-           <Bs1CircleFill className='text-2xl  border-[1px] border-[#ffff] rounded-full ' /> <p className='text-sm font-semibold'>03-June-Mon</p>
-           </div>
-          <div>
-          <FaChevronRight className='hover:text-[#1dffe1cc]'/>
-          </div>
-           </div>
-
-            <select className='w-full mt-2 text-sm'>
-              <option value="abu-dhabi " className=''>Abu-Dhabi</option>
-              <option value="Dubai">Dubai</option>
-            </select>
-
-            </div>
-
-
-
-            <div className='w-[190px] p-2 bg-[#2fd1dd]'>
+            <div className='w-[190px] p-2 hover:bg-[#2fd1dd]'>
            <div className='w-[190px] p-2  flex items-center justify-evenly gap-2'>
            <div className='flex items-center gap-2'>
            <Bs1CircleFill className='text-2xl  border-[1px] border-[#ffff] rounded-full ' /> <p className='text-sm font-semibold'>03-June-Mon</p>
@@ -259,7 +246,26 @@ const changePhotoModal = <div>
 
 
 
-            <div className='w-[190px] p-2 bg-[#2fd1dd]'>
+            <div className='w-[190px] p-2 hover:bg-[#2fd1dd]'>
+           <div className='w-[190px] p-2  flex items-center justify-evenly gap-2'>
+           <div className='flex items-center gap-2'>
+           <Bs1CircleFill className='text-2xl  border-[1px] border-[#ffff] rounded-full ' /> <p className='text-sm font-semibold'>03-June-Mon</p>
+           </div>
+          <div>
+          <FaChevronRight className='hover:text-[#1dffe1cc]'/>
+          </div>
+           </div>
+
+            <select className='w-full mt-2 text-sm'>
+              <option value="abu-dhabi " className=''>Abu-Dhabi</option>
+              <option value="Dubai">Dubai</option>
+            </select>
+
+            </div>
+
+
+
+            <div className='w-[190px] p-2 hover:bg-[#2fd1dd]'>
            <div className='w-[190px] p-2  flex items-center justify-evenly gap-2'>
            <div className='flex items-center gap-2'>
            <Bs1CircleFill className='text-2xl  border-[1px] border-[#ffff] rounded-full ' /> <p className='text-sm font-semibold'>03-June-Mon</p>
@@ -279,7 +285,7 @@ const changePhotoModal = <div>
 
             
 
-              <div className=' w-[190px] p-3 bg-[#f3f2f2] flex items-center hover:bg-[#cffcff] justify-evenly gap-2 '>
+              <div className=' w-[190px] p-3 bg-[#ffff] flex items-center hover:bg-[#cffcff] justify-evenly gap-2 '>
              <GrDocumentText /><p className='text-sm font-semibold'>Package Terms</p><div>
              <FaChevronRight className='text-white hover:text-[#5beafd]' />
              </div>
@@ -289,6 +295,9 @@ const changePhotoModal = <div>
 
 
             <div className='grand-child-2  w-full'>
+
+
+              {/* table start */}
 
       <div className='flex justify-between mt-2'>
       <table>
@@ -303,6 +312,9 @@ const changePhotoModal = <div>
         </div>
 
       </div>
+
+      {/* beginner card */}
+
       <div className='w--full bg-[#ffff] border-2 border-[#f1f1f1] shadow-md mx-2 p-3 mt-4 flex justify-between'>
               <p className='italic text-[#adabab] font-normal'>Enter Day Wise Details</p>
 
@@ -312,13 +324,134 @@ const changePhotoModal = <div>
 
             </div>
 
-            </div>
 
-          
-            </div>
+{/* card 1 */}
 
+        <div className='flex bg-[#ffff] border-2 mx-2 items-start border-[#eeeff0] justify-between  rounded-md shadow-md mt-3 p-2'>
+      
+      
+            <div className='flex items-center'>
+                <div className=' rounded'>
+                <img src={view2} className='w-20 h-20 rounded-lg' alt="" />
                 </div>
 
+                <div className='flex flex-col mx-2'>
+                <p className='font-semibold text-sm '>Arrival in dubai</p>
+                <p className='text-[12px]'>Arrival in dubai and transfer to hotel via private car</p>
+                </div>
+            </div>
+
+
+      <div>
+              <div onClick={()=> handleOpen(iconModal)} className='w-7 h-7 border-[1px] border-[#2e8be2] rounded-full flex items-center justify-center hover:bg-[#2e8be2] group'>
+                    <MdEdit className='text-[#2e8be2] group-hover:text-[#fff]' />
+              </div>
+      </div>
+
+
+        </div> 
+
+{/* card 2 */}
+
+        <div className='flex bg-[#ffff] border-2 mx-2 items-start border-[#eeeff0] justify-between  rounded-md shadow-md mt-3 p-2'>
+      
+      
+      <div className='flex items-start'>
+          <div className=' rounded'>
+          <img src={view2} className='w-20 h-20 rounded-lg' alt="" />
+          </div>
+
+          <div className='flex flex-col mx-2'>
+          <p className='font-semibold text-sm '>Dubai : Airport to Hotel</p>
+          <p className='text-[12px]'>Pick up from airport and transfer to hotel</p>
+          </div>
+      </div>
+
+
+      <div>
+              <div onClick={()=> handleOpen(iconModal)} className='w-7 h-7 border-[1px] border-[#2e8be2] rounded-full flex items-center justify-center hover:bg-[#2e8be2] group'>
+              <MdEdit className='text-[#2e8be2] group-hover:text-[#fff]' />
+              </div>
+      </div>
+
+
+        </div> 
+
+{/* card 3 */}
+<div className='flex bg-[#ffff] border-2 mx-2  border-[#eeeff0] justify-between  rounded-md shadow-md mt-3 p-2'>
+      
+      
+     <div  className='flex w-full items-start'>
+     <img src={view2} className='w-20 h-20 rounded-lg' alt="" />
+
+      
+     <div className='p-3 '>
+
+      
+
+<div className="flex gap-4">
+          <p className="font-semibold text-base flex items-center gap-3">  Bur Dubai </p>
+
+          <p className="flex items-center text-base text-[#ff9900]">  <LiaStarSolid />
+             <LiaStarSolid />
+             <LiaStarSolid />
+             <LiaStarSolid />
+             <LiaStarSolid /></p>
+          </div>
+
+
+        
+
+             <hr className="border-[1px] mt-2  border-[#c7c0c0]" />
+
+
+
+          <div className="card-details flex  mt-2">
+            <div className=''>
+              <p className='text-[14px]'>Check in</p>
+              <p className="flex items-center text-[14px]"><BiCalendar /> <span className="font-semibold text-[14px]">13 May 2024</span></p>
+            </div>
+            <div className='mx-5'>
+              <p className='text-[14px]'>Check out</p>
+              <p className="flex items-center text-[14px]"><BiCalendar /> <span className="font-semibold text-[14px]">13 May 2024</span></p>
+            </div>
+
+
+            <div className='mx-5'>
+              <p className='text-[14px]'>Room Type:</p>
+              <p className="flex items-center text-[14px]"><FaHome /> <span className="font-semibold text-[14px]">Front Villa</span></p>
+            </div>
+
+          </div>
+
+          <hr className="border-[1px] mt-3 border-[#c7c0c0] w-full" />
+
+      <div className="flex items-center mt-3">
+            <p className="text-sm"><span className="font-semibold text-sm">Room:</span>  </p> 
+            <p className="text-sm font-semibold flex items-center"> <span className="text-base"> </span> Meal: </p>
+            <p className="text-sm flex items-center">|   <span className="text-sm flex items-center font-semibold"> <span className="text-sm font-semibold flex gap-5">  </span> </span> </p>
+      </div>
+
+      
+</div>
+
+     </div>
+
+
+      <div>
+              <div onClick={()=> handleOpen(iconModal)} className='w-7 h-7 border-[1px] border-[#2e8be2] rounded-full flex items-center justify-center hover:bg-[#2e8be2] group'>
+              <MdEdit className='text-[#2e8be2] group-hover:text-[#fff]' />
+              </div>
+      </div>
+
+
+        </div> 
+
+
+
+      </div>
+            </div>
+                  </div>
    <div>
     
    <div className='child-2 bg-[#ffff] flex gap-2 items-start mx-2'>
