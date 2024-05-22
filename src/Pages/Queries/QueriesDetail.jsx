@@ -39,16 +39,31 @@ import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined
 import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaUser, FaWhatsapp } from "react-icons/fa";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import CloseIcon from "@mui/icons-material/Close";
 import Modal from "@mui/material/Modal";
 import _ from "lodash";
 import { FaCalendarDays } from "react-icons/fa6";
 import { FaPerson } from "react-icons/fa6";
-import { MdOutlineSmartphone } from "react-icons/md";
+import { MdOutlineReply, MdOutlineSmartphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import Menu from '@mui/material/Menu';
+import { Box } from "@mui/material";
+import { IoClose } from "react-icons/io5";
+import Editor from "../../Components/Editor";
+import ReactDOMServer from 'react-dom/server';
+import logo from "../../assets/images/logo.png"
+import CenterModal from "./ViewProposal/CenterModal";
+
+
+
+
+
+
+
+
+
 function QueriesDetail() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -72,6 +87,27 @@ function QueriesDetail() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const handleOpenModal = (content) => {
+    setModalContent(content);
+    setModalOpen(true);
+    if (content === exportModal) {
+      return console.log("Export");
+    }
+  };
+
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+  
+ 
+
+
+
   // const navigate = useNavigate()
 
   // calculate day
@@ -326,6 +362,77 @@ function QueriesDetail() {
       link: "history",
     },
   ];
+
+
+  const composeTable = ReactDOMServer.renderToString(<div className='overflow-y-scroll h-[79vh]'>
+
+
+
+    <div className='p-2 text-sm font-bold'>
+      {/* <p className='font-normal'>3Night 4days</p> */}
+      <p className='mt-5'><strong>Thanks & Regards,</strong></p><br />
+      
+      <p className='mt-5 mb-5'><strong>Team Travbizz.com<br />
+      + 91 9797871223  </strong></p>
+      <hr />
+    </div>
+  </div>)
+
+  const composeModalMail = <div>
+  <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center w-[900px]'>
+  <h3>Compose Mail</h3>
+  <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+  </div>
+  <hr />
+  
+  <div className='p-3 overflow-y-scroll h-[79vh]'>
+  
+  <p className='text-sm text-[#999999]'>From <span className='text-black'>crm@travbizz.com</span></p>
+  
+  <hr className='mt-4 border-[#838383]'/>
+  
+  <div className='flex items-center gap-3 bg-[#f5f5f5] p-2'>
+  <FaUser className='text-white bg-[#2291e6] rounded-full p-1 text-4xl'/>
+  
+  <div className='flex flex-col gap-0 '>
+     <p className='text-xl'>niraj</p>
+     <span className='text-sm text-[#787878]'>northeasttravels1975@gmail.com</span>
+  </div>
+  </div>
+  
+  <hr className=' border-[#838383]'/>
+  
+  <div className='mt-5'>
+    <p htmlFor="CC" className='text-xs mb-1'>CC</p>
+    <input className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+  
+    <p htmlFor="CC" className='text-xs mt-4 mb-1'>Subject</p>
+    <input className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+  
+    <p htmlFor="CC" className='text-xs mt-4 mb-1'>Mail Body</p>
+    <section>
+          <Editor data={composeTable}/>
+    </section>
+  
+    <p htmlFor="CC" className='text-xs mt-4 mb-1'>Attachment</p>
+    <input className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="file" />
+  
+    <hr className=' border-[#838383] mt-5'/>
+  
+    <div className='flex justify-end'>
+       <button onClick={handleClose} className='mt-5 text-sm bg-[#12344d] text-white p-2 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Send Mail</button>
+    </div>
+  
+  </div>
+  </div>
+  
+  
+  </div>
+  
+
+
+
+
  const [column, setColumn] = useState([
     {
       headerCheckboxSelection: true,
@@ -571,7 +678,7 @@ function QueriesDetail() {
             <WhatsAppIcon style={{ fontSize: 18 }} className="text-green-600" />{" "}
             WhatsApp
           </button>
-          <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
+          <button  onClick={()=> handleOpenModal(composeModalMail)}  className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EmailOutlinedIcon style={{ fontSize: 18 }} /> Email
           </button>
           <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
@@ -1251,6 +1358,10 @@ function QueriesDetail() {
         </div>
       </div>
       </Menu>
+
+
+      <CenterModal open={modalOpen} onClose={handleCloseModal} data={modalContent}/>
+
     </div>
   );
 }

@@ -1,12 +1,75 @@
+import { useEffect, useState } from "react";
 import DashboardHeader from "../../../Components/DashboardHeader";
 import "./organisationSetting.css";
+import CenterModal from "../../Queries/ViewProposal/CenterModal";
+import { IoClose } from "react-icons/io5";
 
 export default function OrganisationSetting() {
+  
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const handleOpenModal = (content) => {
+    setModalContent(content);
+    setModalOpen(true);
+    if (content === exportModal) {
+      return console.log("Export");
+    }
+  };
+
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+
+
+  const newVar = <div>hello world</div>
+
+
+  const editOrganisation = <div>
+    <div className='flex justify-between text-2xl font-semibold bg-[#fcfdfd] p-2 items-center w-[600px]'>
+      <h3>Edit organisation settings</h3>
+      <IoClose className='cursor-pointer font-bold ' onClick={handleCloseModal}/>
+    </div>
+    <hr />
+
+    <div className="mt-5 p-3">
+      <div className="flex gap-4">
+        <div className=' w-full'>
+             <p htmlFor="Supplier" className='text-xs mb-2'>Organisation name</p>
+            <input defaultValue={"Travbizz Travel IT Solutions"} className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" type="text" />
+         </div>
+         <div className=' w-full'>
+             <p htmlFor="Supplier" className='text-xs mb-2'>Email</p>
+            <input defaultValue={"info@travbizz.com"} className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" type="email" />
+         </div>
+      </div>
+      <div className="flex gap-4 mt-4">
+        <div className=' w-full'>
+             <p htmlFor="Supplier" className='text-xs mb-2'>Phone</p>
+            <input defaultValue={"9873027426"} className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" type="text" />
+         </div>
+         <div className=' w-full'>
+             <p htmlFor="Supplier" className='text-xs mb-2'>Address</p>
+            <input defaultValue={"Noida, India"} className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" type="text" />
+         </div>
+      </div>
+      <div className=' w-full mt-4'>
+             <p htmlFor="Supplier" className='text-xs mb-2'>GSTN</p>
+            <input defaultValue={"000000000000000"} className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" type="text" />
+         </div>
+    </div>
+  </div> 
+
+  
+
+  
   return (
     <main className="p-5 w-full h-full">
       <DashboardHeader title="Organisation Settings" />
 
-      <button className="edit-button">Edit settings</button>
+      <button onClick={()=> handleOpenModal(editOrganisation)} className="edit-button">Edit settings</button>
 
       <article className="settings-table">
         <p>Organisation name</p>
@@ -24,6 +87,10 @@ export default function OrganisationSetting() {
         <p>State code</p>
         <p>India</p>
       </article>
+
+
+      <CenterModal open={modalOpen} onClose={handleCloseModal} data={modalContent}/>
     </main>
+    
   );
 }

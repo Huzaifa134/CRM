@@ -11,6 +11,9 @@ import Modal from '@mui/material/Modal';
 import Popper from "@mui/material/Popper";
 import { FaDownload } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import logo from "../../../assets/images/logo.png"
+import { IoLogoWhatsapp } from "react-icons/io";
 
 
 
@@ -20,9 +23,9 @@ const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
-  height: "90vh",
+  height: "auto",
   transform: 'translate(-50%, -50%)',
-  width: 600,
+  width: "auto",
   bgcolor: 'background.paper',
   outline: "none",
   boxShadow: 24,
@@ -46,12 +49,16 @@ function Proposals() {
   const [open, setOpen] = React.useState(false);
   const [modalContent, setModalContent] = useState("");
 
+
+  const navigate = useNavigate()
+
   const handleOpen = (content) => {
     setModalContent(content);
     setOpen(true);
   };
 
   const handleClose = () => setOpen(false);
+
 
 
 
@@ -168,6 +175,260 @@ function Proposals() {
     </div>
   </div>
 
+  const makeConfirm = <div>
+     <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center w-[600px]'>
+    <h3>Alert</h3>
+    <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+    </div>
+    <hr />
+
+    <div className="p-3">
+      <p className="text-2xl font-semibold text-center mt-4">You are about to confirm an itinerary</p>
+      <p className="text-sm text-center mt-1 mb-3">This action cannot be undone.</p>
+
+
+      <div className="bg-[#e6fffd]">
+        <hr />
+
+        <p className="text-center font-semibold mt-4">Select Hotel Option</p>
+      <div className="flex justify-center">
+        <select className="border-[1px] border-black rounded-md w-[280px] mt-2 mb-3 p-1"> 
+          <option value="Select">Select</option>
+          <option value="Select">Option 1 : ₹81,900</option>
+        </select>
+      </div>
+      <hr />
+      </div>
+
+      <hr className="mt-7"/>
+
+      <div className="flex justify-end mt-5">
+          <button onClick={()=> navigate('/queries/proposalSent/viewProposal/pricing')} className="bg-[#46cd93] text-white p-2 px-3 rounded-md mb-3 hover:bg-[#39ad7b] transition-all">Confirm Itinerary</button>
+      </div>
+    </div>
+  </div>
+
+const quotationModal = <div>
+<div className='flex justify-between text-2xl font-semibold bg-[#fcfdfd] p-2 items-center w-[900px]'>
+  <h3>View Quotation</h3>
+  <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+</div>
+<hr />
+<div className='p-3 h-[500px] overflow-y-scroll'>
+  <div className='flex justify-center mb-3'>
+    <img src={logo} alt="" />
+  </div>
+  <hr />
+  <div className='mt-3'>
+      <h3 className='text-sm font-semibold'>Dear Nikhil samar,</h3>
+      <p className='text-sm mt-2'>This is TravBizz and I will be working with you to plan your trip to Dubai</p>
+      <p className='text-sm mt-2 '>Please find below details for your trip and feel free to call me at +911234567890 or click here to view more details about this trip.</p>
+  </div>
+
+  <table className='w-full mt-6'>
+    <tr >
+      <td className='border-[1px] w-full text-sm p-2 font-semibold bg-black text-white' colSpan={4}>Query Details</td>
+    </tr>
+    <tr className='w-full'>
+      <td className='border-[1px] text-sm p-2 font-semibold'>QueryId:</td>
+      <td className='border-[1px]  text-sm p-2'>#141391</td>
+      <td className='border-[1px] w-[50px] text-sm p-2 font-semibold'>Adult(s):</td>
+      <td className='border-[1px] w-[70px] text-sm p-2'>2</td>
+    </tr>
+    <tr className='w-full'>
+      <td className='border-[1px]  text-sm p-2 font-semibold'>Nights:</td>
+      <td className='border-[1px]  text-sm p-2'>2 Nights & 3 Days</td>
+      <td className='border-[1px]  text-sm p-2 font-semibold'>Child(s):</td>
+      <td className='border-[1px] text-sm p-2'>0</td>
+    </tr>
+    <tr>
+      <td className='border-[1px]  text-sm p-2 font-semibold'>Destination Covered:</td>
+      <td className='border-[1px]  text-sm p-2'>Dubai</td>
+      <td className='border-[1px] w-[50px] text-sm p-2 font-semibold'>Start Date:</td>
+      <td className='border-[1px] text-sm p-2'>Mon, 13 May, 2024</td>
+    </tr>
+    <tr>
+      <td className='border-[1px] text-sm p-2 font-semibold'>Query Date:</td>
+      <td className='border-[1px] text-sm p-2'>11-May-2024</td>
+      <td className='border-[1px] text-sm p-2 font-semibold'>End Date:</td>
+      <td className='border-[1px] text-sm p-2'>Wed, 15 May, 2024</td>
+    </tr>
+  </table>
+
+  <h3 className='mt-6 font-semibold'>Nikhil Ji Dubai Trip</h3>
+
+  <table className='w-full mt-3'>
+    <tr >
+      <td className='border-[1px] w-full text-sm p-2 border-gray-300 font-semibold bg-[#4fbdff] text-white' colSpan={7}>Option 1</td>
+    </tr>
+    <tr className='w-full'>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] text-sm p-2 font-semibold'>City</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px]  text-sm p-2 font-semibold'>Hotel Name</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[50px] text-sm p-2 font-semibold'>Check In</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Check Out</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Nights</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Room Type</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Meal Plan</td>
+    </tr>
+    <tr className='w-full'>
+      <td className='border-[1px] border-gray-300  text-sm p-2 font-semibold'>Dubai</td>
+      <td className='border-[1px] border-gray-300  text-sm p-2'>Bur Dubai (5 Star) <br /> <span className='font-semibold'>Double Room: 1</span></td>
+      <td className='border-[1px] border-gray-300  text-sm p-2 w-20'>13-May-2024</td>
+      <td className='border-[1px] border-gray-300 text-sm p-2'>13-May-2024</td>
+      <td className='border-[1px] border-gray-300 text-sm p-2'>0</td>
+      <td className='border-[1px] border-gray-300 text-sm p-2'>Front Villa</td>
+      <td className='border-[1px] border-gray-300 text-sm p-2'></td>
+    </tr>
+  </table>
+
+  <h2 className='text-xl text-center font-bold mt-4'>Option 1 - Total Package Price: <span className='text-[#cc0000]'>26,775 INR</span></h2>
+
+  <table className='w-full mt-4'>
+    <tr >
+      <td className='border-[1px] w-full text-sm p-2 border-gray-300 font-semibold bg-[#04bf58] text-white' colSpan={7}>Option 1</td>
+    </tr>
+    <tr className='w-full'>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] text-sm p-2 font-semibold'>City</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px]  text-sm p-2 font-semibold'>Hotel Name</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[50px] text-sm p-2 font-semibold'>Check In</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Check Out</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Nights</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Room Type</td>
+      <td className='bg-[#e4e4e4] border-gray-300 border-[1px] w-[70px] text-sm p-2 font-semibold'>Meal Plan</td>
+    </tr>
+    <tr className='w-full'>
+      <td className='border-[1px] border-gray-300  text-sm p-2 font-semibold'>Dubai</td>
+      <td className='border-[1px] border-gray-300  text-sm p-2'>Bur Dubai (5 Star) <br /> <span className='font-semibold'>Double Room: 1</span></td>
+      <td className='border-[1px] border-gray-300  text-sm p-2 w-20'>13-May-2024</td>
+      <td className='border-[1px] border-gray-300 text-sm p-2'>13-May-2024</td>
+      <td className='border-[1px] border-gray-300 text-sm p-2'>0</td>
+      <td className='border-[1px] border-gray-300 text-sm p-2'>Front Villa</td>
+      <td className='border-[1px] border-gray-300 text-sm p-2'></td>
+    </tr>
+  </table>
+
+   <h2 className='text-xl text-center font-bold mt-4'>Option 2 - Total Package Price: <span className='text-[#cc0000]'>24,150 INR</span></h2>
+
+  <table className='w-full mt-4'>
+    <tr >
+      <td className=' w-full text-sm p-2  font-semibold bg-black text-white' colSpan={2}>Itinerary Details</td>
+    </tr>
+    <tr className='w-full'>
+      <td className='bg-[#e4e4e4] text-sm p-2 font-semibold'>13 May 2024</td>
+      <td className='bg-[#e4e4e4 w-[80%] text-sm p-2 bg-[#f4f4f4]'><span className='font-semibold'>Day 1:</span> Arrival in dubai</td>
+    </tr>
+  </table>
+
+  <p className='text-sm my-4'>Arrival in dubai and transfer to hotel via private car</p>
+  <hr />
+
+  <p className='my-4 text-sm'><span className='font-semibold'>Transport Included:</span> Dubai : Airport to Hotel - (<span className='font-semibold text-[#cc0000] cursor-pointer '>click here</span> to view package details)</p>
+
+  <table className='w-full mt-7'>
+    <tr className='w-full'>
+      <td className='bg-[#e4e4e4] text-sm p-2 font-semibold'>14 May 2024</td>
+      <td className='bg-[#e4e4e4 w-[80%] text-sm p-2 bg-[#f4f4f4]'><span className='font-semibold'>Day 2:</span></td>
+    </tr>
+  </table>
+  <p className='my-3 text-sm'><span className='font-semibold'>Activity Included:</span> Burj Khalifa - (<span className='font-semibold text-[#cc0000] cursor-pointer '>click here</span> to view package details)</p>
+
+  <table className='w-full mt-7'>
+    <tr className='w-full'>
+      <td className='bg-[#e4e4e4] text-sm p-2 font-semibold'>14 May 2024</td>
+      <td className='bg-[#e4e4e4 w-[80%] text-sm p-2 bg-[#f4f4f4]'><span className='font-semibold'>Day 2:</span></td>
+    </tr>
+  </table>
+  <p className='my-3 text-sm'><span className='font-semibold'>Activity Included:</span> Dubai Desert Safari - (<span className='font-semibold text-[#cc0000] cursor-pointer '>click here</span> to view package details)</p>
+
+
+  <div className='flex flex-col justify-center items-center gap-2 mt-16'>
+    <button className='bg-[#12344d] hover:bg-[#2a4355] py-2 rounded-md w-[120px] text-white font-semibold text-sm'>Print Quotation</button>
+    <button onClick={()=> handleOpen(shareModal)} className='bg-black hover:bg-[#302f2f] py-2 rounded-md w-[120px] text-white font-semibold text-sm'>Send To Email</button>
+  </div>
+</div>
+</div>
+
+const shareModal = <div>
+<div className='flex justify-between text-2xl font-semibold bg-[#fcfdfd] p-2 items-center w-[700px]'>
+ <h3>Share</h3>
+ <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+</div>
+<hr />
+
+<div className='overflow-y-scroll h-[80vh]'>
+
+
+<div className='mt-3 p-3 flex gap-5'>
+ <button className='w-full border-[1px] rounded-md p-2 font-semibold text-[#6c757d] hover:bg-[#6c757d] hover:text-white focus:text-white focus:bg-[#6c757d] transition-all'>SHARE PRIVATELY</button>
+ <button onClick={() => handleOpen(sharePublicly)} className='w-full border-[1px] rounded-md p-2 font-semibold text-[#6c757d] hover:bg-[#6c757d] hover:text-white focus:text-white focus:bg-[#6c757d] transition-all'>SHARE PUBLICLY</button>
+</div>
+
+<div className='p-3'>
+ <p className='text-sm'>Share your itinerary privately via email to specific recipients. Recipients will be prompted to create a login in order to view this itinerary.</p>
+ <h3 className='text-2xl font-semibold mt-3'>Clients</h3>
+ <p className='text-sm'>Select client you would like to email this itinerary to.</p>
+
+ <table className='mt-8'>
+   <tr className='w-full hover:bg-[#f5f8fa] transition-all'>
+     <td className='border-[1px] p-1 px-3'><input type="checkbox" /></td>
+     <td className='border-[1px] p-1 px-3 w-full'>Nikhil samar</td>
+     <td className='border-[1px] p-1 px-3 w-full'>nikhilsamar1992@gmail.com</td>
+     <td className='border-[1px] p-1 px-3 w-full'>9619756981</td>
+   </tr>
+ </table>
+
+ <input type="text" placeholder='CC Mail' className='w-full p-1 border-[1px] outline-none mt-5 px-2 rounded-md focus:border-black transition-all ' />
+
+ <p className='text-xl font-semibold mt-6'>Add a message</p>
+ <textarea rows={3} className='w-full p-1 border-[1px] outline-none mt-2 px-2 rounded-md focus:border-black transition-all ' name="" id="" placeholder='Enter messsage here'></textarea>
+
+ <hr className='mt-5'/>
+
+<div className='flex justify-end mt-5'>
+ <button onClick={()=>navigate('/queries/proposalSent/viewProposal/final')} className='bg-[#46cd93] hover:bg-[#41b884] text-white font-semibold p-2 px-3 rounded-md'>Send</button>
+</div>
+
+</div>
+
+</div>
+</div>
+
+const sharePublicly = <div>
+     <div className='flex justify-between text-2xl font-semibold bg-[#fcfdfd] p-2 items-center w-[700px]'>
+      <h3>Share</h3>
+      <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+    </div>
+    <hr />
+
+    <div className='mt-3 p-3 flex gap-5'>
+      <button onClick={() => handleOpen(shareModal)} className='w-full border-[1px] rounded-md p-2 font-semibold text-[#6c757d] hover:bg-[#6c757d] hover:text-white focus:text-white focus:bg-[#6c757d] transition-all'>SHARE PRIVATELY</button>
+      <button onClick={() => handleOpen(sharePublicly)} className='w-full border-[1px] rounded-md p-2 font-semibold text-[#6c757d] hover:bg-[#6c757d] hover:text-white focus:text-white focus:bg-[#6c757d] transition-all'>SHARE PUBLICLY</button>
+    </div>
+
+  <div className='p-3 mb-5'>
+    <p className='text-sm'>Activate link to enable the ability to share this itinerary with anyone (no sign-in required).</p>
+    <p className='mt-4 text-sm'>
+      <input type="checkbox" /> Turn on link sharing
+    </p>
+
+    <div className='flex justify-between mt-5 items-end'>
+      <p className='text-sm'>With Price (Copy this link)</p>
+      <button className='flex items-center gap-1 bg-[#46cd93] hover:bg-[#39b881] text-sm text-white p-1 px-3 rounded-md'><IoLogoWhatsapp />WhatsApp</button>
+    </div>
+
+    <input defaultValue="https://travbizz.website/crm/sharepackage/104226/nikhil-ji-dubai-trip.html" type="text" className='w-full p-1 outline-none border-[1px] mt-2 focus:border-black transition-all rounded-md bg-[#e9ecef] border-gray-300' />
+
+    <div className='flex justify-between mt-5 items-end'>
+      <p className='text-sm text-[#FF0000]'>With Price (Copy this link)</p>
+      <button className='flex items-center gap-1 bg-[#46cd93] hover:bg-[#39b881] text-sm text-white p-1 px-3 rounded-md'><IoLogoWhatsapp />WhatsApp</button>
+    </div>
+
+    <input defaultValue="https://travbizz.website/crm/share/104226/nikhil-ji-dubai-trip.html" type="text" className='w-full p-1 outline-none border-[1px] mt-2 focus:border-black transition-all rounded-md bg-[#e9ecef] border-gray-300' />
+  </div>
+</div>
+
+
+
 
   const open1 = Boolean(anchorEl);
   const id = open1 ? "simple-popper" : undefined;
@@ -246,10 +507,10 @@ function Proposals() {
           <h1>Option 2: ₹31,347</h1>
         </div>
         <div className="flex flex-col gap-4 w-full justify-center items-center mb-7">
-          <button className="border-2 border-[#b7b7b7] w-[80%] rounded-md font-bold py-2 px-5 bg-gray-200">
+          <button onClick={()=> handleOpen(makeConfirm)} className="border-2 border-[#b7b7b7] w-[80%] rounded-md font-bold py-2 px-5 bg-gray-200">
             Make Confirm
           </button>
-          <button className="border-2 border-[#b7b7b7] w-[80%] rounded-md font-bold py-2 px-5 bg-[#58b4ff]">
+          <button onClick={()=> handleOpen(quotationModal)} className="border-2 border-[#b7b7b7] w-[80%] rounded-md font-bold py-2 px-5 bg-[#58b4ff]">
             View Quotation
           </button>
         </div>
