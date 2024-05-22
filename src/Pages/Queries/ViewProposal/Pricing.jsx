@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import "react-phone-number-input/style.css";
-import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Modal from "@mui/material/Modal";
-import CreateIcon from "@mui/icons-material/Create";
-import "./Pricing.css";
 import {
   FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
   TextField,
+  Select,
+  MenuItem,
+  Modal,
 } from "@mui/material";
+import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
+import { FaCarAlt } from "react-icons/fa";
+import HotelIcon from "@mui/icons-material/Hotel";
+import EventIcon from "@mui/icons-material/Event";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CloseIcon from "@mui/icons-material/Close";
+import CreateIcon from "@mui/icons-material/Create";
+import BlindIcon from '@mui/icons-material/Blind';
+import { FaBed } from "react-icons/fa";
+import { FaBlind } from "react-icons/fa";
+import { FaHotel } from "react-icons/fa";
+
+
+
+
+import "./Pricing.css";
+import ViewProposal from "./ViewProposal";
 
 const data = [
   {
@@ -82,11 +91,48 @@ const dateFilterParams = {
   },
 };
 
+const getIconForType = (type) => {
+  switch (type) {
+    case "Flight":
+      return <div className="bg-[#343642] rounded-full p-2">
+        <FaBed className="text-lg text-[#ffff]"/>
+      </div>;
+    case "Transportation - Private":
+      return <div  className="bg-[#343642] rounded-full p-2">
+        <FaCarAlt className=" text-lg text-[#ffff]" />
+      </div>;
+    case "Accommodation":
+      return <div className="bg-[#343642] rounded-full p-2">
+        <FaBlind className=" text-lg text-[#ffff]" />
+      </div>;
+    case "Activity":
+      return <div className="bg-[#343642] rounded-full p-2">
+        <FaHotel className="  text-lg text-[#ffff] " />
+      </div>;
+    default:
+      return null;
+  }
+};
+
 const Dashboard = () => {
   const [row, setRow] = useState(data);
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
-  const [column, setColumn] = useState([
+  const [services, setServices] = useState([
+    {
+      service: "Hotel Option 1",
+      price: 1000,
+      markup: 200,
+      cgst: 30,
+      sgst: 30,
+      igst: "-",
+      tcs: 50,
+      discount: "-",
+      total: "₹122638",
+    },
+  ]);
+
+  const columnDefs = [
     {
       width: 80,
       cellStyle: {
@@ -101,7 +147,7 @@ const Dashboard = () => {
           <Link>
             <div className="cursor-pointer">
               <div className="flex justify-center items-center">
-                <AirplanemodeActiveIcon />
+                {getIconForType(params.data.type)}
               </div>
             </div>
           </Link>
@@ -181,7 +227,7 @@ const Dashboard = () => {
         );
       },
     },
-  ]);
+  ];
 
   const defaultColDef = {
     sortable: true,
@@ -194,20 +240,6 @@ const Dashboard = () => {
     width: 191,
     tooltipField: "name",
   };
-
-  const [services, setServices] = useState([
-    {
-      service: "Hotel Option 1",
-      price: 1000,
-      markup: 200,
-      cgst: 30,
-      sgst: 30,
-      igst: "-",
-      tcs: 50,
-      discount: "-",
-      total: "₹122638",
-    },
-  ]);
 
   const calculateTotal = (service) => {
     return (
@@ -224,19 +256,17 @@ const Dashboard = () => {
 
   return (
     <div>
+      <ViewProposal />
+
       <div className="flex justify-between items-center m-3 p-3 bg-slate-100 rounded-lg">
         <div className="text-2xl font-medium">Dubai Trip Mr.Nikhil</div>
         <div className="text-sm">Dubai, - Adult: 2 | Child: 0</div>
       </div>
 
-      {/* ----------------------------------------------------------- */}
       <div className="h-full w-full px-3">
-        <div
-          className="ag-theme-quartz"
-          style={{ height: "100%", width: "100%" }}
-        >
+        <div className="ag-theme-quartz" style={{ height: "100%", width: "100%" }}>
           <AgGridReact
-            columnDefs={column}
+            columnDefs={columnDefs}
             rowData={row}
             defaultColDef={defaultColDef}
             enableBrowserTooltips={true}
@@ -245,298 +275,288 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      {/* ----------------------------------------------------------- */}
-      <div>
-        <Modal
-          keepMounted
-          open={open}
-          aria-labelledby="keep-mounted-modal-title"
-          aria-describedby="keep-mounted-modal-description"
-        >
-          <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[25%]">
-            <div className="flex justify-between text-3xl items-center h-[10%] px-2 pb-3">
-              <div className="font-bold text-lg text-slate-600">
-                {" "}
-                Edit Pricing{" "}
-              </div>
-              <div onClick={() => setOpen(false)} className="cursor-pointer">
-                <CloseIcon />
-              </div>
-            </div>
-            <hr />
-            <div className="flex flex-row justify-between w-full mt-4 h-[90%]">
-              <div className="w-full mx-2">
-                <div className=" w-full">
-                  <p className="text-xs mb-2">Per Adult Cost</p>
-                  <TextField
-                    id="outlined-basic"
-                    size="small"
-                    // error={errors.name === "first_name"}
-                    // value={fields.first_name}
-                    // onChange={handleChange}
-                    name="first_name"
-                    variant="outlined"
-                    sx={{ width: "100%" }}
-                  />
-                </div>
-                <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
-                  {/* {errors.name === "first_name" && errors.helperTxt} */}
-                </p>
 
-                <div className="mt-3 w-full">
-                  <p className="text-xs mb-2">Per Child Cost</p>
-                  <TextField
-                    id="outlined-basic"
-                    size="small"
-                    // error={errors.name === "last_name"}
-                    // onChange={handleChange}
-                    // value={fields.last_name}
-                    name="last_name"
-                    variant="outlined"
-                    sx={{ width: "100%" }}
-                  />
-                </div>
-                <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
-                  {/* {errors.name === "last_name" && errors.helperTxt} */}
-                </p>
-
-                <div className="mt-3 w-full mb-8">
-                  <p className="text-xs mb-2">Markup %</p>
-                  <TextField
-                    id="outlined-basic"
-                    size="small"
-                    // onChange={handleChange}
-                    // error={errors.name === "email"}
-                    // value={fields.email}
-                    name="email"
-                    variant="outlined"
-                    sx={{ width: "100%" }}
-                  />
-                </div>
-                <hr />
-                <div className="text-right">
-                  <button className="bg-sky-800 hover:bg-sky-200 font-medium hover:text-sky-900 p-1 px-3 my-5 rounded-lg text-white">
-                    Save
-                  </button>
-                </div>
-              </div>
+      <Modal
+        keepMounted
+        open={open}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[25%]">
+          <div className="flex justify-between text-3xl items-center h-[10%] px-2 pb-3">
+            <div className="font-bold text-lg text-slate-600"> Edit Pricing </div>
+            <div onClick={() => setOpen(false)} className="cursor-pointer">
+              <CloseIcon />
             </div>
           </div>
-        </Modal>
-      </div>
-      {/* ----------------------------------------------------------- */}
-      <div className="flex justify-between mx-3 px-3 py-3 bg-slate-100">
-        <div>
-          <FormControl sx={{ ml: 3 }}>
-            <Select
-              // value={age}
-              // onChange={handleChange}
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-            >
-              <MenuItem value=""></MenuItem>
-              <MenuItem value={10}>Total Price</MenuItem>
-              <MenuItem value={20}>Price Per Traveller</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{ ml: 3 }}>
-            <Select
-              // value={age}
-              // onChange={handleChange}
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-            >
-              <MenuItem value=""></MenuItem>
-              <MenuItem value={10}>GST On Markup</MenuItem>
-              <MenuItem value={20}>GST On Total</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-        <div className="text-right">
-          <p className="text-sm font-medium mb-1">Extra Markup - ₹10000</p>
-          <button
-            onClick={() => setOpen2(true)}
-            className="bg-emerald-600 text-xs px-2 p-1 text-white"
-          >
-            {" "}
-            <CreateIcon style={{ fontSize: "15px" }} />
-            Update
-          </button>
-        </div>
-      </div>
-      {/* ----------------------------------------------------------- */}
-      <div>
-        <Modal
-          keepMounted
-          open={open2}
-          aria-labelledby="keep-mounted-modal-title"
-          aria-describedby="keep-mounted-modal-description"
-        >
-          <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[25%]">
-            <div className="flex justify-between text-3xl items-center h-[10%] px-2 pb-3">
-              <div className="font-bold text-lg text-slate-600">
-                {" "}
-                Add Extra Markup{" "}
-              </div>
-              <div onClick={() => setOpen2(false)} className="cursor-pointer">
-                <CloseIcon />
-              </div>
-            </div>
-            <hr />
-            <div className="flex flex-row justify-between w-full mt-4 h-[90%]">
-              <div className="w-full mx-2">
-                <div className=" w-full">
-                  <p className="text-xs mb-2">Base Markup %</p>
-                  <TextField
-                    id="outlined-basic"
-                    size="small"
-                    // error={errors.name === "first_name"}
-                    // value={fields.first_name}
-                    // onChange={handleChange}
-                    name="first_name"
-                    variant="outlined"
-                    sx={{ width: "100%" }}
-                  />
-                </div>
-                <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
-                  {/* {errors.name === "first_name" && errors.helperTxt} */}
-                </p>
-
-                <div className="mt-3 w-full mb-8">
-                  <p className="text-xs mb-2">Extra Markup</p>
-                  <TextField
-                    id="outlined-basic"
-                    size="small"
-                    // error={errors.name === "last_name"}
-                    // onChange={handleChange}
-                    // value={fields.last_name}
-                    name="last_name"
-                    variant="outlined"
-                    sx={{ width: "100%" }}
-                  />
-                </div>
-                <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
-                  {/* {errors.name === "last_name" && errors.helperTxt} */}
-                </p>
-
-                <hr />
-                <div className="text-right">
-                  <button className="bg-sky-800 hover:bg-sky-200 font-medium hover:text-sky-900 p-1 px-3 my-5 rounded-lg text-white">
-                    Save
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Modal>
-      </div>
-      {/* ---------------------------------------------------- */}
-      <div className="dark-mode">
-        <table>
-          <thead>
-            <tr>
-              <th>Service</th>
-              <th>Price (₹)</th>
-              <th>Markup</th>
-              <th>CGST (2.5%)</th>
-              <th>SGST (2.5%)</th>
-              <th>IGST (0%)</th>
-              <th>TCS (5%)</th>
-              <th>Discount</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {services.map((service, index) => (
-              <tr key={index}>
-                <td>{service.service}</td>
-                <td>{service.price}</td>
-                <td>{service.markup}</td>
-                <td>{service.cgst}</td>
-                <td>{service.sgst}</td>
-                <td>{service.igst}</td>
-                <td>{service.tcs}</td>
-                <td>{service.discount}</td>
-                <td>{service.total}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {/* ---------------------------------------------------- */}
-      <div className="p-4 text-right flex justify-end">
-        <table className="w-1 border-collapse table-bordered">
-          <tbody>
-            <tr>
-              <td className="text-xl border p-3">CGST %</td>
-              <td>
-                <TextField sx={{ width: "10ch" }} label="" />
-              </td>
-            </tr>
-            <tr>
-              <td className="text-xl border p-3">SGST %</td>
-              <td>
-                <TextField sx={{ width: "10ch" }} label="" />
-              </td>
-            </tr>
-            <tr>
-              <td className="text-xl border p-3">IGST %</td>
-              <td>
-                <TextField sx={{ width: "10ch" }} label="" />
-              </td>
-            </tr>
-            <tr>
-              <td className="text-xl border p-3">TCS %</td>
-              <td>
-                <TextField sx={{ width: "10ch" }} label="" />
-              </td>
-            </tr>
-            <tr>
-              <td className="text-xl border p-3">Discount</td>
-              <td>
-                <TextField sx={{ width: "10ch" }} label="" />
-              </td>
-            </tr>
-            <tr>
-              <td className="text-xl border p-3">Price In:</td>
-              <td>
-                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                  <Select
-                    labelId="demo-select-small-label"
-                    id="demo-select-small"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={"USD"}>USD</MenuItem>
-                    <MenuItem value={"MYR"}>MYR</MenuItem>
-                    <MenuItem value={"CAD"}>CAD</MenuItem>
-                    <MenuItem value={"INR"}>INR</MenuItem>
-                    <MenuItem value={"INR"}>INR</MenuItem>
-                    <MenuItem value={"AED"}>AED</MenuItem>
-                    <MenuItem value={"SAR"}>SAR</MenuItem>
-                  </Select>
-                </FormControl>
-              </td>
-            </tr>
-            <tr className="early-bird-row">
-              <td colSpan={2}>
+          <hr />
+          <div className="flex flex-row justify-between w-full mt-4 h-[90%]">
+            <div className="w-full mx-2">
+              <div className=" w-full">
+                <p className="text-xs mb-2">Per Adult Cost</p>
                 <TextField
+                  id="outlined-basic"
+                  size="small"
+                  name="first_name"
+                  variant="outlined"
                   sx={{ width: "100%" }}
-                  placeholder="Early Bird Offer"
                 />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div className="text-right">
-        <button className="bg-sky-800 hover:bg-sky-200  hover:text-sky-900 p-1 px-3 m-5 rounded text-white">
-          Update Billing
-        </button>
-      </div>
+              </div>
+              <p className="text-[0.6rem] text-red-600 h-2 flex items-start"></p>
+              <div className="mt-3 w-full">
+                <p className="text-xs mb-2">Markup %</p>
+                <TextField
+                  id="outlined-basic"
+                  size="small"
+                  name="first_name"
+                  variant="outlined"
+                  sx={{ width: "100%" }}
+                />
+              </div>
+              <p className="text-[0.6rem] text-red-600 h-2 flex items-start"></p>
+              <div className="mt-3 w-full">
+                <p className="text-xs mb-2">Markup Value</p>
+                <TextField
+                  id="outlined-basic"
+                  size="small"
+                  name="first_name"
+                  variant="outlined"
+                  sx={{ width: "100%" }}
+                />
+              </div>
+              <p className="text-[0.6rem] text-red-600 h-2 flex items-start"></p>
+              <div className="flex justify-between w-full mt-4">
+                <button
+                  onClick={() => setOpen(false)}
+                  className="rounded-md border-[1px] p-1.5 hover:bg-slate-100 px-6 text-black"
+                >
+                  Cancel
+                </button>
+                <button className="bg-black text-white px-6 py-1.5 rounded-md">
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        keepMounted
+        open={open2}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[80%]">
+          <div className="flex justify-between text-3xl items-center h-[10%] px-2 pb-3">
+            <div className="font-bold text-lg text-slate-600">Edit Pricing</div>
+            <div onClick={() => setOpen2(false)} className="cursor-pointer">
+              <CloseIcon />
+            </div>
+          </div>
+          <hr />
+          <div className="w-full h-[90%]">
+            <div className="px-2 w-full mt-4">
+              <div className="flex justify-end">
+                <button
+                  className="flex items-center bg-black text-white py-1 px-2 rounded-md"
+                  onClick={() =>
+                    setServices([
+                      ...services,
+                      {
+                        service: "",
+                        price: "",
+                        markup: "",
+                        cgst: "",
+                        sgst: "",
+                        igst: "",
+                        tcs: "",
+                        discount: "",
+                        total: "",
+                      },
+                    ])
+                  }
+                >
+                  <CreateIcon className="mr-1" />
+                  Add More Services
+                </button>
+              </div>
+              <div className="overflow-y-auto h-[75vh]">
+                {services.map((service, index) => (
+                  <div key={index} className="mt-6 p-3 bg-gray-100 rounded-md">
+                    <div className="flex justify-between items-center">
+                      <div className="w-full px-2">
+                        <p className="text-xs mb-2">Service</p>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          name="service"
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                          value={service.service}
+                          onChange={(e) => {
+                            const updatedServices = [...services];
+                            updatedServices[index].service = e.target.value;
+                            setServices(updatedServices);
+                          }}
+                        />
+                      </div>
+                      <div className="w-full px-2">
+                        <p className="text-xs mb-2">Price</p>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          name="price"
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                          value={service.price}
+                          onChange={(e) => {
+                            const updatedServices = [...services];
+                            updatedServices[index].price = e.target.value;
+                            setServices(updatedServices);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center mt-3">
+                      <div className="w-full px-2">
+                        <p className="text-xs mb-2">Markup %</p>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          name="markup"
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                          value={service.markup}
+                          onChange={(e) => {
+                            const updatedServices = [...services];
+                            updatedServices[index].markup = e.target.value;
+                            setServices(updatedServices);
+                          }}
+                        />
+                      </div>
+                      <div className="w-full px-2">
+                        <p className="text-xs mb-2">CGST</p>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          name="cgst"
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                          value={service.cgst}
+                          onChange={(e) => {
+                            const updatedServices = [...services];
+                            updatedServices[index].cgst = e.target.value;
+                            setServices(updatedServices);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center mt-3">
+                      <div className="w-full px-2">
+                        <p className="text-xs mb-2">SGST</p>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          name="sgst"
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                          value={service.sgst}
+                          onChange={(e) => {
+                            const updatedServices = [...services];
+                            updatedServices[index].sgst = e.target.value;
+                            setServices(updatedServices);
+                          }}
+                        />
+                      </div>
+                      <div className="w-full px-2">
+                        <p className="text-xs mb-2">IGST</p>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          name="igst"
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                          value={service.igst}
+                          onChange={(e) => {
+                            const updatedServices = [...services];
+                            updatedServices[index].igst = e.target.value;
+                            setServices(updatedServices);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center mt-3">
+                      <div className="w-full px-2">
+                        <p className="text-xs mb-2">TCS</p>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          name="tcs"
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                          value={service.tcs}
+                          onChange={(e) => {
+                            const updatedServices = [...services];
+                            updatedServices[index].tcs = e.target.value;
+                            setServices(updatedServices);
+                          }}
+                        />
+                      </div>
+                      <div className="w-full px-2">
+                        <p className="text-xs mb-2">Discount</p>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          name="discount"
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                          value={service.discount}
+                          onChange={(e) => {
+                            const updatedServices = [...services];
+                            updatedServices[index].discount = e.target.value;
+                            setServices(updatedServices);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center mt-3">
+                      <div className="w-full px-2">
+                        <p className="text-xs mb-2">Total</p>
+                        <TextField
+                          id="outlined-basic"
+                          size="small"
+                          name="total"
+                          variant="outlined"
+                          sx={{ width: "100%" }}
+                          value={service.total}
+                          onChange={(e) => {
+                            const updatedServices = [...services];
+                            updatedServices[index].total = e.target.value;
+                            setServices(updatedServices);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={() => setOpen2(false)}
+                className="rounded-md border-[1px] p-1.5 hover:bg-slate-100 px-6 text-black"
+              >
+                Cancel
+              </button>
+              <button className="bg-black text-white px-6 py-1.5 rounded-md ml-2">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
-    
   );
 };
 

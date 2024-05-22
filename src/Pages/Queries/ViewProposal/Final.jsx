@@ -319,11 +319,11 @@ const div4 = <div>
     <p className="text-center">No Comment Available</p>
 
     {/* <div className="w-full border-[1px] border-[#c5c2c2]"> */}
-      <textarea minLength="25px" placeholder="Enter your comment" className="w-full border-[1px] border-[#c5c2c2] mt-5 rounded-md"></textarea>
+      <textarea placeholder="Enter your comment" className="w-full border-[1px] border-[#c5c2c2] mt-5 p-3 outline-none rounded-md"></textarea>
     {/* </div> */}
 
     <div className="flex justify-end">
-      <button className="bg-[#06304c] px-4 text-[#fff]  outline-none rounded p-1">Submit Comment</button>
+      <button className="bg-[#06304c] px-4 text-[#fff] mt-3 outline-none rounded p-1">Submit Comment</button>
     </div>
   </div>
 

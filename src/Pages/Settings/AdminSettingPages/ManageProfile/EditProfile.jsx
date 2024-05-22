@@ -1,6 +1,6 @@
 import { Select } from 'antd'
 import React from 'react'
-import indianFlag from "../../../../assets/images/indianFlag.webp"
+import Flag from '../../../../Components/Navbar/Flag'
 
 
 const EditProfile = () => {
@@ -55,7 +55,7 @@ const EditProfile = () => {
           <select name="code" id="code" className='border-2 py-2'>
 
           <option value="code">
-                +91 
+                +91 <Flag />
             </option>
           </select>
       </div>
@@ -158,9 +158,9 @@ const EditProfile = () => {
     </div>
 
    
-<div className='flex justify-end mx-3 mt-3 mb-3'>
-         <button className='bg-[#2c3d3d] text-white text-base px-2 py-1 rounded '> New Password</button>
-         </div>
+              <div className='flex justify-end mx-3 mt-3 mb-3'>
+                  <button className='bg-[#2c3d3d] text-white text-base px-2 py-1 rounded '> New Password</button>
+              </div>
 
       </div>
 
@@ -189,8 +189,8 @@ const EditProfile = () => {
 
    
 <div className='flex justify-end mx-3 mt-3 mb-3'>
-         <button className='bg-[#2c3d3d] text-white text-base px-2 py-1 rounded '> New Password</button>
-         </div>
+         <button className='bg-[#2c3d3d] text-white text-base px-2 py-1 rounded '> New Pin</button>
+</div>
 
       </div>
 

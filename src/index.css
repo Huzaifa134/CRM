@@ -24,5 +24,12 @@
   background: #555;
 }
 
+@media (min-width: 1024px) {
+  .lg\:w-full {
+    width: 100%;
+  }
+}
+
+
 
 

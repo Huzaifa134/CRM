@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 
 const SideBar = () => {
   return (
+    
     <div className="fixed w-[4%] flex flex-col items-center mt-3" >
       <Link to={"/"}>
         <div className="group flex">
