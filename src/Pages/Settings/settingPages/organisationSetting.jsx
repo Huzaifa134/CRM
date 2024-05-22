@@ -34,7 +34,7 @@ export default function OrganisationSetting() {
     </div>
     <hr />
 
-    <div className="mt-5 p-3">
+    <div className="mt-3 p-3">
       <div className="flex gap-4">
         <div className=' w-full'>
              <p htmlFor="Supplier" className='text-xs mb-2'>Organisation name</p>
@@ -58,7 +58,25 @@ export default function OrganisationSetting() {
       <div className=' w-full mt-4'>
              <p htmlFor="Supplier" className='text-xs mb-2'>GSTN</p>
             <input defaultValue={"000000000000000"} className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" type="text" />
-         </div>
+      </div>
+      <div className=' w-full mt-4'>
+             <p htmlFor="Supplier" className='text-xs mb-2'>State</p>
+            <input defaultValue={"UP"} className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" type="text" />
+      </div>
+      <div className=' w-full mt-4'>
+             <p htmlFor="Supplier" className='text-xs mb-2'>State Code</p>
+            <input defaultValue={"India "} className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" type="text" />
+      </div>
+      <div className=' w-full mt-4'>
+             <p htmlFor="Supplier" className='text-xs mb-2'>Voucher PIN</p>
+            <input defaultValue={"0 "} className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" type="text" />
+      </div>
+
+      <hr className="mt-4"/>
+
+      <div className="flex justify-end">
+      <button onClick={handleCloseModal} className='mt-3 text-sm bg-[#12344d] text-white p-2 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Save</button>
+      </div>
     </div>
   </div> 
 
