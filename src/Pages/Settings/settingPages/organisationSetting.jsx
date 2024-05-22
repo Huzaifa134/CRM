@@ -24,7 +24,7 @@ export default function OrganisationSetting() {
 
 
 
-  const newVar = <div>hello world</div>
+
 
 
   const editOrganisation = <div>

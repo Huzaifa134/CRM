@@ -14,12 +14,14 @@ import view2 from "../../../assets/images/view2.jpg"
 import view3 from "../../../assets/images/view3.png"
 import { FaPlus } from "react-icons/fa";
 import BuildCard from './BuildCard';
-import { Box, Modal } from '@mui/material';
+import { Box, Menu, Modal } from '@mui/material';
 import { IoClose } from 'react-icons/io5';
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { BiCalendar } from 'react-icons/bi';
 import { LiaStarSolid } from 'react-icons/lia';
 import { FaHome } from "react-icons/fa";
+import Editor from '../../../Components/Editor';
+import ReactDOMServer from 'react-dom/server';
 
 
 
@@ -47,13 +49,38 @@ const Build = () => {
 
   const [open, setOpen] = React.useState(false);
   const [modalContent, setModalContent] = useState("");
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const openNew = Boolean(anchorEl);
+
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
 
   const handleOpen = (content) => {
     setModalContent(content);
     setOpen(true);
   };
 
-  const handleClose = () => setOpen(false);
+  const handleClose = (MODE) => {
+    setOpen(false)
+    setAnchorEl(null);
+
+    if (MODE === "PROPOSAL") {
+      return setProposalModal(!proposalModal);
+    } else if (MODE === "QUERY") {
+      return setQueryModal(!queryModal);
+    }
+  };
+
+
+  
+
+  const timeArr = ["12:00 AM" ,"12:15 AM" ,"12:30 AM" ,"12:45 AM" ,"01:00 AM" ,"01:15 AM" ,"01:30 AM"  ]
+  const themeArr = ["2N-3D Package" , "Adventure" , "Beach" , "Economy Umrah" , "Flight Booking" , "Fun day/Memoriable Day"]
+  
 
 const iconModal = <div>
 <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center'>
@@ -73,8 +100,171 @@ const iconModal = <div>
      <button onClick={handleClose} className='mt-4 text-sm bg-[#12344d] text-white p-2 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Send Mail</button>
   </div>
 </div>
+</div>
+
+
+const composeTable = ReactDOMServer.renderToString(<div className='overflow-y-scroll h-[79vh]'>
+
+
+
+<div className='p-2 text-sm font-bold'>
+  {/* <p className='font-normal'>3Night 4days</p> */}
+  <p className='mt-5'>470 m drive to main city centre</p><br />
 
 </div>
+</div>)
+
+
+const iconModal2 = <div>
+<div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center'>
+<h3>Accommodation From 01-05-2024</h3>
+<IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+</div>
+<hr />
+
+<div className='p-3 overflow-y-scroll h-[85vh]'>
+
+ <div className='flex gap-4 mt-3'>
+    <div className='w-full'>
+      <p htmlFor="Subject" className='text-xs mb-2'>Subject</p>
+      <input defaultValue={"Dubai"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+    </div>
+    <div className='w-full'>
+      <p htmlFor="Subject" className='text-xs mb-2'>Type</p>
+      <select className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
+          <option value="">Manual</option>
+          <option value="">From Master</option>
+      </select>
+  </div>
+ </div>
+
+ <div className='flex gap-4 mt-4'>
+    <div className='w-full'>
+      <p htmlFor="Subject" className='text-xs mb-2'>Hotel Name</p>
+      <input defaultValue={"Bur Dubai"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+    </div>
+    <div className='w-full'>
+      <p htmlFor="Subject" className='text-xs mb-2'>Category</p>
+      <select className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
+          <option value="">1 Star</option>
+          <option value="">2 Star</option>
+          <option value="">3 Star</option>
+          <option value="">4 Star</option>
+          <option value="">5 Star</option>
+      </select>
+  </div>
+ </div>
+
+ <div className='flex gap-4 mt-4'>
+    <div className='w-full'>
+      <p htmlFor="Subject" className='text-xs mb-2'>Room Name</p>
+      <input defaultValue={"Deluxe Room"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+    </div>
+    <div className='w-full'>
+      <p htmlFor="Subject" className='text-xs mb-2'>Meal Plan</p>
+      <input defaultValue={"MAP"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
+    </div>
+    <div className='w-full'>
+      <p htmlFor="Subject" className='text-xs mb-2'>Hotel Option</p>
+      <select className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
+          <option value="">Option 1</option>
+          <option value="">Option 2</option>
+          <option value="">Option 3</option>
+      </select>
+  </div>
+ </div>
+
+
+ <div className='p-4 mt-5 bg-[#f7f7f7] border-[1px] rounded-md'>
+    <p className='text-sm font-semibold'>Enter Number of Rooms</p>
+
+    <div className='flex gap-4 mt-4'>
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>Single</p>
+          <input defaultValue={"1"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="number" />
+        </div>
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>Double</p>
+          <input defaultValue={"2"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="number" />
+        </div>
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>Triple</p>
+          <input defaultValue={"0"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="number" />
+        </div>
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>Quad</p>
+          <input defaultValue={"0"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="number" />
+        </div>
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>CWB</p>
+          <input defaultValue={"0"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="number" />
+        </div>
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>CNB</p>
+          <input defaultValue={"0"} className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="number" />
+        </div>
+    </div>
+ </div>
+
+ <div className='p-4 mt-5 bg-[#f7f7f7] border-[1px] rounded-md border-[#f7d038]' >
+    
+
+    <div className='flex gap-4'>
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>Check-in date*</p>
+         <p className='text-sm font-semibold mb-2'>01-05-2024</p>
+         <div className='flex gap-3'>
+            <input type="checkbox" className='scale-150'/>
+            <p>	 Show Time</p>
+         </div>
+        </div>
+
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>Check-in time</p>
+          <select className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
+            {timeArr.map((item)=>{
+              return <option>{item}</option>
+            })}
+
+          </select>
+        </div>
+
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>Check-out date*</p>
+          <input  defaultValue="2024-05-05" className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="date" />
+        </div>
+
+        <div className='w-full'>
+          <p htmlFor="Subject" className='text-sm font-semibold mb-2'>Check-out time</p>
+          <select className='outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
+            {timeArr.map((item)=>{
+              return <option>{item}</option>
+            })}
+
+          </select>
+        </div>
+    </div>
+ </div>
+
+   <div>
+      <p htmlFor="Subject" className='text-sm font-semibold mb-2 mt-4'>Description</p>
+
+      <Editor data={composeTable}/>
+  </div>
+
+ 
+
+  <div className='flex justify-between'>
+     <button onClick={handleClose} className='mt-4 text-sm bg-[#f9392f] text-white p-2 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#eb3930]'>Delete</button>
+     <button onClick={handleClose} className='mt-4 text-sm bg-[#12344d] text-white p-2 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Save</button>
+  </div>
+</div>
+</div>
+
+
+
+
+
 
 const obj = [
   {
@@ -202,7 +392,7 @@ const changePhotoModal = <div>
                     <div className='top-0 mx-4 p-2 z-30'>
             <div className='flex gap-3 text-white items-center'>
               <p className='font-semibold text-2xl'>Magical Dubai</p>
-                    <FaPencilAlt />
+                    <FaPencilAlt className='cursor-pointer' onClick={handleClick}/>
               </div>
               <p className='text-white mt-auto'>Dubai, Abu Dhabi</p>
          </div>
@@ -439,7 +629,7 @@ const changePhotoModal = <div>
 
 
       <div>
-              <div onClick={()=> handleOpen(iconModal)} className='w-7 h-7 border-[1px] border-[#2e8be2] rounded-full flex items-center justify-center hover:bg-[#2e8be2] group'>
+              <div onClick={()=> handleOpen(iconModal2)} className='w-7 h-7 border-[1px] border-[#2e8be2] rounded-full flex items-center justify-center hover:bg-[#2e8be2] group'>
               <MdEdit className='text-[#2e8be2] group-hover:text-[#fff]' />
               </div>
       </div>
@@ -510,6 +700,134 @@ const changePhotoModal = <div>
            {modalContent}
         </Box>
       </Modal>
+
+
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={openNew}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+        className='ml-[36vw] max-[1600px]:ml-[30vw] max-[1400px]:ml-[36vw] max-[1300px]:ml-[15vw] max-[1200px]:ml-[10vw] transition-all'
+        PaperProps={{
+            style: {
+              borderRadius: 10, // Adjust this value as per your preference
+              // backgroundColor: "#2d2f31",
+              width:"100vh",
+              height: "200vh",
+              
+            },
+          }}
+          sx={{height:"115vh",marginTop:"18px" }}
+      >
+        <div className="flex justify-center">
+          <div className=" rounded-md bg-white w-full">
+
+          <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 px-5 items-center w-full'>
+            <h3>Itinerary setup</h3>
+            <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+            </div>
+            <hr />
+
+            <div className='mt-4 p-5'>
+              <div className='w-full flex gap-2 items-center justify-end'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Itinerary Name</p>
+                <input defaultValue={"Dubai 3n4D trip"} className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="text" />
+              </div>
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Start Date</p>
+                <input defaultValue={"2024-05-01"} className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="date" />
+              </div>
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>End Date</p>
+                <input defaultValue={"2024-05-04"} className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="date" />
+              </div>
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Adult</p>
+                <input defaultValue={"1"} className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="number" />
+              </div>
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Child</p>
+                <input defaultValue={"1"} className='outline-none border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="number" />
+              </div>
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Destinations</p>
+                <input  className='outline-none border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="text" />
+              </div>
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Notes</p>
+                <textarea placeholder='Notes'  className='outline-none border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="text" />
+              </div>
+
+              <h3 className='text-xl mt-6 font-semibold'>Website Setting</h3>
+
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Theme</p>
+                <select className='outline-none border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md'>
+                    {themeArr.map((item)=>{
+                      return  <option value="">{item}</option>
+                    })}
+                </select>
+              </div>
+
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Theme</p>
+                <select className='outline-none border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md'>
+                    <option value="">Yes</option>
+                    <option value="">No</option>
+                </select>
+              </div>
+
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Per Person Price</p>
+                <input defaultValue={"0"} className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="number" />
+              </div>
+
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Validity</p>
+                <input defaultValue={"2024-05-22"} className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="date" />
+              </div>
+
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Popular</p>
+                <select className='outline-none border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md'>
+                    <option value="">Yes</option>
+                    <option selected value="">No</option>
+                </select>
+              </div>
+
+
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>Special</p>
+                <select className='outline-none border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md'>
+                    <option value="">Yes</option>
+                    <option selected value="">No</option>
+                </select>
+              </div>
+
+              <div className='w-full flex gap-2 items-center justify-end mt-4'>
+                <p htmlFor="First Name" className='text-sm mb-1'>About Package</p>
+                <textarea placeholder='Notes' rows={3} className='outline-none border-[1px] px-2 w-[70%] p-1 focus:border-black transition-all rounded-md' type="text" />
+              </div>
+
+
+            <hr className='mt-8'/>
+             <div className='flex justify-end gap-5 text-xl font-semibold bg-[#fcfdfd] mt-5 px-5 items-center w-full'>
+                <button onClick={handleClose} className='border-[1px] rounded-md text-sm p-2 px-5'>Cancel</button>
+                <button onClick={handleClose} className='bg-[#12344d] text-white rounded-md text-sm p-2 px-5'>Save</button>
+            </div>
+
+
+
+            </div>
+            
+            
+         
+           
+          </div>
+        </div>
+        </Menu>
 
        
         
