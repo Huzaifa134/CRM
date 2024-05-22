@@ -381,7 +381,7 @@ function QueriesDetail() {
   const composeModalMail = <div>
   <div className='flex justify-between text-xl font-semibold bg-[#fcfdfd] p-2 items-center w-[900px]'>
   <h3>Compose Mail</h3>
-  <IoClose className='cursor-pointer font-bold ' onClick={handleClose}/>
+  <IoClose className='cursor-pointer font-bold ' onClick={handleCloseModal}/>
   </div>
   <hr />
   
