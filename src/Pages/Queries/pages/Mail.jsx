@@ -351,7 +351,7 @@ const composeModalMail = <div>
 
       <div className='bg-[#f3f5f7] p-4 flex gap-4'>
         <button className='text-sm bg-[#12344d] text-white p-2 flex items-center gap-1 rounded-md font-semibold px-5 hover:bg-[#1699dd]' onClick={() => handleOpen(composeModalMail)}><GoMail />Compose</button>
-        <button className='text-sm text-[#12344d] bg-white border-[1.5px] border-[#b1b0b0] p-2 px-5 rounded-md font-semibold flex items-center gap-1'><FaInfoCircle />northeasttravels1975@gmail.com</button>
+        <button className='text-sm text-[#12344d] bg-white border-[1.5px] border-[#b1b0b0] p-2 px-5 rounded-md font-semibold flex items-center gap-1' onClick={() => handleOpen(composeModalMail)}><FaInfoCircle />northeasttravels1975@gmail.com</button>
       </div>
 
       <div className='flex items-center p-3 gap-5 hover:bg-[#f3f5f7] cursor-pointer' onClick={() => handleOpen(mailModal)}>

@@ -21,6 +21,7 @@ const CenterModal = ({ open, onClose,data }) => {
 
   return (
     <Modal
+
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
@@ -36,6 +37,7 @@ const CenterModal = ({ open, onClose,data }) => {
                 {data}
           </Box>
         </Fade>
+        
       </Modal>
   )
 }

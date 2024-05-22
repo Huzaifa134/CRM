@@ -20,6 +20,10 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 import { BiCalendar } from "react-icons/bi";
 import { LiaStarSolid } from "react-icons/lia";
 import { FaHome } from "react-icons/fa";
+import CenterModal from "./CenterModal";
+
+import { RiDeleteBin6Fill } from "react-icons/ri";
+
 
 const style = {
   position: "absolute",
@@ -27,15 +31,149 @@ const style = {
   left: "50%",
   height: "auto",
   transform: "translate(-50%, -50%)",
-  width: 600,
+  width: 680,
   bgcolor: "background.paper",
   outline: "none",
   boxShadow: 24,
   borderRadius: "8px",
-  p: 1,
+
 };
 
 const Build = () => {
+
+
+
+  const DeleteBtn = () => {
+    alert('Are you sure your want to delete?')
+  }
+
+
+// Time Function
+
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let hour = 0; hour < 24; hour++) {
+      for (let minute = 0; minute < 60; minute += 5) {
+        const formattedHour = hour < 10 ? `0${hour}` : hour;
+        const formattedMinute = minute === 0 ? '00' : minute;
+        const ampm = hour < 12 ? 'AM' : 'PM';
+        const displayHour = hour === 0 ? 12 : hour <= 12 ? hour : hour - 12;
+        const time = `${displayHour}:${formattedMinute} ${ampm}`;
+        options.push(<option key={`${hour}-${minute}`} value={time}>{time}</option>);
+      }
+    }
+    return options;
+  };
+
+  // Time Function end
+
+
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = (content) => {
+    setModalContent(content);
+    setModalOpen(true);
+    if (content === exportModal) {
+      return console.log("Export");
+    }
+  };
+
+
+  const handleCloseModal = () => {
+    console.log("Modal close button clicked");
+
+    setModalOpen(false);
+  };
+
+
+  const iconModal2 = (
+
+<div>
+      <div className="flex justify-between text-xl font-semibold bg-[#eef0f0] p-2 items-center">
+        <h3>Flight From 01-05-2024</h3>
+        <IoClose className="cursor-pointer font-bold " onClick={handleCloseModal} />
+      </div>
+      <hr />
+
+      
+<div className="mx-3">
+<div  className="flex justify-between mx-3 mt-4">
+    <div>
+          <p className="text-sm">Name</p>
+          <input type="text" className="border-[1px] mt-2 border-[#cccccc]  rounded p-2 w-[380px]" />
+          </div>
+            <div>
+            <p className="text-sm">Flight No</p>
+            <input type="text" className="border-[1px] mt-2 border-[#cccccc] rounded p-2 " />
+            </div>
+</div>
+
+<div className="flex mx-3 justify-between mt-4">
+      <div>
+          <p className="text-sm">From Destination</p>
+          <input type="text" className="border-[1px] mt-2 border-[#cccccc]  rounded p-2" />
+      </div>
+
+      <div>
+          <p className="text-sm">To Destination</p>
+          <input type="text" className="border-[1px] mt-2 border-[#cccccc]  rounded p-2" />
+      </div>
+
+      <div>
+          <p className="text-sm">Flight Duration</p>
+          <input type="text" className="border-[1px] mt-2 border-[#cccccc]  rounded p-2" />
+      </div>
+</div>
+
+
+<div className="border-[1px] border-[#ffc107] w-[96%] mt-5 rounded bg-[#fefaeb] p-5 mx-3">
+<div className="flex justify-between gap-5 w-full">
+      <div className="w-full">
+          <p className="text-sm">Date*</p>
+          <input type="date" className="border-[1px] mt-2 w-full border-[#cccccc]  rounded p-2" />
+      </div>
+
+      <div className="w-full">
+      <p className="text-sm">Start time</p>
+
+      <select className="w-full p-2 mt-2 rounded border-[1px] border-[#cccccc">
+      {generateTimeOptions()}
+    </select>
+         
+      </div>
+
+
+      <div className="w-full">
+          <p className="text-sm">End time</p>
+          <select className="w-full p-2 mt-2 rounded border-[1px] border-[#cccccc">
+      {generateTimeOptions()}
+    </select>      </div>
+
+</div>
+</div>
+
+<div className="mx-3 mt-3" >
+  <p className="text-sm mt-2" >Description</p>
+  <textarea className="w-full  border-[1px] border-[#cccccc] mt-2"></textarea>
+</div>
+
+
+
+<div className="flex justify-between mx-3 mt-5 mb-5">
+  <button className="bg-[#eb1515] text-[#ffff] flex items-center p-1 px-2 rounded" onClick={DeleteBtn}><RiDeleteBin6Fill />Delete</button>
+  <button className="bg-[#12344d] text-[#ffff] flex items-center p-1 px-3 rounded">Save</button>
+</div>
+</div>
+</div>
+
+
+  )
+
+
+
+
+
   const [open, setOpen] = React.useState(false);
   const [modalContent, setModalContent] = useState("");
 
@@ -420,7 +558,7 @@ const Build = () => {
 
                   <div>
                     <div
-                      onClick={() => handleOpen(iconModal)}
+                      onClick={() => handleOpen(iconModal2)}
                       className="w-7 h-7 border-[1px] border-[#2e8be2] rounded-full flex items-center justify-center hover:bg-[#2e8be2] group"
                     >
                       <MdEdit className="text-[#2e8be2] group-hover:text-[#fff]" />
@@ -566,6 +704,13 @@ const Build = () => {
       >
         <Box sx={style}>{modalContent}</Box>
       </Modal>
+
+
+
+
+      <CenterModal open={modalOpen} onClose={handleCloseModal} data={modalContent}/>
+
+
     </>
   );
 };

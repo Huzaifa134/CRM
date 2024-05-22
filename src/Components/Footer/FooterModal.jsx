@@ -44,11 +44,12 @@ const FooterModal = (props) => {
         }}
         anchorEl={anchorEl}
         open={open}
+        className={`${props.marginLeft}`}
        
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <Box className={`p-1 px-5 w-[300px] pb-8  ${props.height}`} >
+        <Box className={`p-1 px-5 ${props.width} pb-8  ${props.height}`} >
 
         <div
           id="heading"

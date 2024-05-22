@@ -4,21 +4,23 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { Link } from "react-router-dom";
 import "react-phone-number-input/style.css";
+ 
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Modal from "@mui/material/Modal";
+import CreateIcon from "@mui/icons-material/Create";
+import "./Pricing.css";
+import ViewProposal from "./ViewProposal";
+
 import {
   FormControl,
   TextField,
   Select,
   MenuItem,
-  Modal,
+
+
 } from "@mui/material";
-import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
 import { FaCarAlt } from "react-icons/fa";
-import HotelIcon from "@mui/icons-material/Hotel";
-import EventIcon from "@mui/icons-material/Event";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CloseIcon from "@mui/icons-material/Close";
-import CreateIcon from "@mui/icons-material/Create";
-import BlindIcon from '@mui/icons-material/Blind';
 import { FaBed } from "react-icons/fa";
 import { FaBlind } from "react-icons/fa";
 import { FaHotel } from "react-icons/fa";
@@ -27,7 +29,6 @@ import { FaHotel } from "react-icons/fa";
 
 
 import "./Pricing.css";
-import ViewProposal from "./ViewProposal";
 
 const data = [
   {
@@ -114,7 +115,7 @@ const getIconForType = (type) => {
   }
 };
 
-const Dashboard = () => {
+const Pricing = () => {
   const [row, setRow] = useState(data);
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -256,13 +257,14 @@ const Dashboard = () => {
 
   return (
     <div>
-      <ViewProposal />
 
+      <ViewProposal/>
       <div className="flex justify-between items-center m-3 p-3 bg-slate-100 rounded-lg">
         <div className="text-2xl font-medium">Dubai Trip Mr.Nikhil</div>
         <div className="text-sm">Dubai, - Adult: 2 | Child: 0</div>
       </div>
 
+      {/* ----------------------------------------------------------- */}
       <div className="h-full w-full px-3">
         <div className="ag-theme-quartz" style={{ height: "100%", width: "100%" }}>
           <AgGridReact
@@ -560,4 +562,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Pricing;
