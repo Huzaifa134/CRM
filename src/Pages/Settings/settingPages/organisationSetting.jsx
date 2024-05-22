@@ -26,6 +26,8 @@ export default function OrganisationSetting() {
 
 
 
+
+
   const editOrganisation = <div>
     <div className='flex justify-between text-2xl font-semibold bg-[#fcfdfd] p-2 items-center w-[600px]'>
       <h3>Edit organisation settings</h3>
