@@ -683,7 +683,7 @@ function QueriesDetail() {
           <button  onClick={()=> handleOpenModal(composeModalMail)}  className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EmailOutlinedIcon style={{ fontSize: 18 }} /> Email
           </button>
-       <Link to="/queries/followUps/followUps">
+       <Link to="/queries/102498/followUps">
             <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EventAvailableOutlinedIcon style={{ fontSize: 18 }} /> Task
           </button>
