@@ -114,7 +114,7 @@ const Footer = () => {
       <div>
         {combinedMessages.map((msg, index) => (
           <div key={index} className={`mt-3 flex ${msg.type === 'reply' ? 'justify-start' : 'justify-end'}`}>
-            <div className={`bg-${msg.type === 'reply' ? 'blue-100' : 'gray-100'} p-2 rounded-md w-[130px]`}>
+            <div className={`${msg.type === 'reply' ? 'bg-blue-100' : 'bg-gray-100'} p-2 rounded-md w-[130px]`}>
               <p className="font-semibold text-sm">{msg.text}</p>
               <p className="text-xs">{msg.time}</p>
             </div>
