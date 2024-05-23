@@ -123,7 +123,6 @@ const Footer = () => {
       </div>
     );
   };
-
   const userTable = (
     <div id="users" className="overflow-y-scroll h-[300px]">
       <div id="usersHead" className="flex justify-between text-sm font-semibold p-2">
@@ -131,19 +130,32 @@ const Footer = () => {
         <h3>Status</h3>
       </div>
       <hr className="border-gray-300" />
-
+  
       <div id="usersTable">
         {usersArr.map((item, index) => (
           <div key={index}>
             <span className="flex items-center justify-between p-1 px-2 cursor-pointer hover:bg-gray-50">
-              <FooterModal btnName={item.name} topHead={item.name} userTable={
-                <div>
-                  {generateUserChat(item)}
-                  <div className="mt-2 p-2 flex justify-center">
-                    <input type="text" placeholder="Send Message..." className="p-2 py-3 mb-2 border-t absolute bottom-0 outline-none rounded-md w-[90%]" />
+              <FooterModal
+                btnName={item.name}
+                topHead={item.name}
+                userTable={
+                  <div className="flex flex-col h-full">
+                    <div className="flex-grow overflow-y-auto px-2">
+                      {generateUserChat(item)}
+                    </div>
+                    <div className="p-2">
+                      <input
+                        type="text"
+                        placeholder="Send Message..."
+                        className="p-1 pt-3 border-t outline-none rounded-md w-full"
+                      />
+                    </div>
                   </div>
-                </div>
-              }  marginLeft="ml-[290px]" height="h-[450px]" width="w-[400px]" />
+                }
+                marginLeft="ml-[290px]"
+                height="h-[450px]"
+                width="w-[400px]"
+              />
               <p className="bg-gray-500 h-3 w-3 rounded-full"></p>
             </span>
             <hr className="border-gray-300" />
@@ -152,6 +164,7 @@ const Footer = () => {
       </div>
     </div>
   );
+  
 
   const [textFields, setTextFields] = useState([]);
 
