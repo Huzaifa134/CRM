@@ -674,16 +674,21 @@ function QueriesDetail() {
           <div className="font-[500]"> Query ID 12345 </div>
         </div>
         <div className="flex py-2 justify-evenly">
-          <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
+      <Link target="target" to='https://api.whatsapp.com/send?text=Hi&phone=+919521508406'>
+             <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center    gap-1">
             <WhatsAppIcon style={{ fontSize: 18 }} className="text-green-600" />{" "}
             WhatsApp
           </button>
+      </Link>
           <button  onClick={()=> handleOpenModal(composeModalMail)}  className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EmailOutlinedIcon style={{ fontSize: 18 }} /> Email
           </button>
-          <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
+       <Link to="/queries/followUps/followUps">
+            <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EventAvailableOutlinedIcon style={{ fontSize: 18 }} /> Task
           </button>
+
+       </Link>
           <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1" onClick= {handleClick}>
             <EditOutlinedIcon style={{ fontSize: 18 }} /> Edit
           </button>
