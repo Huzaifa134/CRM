@@ -471,10 +471,18 @@ const changePhotoModal = <div>
     </div>
     <hr />
 
-    <div className='mt-5 flex items-center justify-between'>
-      <input type="text" placeholder='Search' className='outline-none border-[1px] border-[#494949] w-[420px] p-1 px-2 rounded-md' />
-      <button onClick={handleClose} className=' text-sm bg-[#12344d] text-white p-1 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>Upload Photo</button>
-    </div>
+    <div className='mt-5 flex items-center justify-center gap-3'>
+  <input type="text" placeholder='Search' className='outline-none border-[1px] border-[#494949] w-[420px] p-1 px-2 rounded-md' />
+  
+
+  <input type='file' id='file-input' className='hidden' />
+  
+  <label for='file-input' className='cursor-pointer text-sm bg-[#12344d] text-white p-1 flex items-center gap-1 rounded-md font-semibold px-3 hover:bg-[#1699dd]'>
+    Upload Photo
+  </label>
+  
+ 
+</div>
 
   <div className='flex flex-wrap justify-center gap-2'>
   {imageObj.map((item)=>{
