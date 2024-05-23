@@ -511,24 +511,25 @@ const changePhotoModal = <div>
         <div className='bg-[#f5f7f9] h-[90%] w-full p-2'>
 
           <div className='parent w-full bg-[#fff] border-2 p-2 justify-between flexborder-[#eeefef] rounded-md flex'>
-                <div className='child-1 w-[800px] bg-slate-100'>
+                <div className='child-1 w-full bg-slate-100'>
                 
-                <div className='box w-[800px] h-[160px] flex flex-col justify-end relative'>
-                <div className='bg-gradient-to-t from-[#000] to-[#fff] h-full w-full absolute z-10 opacity-80'></div>
-                <img className='absolute top-0 z-0 inset-0 w-full h-full object-cover ' src={butterfly} alt='' />
+                <div className='box w-full h-[160px] flex flex-col justify-end relative'>
+    <div className='bg-gradient-to-t from-[#000] to-[#fff] h-full w-full absolute z-10 opacity-80'></div>
+    <img className='absolute top-0 z-0 inset-0 w-full h-full object-cover' src={butterfly} alt='' />
 
-                     <div className='absolute top-0 right-0 p-2 flex items-center gap-2 bg-[#00000070] bg-opacity-5 rounded-md mt-2 mr-2 z-30 cursor-pointer'   onClick={() => handleOpen(changePhotoModal)}>
-                    <HiPhoto className='text-white'/>
-                    <button className='bg-transparent text-white'>Change Cover Photo</button>
-                    </div>
-                    <div className='top-0 mx-4 p-2 z-30'>
-            <div className='flex gap-3 text-white items-center'>
-              <p className='font-semibold text-2xl'>Magical Dubai</p>
-                    <FaPencilAlt className='cursor-pointer' onClick={handleClick}/>
-              </div>
-              <p className='text-white mt-auto'>Dubai, Abu Dhabi</p>
-         </div>
+    <div className='absolute top-0 right-0 p-2 flex items-center gap-2 bg-[#00000070] bg-opacity-5 rounded-md mt-2 mr-2 z-30 cursor-pointer' onClick={() => handleOpen(changePhotoModal)}>
+        <HiPhoto className='text-white'/>
+        <button className='bg-transparent text-white'>Change Cover Photo</button>
     </div>
+    <div className='top-0 mx-4 p-2 z-30'>
+        <div className='flex gap-3 text-white items-center'>
+            <p className='font-semibold text-2xl'>Magical Dubai</p>
+            <FaPencilAlt className='cursor-pointer' onClick={handleClick}/>
+        </div>
+        <p className='text-white mt-auto'>Dubai, Abu Dhabi</p>
+    </div>
+</div>
+
             <div className='grand-parent flex w-full bg-[#ffffff]'>
          <div className='grand-child-1 '>
          <div className='w-[190px] p-2 hover:bg-[#2fd1dd]'>

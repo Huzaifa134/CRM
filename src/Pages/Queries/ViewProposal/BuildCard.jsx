@@ -57,7 +57,7 @@ const BuildCard = (props) => {
 
   return (
     <div>
-        <div className='flex bg-[#ffff] border-2 p-4 items-center border-[#d4d4d4] justify-between mx-2 mt-2'>
+        <div className='flex bg-[#ffff] border-2 p-4 items-center border-[#f5f5f5] justify-between mx-2 mt-2'>
 <div className='flex items-center'>
 <div className='w-14 h-14 bg-black rounded'>
   <img src={props.image} className='h-14' alt="" />
