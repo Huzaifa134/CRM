@@ -114,7 +114,7 @@ const Footer = () => {
       <div>
         {combinedMessages.map((msg, index) => (
           <div key={index} className={`mt-3 flex ${msg.type === 'reply' ? 'justify-start' : 'justify-end'}`}>
-            <div className={`bg-${msg.type === 'reply' ? 'blue-100' : 'gray-100'} p-2 rounded-md w-[130px]`}>
+            <div className={`${msg.type === 'reply' ? 'bg-blue-100' : 'bg-gray-100'} p-2 rounded-md w-[130px]`}>
               <p className="font-semibold text-sm">{msg.text}</p>
               <p className="text-xs">{msg.time}</p>
             </div>
@@ -134,13 +134,38 @@ const Footer = () => {
 
       <div id="usersTable">
         {usersArr.map((item, index) => (
-          <div key={index}>
-            <span className="flex items-center justify-between p-1 px-2 cursor-pointer hover:bg-gray-50">
-              <FooterModal btnName={item.name} topHead={item.name} userTable={generateUserChat(item)} marginLeft="ml-[290px]" height="h-[450px]" width="w-[400px]" />
-              <p className="bg-gray-500 h-3 w-3 rounded-full"></p>
-            </span>
-            <hr className="border-gray-300" />
-          </div>
+      <div key={index}>
+      <span className="flex items-center justify-between p-1 px-2 cursor-pointer hover:bg-gray-50">
+        <FooterModal
+          btnName={item.name}
+          topHead={item.name}
+          userTable={
+            <div>
+              <div className="relative">
+                {generateUserChat(item)}
+                <div className="fixed bottom-0 left-0 right-0 bg-white p-2">
+                  <input
+                    type="text"
+                    placeholder="Send Message..."
+                    className="p-2 py-3 border outline-none rounded-md w-[400px]"
+                  />
+                </div>
+              </div>
+            </div>
+          }
+          marginLeft="ml-[290px]"
+          height="h-[450px]"
+          width="w-[400px]"
+        />
+        <p className="bg-gray-500 h-3 w-3 rounded-full"></p>
+      </span>
+      <hr className="border-gray-300" />
+    </div>
+    
+    
+    
+    
+     
         ))}
       </div>
     </div>
