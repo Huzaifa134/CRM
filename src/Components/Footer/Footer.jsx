@@ -136,7 +136,14 @@ const Footer = () => {
         {usersArr.map((item, index) => (
           <div key={index}>
             <span className="flex items-center justify-between p-1 px-2 cursor-pointer hover:bg-gray-50">
-              <FooterModal btnName={item.name} topHead={item.name} userTable={generateUserChat(item)} marginLeft="ml-[290px]" height="h-[450px]" width="w-[400px]" />
+              <FooterModal btnName={item.name} topHead={item.name} userTable={
+                <div>
+                  {generateUserChat(item)}
+                  <div className="mt-2 p-2 flex justify-center">
+                    <input type="text" placeholder="Send Message..." className="p-2 py-3 mb-2 border-t absolute bottom-0 outline-none rounded-md w-[90%]" />
+                  </div>
+                </div>
+              }  marginLeft="ml-[290px]" height="h-[450px]" width="w-[400px]" />
               <p className="bg-gray-500 h-3 w-3 rounded-full"></p>
             </span>
             <hr className="border-gray-300" />
