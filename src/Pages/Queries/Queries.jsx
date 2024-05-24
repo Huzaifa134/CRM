@@ -708,7 +708,7 @@ function Queries() {
             style: {
               borderRadius: 10, // Adjust this value as per your preference
               // backgroundColor: "#2d2f31",
-              width:"40%",
+              width:"50%",
               height: "200vh",
               padding: "3px",
             },
@@ -721,6 +721,10 @@ function Queries() {
             '@media (max-width: 1100px)': {
               // marginLeft: "40px",
               marginTop: "100px",
+            },
+            '@media (max-width: 1910px)': {
+              // marginLeft: "40px",
+              marginTop: "150px",
             },
           }}
       >
