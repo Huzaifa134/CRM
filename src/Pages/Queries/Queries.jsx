@@ -708,12 +708,21 @@ function Queries() {
             style: {
               borderRadius: 10, // Adjust this value as per your preference
               // backgroundColor: "#2d2f31",
-              width:"100vh",
+              width:"40%",
               height: "200vh",
               padding: "3px",
             },
           }}
-          sx={{height:"115vh",marginLeft:"20px",marginTop:"13px"}}
+          // sx={{height:"115vh",marginLeft:"20px",marginTop:"13px"}}
+          sx={{
+            height: "115vh",
+            marginLeft: "20px",
+            marginTop: "13px",
+            '@media (max-width: 1100px)': {
+              // marginLeft: "40px",
+              marginTop: "100px",
+            },
+          }}
       >
         <div className="flex justify-center">
           <div className="p-6 rounded-md bg-white">
