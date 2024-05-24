@@ -81,10 +81,25 @@ function QueriesDetail() {
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("");
   const [errors, setErrors] = useState({ name: null, helperTxt: null });
+  const [activeButton, setActiveButton] = useState(null);
+
+
+  const buttonData = [
+    { label: 'New', color: '#ffcccc' },
+    { label: 'Active', color: '#ccffcc' },
+    { label: 'No Connect', color: '#ccccff' },
+    { label: 'Hot Lead', color: '#ffffcc' },
+    { label: 'Proposal Sent', color: '#ffccff' },
+    { label: 'Follow Up', color: '#ccffff' },
+    { label: 'Confirmed', color: '#ffddcc' },
+    { label: 'Cancelled', color: '#ccffdd' },
+    { label: 'Invalid', color: '#dddddd' },
+  ];
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleClick = (event , index) => {
+    setActiveButton(index);
     setAnchorEl(event.currentTarget);
   };
 
@@ -683,7 +698,7 @@ function QueriesDetail() {
           <button  onClick={()=> handleOpenModal(composeModalMail)}  className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EmailOutlinedIcon style={{ fontSize: 18 }} /> Email
           </button>
-       <Link to="/queries/followUps/followUps">
+       <Link to="/queries/102498/followUps">
             <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EventAvailableOutlinedIcon style={{ fontSize: 18 }} /> Task
           </button>
@@ -700,9 +715,9 @@ function QueriesDetail() {
           <div className="text-xs px-3 ">
             Created: 19-04-2024 | Last Updated: 19/04/2024 - 10:39 PM
           </div>
-          <div className="items--container">
+          {/* <div className="items--container">
             <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
+              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece] " />
               <div className="content">New</div>
               <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
             </div>
@@ -746,7 +761,26 @@ function QueriesDetail() {
               <div className="content group-hover:bg-[#cecece]">Invalid</div>
               <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
             </div>
-          </div>
+          </div> */}
+
+<div className="items--container">
+      {buttonData.map((button, index) => (
+        <div
+          key={index}
+          className={`item group hover:!cursor-pointer ${
+            activeButton === index ? 'active' : ''
+          }`}
+          style={{
+            backgroundColor: activeButton === index ? button.color : '',
+          }}
+          onClick={() => handleClick(index)}
+        >
+          <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
+          <div className="content">{button.label}</div>
+          <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
+        </div>
+      ))}
+    </div>
         </div>
         <div className="flex flex-row w-full h-[68vh] "> 
           <div className="w-[20%] h-full flex flex-col border-r py-1 bordr-slate-300 bg-[#f5f7f9]">

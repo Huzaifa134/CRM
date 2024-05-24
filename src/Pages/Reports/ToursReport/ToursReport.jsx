@@ -12,7 +12,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import "./ToursReport.css";
-
+import { FaSearch } from "react-icons/fa";
+import { FaCalendarDays } from "react-icons/fa6";
 const data = [
   {
     id: "1357924",
@@ -299,11 +300,11 @@ function ToursReport() {
   };
   return (
     <div className="h-full">
-      <div className="flex justify-between items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
+      <div className="flex justify-between text-sm items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Tours Report </div>
-        <div className="flex justify-center  w-[100%] sm:w-[40%] items-center gap-3 h-full">
+        <div className="flex justify-center   items-center gap-3 h-full">
           <div className="custom-date-picker">
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} >
               <MobileDatePicker
                 label="From Date"
                 defaultValue={dayjs("2022-04-17")}
@@ -315,18 +316,69 @@ function ToursReport() {
                     dayjs(date).subtract(1, "day").format("YYYY-MM-DD")
                   );
                 }}
+                sx={{
+                  '& .MuiInputBase-root': {
+                    // height: 48,  // Adjust height
+                    padding: '0 0px',  // Adjust padding
+                    width:'110px !important',
+                  }
+                }}
               />
             </LocalizationProvider>
           </div>
+          <div className="custom-date-picker">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <MobileDatePicker
+              label="To Date"
+              defaultValue={dayjs("2024-04-17")}
+              onAccept={(date) => {
+                setStartDate(
+                  dayjs(date).subtract(1, "day").format("YYYY-MM-DD")
+                );
+                FromRangeDateFilter(
+                  dayjs(date).subtract(1, "day").format("YYYY-MM-DD")
+                );
+                
+              }}
+              sx={{
+                '& .MuiInputBase-root': {
+                  // height: 48,  // Adjust height
+                  padding: '0 0px',  // Adjust padding
+                  width:'110px !important',
+                }
+              }}
+            />
+          </LocalizationProvider>
+        </div>
+        <div>
+        <select name="" id="" className="py-2 px-5 text-center rounded-md border-2 border-gray-300">
+        <option value="">All Destinators</option>
+        <option value="">Bali</option>
+        <option value="">India</option>
+        <option value=""></option>
+        <option value=""></option>
+        </select>
+        </div>
+        <div>
+        <select name="" id="" className="py-2 px-5 text-center rounded-md border-2 border-gray-300">
+        <option value="">All Users</option>
+        <option value="">Bali</option>
+        <option value="">India</option>
+        <option value=""></option>
+        <option value=""></option>
+        </select>
+        </div>
           <input
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
               quickFilter();
             }}
-            className="border border-slate-300 h-[80%] px-2 rounded-md text-sm w-[50%] focus:outline-none focus:border focus:border-black"
+            className="border border-slate-300 h-[80%] px-2 rounded-md text-sm focus:outline-none focus:border focus:border-black"
             placeholder="Search by anything...."
           />
+          <button className="flex justify-center items-center gap-2 bg-[#1E415D] text-white px-4 py-2 rounded-md "><FaSearch /> Search</button>
+          <button className="flex justify-center items-center gap-2 bg-[#1E415D] text-white px-3 py-2 w- rounded-md "><FaCalendarDays /> Calendar View</button>
         </div>
       </div>
 

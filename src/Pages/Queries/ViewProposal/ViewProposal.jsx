@@ -198,7 +198,7 @@ const ViewProposal = () => {
     </div>
     <hr />
 
-  <div className='overflow-y-scroll h-[80vh]'>
+  <div className='overflow-y-auto'>
 
 
     <div className='mt-3 p-3 flex gap-5'>

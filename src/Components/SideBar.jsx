@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const SideBar = () => {
   return (
     
-    <div className="fixed w-[4%] flex flex-col items-center mt-3" >
+    <div className=" w-[4%] justify-center ml-7 flex flex-col items-center mt-3" >
       <Link to={"/"}>
         <div className="group flex">
           <div className="p-2 m-1 cursor-pointer  hover:bg-slate-600 rounded-md">

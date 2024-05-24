@@ -21,7 +21,7 @@ import { FaPerson } from "react-icons/fa6";
 import { MdOutlineSmartphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import Menu from '@mui/material/Menu';
-
+import "./ActiveAnimation.css"
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 let destinations = [];
@@ -45,6 +45,21 @@ function Queries() {
   const [selectService, setSelectService] = useState("");
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("");
+  const [activeButton, setActiveButton] = useState('');
+
+
+  const buttons = [
+    { label: 'TOTAL', path: '/queries', color: 'bg-black', count: 2082 },
+    { label: 'NEW', path: '/queries/new', color: 'bg-[#655be6]', count: 2082 },
+    { label: 'ACTIVE', path: '/queries/active', color: 'bg-[#0cb5b5]', count: 2082 },
+    { label: 'NO CONNECT', path: '/queries/noConnect', color: 'bg-[#0f1f3e]', count: 2082 },
+    { label: 'HOT LEAD', path: '/queries/hotLead', color: 'bg-[#e45555]', count: 2082 },
+    { label: 'FOLLOW UP', path: '/queries/followUp', color: 'bg-[#ff6700]', count: 2082 },
+    { label: 'PROPOSAL SENT', path: '/queries/proposalSent', color: 'bg-[#cc00a9]', count: 2082 },
+    { label: 'CONFIRMED', path: '/queries/confirmed', color: 'bg-[#46cd93]', count: 2082 },
+    { label: 'CANCELED', path: '/queries/canceled', color: 'bg-[#6c757d]', count: 2082 },
+    { label: 'INVALID', path: '/queries/invalid', color: 'bg-[#f9392f]', count: 2082 },
+  ];
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -84,6 +99,7 @@ function Queries() {
 
 
   useEffect(() => {
+    setActiveButton(location.pathname);
     if (fromDate && toDate) {
       const from = new Date(fromDate);
       const to = new Date(toDate);
@@ -101,7 +117,7 @@ function Queries() {
     } else {
       setDays("");
     }
-  }, [fromDate, toDate]);
+  }, [fromDate, toDate , location.pathname]);
 
   //naviagte save
 
@@ -604,7 +620,7 @@ function Queries() {
         </div>
       </div>
 
-      <div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
+      {/* <div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
         <div onClick={()=>{navigate("/queries")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-black rounded-md justify-center">
           <div className="text-white text-xl ">2082</div>
           <div className="text-white text-[0.65rem] font-[700] ">TOTAL</div>
@@ -662,7 +678,25 @@ function Queries() {
           <div className="text-white text-xl ">2082</div>
           <div className="text-white  text-[0.65rem] font-[700] ">INVALID</div>
         </div>
-      </div>
+      </div> */}
+
+<div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
+      {buttons.map((button) => (
+        <div
+          key={button.label}
+          onClick={() => {
+            setActiveButton(button.path);
+            navigate(button.path);
+          }}
+          className={`flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl rounded-md justify-center ${
+            activeButton === button.path ? `active-animation ${button.color}` : button.color
+          }`}
+        >
+          <div className="text-white text-xl">{button.count}</div>
+          <div className="text-white text-[0.65rem] font-[700]">{button.label}</div>
+        </div>
+      ))}
+    </div>
 
       <div className="h-[80%] w-full mt-[6px] px-5 overflow-x-auto ">
         <div className="ag-theme-quartz h-full xl:w-full  w-[1200px]">
@@ -708,12 +742,25 @@ function Queries() {
             style: {
               borderRadius: 10, // Adjust this value as per your preference
               // backgroundColor: "#2d2f31",
-              width:"100vh",
+              width:"50%",
               height: "200vh",
               padding: "3px",
             },
           }}
-          sx={{height:"115vh",marginLeft:"20px",marginTop:"13px"}}
+          // sx={{height:"115vh",marginLeft:"20px",marginTop:"13px"}}
+          sx={{
+            height: "115vh",
+            marginLeft: "20px",
+            marginTop: "13px",
+            '@media (max-width: 1100px)': {
+              // marginLeft: "40px",
+              marginTop: "100px",
+            },
+            '@media (min-width: 1700px)': {
+              // marginLeft: "40px",
+              marginTop: "4%",
+            },
+          }}
       >
         <div className="flex justify-center">
           <div className="p-6 rounded-md bg-white">

@@ -1,0 +1,19 @@
+.active-animation{
+    /* background-color: black; */
+    animation: pulse 1s infinite;
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+      background-color: rgb(128, 126, 126);
+    }
+    50% {
+      transform: scale(1.05);
+      background-color: rgb(145, 145, 145);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
