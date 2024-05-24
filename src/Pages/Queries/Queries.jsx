@@ -722,7 +722,7 @@ function Queries() {
               // marginLeft: "40px",
               marginTop: "100px",
             },
-            '@media (max-width: 1910px)': {
+            '@media (min-width: 1910px)': {
               // marginLeft: "40px",
               marginTop: "150px",
             },
