@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { AgGridReact } from "ag-grid-react";
-
-import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { Link } from "react-router-dom";
 
 const data = [{
@@ -76,7 +73,7 @@ function AttendanceReport() {
   const [column, setColumn] = useState([
     {
       headerName: "Sr.",
-      width: 50,
+      width: 80,
       cellStyle: { display: "flex", alignItems: "center", height:"40px" },
       filter: "agDateColumnFilter",
       filterParams: dateFilterParams,
@@ -109,13 +106,13 @@ function AttendanceReport() {
       headerName: "First Login Time",
       cellStyle: { display: "flex", alignItems: "start", height:"40px" },
       field: "firstLoginTime",
-      // width: 200,
+      width: 250,
     },
     {
       headerName: "session",
       cellStyle: { display: "flex", alignItems: "start", height:"40px"},
       field: "session",
-      // width: 200,
+      width: 250,
     },
     {
       headerName: "Last Update",
@@ -125,13 +122,13 @@ function AttendanceReport() {
       headerName: "Type",
       field: "type",
       cellStyle: { display: "flex", alignItems: "start", height:"40px"},
-      // width: 200,
+      width: 250,
     },
     {
       headerName: "Working Hours",
       field: "workingHours",
       cellStyle: { display: "flex", alignItems: "start", height:"40px"},
-      // width: 200,
+      width: 250,
     },
   ]);
 
@@ -153,31 +150,11 @@ function AttendanceReport() {
   };
 
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       <div className="w-full flex justify-between items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Today's Attandance Report </div>
         <div className="flex justify-end  w-[100%] sm:w-[40%] items-center gap-3 h-full">
           <div className="custom-date-picker"></div>
-          {/* <input
-            className="border border-slate-300 py-2 px-2 rounded-md text-sm w-[50%] focus:outline-none focus:border focus:border-black"
-            placeholder="Search by anything...."
-          /> */}
-
-          {/* <InputLabel id="demo-select-small-label">Age</InputLabel>
-          <Select
-            labelId="demo-select-small-label"
-            id="demo-select-small"
-            value={"age"}
-            label="Age"
-            onChange={handleChange}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select> */}
 
           <select
             title="Today's Attendance"
@@ -219,7 +196,7 @@ function AttendanceReport() {
       Sunday, 12 May 2024
         </span>
       </div>
-      <div className="h-full w-full px-3">
+      <div className="flex-grow">
         <div
           className="ag-theme-quartz"
           style={{ height: "100%", width: "100%" }}
@@ -232,7 +209,6 @@ function AttendanceReport() {
             enableBrowserTooltips={true}
             pagination={true}
             rowHeight={70}
-            domLayout="autoHeight" 
           />
         </div>
       </div>

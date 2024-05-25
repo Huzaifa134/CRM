@@ -102,15 +102,16 @@ function EmailTemplate() {
     {
       headerName: "Name",
       field: "name",
-      width: 250,
+      width: 290,
     },
     {
       headerName: "Mail Subject",
       field: "mail_subject",
-      width: 350,
+      width: 390,
     },
     {
       headerName: "By",
+      width: 250,
       field: "by",
       cellRenderer: (params) => {
         return (
@@ -126,7 +127,7 @@ function EmailTemplate() {
     {
       headerName: "Date",
       field: "date",
-      width: 160,
+      width: 250,
     },
     {
       width: 50,
@@ -192,7 +193,7 @@ function EmailTemplate() {
   };
 
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Email Templates </div>
         <div className="flex justify-center items-center gap-3 h-full">
@@ -224,7 +225,7 @@ function EmailTemplate() {
         </div>
       </div>
 
-      <div className="h-full w-full">
+      <div className="flex-grow">
         <div
           className="ag-theme-quartz"
           style={{ height: "100%", width: "100%" }}

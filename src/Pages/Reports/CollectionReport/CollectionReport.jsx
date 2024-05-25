@@ -11,56 +11,57 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import "./CollectionReport.css";
 
-const data = [{
-  id: "7896543",
-  fname: "Jane",
-  paymentID: "2658492",
-  status: "Paid",
-  transectionID: "QR02KWQEKJDLSN",
-  type: "Credit Card",
-  amount: "₹78500",
-  paymentDate: "28-03-2024 10:30 AM"
-},
-{
-  id: "1239876",
-  fname: "Michael",
-  paymentID: "3759261",
-  status: "Pending",
-  transectionID: "02KWQEKJDLSN",
-  type: "Bank Transfer",
-  amount: "₹96000",
-  paymentDate: "30-03-2024 03:45 PM"
-},
-{
-  id: "4561237",
-  fname: "Sarah",
-  paymentID: "4829613",
-  status: "Paid",
-  transectionID: "PL06SMDLCOPWZQ",
-  type: "Transfer",
-  amount: "₹63000",
-  paymentDate: "02-04-2024 09:15 AM"
-},
-{
-  id: "7894562",
-  fname: "David",
-  paymentID: "5938612",
-  status: "Pending",
-  transectionID: "SR02KWQEKJDLSN",
-  type: "Cash",
-  amount: "₹45000",
-  paymentDate: "05-04-2024 04:00 PM"
-},
-{
-  id: "1237895",
-  fname: "Emma",
-  paymentID: "6872134",
-  status: "Paid",
-  transectionID: "WZ03NCLPQSKJDM",
-  type: "Debit Card",
-  amount: "₹72000",
-  paymentDate: "08-04-2024 11:45 AM"
-}
+const data = [
+  {
+    id: "7896543",
+    fname: "Jane",
+    paymentID: "2658492",
+    status: "Paid",
+    transectionID: "QR02KWQEKJDLSN",
+    type: "Credit Card",
+    amount: "₹78500",
+    paymentDate: "28-03-2024 10:30 AM",
+  },
+  {
+    id: "1239876",
+    fname: "Michael",
+    paymentID: "3759261",
+    status: "Pending",
+    transectionID: "02KWQEKJDLSN",
+    type: "Bank Transfer",
+    amount: "₹96000",
+    paymentDate: "30-03-2024 03:45 PM",
+  },
+  {
+    id: "4561237",
+    fname: "Sarah",
+    paymentID: "4829613",
+    status: "Paid",
+    transectionID: "PL06SMDLCOPWZQ",
+    type: "Transfer",
+    amount: "₹63000",
+    paymentDate: "02-04-2024 09:15 AM",
+  },
+  {
+    id: "7894562",
+    fname: "David",
+    paymentID: "5938612",
+    status: "Pending",
+    transectionID: "SR02KWQEKJDLSN",
+    type: "Cash",
+    amount: "₹45000",
+    paymentDate: "05-04-2024 04:00 PM",
+  },
+  {
+    id: "1237895",
+    fname: "Emma",
+    paymentID: "6872134",
+    status: "Paid",
+    transectionID: "WZ03NCLPQSKJDM",
+    type: "Debit Card",
+    amount: "₹72000",
+    paymentDate: "08-04-2024 11:45 AM",
+  },
 ];
 
 const dateFilterParams = {
@@ -96,7 +97,7 @@ function CollectionReport() {
   const [column, setColumn] = useState([
     {
       headerName: "Query ID",
-      width: 120,
+      width: 170,
       cellStyle: { display: "flex", alignItems: "center" },
       filter: "agDateColumnFilter",
       filterParams: dateFilterParams,
@@ -105,7 +106,7 @@ function CollectionReport() {
         return (
           <Link>
             <div className="cursor-pointer flex flex-col justify-center mt-2">
-              <div className="text-sm text-black font-medium  ">{params.data.id}</div>
+              <div className="text-sm text-black font-medium">{params.data.id}</div>
             </div>
           </Link>
         );
@@ -114,13 +115,11 @@ function CollectionReport() {
     {
       headerName: "Payment ID",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 150,
+      width: 170,
       cellRenderer: (params) => {
         return (
           <div className="flex flex-col">
-            <div className="text-black">
-              {params.data.paymentID}
-            </div>
+            <div className="text-black">{params.data.paymentID}</div>
           </div>
         );
       },
@@ -129,7 +128,7 @@ function CollectionReport() {
       headerName: "Transection ID",
       cellStyle: { display: "flex", alignItems: "center" },
       field: "transectionID",
-      width: 200,
+      width: 220,
     },
     {
       headerName: "Client",
@@ -141,7 +140,7 @@ function CollectionReport() {
       headerName: "Type",
       field: "type",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 100,
+      width: 160,
       cellRenderer: (params) => {
         return (
           <div className="flex justify-center items-center h-full w-full">
@@ -155,34 +154,33 @@ function CollectionReport() {
     {
       headerName: "Amount",
       field: "amount",
-      width: 110,
+      width: 140,
     },
     {
       headerName: "Payment Date",
       field: "paymentDate",
-      width: 200,
+      width: 230,
     },
     {
       headerName: "status",
       field: "status",
-      width: 110,
+      width: 140,
       cellRenderer: (params) => {
         return (
           <div className="flex justify-center items-center h-full w-full">
-            {params.value == "Overdue" ? 
-            <div className=" text-white bg-red-500 rounded h-6 flex justify-center items-center w-16">
-              {params.value}
-            </div>
-         :
-            <div className=" text-white bg-green-500 rounded h-6 flex justify-center items-center w-16">
-              {params.value}
-            </div>
-
-          }
+            {params.value === "Overdue" ? (
+              <div className=" text-white bg-red-500 rounded h-6 flex justify-center items-center w-16">
+                {params.value}
+              </div>
+            ) : (
+              <div className=" text-white bg-green-500 rounded h-6 flex justify-center items-center w-16">
+                {params.value}
+              </div>
+            )}
           </div>
         );
       },
-    }
+    },
   ]);
 
   const onGridReady = (params) => {
@@ -206,7 +204,7 @@ function CollectionReport() {
   };
 
   const quickFilter = () => {
-    gridApi.setGridOption("quickFilterText", search);
+    gridApi.setQuickFilter(search);
   };
 
   const defaultColDef = {
@@ -220,11 +218,12 @@ function CollectionReport() {
     width: 191,
     tooltipField: "name",
   };
+
   return (
-    <div className="h-full">
+    <div className="h-screen flex flex-col">
       <div className="flex justify-between items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Collection Report </div>
-        <div className="flex justify-center  w-[100%] sm:w-[40%] items-center gap-3 h-full">
+        <div className="flex justify-center w-full sm:w-1/2 items-center gap-3 h-full">
           <div className="custom-date-picker">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <MobileDatePicker
@@ -258,17 +257,17 @@ function CollectionReport() {
           <div className="text-white font-bold text-2xl">₹1,637,211</div>
           <div className="text-white font-bold text-[0.6rem]">TOTAL AMOUNT</div>
         </div>
-        <div className="sm:mt-0 mt-3  w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#0cb5b5] rounded-md">
+        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#0cb5b5] rounded-md">
           <div className="text-white font-bold text-2xl">₹1,637,211</div>
           <div className="text-white font-bold text-[0.6rem]">RECEIVED</div>
         </div>
-        <div className="sm:mt-0 mt-3  w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#e45555] rounded-md">
+        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#e45555] rounded-md">
           <div className="text-white font-bold text-2xl">₹1,637,211</div>
           <div className="text-white font-bold text-[0.6rem]">PENDING</div>
         </div>
       </div>
 
-      <div className="h-full w-full">
+      <div className="flex-grow h-full w-full">
         <div
           className="ag-theme-quartz"
           style={{ height: "100%", width: "100%" }}
@@ -281,7 +280,6 @@ function CollectionReport() {
             enableBrowserTooltips={true}
             pagination={true}
             rowHeight={70}
-            domLayout="autoHeight" 
           />
         </div>
       </div>

@@ -205,7 +205,7 @@ function TaskReport() {
     {
       headerName: "Client",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 330,
+      width: 360,
       cellRenderer: (params) => {
         return (
           <div className="flex flex-col">
@@ -226,19 +226,19 @@ function TaskReport() {
       headerName: "Query ID",
       cellStyle: { display: "flex", alignItems: "center" },
       field: "queryId",
-      width: 110,
+      width: 140,
     },
     {
       headerName: "Details",
       cellStyle: { display: "flex", alignItems: "center" },
       field: "details",
-      width: 310,
+      width: 340,
     },
     {
       headerName: "Reminder",
       field: "reminder",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 170,
+      width: 200,
       cellRenderer: (params) => {
         return (
           <div>
@@ -253,7 +253,7 @@ function TaskReport() {
       headerName: "Status",
       field: "status",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 150,
+      width: 200,
       cellRenderer: (params) => {
         return (
           <div className="flex flex-col">
@@ -270,9 +270,8 @@ function TaskReport() {
     {
       headerName: "Assigned",
       field: "assigned",
-      width: 120,
+      width: 200,
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 150,
       cellRenderer: (params) => {
         return (
           <div className="flex flex-col">
@@ -324,7 +323,7 @@ function TaskReport() {
     tooltipField: "name",
   };
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       <div className="flex justify-between items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Task's / Followup's Report   </div>
         <div className="flex justify-center  w-[100%] sm:w-[40%] items-center gap-3 h-full">
@@ -371,7 +370,7 @@ function TaskReport() {
         </div>
       </div>
 
-      <div className="h-full w-full">
+      <div className="flex-grow">
         <div
           className="ag-theme-quartz"
           style={{ height: "100%", width: "100%" }}
@@ -384,7 +383,6 @@ function TaskReport() {
             enableBrowserTooltips={true}
             pagination={true}
             rowHeight={70}
-            domLayout="autoHeight" 
           />
         </div>
       </div>
