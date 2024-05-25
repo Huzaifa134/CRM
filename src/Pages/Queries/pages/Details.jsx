@@ -41,63 +41,63 @@ function Details() {
     <div className="p-3 w-full h-full">
       <div className="w-full flex flex-col ">
         <div className="py-1 w-full rounded-lg bg-[#f7f7f7]">
-          <span className="font-[500] text-sm pl-2">Client Information</span>
+          <span className="font-[550] text-sm pl-2">Client Information</span>
         </div>
         <div className="flex gap-2 w-full pt-2 pl-1">
           <div className="w-[30%] flex flex-col ">
             <div className="text-xs">Client Name</div>
-            <div className="text-sm mt-1 font-[500]">
+            <div className="text-sm mt-1 font-[550]">
               Mr. Ratan Kumar Srivastava Srivastava
             </div>
           </div>
           <div className="w-[24%] flex flex-col ">
             <div className="text-xs">Mobile</div>
-            <div className="text-sm mt-1 font-[500]">+919521508406</div>
+            <div className="text-sm mt-1 font-[550]">+919521508406</div>
           </div>
           <div className="w-[24%] flex flex-col ">
             <div className="text-xs">Email</div>
-            <div className="text-sm mt-1 font-[500]">ratan@travbizz.com</div>
+            <div className="text-sm mt-1 font-[550]">ratan@travbizz.com</div>
           </div>
           <div className="w-[20%] flex flex-col "></div>
         </div>
       </div>
       <div className="w-full flex flex-col mt-4">
         <div className="py-1 w-full rounded-lg bg-[#f7f7f7]">
-          <span className="font-[500] text-sm pl-2">Query Information</span>
+          <span className="font-[550] text-sm pl-2">Query Information</span>
         </div>
         <div className="flex w-full pt-2 gap-2 pl-1">
           <div className="w-[30%] flex flex-col ">
             <div className="w-full">
               <div className="text-xs">Destination</div>
-              <div className="text-sm mt-1 font-[500]">Dubai</div>
+              <div className="text-sm mt-1 font-[550]">Dubai</div>
             </div>
             <div className="w-full mt-5">
               <div className="text-xs">Lead Source</div>
-              <div className="text-sm mt-1 font-[500]">Instagram</div>
+              <div className="text-sm mt-1 font-[550]">Instagram</div>
             </div>
             <div className="w-full mt-5">
               <div className="text-xs">Query Description</div>
-              <div className="text-sm mt-1 font-[500]">nothing</div>
+              <div className="text-sm mt-1 font-[550]">nothing</div>
             </div>
           </div>
           <div className="w-[24%]">
             <div className="w-full">
               <div className="text-xs">From Date</div>
-              <div className="text-sm mt-1 font-[500]">01-06-2024</div>
+              <div className="text-sm mt-1 font-[550]">01-06-2024</div>
             </div>
             <div className="w-full mt-5">
               <div className="text-xs">Services</div>
-              <div className="text-sm mt-1 font-[500]">Full package</div>
+              <div className="text-sm mt-1 font-[550]">Full package</div>
             </div>
           </div>
           <div className="w-[24%]">
             <div className="w-full">
               <div className="text-xs">To Date</div>
-              <div className="text-sm mt-1 font-[500]">04-06-2024</div>
+              <div className="text-sm mt-1 font-[550]">04-06-2024</div>
             </div>
             <div className="w-full mt-5">
               <div className="text-xs">Pax</div>
-              <div className="text-sm mt-1 font-[500]">
+              <div className="text-sm mt-1 font-[550]">
                 Adult:{`1`}-Child:{`0`}-Infant:{`0`}
               </div>
             </div>
@@ -105,11 +105,11 @@ function Details() {
           <div className="w-[20%]">
             <div className="w-full">
               <div className="text-xs">Travel Month</div>
-              <div className="text-sm mt-1 font-[500]">June</div>
+              <div className="text-sm mt-1 font-[550]">June</div>
             </div>
             <div className="w-full mt-5">
               <div className="text-xs">Assign To</div>
-              <div className="text-sm mt-1 font-[500]">
+              <div className="text-sm mt-1 font-[550]">
                 TravBizz IT Solutions
               </div>
             </div>
@@ -118,8 +118,8 @@ function Details() {
       </div>
       <div className="w-full flex flex-col mt-4">
         <div className="py-2 w-full px-2 rounded-lg items-center  flex justify-between bg-[#f7f7f7]">
-          <span className="font-[500] text-sm pl-2">Notes</span>
-          <button className="text-xs py-1 focus:outline-none active:outline-none hover:bg-blue-900 bg-[#005ee2] rounded-md text-white font-[500] px-2 ">
+          <span className="font-[550] text-sm pl-2">Notes</span>
+          <button className="text-xs py-1 focus:outline-none active:outline-none hover:bg-blue-900 bg-[#005ee2] rounded-md text-white font-[550] px-2 ">
             +Add Notes
           </button>
         </div>
@@ -153,7 +153,7 @@ function Details() {
       </div>
       <div className="w-full flex flex-col mt-4">
         <div className="py-2 w-full rounded-lg bg-[#f7f7f7]">
-          <span className="font-[500] text-sm pl-2">Package Suggestion</span>
+          <span className="font-[550] text-sm pl-2">Package Suggestion</span>
         </div>
         {/* Grid Div */}
         <div className="border w-full overflow-auto rounded-lg mt-3 h-52  ">

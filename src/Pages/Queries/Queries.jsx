@@ -61,6 +61,7 @@ function Queries() {
     setModalOpen(true);
   };
   
+  
 
 
 
@@ -681,9 +682,9 @@ function Queries() {
     }
   }} value="Options" className="border-[1px] px-2 py-2 border-gray-400 rounded-md text-black bg-transparent w-24 flex-shrink-0 h-[80%]">
           <option value="default" className="hidden">Options</option>
-            <option value="">Download Excel Format</option>
-            <option value="import">Import Excel</option>
-            <option value="">Export Data</option>
+            <option value="" style={{padding: "8px 12px"}}>Download Excel Format</option>
+            <option value="import" style={{padding: "8px 12px"}}>Import Excel</option>
+            <option value="" style={{padding: "8px 12px"}}>Export Data</option>
           </select>
           <button
             className="border-[1px] px-2 py-2 w-24 border-gray-400 rounded-md text-black flex-shrink-0 h-[80%] flex items-center justify-center gap-1"

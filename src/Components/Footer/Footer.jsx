@@ -172,7 +172,7 @@ const Footer = () => {
     setTextFields(prevTextFields => [
       ...prevTextFields,
       <div key={prevTextFields.length} className="bg-yellow-300 p-3 rounded-md mt-3">
-        <textarea className="bg-yellow-300 outline-none text-sm" placeholder="Write here something..." cols={34} name="" id=""></textarea>
+        <textarea className="bg-yellow-300 outline-none text-sm" placeholder="Write here something..." cols={46} name="" id=""></textarea>
         <hr />
         <RiDeleteBinFill className="mt-3 cursor-pointer hover:text-red-700 transition-all" onClick={() => handleDeleteTextField(prevTextFields.length)} />
       </div>
@@ -204,7 +204,7 @@ const Footer = () => {
           </button>
           <button className="text-[12px] font-semibold border-x-2 px-3 border-gray-300 flex items-center gap-1 hover:bg-gray-100">
             <CiStickyNote />
-            <FooterModal btnName={"NOTEBOOK"} topHead="NOTEBOOK" width="w-[300px]" icon={<FaPlusSquare />} userTable={
+            <FooterModal btnName={"NOTEBOOK"} topHead="NOTEBOOK" width="w-[400px]" icon={<FaPlusSquare />} userTable={
               textFields.length > 0 ? (
                 <div>
                   {textFields.map((textField, index) => (
