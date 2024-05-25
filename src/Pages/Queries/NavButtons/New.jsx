@@ -21,6 +21,8 @@ import { FaPerson } from "react-icons/fa6";
 import { MdOutlineSmartphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { Menu } from "@mui/material";
+import { IoClose } from "react-icons/io5";
+import CenterModal from "../ViewProposal/CenterModal";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 let destinations = [];
 let clients = [];
@@ -45,6 +47,42 @@ function New() {
   const [type, setType] = useState("");
   const [activeButton, setActiveButton] = useState('');
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const handleOpenModal = (content) => {
+    console.log("Opening modal with content:", content);
+    setModalContent(content);
+    setModalOpen(true);
+  };
+  
+
+
+
+  
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+
+  const importModal = <div>
+     <div className='flex justify-between text-2xl font-semibold bg-[#fcfdfd] p-2 items-center w-[400px]'>
+      <h3>Import</h3>
+      <IoClose className='cursor-pointer font-bold ' onClick={handleCloseModal}/>
+    </div>
+    <hr />
+
+    <div className="p-5">
+      <p className="text-xs mt-4">Import Excel File</p>
+      <input type="file" className="border-[1px] p-1 rounded-md w-full mt-2" />
+    </div>
+    <hr className="mt-8 mx-3"/>
+    <div className='flex p-5 justify-end items-center gap-2 mt-2'>
+        <button className='bg-[#12344d] hover:bg-[#2a4355] p-1 rounded-md px-3 text-white font-semibold text-sm'>Import</button>
+      </div>
+  </div>
   
 
   const toggleDropdown = () => {
@@ -617,10 +655,14 @@ function goToQueries() {
             </span>
           </button>
           <button className="border-[1px] px-2 py-2 w-36 border-gray-400 rounded-md text-black flex-shrink-0 flex items-center justify-center h-[80%]">Load Leads</button>
-          <select className="border-[1px] px-2 py-2 border-gray-400 rounded-md text-black bg-transparent w-24 flex-shrink-0 h-[80%]">
-            <option value="" disabled>option</option>
+          <select onChange={(e) => {
+    if (e.target.value === "import") {
+      handleOpenModal(importModal);
+    }
+  }} value="Options" className="border-[1px] px-2 py-2 border-gray-400 rounded-md text-black bg-transparent w-24 flex-shrink-0 h-[80%]">
+          <option value="default" className="hidden">Options</option>
             <option value="">Download Excel Format</option>
-            <option value="">Import Excel</option>
+            <option value="import">Import Excel</option>
             <option value="">Export Data</option>
           </select>
           <button
@@ -633,32 +675,32 @@ function goToQueries() {
       </div>
 
       {/* dropdown div */}
-      <div style={dropdownStyles} className="w-full bg-[#f5f7f9] p-2 flex gap-2 px-3 dropdown-Div ">
+      <div style={dropdownStyles} className="w-full h-12 bg-[#f5f7f9] p-2 flex gap-2 px-2 dropdown-Div ">
         <input type="date" placeholder="from" className="bg-[#e9ecef] p-1 py-3 rounded-md outline-none focus:border-black border-[1px] border-gray-300 transition-all" />
         <input type="date" placeholder="from" className="bg-[#e9ecef] p-1 py-3 rounded-md outline-none focus:border-black border-[1px] border-gray-300 transition-all" />
         <input type="text" className="p-1 px-3 rounded-md outline-none focus:border-black border-[1px] border-gray-300 transition-all" placeholder="Search by ID, name, email, mobile" />
-        <select className="p-1 py-3 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
+        <select className="p-1 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
           <option>All User</option>
           <option>User Panal</option>
           <option>Trishti Samar</option>
           <option>Suriya ji</option>
         </select>
-        <select className="p-1 py-3 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
+        <select className="p-1  rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
           <option>All Sourse</option>
           <option>Advertizment</option>
           <option>Agent</option>
           <option>Akbar Travel</option>
         </select>
-        <select className="p-1 py-3 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
+        <select className="p-1 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
           <option>All</option>
           <option>Client</option>
           <option>Agent</option>
           <option>Corporate</option>
         </select>
-        <button className="border border-slate-300 bg-[#1d3f5a] h-auto items-center text-white text-[0.8rem] font-[700] rounded-md px-2 py-2 flex-shrink-0">
+        <button className="border border-slate-300 bg-[#1d3f5a] h-auto items-center flex text-white text-[0.8rem] font-[700] rounded-md px-2 py-2 flex-shrink-0">
           <span className="flex justify-center items-center gap-1 px-2"><FaSearch />Search</span>
         </button>
-        <button className="border border-slate-300 bg-[#1d3f5a] h-auto items-center text-white text-[0.8rem] font-[700] rounded-md px-2 py-2 flex-shrink-0">
+        <button className="border border-slate-300 bg-[#1d3f5a] h-auto flex items-center text-white text-[0.8rem] font-[700] rounded-md px-2 py-2 flex-shrink-0">
           <span className="flex justify-center items-center gap-1 px-2">All</span>
         </button>
       </div>
@@ -1218,6 +1260,8 @@ function goToQueries() {
           </div>
         </div>
         </Menu>
+
+        <CenterModal open={modalOpen} onClose={handleCloseModal} data={modalContent}/>
 
 
         <style jsx>{`

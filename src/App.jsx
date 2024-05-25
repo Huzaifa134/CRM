@@ -72,6 +72,10 @@ const App = () => {
       setShow(click);
     };
 
+    const handleMouseLeave = () => {
+      setShow(true); // or set it to whatever value hides the sidebar
+    };
+
     return (
       <div className="main h-screen w-full flex flex-col ">
         <Navbar sendDataToApp={getStatusFromSideBar} />
