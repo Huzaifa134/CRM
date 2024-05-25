@@ -1022,7 +1022,7 @@ function Queries() {
             setActiveButton(button.path);
             navigate(button.path);
           }}
-          className={`flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl rounded-md justify-center ${
+          className={`flex flex-col items-center m-1 h-12 w-[8.5vw] cursor-pointer shadow-xl rounded-md justify-center ${
             activeButton === button.path ? `active-animation ${button.color}` : button.color
           }`}
         >
