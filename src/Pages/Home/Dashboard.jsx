@@ -147,6 +147,9 @@ export default function Dashboard() {
                 <PostAddIcon fontSize='small' />
                 Query
               </Btn>
+
+
+              
               <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
                 <div className="drawer">
                   <h2 className='dashboard-card-heading'>Add Query</h2>

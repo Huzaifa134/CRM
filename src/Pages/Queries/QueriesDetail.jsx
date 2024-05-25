@@ -49,12 +49,18 @@ import { FaPerson } from "react-icons/fa6";
 import { MdOutlineReply, MdOutlineSmartphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import Menu from '@mui/material/Menu';
-import { Box } from "@mui/material";
+import { Box, Button, Drawer, FormControl, FormGroup, MenuItem } from "@mui/material";
 import { IoClose } from "react-icons/io5";
 import Editor from "../../Components/Editor";
 import ReactDOMServer from 'react-dom/server';
 import logo from "../../assets/images/logo.png"
 import CenterModal from "./ViewProposal/CenterModal";
+import { DatePicker } from "@mui/lab";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import PostAddIcon from '@mui/icons-material/PostAdd';
+
+
 
 
 
@@ -82,6 +88,249 @@ function QueriesDetail() {
   const [type, setType] = useState("");
   const [errors, setErrors] = useState({ name: null, helperTxt: null });
   const [activeButton, setActiveButton] = useState(null);
+  
+
+
+
+// type change function
+const handleTypeChange = (event) => {
+  setType(event.target.value);
+};
+
+
+// drawer btn function 
+function Btn({ handleClicked, children, className }) {
+  return (
+    <Button onClick={handleClicked} variant='contained' >
+      {children}
+    </Button>
+  )
+}
+
+// drawerOpen function
+const [drawerOpen, setDrawerOpen] = useState({
+  client: false,
+  query: false,
+  itinerary: false,
+});
+
+
+  // toggleDrawer function
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return;
+
+    setDrawerOpen({ ...drawerOpen, [anchor]: open });
+  };
+
+
+// BtnOutlined
+function BtnOutlined({ handleClicked, children }) {
+  return (
+    <Button onClick={handleClicked} variant='outlined'
+      sx={{
+        borderColor: '#0d47a1',
+        color: '#0d47a1',
+        '&:hover': {
+          color: '#0d47a1c0',
+          borderColor: '#0d47a1c0',
+          backgroundColor: '#0d47a110'
+        }
+      }}>
+      {children}
+    </Button>
+  )
+}
+
+function AddQueryForm({ closeDrawer }) {
+  return (
+    <form className="drawer-form">
+       <FormControl sx={{ width: '100%' }} value={"DEFAULT"} disabled={true}>
+      <TextField
+        select
+        value={type}
+        onChange={handleTypeChange}
+        defaultValue="client"
+        size='small'
+        label="Type"
+      >
+        <MenuItem value="client">Client</MenuItem>
+        <MenuItem value="agent">Agent</MenuItem>
+        <MenuItem value="corporate">Corporate</MenuItem>
+      </TextField>
+    </FormControl>
+
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+        <TextField label="Mobile" variant="outlined" size='small' required />
+        <TextField label="Email" variant="outlined" size='small' required type='email' />
+      </FormGroup>
+      <FormGroup row sx={{ gap: '0.5rem' }}>
+        <FormControl>
+          <TextField select defaultValue="mr" size='small'>
+            <MenuItem value="mr">Mr.</MenuItem>
+            <MenuItem value="mrs">Mrs.</MenuItem>
+            <MenuItem value="ms">Ms.</MenuItem>
+            <MenuItem value="dr">Dr.</MenuItem>
+            <MenuItem value="prof">Prof.</MenuItem>
+          </TextField>
+        </FormControl>
+        <TextField label="Client name" variant="outlined" size='small' required sx={{ flex: 1 }} />
+      </FormGroup>
+
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+      {(type === 'agent' || type === 'corporate') && (
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+        <TextField label="Company" variant="outlined" size='small' required />
+        <TextField label="GST" variant="outlined" size='small' required type='email' />
+      </FormGroup>
+    )}
+    </FormGroup>
+
+  
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+        <TextField label="Destinations" variant="outlined" size='small' required />
+        <FormControl>
+          <TextField select defaultValue="january" size='small' label="Travel month" fullWidth>
+            <MenuItem value="january">January</MenuItem>
+            <MenuItem value="february">February</MenuItem>
+            <MenuItem value="march">March</MenuItem>
+            <MenuItem value="april">April</MenuItem>
+            <MenuItem value="may">May</MenuItem>
+            <MenuItem value="june">June</MenuItem>
+            <MenuItem value="july">July</MenuItem>
+            <MenuItem value="august">August</MenuItem>
+            <MenuItem value="september">September</MenuItem>
+            <MenuItem value="october">October</MenuItem>
+            <MenuItem value="november">November</MenuItem>
+            <MenuItem value="december">December</MenuItem>
+          </TextField>
+        </FormControl>
+      </FormGroup>
+
+
+
+
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+    <DatePicker
+      value={fromDate}
+      onChange={(date) => setFromDate(date)}
+      label="From Date"
+      size="small"
+      slotProps={{ textField: { size: 'small' } }}
+    />
+    <DatePicker
+      value={toDate}
+      onChange={(date) => setToDate(date)}
+      label="To Date"
+      size="small"
+      slotProps={{ textField: { size: 'small' } }}
+    />
+    <TextField
+      value={(nights !== 0 ? `${nights} Nights, ` : '') + days + ' Days'}
+      label="Package Duration"
+      variant="outlined"
+      size="small"
+      required
+      sx={{ flex: 1, width: 24 }}
+    />
+  </FormGroup>
+
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }} >
+        
+        <TextField label="Adult" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 1, max: 24 } }} required />
+        <TextField label="Child" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 12 } }} />
+        <TextField label="Infant" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 6 } }} />
+      </FormGroup>
+
+      <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
+        <FormControl>
+          <TextField select defaultValue="16" size='small' label="Lead source" required>
+            <MenuItem value="advertisment">Advertisment</MenuItem>
+            <MenuItem value="agent">Agent</MenuItem>
+            <MenuItem value="akbartravel">AkbarTravel</MenuItem>
+            <MenuItem value="chat">Chat</MenuItem>
+            <MenuItem value="facebook">Facebook</MenuItem>
+            <MenuItem value="hellotravel">Hello Travel</MenuItem>
+            <MenuItem value="instagram">Instagram</MenuItem>
+            <MenuItem value="justdial">Justdial</MenuItem>
+            <MenuItem value="online">Online</MenuItem>
+            <MenuItem value="others">Others</MenuItem>
+            <MenuItem value="referral">Referral</MenuItem>
+            <MenuItem value="snapchat">snapchat</MenuItem>
+            <MenuItem value="telephone">Telephone</MenuItem>
+            <MenuItem value="walk-in">Walk-In</MenuItem>
+            <MenuItem value="website">Website</MenuItem>
+            <MenuItem value="whatsapp">WhatsApp</MenuItem>
+          </TextField>
+        </FormControl>
+        <FormControl>
+          <TextField select defaultValue="hot" size='small' label="Priority" required>
+            <MenuItem value="general">General Query</MenuItem>
+            <MenuItem value="hot">Hot Query</MenuItem>
+          </TextField>
+        </FormControl>
+        <FormControl>
+          <TextField select defaultValue="me" size='small' label="Assign To" required>
+            <MenuItem value="me">Assign to me</MenuItem>
+          </TextField>
+        </FormControl>
+      </FormGroup>
+
+      <FormControl sx={{ width: '100%' }}>
+        <TextField select defaultValue="activitiesonly" size='small' label="Select service">
+          <MenuItem value="activitiesonly">Activities only</MenuItem>
+          <MenuItem value="flightonly">Flight only</MenuItem>
+          <MenuItem value="fullpackage">Full package</MenuItem>
+          <MenuItem value="hotelflight">Hotel + Flight</MenuItem>
+          <MenuItem value="hoteltransport">Hotel + Transport</MenuItem>
+          <MenuItem value="hotelonly">Hotel only</MenuItem>
+          <MenuItem value="transportonly">Transport only</MenuItem>
+          <MenuItem value="visaonly">Visa only</MenuItem>
+        </TextField>
+      </FormControl>
+
+      <TextField label="Remark" variant="outlined" size='small' multiline />
+
+      <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
+        <BtnOutlined handleClick={closeDrawer} >Cancel</BtnOutlined>
+        <Btn handleClick={() => { }}>Save</Btn>
+      </FormGroup>
+    </form>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   const buttonData = [
@@ -698,16 +947,55 @@ function QueriesDetail() {
           <button  onClick={()=> handleOpenModal(composeModalMail)}  className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EmailOutlinedIcon style={{ fontSize: 18 }} /> Email
           </button>
-       <Link to="/queries/102498/followUps">
+      <Link to="/queries/102498/followUps">
             <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EventAvailableOutlinedIcon style={{ fontSize: 18 }} /> Task
           </button>
 
        </Link>
-          <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1" onClick= {handleClick}>
+
+
+
+
+
+       <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+        <Btn handleClicked={toggleDrawer('query', true)}>
+      <     EditOutlinedIcon style={{ fontSize: 18 }} />
+            Edit
+          </Btn>
+         
+    <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
+          <div className="drawer">
+            <h2 className='dashboard-card-heading'> Edit Queries </h2>
+
+            <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
+      </div>
+    </Drawer>
+</LocalizationProvider>
+
+
+
+
+
+
+       {/* <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1" onClick= {handleClick}>
             <EditOutlinedIcon style={{ fontSize: 18 }} /> Edit
           </button>
+        </div> */}
+
+
+
+
+        {/* <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1" onClick= {handleClick}>
+            <EditOutlinedIcon style={{ fontSize: 18 }} /> Edit
+          </button> */}
         </div>
+
+
+
+
+         
       </div>
 
       <div className="flex flex-col justify-start h-fit items-start mt-2 m-auto border border-slate-200 rounded-lg w-[99%]">
@@ -762,6 +1050,9 @@ function QueriesDetail() {
               <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
             </div>
           </div> */}
+
+
+
 
 <div className="items--container">
       {buttonData.map((button, index) => (
@@ -822,6 +1113,10 @@ function QueriesDetail() {
               <Route path="/feedBack" element={<FeedBack />} />
             </Routes>
           </div>
+
+
+
+          
           {/* <div className="w-[80%] ">
             <div className="bg-[#f7f7f7] px-1 rounded-md mx-2 py-1 font-[600] mt-2">
               Client Information
@@ -890,7 +1185,13 @@ function QueriesDetail() {
           </div> */}
         </div>
       </div>
-      <Modal
+
+
+
+
+
+
+      {/* <Modal
         keepMounted
         onClose={() => {
           handleClose("PROPOSAL");
@@ -911,8 +1212,7 @@ function QueriesDetail() {
       }}
       PaperProps={{
           style: {
-            borderRadius: 10, // Adjust this value as per your preference
-            // backgroundColor: "#2d2f31",
+            borderRadius: 10, 
             width:"100vh",
             height: "200vh",
             padding: "3px",
@@ -1022,9 +1322,7 @@ function QueriesDetail() {
                 </p>
               </div>
 
-              {/*phone / email */}
               <div className="flex w-full justify-between">
-                {/*phone number */}
                 <div className="mt-4">
                   <div className="flex justify-center items-center border-2 rounded-md w-full">
                     <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
@@ -1041,12 +1339,6 @@ function QueriesDetail() {
                         placeholder="Phone/Mobile"
 
 
-
-
-
-
-
-
                       />
                       {isInputFocused && (
                         <div className="dropdown-content">
@@ -1054,7 +1346,6 @@ function QueriesDetail() {
                             searchResults.map((result, index) => (
                               <div key={index} className="dropdown-item">
                                 {result.name}{" "}
-                                {/* Assuming result contains name of the user */}
                               </div>
                             ))
                           ) : (
@@ -1066,7 +1357,8 @@ function QueriesDetail() {
                     </div>
                   </div>
                 </div>
-                {/*email */}
+
+
                 <div className="mt-4">
                   <div className="flex justify-center items-center border-2 rounded-md w-full">
                     <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
@@ -1080,25 +1372,16 @@ function QueriesDetail() {
                       value={email}
                       onChange={handlefields}
                       className=" py-2 px-2 w-full"
-
-
-
-
-
-               
-
-                      
-
-
-
                     />
                   </div>
                 </div>
               </div>
-              {/*Agent company and GST */}
+
+
+
               {type === "AGENT" || type === "CORPORATE" ? (
                 <div className="flex gap-5 mt-3 justify-between">
-                  {/* company */}
+
                   <div className="">
                     <label htmlFor="company">Company</label>
                     <input
@@ -1115,7 +1398,8 @@ function QueriesDetail() {
                       
                     />
                   </div>
-                  {/* GST */}
+
+
                   <div>
                     <label htmlFor="gst">GST</label>
                     <input
@@ -1131,7 +1415,8 @@ function QueriesDetail() {
                 ""
               )}
               <div className="flex justify-between w-full gap-4">
-                {/* destination */}
+
+
                 <div className="mt-2 w-full">
                   <label htmlFor="fromdate ">Travel Destination</label>
 
@@ -1155,7 +1440,8 @@ function QueriesDetail() {
                   </div>
                 </div>
 
-                {/* months */}
+
+
                 <div className="mt-2 w-full">
                   <label htmlFor="fromdate ">Travel month</label>
                   <div className="mt-2">
@@ -1177,10 +1463,9 @@ function QueriesDetail() {
                 </div>
               </div>
 
-              {/* from date to date start*/}
 
               <div className="">
-                {/* from date to date */}
+
                 <div className="flex gap-4 w-full justify-between">
                   <div className="mt-4">
                     <label htmlFor="fromdate">From Date</label>
@@ -1203,7 +1488,7 @@ function QueriesDetail() {
                     />
                   </div>
 
-                  {/* Difference days */}
+
                   <div className="mt-4">
                     <label htmlFor="days">Package Duration</label>
                     <input
@@ -1221,9 +1506,9 @@ function QueriesDetail() {
                 </div>
               </div>
 
-              {/* Adult child infant */}
+
               <div className="flex gap-3 mt-5">
-                {/* Adult */}
+
                 <div>
                   <label htmlFor="adultage">Adult</label>
                   <div className="flex justify-center items-center border-2 rounded-md">
@@ -1241,7 +1526,7 @@ function QueriesDetail() {
                     />
                   </div>
                 </div>
-                {/* Child */}
+
                 <div>
                   <label htmlFor="childage">Child </label>
                   <div className="border-2 rounded-md flex">
@@ -1259,7 +1544,7 @@ function QueriesDetail() {
                     />
                   </div>
                 </div>
-                {/*infant  */}
+
               <div>
                   <label htmlFor="infantage">Infant </label>
                       <div className="border-2 rounded-md flex">
@@ -1278,9 +1563,9 @@ function QueriesDetail() {
                 </div>
               </div>
 
-              {/* source priority Assign-to */}
+
               <div className="flex gap-3 mt-5 justify-between">
-                {/* source */}
+
                 <div>
                   <label htmlFor="source">Lead Source</label>
                   <select
@@ -1298,7 +1583,7 @@ function QueriesDetail() {
                     ))}
                   </select>
                 </div>
-                {/* priority */}
+
                 <div>
                   <label htmlFor="priority">Priority</label>
                   <select
@@ -1315,7 +1600,7 @@ function QueriesDetail() {
                     ))}
                   </select>
                 </div>
-                {/* assignto */}
+
                 <div>
                   <label htmlFor="assignto">Assign To</label>
                   <select
@@ -1334,7 +1619,7 @@ function QueriesDetail() {
                 </div>
               </div>
 
-              {/* Service */}
+
               <div className="mt-5 flex flex-col">
                 <label htmlFor="service">Service</label>
                 <select
@@ -1351,7 +1636,7 @@ function QueriesDetail() {
                   ))}
                 </select>
               </div>
-              {/* Remarks */}
+
               <div className="mt-7">
                 <textarea
                   name="remarks"
@@ -1363,7 +1648,7 @@ function QueriesDetail() {
                 ></textarea>
               </div>
             </div>
-            {/*<div className="w-[49%]"></div>*/}
+
           </div>
           <div className="mt-1 flex gap-8 justify-evenly px-8 items-center w-full">
             <div
@@ -1396,7 +1681,7 @@ function QueriesDetail() {
           </div>
         </div>
       </div>
-      </Menu>
+      </Menu> */}
 
 
       <CenterModal open={modalOpen} onClose={handleCloseModal} data={modalContent}/>

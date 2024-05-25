@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
@@ -16,12 +16,25 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import _ from "lodash";
-import { FaCalendarDays } from "react-icons/fa6";
 import { FaPerson } from "react-icons/fa6";
 import { MdOutlineSmartphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import Menu from '@mui/material/Menu';
 import "./ActiveAnimation.css"
+import { Button, Drawer, FormControl, FormGroup, MenuItem } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers";
+import FormControlLabel from '@mui/material/FormControlLabel';
+// import FormControl from '@mui/material/FormControl';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+
+
+
+
+
+
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 let destinations = [];
@@ -44,9 +57,202 @@ function Queries() {
   const [selectAssign, setSelectAssign] = useState("");
   const [selectService, setSelectService] = useState("");
   const [remarks, setRemarks] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState("client");
   const [activeButton, setActiveButton] = useState('');
 
+
+
+// type change function
+  const handleTypeChange = (event) => {
+    setType(event.target.value);
+  };
+
+
+  // drawer btn function 
+  function Btn({ handleClicked, children, className }) {
+    return (
+      <Button onClick={handleClicked} variant='contained' sx={{ backgroundColor: '#0d47a1', '&:hover': { backgroundColor: '#0d47a1c0' } }} className={className} size='medium'>
+        {children}
+      </Button>
+    )
+  }
+
+
+
+  // BtnOutlined
+  function BtnOutlined({ handleClicked, children }) {
+    return (
+      <Button onClick={handleClicked} variant='outlined'
+        sx={{
+          borderColor: '#0d47a1',
+          color: '#0d47a1',
+          '&:hover': {
+            color: '#0d47a1c0',
+            borderColor: '#0d47a1c0',
+            backgroundColor: '#0d47a110'
+          }
+        }}>
+        {children}
+      </Button>
+    )
+  }
+  
+  function AddQueryForm({ closeDrawer }) {
+    return (
+      <form className="drawer-form">
+         <FormControl sx={{ width: '100%' }} value={"DEFAULT"} disabled={true}>
+        <TextField
+          select
+          value={type}
+          onChange={handleTypeChange}
+          defaultValue="client"
+          size='small'
+          label="Type"
+        >
+          <MenuItem value="client">Client</MenuItem>
+          <MenuItem value="agent">Agent</MenuItem>
+          <MenuItem value="corporate">Corporate</MenuItem>
+        </TextField>
+      </FormControl>
+  
+        <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+          <TextField label="Mobile" variant="outlined" size='small' required />
+          <TextField label="Email" variant="outlined" size='small' required type='email' />
+        </FormGroup>
+        <FormGroup row sx={{ gap: '0.5rem' }}>
+          <FormControl>
+            <TextField select defaultValue="mr" size='small'>
+              <MenuItem value="mr">Mr.</MenuItem>
+              <MenuItem value="mrs">Mrs.</MenuItem>
+              <MenuItem value="ms">Ms.</MenuItem>
+              <MenuItem value="dr">Dr.</MenuItem>
+              <MenuItem value="prof">Prof.</MenuItem>
+            </TextField>
+          </FormControl>
+          <TextField label="Client name" variant="outlined" size='small' required sx={{ flex: 1 }} />
+        </FormGroup>
+
+        <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+        {(type === 'agent' || type === 'corporate') && (
+        <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+          <TextField label="Company" variant="outlined" size='small' required />
+          <TextField label="GST" variant="outlined" size='small' required type='email' />
+        </FormGroup>
+      )}
+      </FormGroup>
+
+    
+        <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+          <TextField label="Destinations" variant="outlined" size='small' required />
+          <FormControl>
+            <TextField select defaultValue="january" size='small' label="Travel month" fullWidth>
+              <MenuItem value="january">January</MenuItem>
+              <MenuItem value="february">February</MenuItem>
+              <MenuItem value="march">March</MenuItem>
+              <MenuItem value="april">April</MenuItem>
+              <MenuItem value="may">May</MenuItem>
+              <MenuItem value="june">June</MenuItem>
+              <MenuItem value="july">July</MenuItem>
+              <MenuItem value="august">August</MenuItem>
+              <MenuItem value="september">September</MenuItem>
+              <MenuItem value="october">October</MenuItem>
+              <MenuItem value="november">November</MenuItem>
+              <MenuItem value="december">December</MenuItem>
+            </TextField>
+          </FormControl>
+        </FormGroup>
+
+
+
+  
+        <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+      <DatePicker
+        value={fromDate}
+        onChange={(date) => setFromDate(date)}
+        label="From Date"
+        size="small"
+        slotProps={{ textField: { size: 'small' } }}
+      />
+      <DatePicker
+        value={toDate}
+        onChange={(date) => setToDate(date)}
+        label="To Date"
+        size="small"
+        slotProps={{ textField: { size: 'small' } }}
+      />
+      <TextField
+        value={(nights !== 0 ? `${nights} Nights, ` : '') + days + ' Days'}
+        label="Package Duration"
+        variant="outlined"
+        size="small"
+        required
+        sx={{ flex: 1, width: 24 }}
+      />
+    </FormGroup>
+  
+        <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }} >
+          
+          <TextField label="Adult" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 1, max: 24 } }} required />
+          <TextField label="Child" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 12 } }} />
+          <TextField label="Infant" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 6 } }} />
+        </FormGroup>
+  
+        <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
+          <FormControl>
+            <TextField select defaultValue="16" size='small' label="Lead source" required>
+              <MenuItem value="advertisment">Advertisment</MenuItem>
+              <MenuItem value="agent">Agent</MenuItem>
+              <MenuItem value="akbartravel">AkbarTravel</MenuItem>
+              <MenuItem value="chat">Chat</MenuItem>
+              <MenuItem value="facebook">Facebook</MenuItem>
+              <MenuItem value="hellotravel">Hello Travel</MenuItem>
+              <MenuItem value="instagram">Instagram</MenuItem>
+              <MenuItem value="justdial">Justdial</MenuItem>
+              <MenuItem value="online">Online</MenuItem>
+              <MenuItem value="others">Others</MenuItem>
+              <MenuItem value="referral">Referral</MenuItem>
+              <MenuItem value="snapchat">snapchat</MenuItem>
+              <MenuItem value="telephone">Telephone</MenuItem>
+              <MenuItem value="walk-in">Walk-In</MenuItem>
+              <MenuItem value="website">Website</MenuItem>
+              <MenuItem value="whatsapp">WhatsApp</MenuItem>
+            </TextField>
+          </FormControl>
+          <FormControl>
+            <TextField select defaultValue="hot" size='small' label="Priority" required>
+              <MenuItem value="general">General Query</MenuItem>
+              <MenuItem value="hot">Hot Query</MenuItem>
+            </TextField>
+          </FormControl>
+          <FormControl>
+            <TextField select defaultValue="me" size='small' label="Assign To" required>
+              <MenuItem value="me">Assign to me</MenuItem>
+            </TextField>
+          </FormControl>
+        </FormGroup>
+  
+        <FormControl sx={{ width: '100%' }}>
+          <TextField select defaultValue="activitiesonly" size='small' label="Select service">
+            <MenuItem value="activitiesonly">Activities only</MenuItem>
+            <MenuItem value="flightonly">Flight only</MenuItem>
+            <MenuItem value="fullpackage">Full package</MenuItem>
+            <MenuItem value="hotelflight">Hotel + Flight</MenuItem>
+            <MenuItem value="hoteltransport">Hotel + Transport</MenuItem>
+            <MenuItem value="hotelonly">Hotel only</MenuItem>
+            <MenuItem value="transportonly">Transport only</MenuItem>
+            <MenuItem value="visaonly">Visa only</MenuItem>
+          </TextField>
+        </FormControl>
+  
+        <TextField label="Remark" variant="outlined" size='small' multiline />
+  
+        <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
+          <BtnOutlined handleClick={closeDrawer}>Cancel</BtnOutlined>
+          <Btn handleClick={() => { }}>Save</Btn>
+        </FormGroup>
+      </form>
+    )
+  }
 
   const buttons = [
     { label: 'TOTAL', path: '/queries', color: 'bg-black', count: 2082 },
@@ -70,33 +276,27 @@ function Queries() {
 
 
 
+// drawerOpen function
+  const [drawerOpen, setDrawerOpen] = useState({
+    client: false,
+    query: false,
+    itinerary: false,
+  });
+  
 
+  // toggleDrawer function
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return;
 
+    setDrawerOpen({ ...drawerOpen, [anchor]: open });
+  };
 
-// tab function
-
-
-
-
-
-
-
-
-
-  const navigate = useNavigate()
-
-  // calculate day
-
-  const [fromDate, setFromDate] = useState("");
+  
+// Calculate days and Night
+ const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [days, setDays] = useState(0);
   const [nights, setNights] = useState(0);
-
-
-  function goToProposals() {
-    navigate('proposalSent')
-  }
-
 
   useEffect(() => {
     setActiveButton(location.pathname);
@@ -110,14 +310,65 @@ function Queries() {
       // Convert milliseconds to days
       const daysDifference = Math.ceil(difference / (1000 * 3600 * 24));
 
-      const nightsDifference = Math.max(0, daysDifference - 1); // Ek din ka difference subtract karein
+      const nightsDifference = Math.max(0, daysDifference - 1); // Subtract one day for nights calculation
 
       setDays(daysDifference);
       setNights(nightsDifference);
     } else {
-      setDays("");
+      setDays('');
+      setNights('');
     }
-  }, [fromDate, toDate , location.pathname]);
+  }, [fromDate, toDate, location.pathname]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// tab function
+
+  const navigate = useNavigate()
+
+  // calculate day
+
+  // const [fromDate, setFromDate] = useState("");
+  // const [toDate, setToDate] = useState("");
+  // const [days, setDays] = useState(0);
+  // const [nights, setNights] = useState(0);
+
+
+  function goToProposals() {
+    navigate('proposalSent')
+  }
+
+
+  // useEffect(() => {
+  //   setActiveButton(location.pathname);
+  //   if (fromDate && toDate) {
+  //     const from = new Date(fromDate);
+  //     const to = new Date(toDate);
+
+  //     // Calculate the difference in milliseconds
+  //     const difference = to.getTime() - from.getTime();
+
+  //     // Convert milliseconds to days
+  //     const daysDifference = Math.ceil(difference / (1000 * 3600 * 24));
+
+  //     const nightsDifference = Math.max(0, daysDifference - 1); // Ek din ka difference subtract karein
+
+  //     setDays(daysDifference);
+  //     setNights(nightsDifference);
+  //   } else {
+  //     setDays("");
+  //   }
+  // }, [fromDate, toDate , location.pathname]);
 
   //naviagte save
 
@@ -577,6 +828,9 @@ function Queries() {
   }, []);
 
   return (
+
+
+    
     <div className="h-full w-full">
       <style>{`
       .ag-header{
@@ -596,6 +850,14 @@ function Queries() {
       `}</style>
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#f5f7f9]">
         <div className="font-[700]"> Queries </div>
+
+
+        
+
+
+
+
+
         <div className="flex justify-center  sm:w-[65%] md:w-[55%] lg:w-[43%]  w-[90%] items-center gap-3 h-full">
           <input
             value={search}
@@ -606,7 +868,7 @@ function Queries() {
             className="border border-slate-300 h-[80%] px-2 rounded-md text-sm w-[60%] focus:outline-none focus:border focus:border-black"
             placeholder="Search by anything...."
           />
-          <div className="w-[40%] h-[80%]">
+          {/* <div className="w-[40%] h-[80%]">
             <button
               onClick= {handleClick}
               className="border w-[100%] border-slate-300 h-full bg-[#1d3f5a] text-white  text-[0.8rem] font-[700] rounded-md px-2 "
@@ -616,69 +878,32 @@ function Queries() {
                 <AddRoundedIcon />
               </span>
             </button>
-          </div>
+          </div> */}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+          <Btn handleClicked={toggleDrawer('query', true)}>
+                <PostAddIcon fontSize='small' />
+                Add Queries
+              </Btn>
+                   
+              <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
+                <div className="drawer">
+                  <h2 className='dashboard-card-heading'>Create Query</h2>
+
+                  <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
+                </div>
+              </Drawer>
+          </LocalizationProvider>
+
         </div>
       </div>
 
-      {/* <div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
-        <div onClick={()=>{navigate("/queries")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-black rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white text-[0.65rem] font-[700] ">TOTAL</div>
-        </div>
+      
 
-        <div onClick={()=>{navigate("/queries/new")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#655be6] rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white  text-[0.65rem] font-[700] ">NEW</div>
-        </div>
+{/* Commet Code  in Note */}
 
-        <div onClick={()=>{navigate("/queries/active")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#0cb5b5] rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white  text-[0.65rem] font-[700] ">ACTIVE</div>
-        </div>
 
-        <div onClick={()=>{navigate("/queries/noConnect")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#0f1f3e] rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white  text-[0.65rem] font-[700] ">
-            NO CONNECT
-          </div>
-        </div>
 
-        <div onClick={()=>{navigate("/queries/hotLead")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#e45555] rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white  text-[0.65rem] font-[700] ">HOT LEAD</div>
-        </div>
-
-        <div onClick={()=>{navigate("/queries/followUp")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#ff6700] rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white  text-[0.65rem] font-[700] ">
-            FOLLOW UP
-          </div>
-        </div>
-
-        <div onClick={()=>{navigate("/queries/proposalSent")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#cc00a9] rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white  text-[0.65rem] font-[700] ">
-            PROPOSAL SENT
-          </div>
-        </div>
-
-        <div onClick={()=>{navigate("/queries/confirmed")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#46cd93] rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white  text-[0.65rem] font-[700] ">
-            CONFIRMED
-          </div>
-        </div>
-
-        <div onClick={()=>{navigate("/queries/canceled")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#6c757d] rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white  text-[0.65rem] font-[700] ">CANCELED</div>
-        </div>
-
-        <div onClick={()=>{navigate("/queries/invalid")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-[#f9392f] rounded-md justify-center">
-          <div className="text-white text-xl ">2082</div>
-          <div className="text-white  text-[0.65rem] font-[700] ">INVALID</div>
-        </div>
-      </div> */}
 
 <div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
       {buttons.map((button) => (
@@ -717,7 +942,7 @@ function Queries() {
         </div>
       </div>
 
-      <Modal
+      {/* <Modal
         keepMounted
         onClose={() => {
           handleClose("PROPOSAL");
@@ -727,11 +952,11 @@ function Queries() {
         aria-describedby="keep-mounted-modal-description"
       >
         <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[95%] md:w-[70%] h-fit"></div>
-      </Modal>
+      </Modal> */}
 
       {/* Add Query Modal */}
 
-      <Menu
+      {/* <Menu
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
@@ -740,24 +965,20 @@ function Queries() {
         }}
         PaperProps={{
             style: {
-              borderRadius: 10, // Adjust this value as per your preference
-              // backgroundColor: "#2d2f31",
+              borderRadius: 10, 
               width:"50%",
               height: "200vh",
               padding: "3px",
             },
           }}
-          // sx={{height:"115vh",marginLeft:"20px",marginTop:"13px"}}
           sx={{
             height: "115vh",
             marginLeft: "20px",
             marginTop: "13px",
             '@media (max-width: 1100px)': {
-              // marginLeft: "40px",
               marginTop: "100px",
             },
             '@media (min-width: 1700px)': {
-              // marginLeft: "40px",
               marginTop: "4%",
             },
           }}
@@ -816,7 +1037,6 @@ function Queries() {
 
 
 
-
                         className={`px-2 w-[200px] focus:outline-none  border h-10  focus:border  ${
                           errors.name === "meal_plan_id"
                             ? "border-red-600"
@@ -859,9 +1079,7 @@ function Queries() {
                   </p>
                 </div>
 
-                {/*phone / email */}
                 <div className="flex w-full justify-between">
-                  {/*phone number */}
                   <div className="mt-4">
                     <div className="flex justify-center items-center border-2 rounded-md w-full">
                       <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
@@ -885,7 +1103,6 @@ function Queries() {
                               searchResults.map((result, index) => (
                                 <div key={index} className="dropdown-item">
                                   {result.name}{" "}
-                                  {/* Assuming result contains name of the user */}
                                 </div>
                               ))
                             ) : (
@@ -897,7 +1114,8 @@ function Queries() {
                       </div>
                     </div>
                   </div>
-                  {/*email */}
+
+
                   <div className="mt-4">
                     <div className="flex justify-center items-center border-2 rounded-md w-full">
                       <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
@@ -916,11 +1134,11 @@ function Queries() {
                     </div>
                   </div>
                 </div>
-                {/*Agent company and GST */}
+
                 {type === "AGENT" || type === "CORPORATE" ? (
                   <div className="flex gap-5 mt-3 justify-between">
-                    {/* company */}
                     <div className="">
+
                       <label htmlFor="company">Company</label>
                       <input
                         type="text"
@@ -936,7 +1154,7 @@ function Queries() {
                         
                       />
                     </div>
-                    {/* GST */}
+
                     <div>
                       <label htmlFor="gst">GST</label>
                       <input
@@ -952,7 +1170,8 @@ function Queries() {
                   ""
                 )}
                 <div className="flex justify-between w-full gap-4">
-                  {/* destination */}
+
+
                   <div className="mt-2 w-full">
                     <label htmlFor="fromdate ">Travel Destination</label>
 
@@ -976,7 +1195,8 @@ function Queries() {
                     </div>
                   </div>
 
-                  {/* months */}
+
+
                   <div className="mt-2 w-full">
                     <label htmlFor="fromdate ">Travel month</label>
                     <div className="mt-2">
@@ -998,10 +1218,9 @@ function Queries() {
                   </div>
                 </div>
 
-                {/* from date to date start*/}
-
+3
                 <div className="">
-                  {/* from date to date */}
+
                   <div className="flex gap-4 w-full justify-between">
                     <div className="mt-4">
                       <label htmlFor="fromdate">From Date</label>
@@ -1024,16 +1243,11 @@ function Queries() {
                       />
                     </div>
 
-                    {/* Difference days */}
                     <div className="mt-4">
                       <label htmlFor="days">Package Duration</label>
                       <input
                         type="text"
-                        value={
-                          (nights !== 0 ? `${nights} Nights, ` : "") +
-                          days +
-                          " Days"
-                        }
+                        value={ (nights !== 0 ? `${nights} Nights, ` : "") + days + " Days" }
                         className="border-2 rounded-md text-sm px-3 py-2 w-full"
                         placeholder="days"
                         readOnly
@@ -1042,9 +1256,8 @@ function Queries() {
                   </div>
                 </div>
 
-                {/* Adult child infant */}
                 <div className="flex gap-3 mt-5">
-                  {/* Adult */}
+
                   <div>
                     <label htmlFor="adultage">Adult</label>
                     <div className="flex justify-center items-center border-2 rounded-md">
@@ -1062,7 +1275,8 @@ function Queries() {
                       />
                     </div>
                   </div>
-                  {/* Child */}
+
+
                   <div>
                     <label htmlFor="childage">Child </label>
                     <div className="border-2 rounded-md flex">
@@ -1080,8 +1294,9 @@ function Queries() {
                       />
                     </div>
                   </div>
-                  {/*infant  */}
-                <div>
+
+
+3                <div>
                     <label htmlFor="infantage">Infant </label>
                         <div className="border-2 rounded-md flex">
                     <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
@@ -1099,9 +1314,8 @@ function Queries() {
                   </div>
                 </div>
 
-                {/* source priority Assign-to */}
                 <div className="flex gap-3 mt-5 justify-between">
-                  {/* source */}
+
                   <div>
                     <label htmlFor="source">Lead Source</label>
                     <select
@@ -1119,8 +1333,9 @@ function Queries() {
                       ))}
                     </select>
                   </div>
-                  {/* priority */}
                   <div>
+
+
                     <label htmlFor="priority">Priority</label>
                     <select
                       name="priority"
@@ -1136,7 +1351,8 @@ function Queries() {
                       ))}
                     </select>
                   </div>
-                  {/* assignto */}
+
+
                   <div>
                     <label htmlFor="assignto">Assign To</label>
                     <select
@@ -1155,7 +1371,6 @@ function Queries() {
                   </div>
                 </div>
 
-                {/* Service */}
                 <div className="mt-5 flex flex-col">
                   <label htmlFor="service">Service</label>
                   <select
@@ -1172,7 +1387,8 @@ function Queries() {
                     ))}
                   </select>
                 </div>
-                {/* Remarks */}
+
+
                 <div className="mt-7">
                   <textarea
                     name="remarks"
@@ -1184,7 +1400,8 @@ function Queries() {
                   ></textarea>
                 </div>
               </div>
-              {/*<div className="w-[49%]"></div>*/}
+
+
             </div>
             <div className="mt-1 flex gap-8 justify-evenly px-8 items-center w-full">
               <div
@@ -1217,7 +1434,7 @@ function Queries() {
             </div>
           </div>
         </div>
-        </Menu>
+        </Menu> */}
 
         <style jsx>{`
         .custom-checkbox .ag-selection-checkbox {
