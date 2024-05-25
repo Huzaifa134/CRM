@@ -270,7 +270,7 @@ function TaskReport() {
     {
       headerName: "Assigned",
       field: "assigned",
-      width: 120,
+      // width: 120,
       cellStyle: { display: "flex", alignItems: "center" },
       width: 150,
       cellRenderer: (params) => {

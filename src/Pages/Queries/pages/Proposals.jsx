@@ -137,32 +137,8 @@ function Proposals() {
         <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
       </div> */}
 
-      <div className='w-full'>
-        <p htmlFor="First Name" className='text-xs mb-1'>Validity</p>
-        <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="date" />
-      </div>
 
-      <div className='w-full mt-4'>
-        <p htmlFor="First Name" className='text-xs mb-1'>Popular</p>
-         <select className='outline-none  border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
-           <option value="">No</option>
-           <option value="">Yes</option>
-         </select>
-       </div>
-
-       <div className='w-full mt-4'>
-        <p htmlFor="First Name" className='text-xs mb-1'>Special</p>
-         <select className='outline-none  border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md'>
-           <option value="">No</option>
-           <option value="">Yes</option>
-         </select>
-       </div>
-
-       <div className='w-full mt-4'>
-           <p htmlFor="First Name" className='text-xs mb-1'>About Package</p>
-           <textarea className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" name="" id="" ></textarea>
-      </div>
-
+    
       <hr className="mt-6"/>
 
       <div className="flex justify-end gap-3">
