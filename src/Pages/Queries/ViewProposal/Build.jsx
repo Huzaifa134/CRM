@@ -782,19 +782,19 @@ const changePhotoModal = <div>
     <input type="text" placeholder='Search' className='outline-0 p-1 w-48' />
   </div>
 
-  <div className='p-2 border-2 border-[#f1f1f1]'>
-  <select className='outline-0 p-1 w-56'>
-    <option value="Data itinerary">Data itinerary</option>
-    <option value="Accommondation">Accommondation</option>
-    <option value="Activiy">Activiy</option>
-    <option value="Transportation">Transportation</option>
-    <option value="Insurance/Visa">Insurance/Visa</option>
-    <option value="Meal">Meal</option>
-    <option value="Flight">Flight</option>
-    <option value="Leisure">Leisure</option>
-    <option value="Cruise">Cruise</option>
-  </select>
-</div>
+      <div className='p-2 border-2 border-[#f1f1f1]'>
+            <select className='outline-0 p-1 w-56'>
+                  <option value="Data itinerary">Data itinerary</option>
+                  <option value="Accommondation">Accommondation</option>
+                  <option value="Activiy">Activiy</option>
+                  <option value="Transportation">Transportation</option>
+                  <option value="Insurance/Visa">Insurance/Visa</option>
+                  <option value="Meal">Meal</option>
+                  <option value="Flight">Flight</option>
+                  <option value="Leisure">Leisure</option>
+                  <option value="Cruise">Cruise</option>
+            </select>
+    </div>
 
 </div>
 

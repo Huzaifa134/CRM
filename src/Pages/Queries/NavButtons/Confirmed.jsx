@@ -8,7 +8,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaFilter, FaSearch, FaWhatsapp } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import CloseIcon from "@mui/icons-material/Close";
@@ -44,6 +44,22 @@ function Confirmed() {
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("");
   const [activeButton, setActiveButton] = useState('');
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+
+  const dropdownStyles = {
+    maxHeight: isDropdownVisible ? '100px' : '0',
+    marginTop: !isDropdownVisible ? "-15px" : "0",
+    opacity: isDropdownVisible ? '1' : '0',
+    overflow: 'hidden',
+    transition: '300ms',
+  };
+
 
 
   const buttons = [
@@ -579,31 +595,75 @@ function goToQueries() {
       .ag-row{}
       
       `}</style>
+    <div>
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#f5f7f9]">
-        <div className="font-[700]"> Confirmed </div>
-        <div className="flex justify-center  sm:w-[65%] md:w-[55%] lg:w-[43%]  w-[90%] items-center gap-3 h-full">
+        <div className="font-[700] flex-shrink-0">Confirmed</div>
+        <div className="flex justify-end items-center gap-3 h-full w-full sm:w-auto">
           <input
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
               quickFilter(e.target.value);
             }}
-            className="border border-slate-300 h-[80%] px-2 rounded-md text-sm w-[60%] focus:outline-none focus:border focus:border-black"
+            className="border border-slate-300 h-[80%] px-2 rounded-md text-sm flex-grow max-w-[300px] focus:outline-none focus:border focus:border-black"
             placeholder="Search by anything...."
           />
-          <div className="w-[40%] h-[80%]">
-            <button
-              onClick={handleClick}
-              className="border w-[100%] border-slate-300 h-full bg-[#1d3f5a] text-white  text-[0.8rem] font-[700] rounded-md px-2 "
-            >
-              <span className="sm:block hidden">Add Queries</span>
-              <span className="sm:hidden block">
-                <AddRoundedIcon />
-              </span>
-            </button>
-          </div>
+          <button
+            onClick={handleClick}
+            className="border border-slate-300 bg-[#1d3f5a] text-white text-[0.8rem] font-[700] rounded-md px-2 py-2 flex-shrink-0 h-[80%]"
+          >
+            <span className="sm:block hidden w-24">Add Queries</span>
+            <span className="sm:hidden block">
+              <AddRoundedIcon />
+            </span>
+          </button>
+          <button className="border-[1px] px-2 py-2 w-36 border-gray-400 rounded-md text-black flex-shrink-0 flex items-center justify-center h-[80%]">Load Leads</button>
+          <select className="border-[1px] px-2 py-2 border-gray-400 rounded-md text-black bg-transparent w-24 flex-shrink-0 h-[80%]">
+            <option value="" disabled>option</option>
+            <option value="">Download Excel Format</option>
+            <option value="">Import Excel</option>
+            <option value="">Export Data</option>
+          </select>
+          <button
+            className="border-[1px] px-2 py-2 w-24 border-gray-400 rounded-md text-black flex-shrink-0 h-[80%] flex items-center justify-center gap-1"
+            onClick={toggleDropdown}
+          >
+            <FaFilter className="text-sm" /> Filter
+          </button>
         </div>
       </div>
+
+      {/* dropdown div */}
+      <div style={dropdownStyles} className="w-full bg-[#f5f7f9] p-2 flex gap-2 px-3 dropdown-Div ">
+        <input type="date" placeholder="from" className="bg-[#e9ecef] p-1 py-3 rounded-md outline-none focus:border-black border-[1px] border-gray-300 transition-all" />
+        <input type="date" placeholder="from" className="bg-[#e9ecef] p-1 py-3 rounded-md outline-none focus:border-black border-[1px] border-gray-300 transition-all" />
+        <input type="text" className="p-1 px-3 rounded-md outline-none focus:border-black border-[1px] border-gray-300 transition-all" placeholder="Search by ID, name, email, mobile" />
+        <select className="p-1 py-3 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
+          <option>All User</option>
+          <option>User Panal</option>
+          <option>Trishti Samar</option>
+          <option>Suriya ji</option>
+        </select>
+        <select className="p-1 py-3 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
+          <option>All Sourse</option>
+          <option>Advertizment</option>
+          <option>Agent</option>
+          <option>Akbar Travel</option>
+        </select>
+        <select className="p-1 py-3 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
+          <option>All</option>
+          <option>Client</option>
+          <option>Agent</option>
+          <option>Corporate</option>
+        </select>
+        <button className="border border-slate-300 bg-[#1d3f5a] h-auto items-center text-white text-[0.8rem] font-[700] rounded-md px-2 py-2 flex-shrink-0">
+          <span className="flex justify-center items-center gap-1 px-2"><FaSearch />Search</span>
+        </button>
+        <button className="border border-slate-300 bg-[#1d3f5a] h-auto items-center text-white text-[0.8rem] font-[700] rounded-md px-2 py-2 flex-shrink-0">
+          <span className="flex justify-center items-center gap-1 px-2">All</span>
+        </button>
+      </div>
+    </div>
 
       {/* <div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
         <div onClick={()=>{navigate("/queries")}} className="flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl bg-black rounded-md justify-center">
@@ -673,7 +733,7 @@ function goToQueries() {
             setActiveButton(button.path);
             navigate(button.path);
           }}
-          className={`flex flex-col items-center m-1 h-12 w-[7rem] cursor-pointer shadow-xl rounded-md justify-center ${
+          className={`flex flex-col items-center m-1 h-12 w-[8.5vw] cursor-pointer shadow-xl rounded-md justify-center ${
             activeButton === button.path ? `active-animation ${button.color}` : button.color
           }`}
         >

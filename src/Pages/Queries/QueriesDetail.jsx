@@ -81,25 +81,15 @@ function QueriesDetail() {
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("");
   const [errors, setErrors] = useState({ name: null, helperTxt: null });
-  const [activeButton, setActiveButton] = useState(null);
+  const [activeItem, setActiveItem] = useState(null);
 
 
-  const buttonData = [
-    { label: 'New', color: '#ffcccc' },
-    { label: 'Active', color: '#ccffcc' },
-    { label: 'No Connect', color: '#ccccff' },
-    { label: 'Hot Lead', color: '#ffffcc' },
-    { label: 'Proposal Sent', color: '#ffccff' },
-    { label: 'Follow Up', color: '#ccffff' },
-    { label: 'Confirmed', color: '#ffddcc' },
-    { label: 'Cancelled', color: '#ccffdd' },
-    { label: 'Invalid', color: '#dddddd' },
-  ];
+
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event , index) => {
-    setActiveButton(index);
+    setActiveItem(index);
     setAnchorEl(event.currentTarget);
   };
 
@@ -717,7 +707,7 @@ function QueriesDetail() {
           </div>
           {/* <div className="items--container">
             <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece] " />
+              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
               <div className="content">New</div>
               <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
             </div>
@@ -764,23 +754,26 @@ function QueriesDetail() {
           </div> */}
 
 <div className="items--container">
-      {buttonData.map((button, index) => (
-        <div
-          key={index}
-          className={`item group hover:!cursor-pointer ${
-            activeButton === index ? 'active' : ''
-          }`}
-          style={{
-            backgroundColor: activeButton === index ? button.color : '',
-          }}
-          onClick={() => handleClick(index)}
-        >
-          <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-          <div className="content">{button.label}</div>
-          <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
+      {["New", "Active", "No Connect", "Hot Lead", "Proposal Sent", "Follow Up", "Confirmed", "Cancelled", "Invalid"].map((item, index) => (
+        <div className={`item hover:!cursor-pointer group ${activeItem === index ? 'active' : ''}`} key={index} onClick={() => handleItemClick(index)}>
+          <div className={`arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} style={{ backgroundColor: activeItem === index ? 'yellow' : '' }} />
+          <div className={`content ${activeItem === index ? 'active' : ''}`}>{item}</div>
+          <div className={`arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} style={{ backgroundColor: activeItem === index ? 'yellow' : '' }} />
         </div>
       ))}
+      <style>
+        {`
+          /* Add this CSS directly in the JSX */
+          .item.active .arrow {
+            background-color: yellow;
+          }
+        `}
+      </style>
     </div>
+
+
+
+
         </div>
         <div className="flex flex-row w-full h-[68vh] "> 
           <div className="w-[20%] h-full flex flex-col border-r py-1 bordr-slate-300 bg-[#f5f7f9]">

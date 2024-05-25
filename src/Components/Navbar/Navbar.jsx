@@ -134,10 +134,10 @@ const Navbar = ({sendDataToApp}) => {
       </div>
 
       <div className="md:w-[50%] w-[100%] h-full  flex items-center justify-end gap-3 sm:gap-5 mr-3">
-
+      <Link to="/emailInbox">
         <button className="bg-[#078d80] flex justify-center items-center gap-1 p-1 sm:p-2 rounded-md text-white font-bold  text-xs lg:text-sm">
-          <MdOutlineEmail style={{ fontSize: 18 }} /> <span className="sm:block hidden" ><Link to="/emailInbox">Email Inbox</Link></span>
-        </button>
+          <MdOutlineEmail style={{ fontSize: 18 }} /> <span className="sm:block hidden" >Email Inbox</span>
+        </button></Link>
 
         <div className="relative group flex z-10 justify-center cursor-pointer">
           <NotificationsActiveOutlinedIcon />
