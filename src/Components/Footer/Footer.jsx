@@ -194,10 +194,10 @@ const Footer = () => {
         </div>
 
         <div className="flex items-center justify-center">
-          <button className="text-[12px] font-semibold border-x-2 px-3 border-gray-300 flex items-center gap-1 hover:bg-gray-100">
+          {/* <button className="text-[12px] font-semibold border-x-2 px-3 border-gray-300 flex items-center gap-1 hover:bg-gray-100">
             <IoMoonOutline />
             NIGHT THEME OFF
-          </button>
+          </button> */}
           <button className="text-[12px] font-semibold border-r-1 px-3 border-gray-300 flex items-center gap-1 hover:bg-gray-100">
             <CiBullhorn />
             UPDATES

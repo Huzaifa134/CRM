@@ -800,7 +800,7 @@ const items = [
               return (
                 <Link key={index} to={item.link}>
                   <div
-                    className={`mx-2 text-sm px-2 hover:cursor-pointer py-2 rounded-sm border-transparent border-l-[8px] ${
+                    className={`mx-2 text-sm px-2 hover:cursor-pointer py-2 rounded-sm border-transparent leading-[2rem] border-l-[8px] ${
                       window.location.pathname.includes(item.link)
                         ? "shadow-lg border-l-[8px] border-l-green-600 bg-white"
                         : "hover:bg-slate-200"
