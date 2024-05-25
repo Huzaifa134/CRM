@@ -91,8 +91,6 @@ const data = [
   },
   {
     id: "12EF34RC6",
-
-    
     date: "25-03-2024",
     fname: "Sarah",
     lname: "Johnson",
@@ -186,7 +184,7 @@ function ProfitLossReport() {
   const [column, setColumn] = useState([
     {
       headerName: "Query ID",
-      width: 110,
+      width: 120,
       cellStyle: { display: "flex", alignItems: "center" },
       filter: "agDateColumnFilter",
       filterParams: dateFilterParams,
@@ -205,7 +203,7 @@ function ProfitLossReport() {
     {
       headerName: "Client",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 220,
+      width: 270,
       cellRenderer: (params) => {
         return (
           <div className="flex flex-col">
@@ -226,19 +224,19 @@ function ProfitLossReport() {
       headerName: "Source",
       cellStyle: { display: "flex", alignItems: "center" },
       field: "source",
-      width: 110,
+      width: 130,
     },
     {
       headerName: "Package",
       cellStyle: { display: "flex", alignItems: "center" },
       field: "source",
-      width: 110,
+      width: 130,
     },
     {
       headerName: "Destination",
       field: "city",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 150,
+      width: 200,
       cellRenderer: (params) => {
         return (
           <div className="flex justify-center items-center h-full w-full">
@@ -252,17 +250,17 @@ function ProfitLossReport() {
     {
       headerName: "Pax",
       field: "pax",
-      width: 80,
+      width: 120,
     },
     {
       headerName: "Buying",
       field: "cost",
-      width: 100,
+      width: 120,
     },
     {
       headerName: "Selling",
       field: "cost",
-      width: 100,
+      width: 120,
     },
     {
       headerName: "Profit",
@@ -270,7 +268,7 @@ function ProfitLossReport() {
       width: 120,
     },
     {
-      headerName: "Assinged To",
+      headerName: "Assigned To",
       field: "by",
     },
   ]);
@@ -296,7 +294,7 @@ function ProfitLossReport() {
   };
 
   const quickFilter = () => {
-    gridApi.setGridOption("quickFilterText", search);
+    gridApi.setQuickFilter(search);
   };
 
   const defaultColDef = {
@@ -310,11 +308,12 @@ function ProfitLossReport() {
     width: 191,
     tooltipField: "name",
   };
+
   return (
-    <div className="h-full">
+    <div className="h-screen flex flex-col">
       <div className="flex justify-between items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Profit / Loss Report </div>
-        <div className="flex justify-center  w-[100%] sm:w-[40%] items-center gap-3 h-full">
+        <div className="flex justify-center w-full sm:w-1/2 items-center gap-3 h-full">
           <div className="custom-date-picker">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <MobileDatePicker
@@ -348,17 +347,17 @@ function ProfitLossReport() {
           <div className="text-white font-bold text-2xl">₹1,637,211</div>
           <div className="text-white font-bold text-[0.6rem]">TOTAL BUYING</div>
         </div>
-        <div className="sm:mt-0 mt-3  w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#0cb5b5] rounded-md">
+        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#0cb5b5] rounded-md">
           <div className="text-white font-bold text-2xl">₹1,637,211</div>
           <div className="text-white font-bold text-[0.6rem]">TOTAL BUYING</div>
         </div>
-        <div className="sm:mt-0 mt-3  w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#e45555] rounded-md">
+        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#e45555] rounded-md">
           <div className="text-white font-bold text-2xl">₹1,637,211</div>
           <div className="text-white font-bold text-[0.6rem]">TOTAL BUYING</div>
         </div>
       </div>
 
-      <div className="h-full w-full">
+      <div className="flex-grow">
         <div
           className="ag-theme-quartz"
           style={{ height: "100%", width: "100%" }}
@@ -371,7 +370,6 @@ function ProfitLossReport() {
             enableBrowserTooltips={true}
             pagination={true}
             rowHeight={70}
-            domLayout="autoHeight" 
           />
         </div>
       </div>

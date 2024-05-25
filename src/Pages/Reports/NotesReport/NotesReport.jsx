@@ -87,7 +87,127 @@ const data = [{
   rank: "Mr.",
   pax: "1",
   destination:"Sydney"
-}
+},
+{
+  id: "45DF67GH6",
+  fname: "Daniel",
+  lname: "Martinez",
+  date: "08-04-2024",
+  number: 654987321,
+  email: "danielmartinez@gmail.com",
+  source: "Email",
+  notes: "ut labore et dolore magna aliqua",
+  status: "New",
+  assignedTo: "Emily Smith",
+  rank: "Mr.",
+  pax: "1",
+  destination:"Sydney"
+},
+{
+  id: "45DF67GH6",
+  fname: "Daniel",
+  lname: "Martinez",
+  date: "08-04-2024",
+  number: 654987321,
+  email: "danielmartinez@gmail.com",
+  source: "Email",
+  notes: "ut labore et dolore magna aliqua",
+  status: "New",
+  assignedTo: "Emily Smith",
+  rank: "Mr.",
+  pax: "1",
+  destination:"Sydney"
+},
+{
+  id: "45DF67GH6",
+  fname: "Daniel",
+  lname: "Martinez",
+  date: "08-04-2024",
+  number: 654987321,
+  email: "danielmartinez@gmail.com",
+  source: "Email",
+  notes: "ut labore et dolore magna aliqua",
+  status: "New",
+  assignedTo: "Emily Smith",
+  rank: "Mr.",
+  pax: "1",
+  destination:"Sydney"
+},
+{
+  id: "45DF67GH6",
+  fname: "Daniel",
+  lname: "Martinez",
+  date: "08-04-2024",
+  number: 654987321,
+  email: "danielmartinez@gmail.com",
+  source: "Email",
+  notes: "ut labore et dolore magna aliqua",
+  status: "New",
+  assignedTo: "Emily Smith",
+  rank: "Mr.",
+  pax: "1",
+  destination:"Sydney"
+},
+{
+  id: "45DF67GH6",
+  fname: "Daniel",
+  lname: "Martinez",
+  date: "08-04-2024",
+  number: 654987321,
+  email: "danielmartinez@gmail.com",
+  source: "Email",
+  notes: "ut labore et dolore magna aliqua",
+  status: "New",
+  assignedTo: "Emily Smith",
+  rank: "Mr.",
+  pax: "1",
+  destination:"Sydney"
+},
+{
+  id: "45DF67GH6",
+  fname: "Daniel",
+  lname: "Martinez",
+  date: "08-04-2024",
+  number: 654987321,
+  email: "danielmartinez@gmail.com",
+  source: "Email",
+  notes: "ut labore et dolore magna aliqua",
+  status: "New",
+  assignedTo: "Emily Smith",
+  rank: "Mr.",
+  pax: "1",
+  destination:"Sydney"
+},
+{
+  id: "45DF67GH6",
+  fname: "Daniel",
+  lname: "Martinez",
+  date: "08-04-2024",
+  number: 654987321,
+  email: "danielmartinez@gmail.com",
+  source: "Email",
+  notes: "ut labore et dolore magna aliqua",
+  status: "New",
+  assignedTo: "Emily Smith",
+  rank: "Mr.",
+  pax: "1",
+  destination:"Sydney"
+},
+{
+  id: "45DF67GH6",
+  fname: "Daniel",
+  lname: "Martinez",
+  date: "08-04-2024",
+  number: 654987321,
+  email: "danielmartinez@gmail.com",
+  source: "Email",
+  notes: "ut labore et dolore magna aliqua",
+  status: "New",
+  assignedTo: "Emily Smith",
+  rank: "Mr.",
+  pax: "1",
+  destination:"Sydney"
+},
 ];
 
 const dateFilterParams = {
@@ -123,7 +243,7 @@ function NotesReport() {
   const [column, setColumn] = useState([
     {
       headerName: "ID",
-      width: 100,
+      width: 120,
       cellStyle: { display: "flex", alignItems: "center" },
       filter: "agDateColumnFilter",
       filterParams: dateFilterParams,
@@ -142,7 +262,7 @@ function NotesReport() {
     {
       headerName: "Client",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 300,
+      width: 350,
       cellRenderer: (params) => {
         return (
           <div className="flex flex-col">
@@ -163,19 +283,19 @@ function NotesReport() {
       headerName: "Source",
       cellStyle: { display: "flex", alignItems: "center" },
       field: "source",
-      width: 140 ,
+      width: 170 ,
     },
     {
       headerName: "Notes",
       cellStyle: { display: "flex", alignItems: "center" },
       field: "notes",
-      width: 220,
+      width: 260,
     },
     {
       headerName: "Destination",
       field: "destination",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 150,
+      width: 170,
       cellRenderer: (params) => {
         return (
           <div className="flex justify-center items-center h-full w-full">
@@ -189,13 +309,13 @@ function NotesReport() {
     {
       headerName: "Pax",
       field: "pax",
-      width: 100,
+      width: 120,
     },
     {
       headerName: "Status",
       field: "status",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 150,
+      width: 170,
       cellRenderer: (params) => {
         return (
           <div className="flex justify-center items-center h-full w-full">
@@ -215,7 +335,7 @@ function NotesReport() {
     {
       headerName: "Assigned To",
       field: "assignedTo",
-      width: 140,
+      width: 170,
     }
   ]);
 
@@ -240,7 +360,7 @@ function NotesReport() {
   };
 
   const quickFilter = () => {
-    gridApi.setGridOption("quickFilterText", search);
+    gridApi.setQuickFilter(search);
   };
 
   const defaultColDef = {
@@ -254,9 +374,10 @@ function NotesReport() {
     width: 191,
     tooltipField: "name",
   };
+  
   return (
-    <div className="h-full">
-      <div className="flex justify-between items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
+    <div className="h-full flex flex-col">
+      <div className="flex-shrink-0 flex justify-between items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Notes Report </div>
         <div className="flex justify-center  w-[100%] sm:w-[40%] items-center gap-3 h-full">
           <div className="custom-date-picker">
@@ -287,11 +408,8 @@ function NotesReport() {
         </div>
       </div>
 
-      <div className="h-full w-full">
-        <div
-          className="ag-theme-quartz"
-          style={{ height: "100%", width: "100%" }}
-        >
+      <div className="flex-grow">
+        <div className="ag-theme-quartz" style={{ height: "100%", width: "100%" }}>
           <AgGridReact
             onGridReady={onGridReady}
             columnDefs={column}
@@ -300,7 +418,6 @@ function NotesReport() {
             enableBrowserTooltips={true}
             pagination={true}
             rowHeight={70}
-            domLayout="autoHeight" 
           />
         </div>
       </div>

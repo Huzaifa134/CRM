@@ -188,7 +188,7 @@ function Campagins() {
     tooltipField: "name",
   };
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Campagins </div>
         <div className="flex justify-center items-center gap-3 h-full">
@@ -220,7 +220,7 @@ function Campagins() {
         </div>
       </div>
 
-      <div className="h-full w-full overflow-x-auto">
+      <div className="flex-grow">
         <div
           className="ag-theme-quartz h-full w-[1200px] lg:w-full"
         >
