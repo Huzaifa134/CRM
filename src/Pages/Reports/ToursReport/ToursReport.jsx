@@ -195,7 +195,7 @@ function ToursReport() {
     {
       headerName: "Package",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 420,
+      width: 500,
       cellRenderer: (params) => {
         return (
           <div className="flex flex-col">
@@ -215,7 +215,7 @@ function ToursReport() {
     {
       headerName: "Client",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 420,
+      width: 500,
       cellRenderer: (params) => {
         return (
           <div className="flex flex-col">
@@ -236,7 +236,7 @@ function ToursReport() {
       headerName: "Status",
       field: "status",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 150,
+      width: 190,
       cellRenderer: (params) => {
         return (
           <div className="flex justify-center items-center h-full w-full">
@@ -251,7 +251,7 @@ function ToursReport() {
       headerName: "Assigned",
       field: "city",
       cellStyle: { display: "flex", alignItems: "center" },
-      width: 150,
+      width: 190,
       cellRenderer: (params) => {
         return (
           <div className="cursor-pointer flex flex-col justify-center mt-2">
@@ -295,11 +295,11 @@ function ToursReport() {
       display: "flex",
       alignItems: "center",
     },
-    width: 191,
+    width: 190,
     tooltipField: "name",
   };
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       <div className="flex justify-between text-sm items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Tours Report </div>
         <div className="flex justify-center   items-center gap-3 h-full">
@@ -397,7 +397,7 @@ function ToursReport() {
         </div>
       </div>
 
-      <div className="h-full w-full">
+      <div className="flex-grow">
         <div
           className="ag-theme-quartz"
           style={{ height: "100%", width: "100%" }}

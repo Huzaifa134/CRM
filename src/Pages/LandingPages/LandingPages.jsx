@@ -242,7 +242,7 @@ function LandingPages() {
     tooltipField: "name",
   };
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Landing Pages </div>
         <div className="flex justify-center items-center gap-3 h-full">
@@ -266,7 +266,7 @@ function LandingPages() {
         </div>
       </div>
 
-      <div className="h-full w-full overflow-x-auto">
+      <div className="flex-grow">
         <div
           className="ag-theme-quartz lg:w-full h-full w-[1400px]"
         >

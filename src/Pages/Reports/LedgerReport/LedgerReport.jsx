@@ -574,7 +574,7 @@ function LedgerReport() {
     tooltipField: "name",
   };
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       <div className="flex justify-between items-center h-20 gap-2 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Ledger Report </div>
         <div className="flex justify-center items-center gap-3 h-full">
@@ -622,7 +622,7 @@ function LedgerReport() {
         </div>
       </div>
 
-      <div className="h-full w-full">
+      <div className="flex-grow">
         <div
           className="ag-theme-quartz"
           style={{ height: "100%", width: "100%" }}
@@ -634,7 +634,6 @@ function LedgerReport() {
             defaultColDef={defaultColDef}
             enableBrowserTooltips={true}
             pagination={true}
-            domLayout="autoHeight" 
           />
         </div>
       </div>

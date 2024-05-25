@@ -26,7 +26,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const Clients = () => {
   const [able, setAble] = useState(false);
   const [search, setSearch] = useState("");
-  const [row, setRow] = useState();
+  // const [row, setRow] = useState();
   const [open, setOpen] = useState(false);
   const [gridApi, setGridApi] = useState(null);
   const [stat, setStat] = useState("");
@@ -35,6 +35,24 @@ const Clients = () => {
   const [id, setId] = useState("");
   const [showDOBDate, setShowDOBDate] = useState(dayjs());
   const [showMADate, setShowMADate] = useState(dayjs());
+
+  const row = [
+    {
+      name: "ajay gupta",
+      mobileNum: "09932901938",
+      email: "ajaygupta@travelzone.co.in",
+      city: "",
+      Status: "Active",
+      By: "TravBizz",
+    },
+    {
+      Name: "ajay gupta",
+      Mobile: "09932901938",
+      email: "ajaygupta@travelzone.co.in",
+      Status: "Active",
+      By: "TravBizz",
+    },
+  ]
 
   const [fields, setField] = useState({
     title: "DEFAULT",
@@ -262,16 +280,16 @@ const Clients = () => {
     tooltipField: "name",
   };
 
-  useEffect(() => {
-    const getdata = () => {
-      axios
-        .get(`${BASE_URL}api/v1/client`)
-        .then((response) => {
-          setRow(response.data.reverse());
-        });
-    };
-    getdata();
-  }, [reload]);
+  // useEffect(() => {
+  //   const getdata = () => {
+  //     axios
+  //       .get(`${BASE_URL}api/v1/client`)
+  //       .then((response) => {
+  //         setRow(response.data.reverse());
+  //       });
+  //   };
+  //   getdata();
+  // }, [reload]);
 
   return (
     <div className="h-full">

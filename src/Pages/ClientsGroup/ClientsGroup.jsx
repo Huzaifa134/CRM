@@ -117,11 +117,12 @@ function ClientsGroup() {
     {
       headerName: "Name",
       field: "group_name",
+      width:250
     },
     {
       headerName: "Description",
       field: "description",
-      width: 350,
+      width: 400,
     },
     {
       headerName: "Subscribers",
@@ -141,7 +142,7 @@ function ClientsGroup() {
       field: "status",
       sortable: false,
       filter: false,
-      width: 150,
+      width: 220,
       cellRenderer: (params) => {
         return (
           <div className="flex items-center justify-center w-full h-full">
@@ -159,6 +160,7 @@ function ClientsGroup() {
     {
       headerName: "By",
       field: "by",
+      width:200,
       cellRenderer: (params) => {
         return (
           <div className="flex items-center justify-start gap-2 w-full h-full">
@@ -173,7 +175,7 @@ function ClientsGroup() {
     {
       headerName: "Date",
       field: "date",
-      width: 170,
+      width: 220,
     },
     {
       width: 50,
@@ -219,7 +221,7 @@ function ClientsGroup() {
     tooltipField: "name",
   };
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Clients Group </div>
         <div className="flex justify-center items-center gap-3 h-full">
@@ -255,7 +257,7 @@ function ClientsGroup() {
         </div>
       </div>
 
-      <div className="h-full w-full">
+      <div className="flex-grow">
         <div
           className="ag-theme-quartz"
           style={{ height: "100%", width: "100%" }}

@@ -94,33 +94,33 @@ export default function Dashboard() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <main className="dashboard-container">
           <article data-type="todaysqueries" className='dashboard-card dashboard-data' >
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-violet-600' />Today's Queries</h2>
-            <p style={{ color: "#4a4a69"}}>0</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-[#0cb5b5]' />Today's Queries</h2>
+            <p style={{ color: "#0cb5b5"}}>0</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="totalqueries" className='dashboard-card dashboard-data'>
             <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-violet-600' /> Total Queries</h2>
-            <p style={{ color: "#4a4a69"}}>2033</p>
+            <p style={{ color: "#655be6"}}>2033</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="proposal" className='dashboard-card dashboard-data'>
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-violet-600' />Proposal Sent</h2>
-            <p style={{ color: "#4a4a69"}}>30</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-[#0f1f3e]' />Proposal Sent</h2>
+            <p style={{ color: "#0f1f3e"}}>30</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="proconf" className='dashboard-card dashboard-data'>
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-violet-600' />Total Pro. Conf</h2>
-            <p style={{ color: "#4a4a69"}}>248</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-[#cc00a9]' />Total Pro. Conf</h2>
+            <p style={{ color: "#cc00a9"}}>248</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="confirmed" className='dashboard-card dashboard-data'>
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-violet-600' />Total Confirmed</h2>
-            <p style={{marginLeft: "-50px" , color: "#4a4a69"}}>1002</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-[#6c757d]' />Total Confirmed</h2>
+            <p style={{marginLeft: "-50px" , color: "#6c757d"}}>1002</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="lost" className='dashboard-card dashboard-data'>
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-violet-600' />Total Lost</h2>
-            <p style={{ color: "#4a4a69"}}>25</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-[#f9392f]' />Total Lost</h2>
+            <p style={{ color: "#f9392f"}}>25</p>
             <a href='#'><span>Open</span></a>
           </article>
 
@@ -222,23 +222,23 @@ export default function Dashboard() {
             </div>
 
             <div>
-              <p>
+              <p style={{backgroundColor:"#d2f1ff"}}>
                 <span style={{fontWeight: "600" , color: "#4a4a69"}}>This Month Sales</span>
                 <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.monthlySales)}</span>
               </p>
-              <p>
+              <p style={{backgroundColor:"#d2ffc1"}}>
                 <span style={{fontWeight: "600" , color: "#4a4a69"}} >This Month Collections</span>
                 <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.monthlyCollections)}</span>
               </p>
-              <p>
+              <p style={{backgroundColor:"#ffe1e1"}}>
                 <span style={{fontWeight: "600" , color: "#4a4a69"}} >Total Pending Collection</span>
                 <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.pendingCollections)}</span>
               </p>
-              <p>
+              <p style={{backgroundColor:"#ffeeb3"}}>
                 <span style={{fontWeight: "600" , color: "#4a4a69"}} >Total Supplier Pending</span>
                 <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.totalSupplierPending)}</span>
               </p>
-              <p>
+              <p style={{backgroundColor:"#eee1ff"}}>
                 <span style={{fontWeight: "600" , color: "#4a4a69"}} >This Month Expense</span>
                 <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.monthlyExpense)}</span>
               </p>
@@ -319,8 +319,8 @@ export default function Dashboard() {
                     <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                       <TableCell component="th" scope="row">{i + 1}</TableCell>
                       <TableCell>{row.name}</TableCell>
-                      <TableCell align='right'>{row.assigned}</TableCell>
-                      <TableCell align='right' sx={{ backgroundColor: '#bbdefb' }}>{row.confirmed}</TableCell>
+                      <TableCell align='right' sx={{backgroundColor:"#f3f3f3"}}>{row.assigned}</TableCell>
+                      <TableCell align='right' sx={{ backgroundColor: '#e8fff1' }}>{row.confirmed}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -348,8 +348,8 @@ export default function Dashboard() {
                     <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                       <TableCell component="th" scope="row">{i + 1}</TableCell>
                       <TableCell>{row.name}</TableCell>
-                      <TableCell align='right'>{row.totalQueries}</TableCell>
-                      <TableCell align='right' sx={{ backgroundColor: '#bbdefb' }}>{row.confirmed}</TableCell>
+                      <TableCell align='right' sx={{backgroundColor:"#f3f3f3"}}>{row.totalQueries}</TableCell>
+                      <TableCell align='right' sx={{ backgroundColor: '#e8fff1' }}>{row.confirmed}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -378,7 +378,7 @@ export default function Dashboard() {
                       <TableCell component="th" scope="row">{row.id}</TableCell>
                       <TableCell>{row.name}</TableCell>
                       <TableCell>{row.amount}</TableCell>
-                      <TableCell sx={{ color: row.status === 'overdue' ? 'red' : 'black' }}>{row.status}</TableCell>
+                      <TableCell sx={{ color: row.status === 'overdue' ? 'red' : 'black' }}> <p className='bg-[red] text-white text-center rounded-md text-xs ' >{row.status}</p> </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

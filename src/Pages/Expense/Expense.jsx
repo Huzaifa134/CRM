@@ -12,7 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 // import "./ToursReport.css";
-import { FaSearch } from "react-icons/fa";
+import { FaPencilAlt, FaSearch } from "react-icons/fa";
 import { FaCalendarDays } from "react-icons/fa6";
 const data = [
   {
@@ -287,6 +287,11 @@ function Expense() {
     gridApi.setGridOption("quickFilterText", search);
   };
 
+
+  // table data
+
+
+
   const defaultColDef = {
     sortable: true,
     filter: true,
@@ -304,8 +309,8 @@ function Expense() {
        sm-max:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="flex justify-between mt-5">
 
-        <div className="font-bold"> Tours Report </div>
-        <button className="flex justify-center items-center gap-2 bg-[#1E415D] text-white px-3 py-2 w- rounded-md "> Add Expenses</button>
+        <div className="font-bold"> Expenses </div>
+        <button className="flex justify-center items-center gap-2 bg-[#1E415D] text-white px-3 py-2 w- rounded-md "> Add Expense</button>
         </div>
         <div>
       <div className="flex justify-start mt-2  items-center gap-3 h-full">
@@ -370,17 +375,13 @@ function Expense() {
         <option value="">All Types</option>
         <option value="">Bali</option>
         <option value="">India</option>
-        <option value=""></option>
-        <option value=""></option>
         </select>
         </div>
         <div>
-        <select name="" id="" className="py-2 px-5 text-center rounded-md border-2 border-gray-300">
+        <select name="" id="" className="p-2 px-5 text-center rounded-md border-2 border-gray-300">
         <option value="">All Status</option>
         <option value="">Bali</option>
         <option value="">India</option>
-        <option value=""></option>
-        <option value=""></option>
         </select>
         </div>
      
@@ -395,17 +396,47 @@ function Expense() {
 
       <div className="flex sm:flex-row flex-col justify-evenly px-2 py-1 items-center h-fit sm:h-[4.5rem]">
         <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#655be6] rounded-md">
-          <div className="text-white font-bold text-2xl">11</div>
-          <div className="text-white font-bold text-[0.6rem]">TOTAL TOURS</div>
+          <div className="text-white font-bold text-2xl">₹1,000</div>
+          <div className="text-white font-bold text-[0.6rem]">TOTAL AMOUNT</div>
         </div>
         <div className="sm:mt-0 mt-3  w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#0cb5b5] rounded-md">
-          <div className="text-white font-bold text-2xl">211</div>
-          <div className="text-white font-bold text-[0.6rem]">TOTAL COMPLEATED</div>
+          <div className="text-white font-bold text-2xl">₹1,000</div>
+          <div className="text-white font-bold text-[0.6rem]">PAID</div>
         </div>
         <div className="sm:mt-0 mt-3  w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#e45555] rounded-md">
-          <div className="text-white font-bold text-2xl">37</div>
-          <div className="text-white font-bold text-[0.6rem]">UPCOMING TOURS</div>
+          <div className="text-white font-bold text-2xl">₹0</div>
+          <div className="text-white font-bold text-[0.6rem]">PENDING</div>
         </div>
+      </div>
+
+
+    <div className="px-4">
+      <table className="w-full">
+        <tr className="w-full">
+          <td className="border-[1px] border-[#c7d3db] bg-[#f5f7f9] p-2 px-3 text-sm font-semibold text-gray-600">ID</td>
+          <td className="border-[1px] border-[#c7d3db] bg-[#f5f7f9] p-2 px-3 text-sm font-semibold text-gray-600 w-[200px]">Type</td>
+          <td className="border-[1px] border-[#c7d3db] bg-[#f5f7f9] p-2 px-3 text-sm font-semibold text-gray-600 w-[150px]">Amount</td>
+          <td className="border-[1px] border-[#c7d3db] bg-[#f5f7f9] p-2 px-3 text-sm font-semibold text-gray-600 w-[500px]">Remark</td>
+          <td className="border-[1px] border-[#c7d3db] bg-[#f5f7f9] p-2 px-3 text-sm font-semibold text-gray-600">Payment Date</td>
+          <td className="border-[1px] border-[#c7d3db] bg-[#f5f7f9] p-2 px-3 text-sm font-semibold text-gray-600 w-[20px]">Status</td>
+          <td className="border-[1px] border-[#c7d3db] bg-[#f5f7f9] p-2 px-3 text-sm font-semibold text-gray-600 w-[15px]"></td>
+        </tr>
+        <tr className="w-full hover:bg-[#f5f7f9]">
+          <td className="border-[1px] border-[#c7d3db] p-2 px-3 text-sm font-semibold ">100073</td>
+          <td className="border-[1px] border-[#c7d3db] p-2 px-3 text-sm font-semibold "><span className="bg-black text-white text-xs p-1 px-1 rounded-md">Printing</span></td>
+          <td className="border-[1px] border-[#c7d3db] p-2 px-3 text-sm  ">₹1000</td>
+          <td className="border-[1px] border-[#c7d3db] p-2 px-3 text-sm font-semibold "></td>
+          <td className="border-[1px] border-[#c7d3db] p-2 px-3 text-sm ">09/05/2024</td>
+          <td className="border-[1px] border-[#c7d3db] p-2 px-3 text-sm font-semibold "><span className="bg-[#46cd93] text-white text-xs p-1 px-3 rounded-md">Paid</span></td>
+          <td className="border-[1px] border-[#c7d3db] p-2 px-3 text-sm font-semibold "><div className="bg-white  rounded-full hover:bg-[#c7d3db] h-auto w-fit p-2 cursor-pointer"><FaPencilAlt className=" "/></div></td>
+        </tr>
+        <tr>
+          <td className="border-x-[1px] border-[#c7d3db] p-2 px-3 text-sm font-semibold text-gray-600" colSpan={7}></td>
+        </tr>
+        <tr>
+          <td colSpan={7} className="border-x-[1px] border-b-[1px] bg-[#f5f7f9] border-[#c7d3db] p-3 text-sm"><div className="text-sm bg-white p-2 border-[1px] w-[120px] text-center">Total Records:<span className="font-semibold">1</span></div></td>
+        </tr>
+      </table>
       </div>
 
       

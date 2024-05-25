@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import image from "../../../assets/images/lanscape.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaWhatsapp } from "react-icons/fa";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -11,9 +11,10 @@ import Modal from '@mui/material/Modal';
 import Popper from "@mui/material/Popper";
 import { FaDownload } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/images/logo.png"
 import { IoLogoWhatsapp } from "react-icons/io";
+import { Menu, MenuItem } from "@mui/material";
 
 
 
@@ -50,6 +51,10 @@ function Proposals() {
   const [modalContent, setModalContent] = useState("");
 
 
+
+  const openNew = Boolean(anchorEl);
+
+
   const navigate = useNavigate()
 
   const handleOpen = (content) => {
@@ -57,7 +62,10 @@ function Proposals() {
     setOpen(true);
   };
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setAnchorEl(null);
+    setOpen(false);
+  };
 
 
 
@@ -71,7 +79,7 @@ function Proposals() {
     </div>
     <hr />
 
-<div className="overflow-y-scroll h-[78vh]">
+<div className=" h-auto">
 
 
     <div className="p-3 mt-5">
@@ -137,7 +145,7 @@ function Proposals() {
         <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="text" />
       </div> */}
 
-      <div className='w-full'>
+      {/* <div className='w-full'>
         <p htmlFor="First Name" className='text-xs mb-1'>Validity</p>
         <input className='outline-none border-l-4 border-l-[#ff6a6a] focus:border-l-[#a01616] border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md' type="date" />
       </div>
@@ -161,7 +169,7 @@ function Proposals() {
        <div className='w-full mt-4'>
            <p htmlFor="First Name" className='text-xs mb-1'>About Package</p>
            <textarea className="outline-none border-[1px] px-2 w-full p-1 focus:border-black transition-all rounded-md" name="" id="" ></textarea>
-      </div>
+      </div> */}
 
       <hr className="mt-6"/>
 
@@ -533,6 +541,22 @@ const sharePublicly = <div>
         </div>
       </div>
       </div>
+
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={openNew}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <Link to={"/queries/proposalSent/viewProposal"}><MenuItem onClick={handleClose} sx={{color: "black" , fontWeight: "600" , fontSize: "14px"}}>Actions</MenuItem></Link>
+        <Link to={"https://api.whatsapp.com/send?text=https://travbizz.website/crm/sharepackage/104241/dubai-trip-mr-shikher-.html&phone=+919619756981"} target="target"><MenuItem onClick={handleClose} sx={{color: "gray" , fontWeight: "600" , fontSize: "14px"}}><FaWhatsapp className="mr-1"/> WhatsApp</MenuItem></Link>
+        <MenuItem onClick={() => {handleOpen(createItineraryModal)} } sx={{color: "gray" , fontWeight: "600" , fontSize: "14px"}}>Edit Itinerary</MenuItem>
+        <MenuItem onClick={handleClose} sx={{color: "gray" , fontWeight: "600" , fontSize: "14px"}}>Duplicate</MenuItem>
+        <MenuItem onClick={handleClose} sx={{color: "gray" , fontWeight: "600" , fontSize: "14px"}}>Archive</MenuItem>
+      </Menu>
 
       <Modal
         open={open}
