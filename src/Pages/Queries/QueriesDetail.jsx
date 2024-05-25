@@ -176,14 +176,12 @@ function AddQueryForm({ closeDrawer }) {
         <TextField label="Client name" variant="outlined" size='small' required sx={{ flex: 1 }} />
       </FormGroup>
 
-      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
-      {(type === 'agent' || type === 'corporate') && (
-      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
-        <TextField label="Company" variant="outlined" size='small' required />
-        <TextField label="GST" variant="outlined" size='small' required type='email' />
-      </FormGroup>
-    )}
-    </FormGroup>
+      {type === 'agent' || type === 'corporate' ? (
+        <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+          <TextField label="Company" variant="outlined" size='small' required />
+          <TextField label="GST" variant="outlined" size='small' required type='email' />
+        </FormGroup>
+      ) : null}
 
   
       <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>

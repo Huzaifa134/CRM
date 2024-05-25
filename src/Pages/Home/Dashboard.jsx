@@ -26,6 +26,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import "./dashboard.css"
+import { RiExternalLinkFill } from 'react-icons/ri';
 
 const theme = createTheme({
   components: {
@@ -64,7 +65,7 @@ const theme = createTheme({
           },
           "& .MuiTableRow-root th": {
             color: "#fff",
-            backgroundColor: "#0d47a1",
+            backgroundColor: "#4a4a69",
           }
         }
       }
@@ -93,46 +94,46 @@ export default function Dashboard() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <main className="dashboard-container">
           <article data-type="todaysqueries" className='dashboard-card dashboard-data' >
-            <h2>Today's Queries</h2>
-            <p>0</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-violet-600' />Today's Queries</h2>
+            <p style={{ color: "#4a4a69"}}>0</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="totalqueries" className='dashboard-card dashboard-data'>
-            <h2>Total Queries</h2>
-            <p>2033</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-violet-600' /> Total Queries</h2>
+            <p style={{ color: "#4a4a69"}}>2033</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="proposal" className='dashboard-card dashboard-data'>
-            <h2>Proposal Sent</h2>
-            <p>30</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-violet-600' />Proposal Sent</h2>
+            <p style={{ color: "#4a4a69"}}>30</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="proconf" className='dashboard-card dashboard-data'>
-            <h2>Total Pro. Conf</h2>
-            <p>248</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-violet-600' />Total Pro. Conf</h2>
+            <p style={{ color: "#4a4a69"}}>248</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="confirmed" className='dashboard-card dashboard-data'>
-            <h2>Total Confirmed</h2>
-            <p>1002</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-violet-600' />Total Confirmed</h2>
+            <p style={{marginLeft: "-50px" , color: "#4a4a69"}}>1002</p>
             <a href='#'><span>Open</span></a>
           </article>
           <article data-type="lost" className='dashboard-card dashboard-data'>
-            <h2>Total Lost</h2>
-            <p>25</p>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-violet-600' />Total Lost</h2>
+            <p style={{ color: "#4a4a69"}}>25</p>
             <a href='#'><span>Open</span></a>
           </article>
 
           <article className="dashboard-card dashboard-grid-item-col2 dashboard-create">
             <div>
-              <p>Good Morning</p>
+              <p style={{ color: "#38cab3"}}>Good Morning</p>
               <p>Time to Travel</p>
               <p>{(new Date()).toDateString()}</p>
             </div>
 
             <div>
-              <Btn handleClick={toggleDrawer('client', true)}>
-                <PersonAddAltIcon fontSize='small' />
+              <Btn style={{ backgroundColor: "gray!important"}} handleClick={toggleDrawer('client', true)}>
+                <PersonAddAltIcon fontSize='small'/>
                 Client
               </Btn>
               <Drawer anchor='right' open={drawerOpen['client']} onClose={toggleDrawer('client', false)}>
@@ -173,7 +174,7 @@ export default function Dashboard() {
           </article>
 
           <article className="dashboard-card dashboard-grid-item-col2 dashboard-task">
-            <h2 className="dashboard-card-heading">
+            <h2 className="dashboard-card-heading text-[#4a4a69]">
               Task/Followups
             </h2>
 
@@ -183,7 +184,7 @@ export default function Dashboard() {
           </article>
 
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-tours'>
-            <h2 className="dashboard-card-heading">
+            <h2 className="dashboard-card-heading text-[#4a4a69]">
               Today's tours
             </h2>
 
@@ -205,47 +206,47 @@ export default function Dashboard() {
           </article>
 
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-report'>
-            <h2 className="dashboard-card-heading">
+            <h2 className="dashboard-card-heading text-[#4a4a69]">
               Finance Report
             </h2>
 
             <div>
-              <p>
+              <p className='flex border-[1px] flex-col-reverse bg-[#f9f9f9]'>
                 <span>2024 Sales</span>
-                <span>{numberFormatter.format(financialReport.yearlySales)}</span>
+                <span style={{color: "#4a4a69"}}>{numberFormatter.format(financialReport.yearlySales)}</span>
               </p>
-              <p>
+              <p className='flex border-[1px] flex-col-reverse bg-[#f9f9f9]'>
                 <span>2024 Collections</span>
-                <span>{numberFormatter.format(financialReport.yearlyCollections)}</span>
+                <span style={{color: "#4a4a69"}}>{numberFormatter.format(financialReport.yearlyCollections)}</span>
               </p>
             </div>
 
             <div>
               <p>
-                <span>This Month Sales</span>
-                <span>{numberFormatter.format(financialReport.monthlySales)}</span>
+                <span style={{fontWeight: "600" , color: "#4a4a69"}}>This Month Sales</span>
+                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.monthlySales)}</span>
               </p>
               <p>
-                <span>This Month Collections</span>
-                <span>{numberFormatter.format(financialReport.monthlyCollections)}</span>
+                <span style={{fontWeight: "600" , color: "#4a4a69"}} >This Month Collections</span>
+                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.monthlyCollections)}</span>
               </p>
               <p>
-                <span>Total Pending Collection</span>
-                <span>{numberFormatter.format(financialReport.pendingCollections)}</span>
+                <span style={{fontWeight: "600" , color: "#4a4a69"}} >Total Pending Collection</span>
+                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.pendingCollections)}</span>
               </p>
               <p>
-                <span>Total Supplier Pending</span>
-                <span>{numberFormatter.format(financialReport.totalSupplierPending)}</span>
+                <span style={{fontWeight: "600" , color: "#4a4a69"}} >Total Supplier Pending</span>
+                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.totalSupplierPending)}</span>
               </p>
               <p>
-                <span>This Month Expense</span>
-                <span>{numberFormatter.format(financialReport.monthlyExpense)}</span>
+                <span style={{fontWeight: "600" , color: "#4a4a69"}} >This Month Expense</span>
+                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.monthlyExpense)}</span>
               </p>
             </div>
           </article>
 
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-chart'>
-            <h2 className="dashboard-card-heading">
+            <h2 className="dashboard-card-heading text-[#4a4a69]">
               This year queries
             </h2>
 
@@ -257,15 +258,18 @@ export default function Dashboard() {
                   scaleType: 'band',
                 },
               ]}
-              series={[{ data: yearQueries, color: '#0d47a1' }]}
+              series={[{ data: yearQueries, color: 'blueviolet' }]}
               height={300}
             />
           </article>
 
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-chart'>
-            <h2 className="dashboard-card-heading">
+            <h2 className="dashboard-card-heading text-[#4a4a69]">
               Queries by status
             </h2>
+
+
+       
 
             <PieChart
               series={[
@@ -292,18 +296,19 @@ export default function Dashboard() {
               height={300}
               slotProps={{ legend: { hidden: true } }}
             />
+    
           </article>
 
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-sales'>
-            <h2 className="dashboard-card-heading">
+            <h2 className="dashboard-card-heading text-[#4a4a69]">
               Sales Rep
             </h2>
 
             <TableContainer sx={{ marginTop: '1.5rem', maxHeight: '300px' }}>
-              <Table size='small' aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>#</TableCell>
+              <Table size='small' aria-label="simple table" >
+                <TableHead >
+                  <TableRow >
+                    <TableCell >#</TableCell>
                     <TableCell>Name</TableCell>
                     <TableCell align='right'>Assigned</TableCell>
                     <TableCell align='right'>Confirmed</TableCell>
@@ -324,7 +329,7 @@ export default function Dashboard() {
           </article>
 
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-sales'>
-            <h2 className="dashboard-card-heading">
+            <h2 className="dashboard-card-heading text-[#4a4a69]">
               Top Lead Sources
             </h2>
 
@@ -353,7 +358,7 @@ export default function Dashboard() {
           </article>
 
           <article className="dashboard-card dashboard-grid-item-col2 dashboard-payment">
-            <h2 className="dashboard-card-heading">
+            <h2 className="dashboard-card-heading text-[#4a4a69]">
               Payment Collection
             </h2>
 
@@ -389,7 +394,7 @@ export default function Dashboard() {
 
 function Btn({ handleClick, children, className }) {
   return (
-    <Button onClick={handleClick} variant='contained' sx={{ backgroundColor: '#0d47a1', '&:hover': { backgroundColor: '#0d47a1c0' } }} className={className} size='large'>
+    <Button onClick={handleClick} variant='contained' sx={{ backgroundColor: '#12344d', color:"white" , fontWeight: "600" , '&:hover': { backgroundColor: '#1699dd' } }} className={className} size='large'>
       {children}
     </Button>
   )

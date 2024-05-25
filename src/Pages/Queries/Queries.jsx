@@ -8,7 +8,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaFilter, FaSearch, FaWhatsapp } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import CloseIcon from "@mui/icons-material/Close";
@@ -29,6 +29,8 @@ import PostAddIcon from '@mui/icons-material/PostAdd';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import { IoClose } from "react-icons/io5";
+import CenterModal from "./ViewProposal/CenterModal";
 
 
 
@@ -59,7 +61,60 @@ function Queries() {
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("client");
   const [activeButton, setActiveButton] = useState('');
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
+
+  // dropdownStyles
+  const dropdownStyles = {
+    maxHeight: isDropdownVisible ? '100px' : '0',
+    marginTop: !isDropdownVisible ? "-15px" : "0",
+    opacity: isDropdownVisible ? '1' : '0',
+    overflow: 'hidden',
+    transition: '300ms',
+  };
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const handleOpenModal = (content) => {
+    console.log("Opening modal with content:", content);
+    setModalContent(content);
+    setModalOpen(true);
+  };
+  
+
+
+
+  
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+
+  const importModal = <div>
+     <div className='flex justify-between text-2xl font-semibold bg-[#fcfdfd] p-2 items-center w-[400px]'>
+      <h3>Import</h3>
+      <IoClose className='cursor-pointer font-bold ' onClick={handleCloseModal}/>
+    </div>
+    <hr />
+
+    <div className="p-5">
+      <p className="text-xs mt-4">Import Excel File</p>
+      <input type="file" className="border-[1px] p-1 rounded-md w-full mt-2" />
+    </div>
+    <hr className="mt-8 mx-3"/>
+    <div className='flex p-5 justify-end items-center gap-2 mt-2'>
+        <button className='bg-[#12344d] hover:bg-[#2a4355] p-1 rounded-md px-3 text-white font-semibold text-sm'>Import</button>
+      </div>
+  </div>
+
+
+   // toggleDropdown
+
+   const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
 
 
 // type change function
@@ -71,10 +126,25 @@ function Queries() {
   // drawer btn function 
   function Btn({ handleClicked, children, className }) {
     return (
-      <Button onClick={handleClicked} variant='contained' sx={{ backgroundColor: '#0d47a1', '&:hover': { backgroundColor: '#0d47a1c0' } }} className={className} size='medium'>
+      <Button 
+        onClick={handleClicked}  
+        className={className} 
+        size='medium'
+        sx={{ 
+          backgroundColor: '#000', 
+          color: '#fff',
+         
+          '&:hover': {
+            backgroundColor: '#333', // Optional: Slightly lighter shade for hover effect
+          },
+          textTransform: 'none', // Disable uppercase transformation
+          boxShadow: 'none', // Remove default box-shadow
+        }}
+        variant="contained" // Ensures the button has a solid background
+      >
         {children}
       </Button>
-    )
+    );
   }
 
 
@@ -96,6 +166,9 @@ function Queries() {
       </Button>
     )
   }
+
+
+
   
   function AddQueryForm({ closeDrawer }) {
     return (
@@ -132,15 +205,12 @@ function Queries() {
           <TextField label="Client name" variant="outlined" size='small' required sx={{ flex: 1 }} />
         </FormGroup>
 
-        <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
-        {(type === 'agent' || type === 'corporate') && (
+       {type === 'agent' || type === 'corporate' ? (
         <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
           <TextField label="Company" variant="outlined" size='small' required />
           <TextField label="GST" variant="outlined" size='small' required type='email' />
         </FormGroup>
-      )}
-      </FormGroup>
-
+      ) : null}
     
         <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
           <TextField label="Destinations" variant="outlined" size='small' required />
@@ -248,7 +318,7 @@ function Queries() {
   
         <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
           <BtnOutlined handleClick={closeDrawer}>Cancel</BtnOutlined>
-          <Btn handleClick={() => { }}>Save</Btn>
+          <Btn variant='contained' sx={{ backgroundColor: '#000', '&:hover': { backgroundColor: '#0d47a1c0' } }} size='medium' handleClick={() => { }}>Save</Btn>
         </FormGroup>
       </form>
     )
@@ -323,10 +393,7 @@ function Queries() {
 
 
 
-
-
-
-
+ 
 
 
 
@@ -848,55 +915,97 @@ function Queries() {
       .ag-row{}
       
       `}</style>
+
+
+<div>
       <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#f5f7f9]">
-        <div className="font-[700]"> Queries </div>
-
-
-        
-
-
-
-
-
-        <div className="flex justify-center  sm:w-[65%] md:w-[55%] lg:w-[43%]  w-[90%] items-center gap-3 h-full">
+        <div className="font-[700] flex-shrink-0">Queries</div>
+        <div className="flex justify-end items-center gap-3 h-full w-full sm:w-auto">
           <input
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
               quickFilter(e.target.value);
             }}
-            className="border border-slate-300 h-[80%] px-2 rounded-md text-sm w-[60%] focus:outline-none focus:border focus:border-black"
+            className="border border-slate-300 h-[80%] px-2 rounded-md text-sm flex-grow max-w-[300px] focus:outline-none focus:border focus:border-black"
             placeholder="Search by anything...."
           />
-          {/* <div className="w-[40%] h-[80%]">
-            <button
-              onClick= {handleClick}
-              className="border w-[100%] border-slate-300 h-full bg-[#1d3f5a] text-white  text-[0.8rem] font-[700] rounded-md px-2 "
-            >
-              <span className="sm:block hidden">Add Queries</span>
-              <span className="sm:hidden block">
-                <AddRoundedIcon />
-              </span>
-            </button>
-          </div> */}
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-          <Btn handleClicked={toggleDrawer('query', true)}>
-                <PostAddIcon fontSize='small' />
-                Add Queries
-              </Btn>
-                   
-              <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
-                <div className="drawer">
-                  <h2 className='dashboard-card-heading'>Create Query</h2>
 
-                  <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
-                </div>
-              </Drawer>
-          </LocalizationProvider>
 
+<LocalizationProvider dateAdapter={AdapterDayjs}>
+
+<Btn handleClicked={toggleDrawer('query', true)}>
+      Add Queries
+    </Btn>
+         
+    <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
+      <div className="drawer">
+        <h2 className='dashboard-card-heading'>Create Query</h2>
+
+        <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
+      </div>
+    </Drawer>
+</LocalizationProvider>
+
+
+
+
+
+          <button className="border-[1px] px-2 py-2 w-36 border-gray-400 rounded-md text-black flex-shrink-0 flex items-center justify-center h-[80%]">Load Leads</button>
+          <select onChange={(e) => {
+    if (e.target.value === "import") {
+      handleOpenModal(importModal);
+    }
+  }} value="Options" className="border-[1px] px-2 py-2 border-gray-400 rounded-md text-black bg-transparent w-24 flex-shrink-0 h-[80%]">
+          <option value="default" className="hidden">Options</option>
+            <option value="">Download Excel Format</option>
+            <option value="import">Import Excel</option>
+            <option value="">Export Data</option>
+          </select>
+          <button
+            className="border-[1px] px-2 py-2 w-24 border-gray-400 rounded-md text-black flex-shrink-0 h-[80%] flex items-center justify-center gap-1"
+            onClick={toggleDropdown}
+          >
+            <FaFilter className="text-sm" /> Filter
+          </button>
         </div>
       </div>
+
+      {/* dropdown div */}
+      <div style={dropdownStyles} className="w-full bg-[#f5f7f9] p-2 flex gap-2 px-3 dropdown-Div ">
+        <input type="date" placeholder="from" className="bg-[#e9ecef] p-1 py-3 rounded-md outline-none focus:border-black border-[1px] border-gray-300 transition-all" />
+        <input type="date" placeholder="from" className="bg-[#e9ecef] p-1 py-3 rounded-md outline-none focus:border-black border-[1px] border-gray-300 transition-all" />
+        <input type="text" className="p-1 px-3 rounded-md outline-none focus:border-black border-[1px] border-gray-300 transition-all" placeholder="Search by ID, name, email, mobile" />
+        <select className="p-1 py-3 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
+          <option>All User</option>
+          <option>User Panal</option>
+          <option>Trishti Samar</option>
+          <option>Suriya ji</option>
+        </select>
+        <select className="p-1 py-3 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
+          <option>All Sourse</option>
+          <option>Advertizment</option>
+          <option>Agent</option>
+          <option>Akbar Travel</option>
+        </select>
+        <select className="p-1 py-3 rounded-md outline-none focus:border-black border-[1px] text-gray-500 border-gray-300 transition-all">
+          <option>All</option>
+          <option>Client</option>
+          <option>Agent</option>
+          <option>Corporate</option>
+        </select>
+        <button className="border border-slate-300 bg-[#1d3f5a] h-auto items-center text-white text-[0.8rem] font-[700] rounded-md px-2 py-2 flex-shrink-0">
+          <span className="flex justify-center items-center gap-1 px-2"><FaSearch />Search</span>
+        </button>
+        <button className="border border-slate-300 bg-[#1d3f5a] h-auto items-center text-white text-[0.8rem] font-[700] rounded-md px-2 py-2 flex-shrink-0">
+          <span className="flex justify-center items-center gap-1 px-2">All</span>
+        </button>
+      </div>
+    </div>
+
+
+     
 
       
 
@@ -1435,6 +1544,12 @@ function Queries() {
           </div>
         </div>
         </Menu> */}
+
+
+
+<CenterModal open={modalOpen} onClose={handleCloseModal} data={modalContent}/>
+
+
 
         <style jsx>{`
         .custom-checkbox .ag-selection-checkbox {
