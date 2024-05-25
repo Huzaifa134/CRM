@@ -4,6 +4,7 @@
 }
 
 
+
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -17,3 +18,18 @@
       transform: scale(1);
     }
   }
+
+
+
+  .item.active .arrow.top,
+.item.active .arrow.bottom {
+background-color: #555555;
+/* border-color: #cecece; */
+}
+
+.item.active .content {
+background-color: none;
+}
+
+
+ 

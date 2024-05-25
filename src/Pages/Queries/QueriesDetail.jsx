@@ -55,8 +55,7 @@ import Editor from "../../Components/Editor";
 import ReactDOMServer from 'react-dom/server';
 import logo from "../../assets/images/logo.png"
 import CenterModal from "./ViewProposal/CenterModal";
-
-
+import "./ActiveAnimation.css"
 
 
 
@@ -81,7 +80,7 @@ function QueriesDetail() {
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("");
   const [errors, setErrors] = useState({ name: null, helperTxt: null });
-  const [activeItem, setActiveItem] = useState(null);
+  // const [activeItem, setActiveItem] = useState(null);
 
 
 
@@ -111,7 +110,17 @@ function QueriesDetail() {
   
  
 
+// proposal  
+const [activeItem, setActiveItem] = useState(null);
 
+const handleItemClick = (index) => {
+  setActiveItem(index);
+};  
+const items = [
+  "New", "Active", "No Connect", "Hot Lead", 
+  "Proposal Sent", "Follow Up", "Confirmed", 
+  "Cancelled", "Invalid"
+];
 
   // const navigate = useNavigate()
 
@@ -753,7 +762,7 @@ function QueriesDetail() {
             </div>
           </div> */}
 
-<div className="items--container">
+{/* <div className="items--container">
       {["New", "Active", "No Connect", "Hot Lead", "Proposal Sent", "Follow Up", "Confirmed", "Cancelled", "Invalid"].map((item, index) => (
         <div className={`item hover:!cursor-pointer group ${activeItem === index ? 'active' : ''}`} key={index} onClick={() => handleItemClick(index)}>
           <div className={`arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} style={{ backgroundColor: activeItem === index ? 'yellow' : '' }} />
@@ -761,16 +770,26 @@ function QueriesDetail() {
           <div className={`arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} style={{ backgroundColor: activeItem === index ? 'yellow' : '' }} />
         </div>
       ))}
-      <style>
-        {`
-          /* Add this CSS directly in the JSX */
-          .item.active .arrow {
-            background-color: yellow;
-          }
-        `}
-      </style>
-    </div>
+    
+    </div> */}
+  
+  
 
+<div className="items--container">
+      {items.map((item, index) => (
+        <div 
+          key={index} 
+          className={`item hover:!cursor-pointer group ${activeItem === index ? 'active' : ''}`} 
+          onClick={() => handleItemClick(index)}
+        >
+          <div className={`arrow top group-hover:bg-[#cecece]  group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} />
+          <div className={`content ${activeItem === index ? 'active' : ''}`} style={{ color: activeItem === index ? '#cecece' : '' }}>
+            {item}
+          </div>
+          <div className={`arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} />
+        </div>
+      ))}
+    </div>
 
 
 
