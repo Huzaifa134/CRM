@@ -403,12 +403,7 @@ function Queries() {
 
   const navigate = useNavigate()
 
-  // calculate day
 
-  // const [fromDate, setFromDate] = useState("");
-  // const [toDate, setToDate] = useState("");
-  // const [days, setDays] = useState(0);
-  // const [nights, setNights] = useState(0);
 
 
   function goToProposals() {
@@ -416,26 +411,7 @@ function Queries() {
   }
 
 
-  // useEffect(() => {
-  //   setActiveButton(location.pathname);
-  //   if (fromDate && toDate) {
-  //     const from = new Date(fromDate);
-  //     const to = new Date(toDate);
-
-  //     // Calculate the difference in milliseconds
-  //     const difference = to.getTime() - from.getTime();
-
-  //     // Convert milliseconds to days
-  //     const daysDifference = Math.ceil(difference / (1000 * 3600 * 24));
-
-  //     const nightsDifference = Math.max(0, daysDifference - 1); // Ek din ka difference subtract karein
-
-  //     setDays(daysDifference);
-  //     setNights(nightsDifference);
-  //   } else {
-  //     setDays("");
-  //   }
-  // }, [fromDate, toDate , location.pathname]);
+ 
 
   //naviagte save
 
@@ -941,7 +917,7 @@ function Queries() {
          
     <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
       <div className="drawer">
-        <h2 className='dashboard-card-heading'>Create Query</h2>
+        <h2 className='dashboard-card-heading text-black'>Create Query</h2>
 
         <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
       </div>

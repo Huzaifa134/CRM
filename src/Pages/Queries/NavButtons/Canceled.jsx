@@ -915,7 +915,7 @@ function goToQueries() {
 
 <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
 <div className="drawer">
-  <h2 className='dashboard-card-heading'>Create Query</h2>
+  <h2 className='dashboard-card-heading text-black'>Create Query</h2>
 
 <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
 </div>
