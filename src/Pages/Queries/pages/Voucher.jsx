@@ -29,7 +29,7 @@ const Voucher = ( ) => {
             </td>
             <td className="border-[1px] border-[#dbdbdb] px-2">22-05-2024</td>
             <td className="border-[1px] border-[#dbdbdb] px-2">22-05-2024</td>
-            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]"><Link to={`/downloadVoucher`}>Download</Link></button></td>
+            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><Link to={`/downloadVoucher`}><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]">Download</button></Link></td>
           </tr>
 
           <tr className="w-full text-sm">
@@ -38,7 +38,7 @@ const Voucher = ( ) => {
             </td>
             <td className="border-[1px] border-[#dbdbdb] px-2">21-05-2024</td>
             <td className="border-[1px] border-[#dbdbdb] px-2">22-05-2024</td>
-            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]"><Link to={`/downloadVoucher`}>Download</Link></button></td>
+            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><Link to={`/downloadVoucher`}><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]">Download</button></Link></td>
           </tr>
 
           <tr className="w-full text-sm">
@@ -47,7 +47,7 @@ const Voucher = ( ) => {
             </td>
             <td className="border-[1px] border-[#dbdbdb] px-2">22-05-2024</td>
             <td className="border-[1px] border-[#dbdbdb] px-2">22-05-2024</td>
-            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]"><Link to={`/downloadVoucher`}>Download</Link></button></td>
+            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><Link to={`/downloadVoucher`}><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]">Download</button></Link></td>
           </tr>
 
           <tr className="w-full text-sm">
@@ -56,7 +56,7 @@ const Voucher = ( ) => {
             </td>
             <td className="border-[1px] border-[#dbdbdb] px-2">21-05-2024</td>
             <td className="border-[1px] border-[#dbdbdb] px-2">21-05-2024</td>
-            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]"><Link to={`/downloadVoucher`}>Download</Link></button></td>
+            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><Link to={`/downloadVoucher`}><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]">Download</button></Link></td>
           </tr>
 
           <tr className="w-full text-sm">
@@ -65,7 +65,7 @@ const Voucher = ( ) => {
             </td>
             <td className="border-[1px] border-[#dbdbdb] px-2">21-05-2024</td>
             <td className="border-[1px] border-[#dbdbdb] px-2">21-05-2024</td>
-            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]"><Link to={`/downloadVoucher`}>Download</Link></button></td>
+            <td className="border-[1px] border-[#dbdbdb] text-sm font-semibold px-2 text-center p-1"><Link to={`/downloadVoucher`}><button className="text-white px-2 p-1 rounded-md bg-[#005ee2]">Download</button></Link></td>
           </tr>
           
         </table>

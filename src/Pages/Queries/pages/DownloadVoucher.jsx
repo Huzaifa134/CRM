@@ -49,16 +49,61 @@ const DownloadVoucher = () => {
       <h2 className='text-[#09488b] font-semibold text-lg text-center pt-8'>Activity Voucher</h2>
       <h2 className='text-[#09488b] font-semibold text-3xl text-center pt-3'>Amazing Dubai Tour Mr. Abhishek Ji</h2>
 
-     <div className='flex justify-center'>
-        <table className='w-[97%]'>
-            <tr className='w-full bg-[#ff9933] rounded-3xl'>
-                <td className='p-2 font-semibold text-sm rounded-full text-white'>Date</td>
-                <td className='p-2 font-semibold text-sm rounded-full text-white'>Name</td>
-                <td className='p-2 font-semibold text-sm rounded-full text-white'>Time</td>
-                <td className='p-2 font-semibold text-sm rounded-full text-white'>End Time</td>
-                <td className='p-2 font-semibold text-sm rounded-full text-white'>Adult</td>
-                <td className='p-2 font-semibold text-sm rounded-full text-white'>Child</td>
-                <td className='p-2 font-semibold text-sm rounded-full text-white'>Confirmation No.</td>
+     <div className='flex justify-center mt-7'>
+        <table className='w-[97%] shadow-md'>
+            <tr className='w-full bg-[#ff9933] '>
+                <td className='p-2 font-semibold text-sm rounded-tl-lg text-white'>Date</td>
+                <td className='p-2 font-semibold text-sm text-white'>Name</td>
+                <td className='p-2 font-semibold text-sm text-white'>Time</td>
+                <td className='p-2 font-semibold text-sm text-white'>End Time</td>
+                <td className='p-2 font-semibold text-sm text-white'>Adult</td>
+                <td className='p-2 font-semibold text-sm text-white'>Child</td>
+                <td className='p-2 font-semibold text-sm text-white rounded-tr-lg'>Confirmation No.</td>
+            </tr>
+            <tr className='bg-white border-y-[1px]'>
+                <td className='p-2 font-semibold text-sm'>07-Jul-2024</td>
+                <td className='p-2 text-sm'>Kite Beach</td>
+                <td className='p-2 text-sm'>01:00 PM</td>
+                <td className='p-2 text-sm'>02:00 PM</td>
+                <td className='p-2 text-sm'>2</td>
+                <td className='p-2 text-sm'>0</td>
+                <td className='p-2 text-sm'></td>
+            </tr>
+            <tr className='bg-white border-y-[1px]'>
+                <td className='p-2 font-semibold text-sm'>06-Jul-2024</td>
+                <td className='p-2 text-sm'>Dubai Desert Safari</td>
+                <td className='p-2 text-sm'>01:00 PM</td>
+                <td className='p-2 text-sm'>02:00 PM</td>
+                <td className='p-2 text-sm'>2</td>
+                <td className='p-2 text-sm'>0</td>
+                <td className='p-2 text-sm'></td>
+            </tr>
+            <tr className='bg-white border-y-[1px]'>
+                <td className='p-2 font-semibold text-sm'>07-Jul-2024</td>
+                <td className='p-2 text-sm'>Dubai Museum</td>
+                <td className='p-2 text-sm'>01:00 PM</td>
+                <td className='p-2 text-sm'>02:00 PM</td>
+                <td className='p-2 text-sm'>2</td>
+                <td className='p-2 text-sm'>0</td>
+                <td className='p-2 text-sm'></td>
+            </tr>
+            <tr className='bg-white border-y-[1px]'>
+                <td className='p-2 font-semibold text-sm'>07-Jul-2024</td>
+                <td className='p-2 text-sm'>Dubai Museum</td>
+                <td className='p-2 text-sm'>01:00 PM</td>
+                <td className='p-2 text-sm'>02:00 PM</td>
+                <td className='p-2 text-sm'>2</td>
+                <td className='p-2 text-sm'>0</td>
+                <td className='p-2 text-sm'></td>
+            </tr>
+            <tr className='bg-white border-t-[1px]'>
+                <td className='p-2 font-semibold text-sm '>07-Jul-2024</td>
+                <td className='p-2 text-sm'>Kite Beach</td>
+                <td className='p-2 text-sm'>01:00 PM</td>
+                <td className='p-2 text-sm'>02:00 PM</td>
+                <td className='p-2 text-sm'>2</td>
+                <td className='p-2 text-sm'>0</td>
+                <td className='p-2 text-sm '></td>
             </tr>
         </table>
      </div>
