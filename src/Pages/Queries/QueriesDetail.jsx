@@ -46,16 +46,30 @@ import Modal from "@mui/material/Modal";
 import _ from "lodash";
 import { FaCalendarDays } from "react-icons/fa6";
 import { FaPerson } from "react-icons/fa6";
-import { MdOutlineReply, MdOutlineSmartphone } from "react-icons/md";
+import { MdModeEdit, MdOutlineReply, MdOutlineSmartphone } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import Menu from '@mui/material/Menu';
-import { Box } from "@mui/material";
+import { Box, Button, Drawer, FormControl, FormGroup, MenuItem } from "@mui/material";
 import { IoClose } from "react-icons/io5";
 import Editor from "../../Components/Editor";
 import ReactDOMServer from 'react-dom/server';
 import logo from "../../assets/images/logo.png"
 import CenterModal from "./ViewProposal/CenterModal";
+
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+
+
+// import { DatePicker } from "@mui/x-date-pickers";
+// import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import PostAddIcon from '@mui/icons-material/PostAdd';
+
+
+
 import "./ActiveAnimation.css"
+// import { DatePicker } from '@mui/x-date-pickers';
+
+
 
 
 
@@ -81,37 +95,41 @@ function QueriesDetail() {
   const [remarks, setRemarks] = useState("");
   const [type, setType] = useState("");
   const [errors, setErrors] = useState({ name: null, helperTxt: null });
-  // const [activeItem, setActiveItem] = useState(null);
-
-  const params = useParams()
-console.log(params.queryId);
-
-
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event , index) => {
-    setActiveItem(index);
-    setAnchorEl(event.currentTarget);
-  };
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState("");
-
-  const handleOpenModal = (content) => {
-    setModalContent(content);
-    setModalOpen(true);
-    if (content === exportModal) {
-      return console.log("Export");
-    }
-  };
-
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
+  const [activeButton, setActiveButton] = useState(null);
   
- 
+
+
+
+// form function start
+
+// Calculate days and Night
+const [fromDate, setFromDate] = useState("");
+const [toDate, setToDate] = useState("");
+const [days, setDays] = useState(0);
+const [nights, setNights] = useState(0);
+
+useEffect(() => {
+  setActiveButton(location.pathname);
+  if (fromDate && toDate) {
+    const from = new Date(fromDate);
+    const to = new Date(toDate);
+
+    // Calculate the difference in milliseconds
+    const difference = to.getTime() - from.getTime();
+
+    // Convert milliseconds to days
+    const daysDifference = Math.ceil(difference / (1000 * 3600 * 24));
+
+    const nightsDifference = Math.max(0, daysDifference - 1); // Subtract one day for nights calculation
+
+    setDays(daysDifference);
+    setNights(nightsDifference);
+  } else {
+    setDays('');
+    setNights('');
+  }
+}, [fromDate, toDate, location.pathname]);
+
 
 // proposal  
 const [activeItem, setActiveItem] = useState(null);
@@ -125,40 +143,296 @@ const items = [
   "Cancelled", "Invalid"
 ];
 
+// drawerOpen function
+const [drawerOpen, setDrawerOpen] = useState({
+client: false,
+query: false,
+
+});
+
+
+
+ // toggleDrawer function
+ const toggleDrawer = (anchor, open) => (event) => {
+  if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) return;
+
+  setDrawerOpen({ ...drawerOpen, [anchor]: open });
+};
+
+
+// type change function
+const handleTypeChange = (event) => {
+  setType(event.target.value);
+};
+
+
+// drawer btn function 
+function Btn({ handleClicked, children, className }) {
+  return (
+    <Button 
+      onClick={handleClicked}  
+      className={className} 
+      size='medium'
+      sx={{ 
+        backgroundColor: '#000', 
+        color: '#fff',
+       
+        '&:hover': {
+          backgroundColor: '#333', // Optional: Slightly lighter shade for hover effect
+        },
+        textTransform: 'none', // Disable uppercase transformation
+        boxShadow: 'none', // Remove default box-shadow
+      }}
+      variant="contained" // Ensures the button has a solid background
+    >
+      {children}
+    </Button>
+  );
+}
+
+
+
+// BtnOutlined
+function BtnOutlined({ handleClicked, children }) {
+  return (
+    <Button onClick={handleClicked} variant='outlined'
+      sx={{
+        borderColor: '#0d47a1',
+        color: '#0d47a1',
+        '&:hover': {
+          color: '#0d47a1c0',
+          borderColor: '#0d47a1c0',
+          backgroundColor: '#0d47a110'
+        }
+      }}>
+      {children}
+    </Button>
+  )
+}
+
+//   const params = useParams()
+// console.log(params.queryId);
+
+
+
+function AddQueryForm({ closeDrawer }) {
+  return (
+    <form className="drawer-form">
+      <FormControl sx={{ width: '100%' }} value={"DEFAULT"} disabled={true}>
+      <TextField
+        select
+        value={type}
+        onChange={handleTypeChange}
+        defaultValue="client"
+        size='small'
+        label="Type"
+      >
+        <MenuItem value="client">Client</MenuItem>
+        <MenuItem value="agent">Agent</MenuItem>
+        <MenuItem value="corporate">Corporate</MenuItem>
+      </TextField>
+    </FormControl>
+
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+        <TextField label="Mobile" variant="outlined" size='small' required />
+        <TextField label="Email" variant="outlined" size='small' required type='email' />
+      </FormGroup>
+      <FormGroup row sx={{ gap: '0.5rem' }}>
+        <FormControl>
+          <TextField select defaultValue="mr" size='small'>
+            <MenuItem value="mr">Mr.</MenuItem>
+            <MenuItem value="mrs">Mrs.</MenuItem>
+            <MenuItem value="ms">Ms.</MenuItem>
+            <MenuItem value="dr">Dr.</MenuItem>
+            <MenuItem value="prof">Prof.</MenuItem>
+          </TextField>
+        </FormControl>
+        <TextField label="Client name" variant="outlined" size='small' required sx={{ flex: 1 }} />
+      </FormGroup>
+
+      {type === 'agent' || type === 'corporate' ? (
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+        <TextField label="Company" variant="outlined" size='small' required />
+        <TextField label="GST" variant="outlined" size='small' required type='email' />
+      </FormGroup>
+    ) : null}
+
+    
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+        <TextField label="Destinations" variant="outlined" size='small' required />
+        <FormControl>
+          <TextField select defaultValue="january" size='small' label="Travel month" fullWidth>
+            <MenuItem value="january">January</MenuItem>
+            <MenuItem value="february">February</MenuItem>
+            <MenuItem value="march">March</MenuItem>
+            <MenuItem value="april">April</MenuItem>
+            <MenuItem value="may">May</MenuItem>
+            <MenuItem value="june">June</MenuItem>
+            <MenuItem value="july">July</MenuItem>
+            <MenuItem value="august">August</MenuItem>
+            <MenuItem value="september">September</MenuItem>
+            <MenuItem value="october">October</MenuItem>
+            <MenuItem value="november">November</MenuItem>
+            <MenuItem value="december">December</MenuItem>
+          </TextField>
+        </FormControl>
+      </FormGroup>
+
+
+
+
+<FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+    <DatePicker
+      value={fromDate}
+      onChange={(date) => setFromDate(date)}
+      label="From Date"
+      size="small"
+      slotProps={{ textField: { size: 'small' } }}
+    />
+    <DatePicker
+      value={toDate}
+      onChange={(date) => setToDate(date)}
+      label="To Date"
+      size="small"
+      slotProps={{ textField: { size: 'small' } }}
+    />
+    <TextField
+      value={(nights !== 0 ? `${nights} Nights, ` : '') + days + ' Days'}
+      label="Package Duration"
+      variant="outlined"
+      size="small"
+      required
+      sx={{ flex: 1, width: 24 }}
+    />
+  </FormGroup>
+    
+
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+        <TextField label="Adult" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 1, max: 24 } }} required />
+        <TextField label="Child" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 12 } }} />
+        <TextField label="Infant" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 6 } }} />
+      </FormGroup>
+
+      <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
+        <FormControl>
+          <TextField select defaultValue="16" size='small' label="Lead source" required>
+            <MenuItem value="advertisment">Advertisment</MenuItem>
+            <MenuItem value="agent">Agent</MenuItem>
+            <MenuItem value="akbartravel">AkbarTravel</MenuItem>
+            <MenuItem value="chat">Chat</MenuItem>
+            <MenuItem value="facebook">Facebook</MenuItem>
+            <MenuItem value="hellotravel">Hello Travel</MenuItem>
+            <MenuItem value="instagram">Instagram</MenuItem>
+            <MenuItem value="justdial">Justdial</MenuItem>
+            <MenuItem value="online">Online</MenuItem>
+            <MenuItem value="others">Others</MenuItem>
+            <MenuItem value="referral">Referral</MenuItem>
+            <MenuItem value="snapchat">snapchat</MenuItem>
+            <MenuItem value="telephone">Telephone</MenuItem>
+            <MenuItem value="walk-in">Walk-In</MenuItem>
+            <MenuItem value="website">Website</MenuItem>
+            <MenuItem value="whatsapp">WhatsApp</MenuItem>
+          </TextField>
+        </FormControl>
+        <FormControl>
+          <TextField select defaultValue="hot" size='small' label="Priority" required>
+            <MenuItem value="general">General Query</MenuItem>
+            <MenuItem value="hot">Hot Query</MenuItem>
+          </TextField>
+        </FormControl>
+        <FormControl>
+          <TextField select defaultValue="me" size='small' label="Assign To" required>
+            <MenuItem value="me">Assign to me</MenuItem>
+          </TextField>
+        </FormControl>
+      </FormGroup>
+
+      <FormControl sx={{ width: '100%' }}>
+        <TextField select defaultValue="activitiesonly" size='small' label="Select service">
+          <MenuItem value="activitiesonly">Activities only</MenuItem>
+          <MenuItem value="flightonly">Flight only</MenuItem>
+          <MenuItem value="fullpackage">Full package</MenuItem>
+          <MenuItem value="hotelflight">Hotel + Flight</MenuItem>
+          <MenuItem value="hoteltransport">Hotel + Transport</MenuItem>
+          <MenuItem value="hotelonly">Hotel only</MenuItem>
+          <MenuItem value="transportonly">Transport only</MenuItem>
+          <MenuItem value="visaonly">Visa only</MenuItem>
+        </TextField>
+      </FormControl>
+
+      <TextField label="Remark" variant="outlined" size='small' multiline />
+
+    
+   <div className="buttons">
+   <FormGroup row sx={{ gap: '0.5rem',  flexWrap: 'nowrap', '& > *': { flex: 1 },  }}>
+        <BtnOutlined handleClicked={closeDrawer}>Cancel</BtnOutlined>
+        <Btn handleClicked={() => { }}> <Link to="./queriesDetail">Save</Link> </Btn>
+      </FormGroup>
+   </div>
+   
+    </form>
+  )
+}
+
+// form all functions completed
+
+
+
+
+
+  const buttonData = [
+    { label: 'New', color: '#ffcccc' },
+    { label: 'Active', color: '#ccffcc' },
+    { label: 'No Connect', color: '#ccccff' },
+    { label: 'Hot Lead', color: '#ffffcc' },
+    { label: 'Proposal Sent', color: '#ffccff' },
+    { label: 'Follow Up', color: '#ccffff' },
+    { label: 'Confirmed', color: '#ffddcc' },
+    { label: 'Cancelled', color: '#ccffdd' },
+    { label: 'Invalid', color: '#dddddd' },
+  ];
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event , index) => {
+    setActiveButton(index);
+    setAnchorEl(event.currentTarget);
+  };
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const handleOpenModal = (content) => {
+    console.log("email clicked");
+    setModalContent(content);
+    setModalOpen(true);
+   
+  };
+
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // const navigate = useNavigate()
-
-  // calculate day
-
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-  const [days, setDays] = useState(0);
-  const [nights, setNights] = useState(0);
-
-
-  // function goToProposals() {
-  //   navigate('proposalSent')
-  // }
-
-
-  useEffect(() => {
-    if (fromDate && toDate) {
-      const from = new Date(fromDate);
-      const to = new Date(toDate);
-
-      // Calculate the difference in milliseconds
-      const difference = to.getTime() - from.getTime();
-
-      // Convert milliseconds to days
-      const daysDifference = Math.ceil(difference / (1000 * 3600 * 24));
-
-      const nightsDifference = Math.max(0, daysDifference - 1); // Ek din ka difference subtract karein
-
-      setDays(daysDifference);
-      setNights(nightsDifference);
-    } else {
-      setDays("");
-    }
-  }, [fromDate, toDate]);
 
   //naviagte save
 
@@ -185,121 +459,18 @@ const items = [
   };
 
 
-  const handlefields = (e) => {
-    const { name, value } = e.target;
-    if (name === 'childage') {
-      setSelectChildage(value);
-    } else if (name === 'infantage') {
-      setSelectInfantage(value);
-    }
 
-    if (name === "email") {
-      setEmail(value);
-    } else if (name === "destination") {
-      setDestination(value);
-    } else if (name === "month") {
-      setSelectedMonth(value);
-    } else if (name === "adultage") {
-      setSelectAdultage(value);
-    } else if (name === "childage") {
-      setSelectChildage(value);
-    } else if (name === "infantage") {
-      setSelectInfantage(value);
-    } else if (name === "source") {
-      setSelectSource(value);
-    } else if (name === "priority") {
-      setSelectPriority(value);
-    } else if (name === "assignto") {
-      setSelectAssign(value);
-    } else if (name === "service") {
-      setSelectService(value);
-    } else if (name === "remarks") {
-      setRemarks(value);
-    } else if (name === "type") {
-      setType(value);
-    }
-  };
-
-  // month array
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
   // adultage child infant array
-  const adultage = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24,
-  ];
-  const childage = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const infantage = [0, 1, 2, 3, 4, 5, 6];
-  const handleChange = async (event) => {
-    const value = event.target.value;
-    setPhoneNumber(value);
 
-    if (value.trim() === "") {
-      setSearchResults([]);
-      return;
-    }
 
-    try {
-      const response = await fetch(`/search?phone=${value}`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      const foundData = data.find((item) => item.phone === value);
-      if (foundData) {
-        setSearchResults([foundData]);
-      } else {
-        setSearchResults([]);
-      }
-    } catch (error) {
-      console.error("Error searching database:", error);
-    }
-  };
 
-  //source prioriry assign-to
-  const source = [
-    "Advertisnment",
-    "Agent",
-    "Akbar Tavel",
-    "Chat",
-    "Facebook",
-    "Hello Travel",
-    "instagram",
-    "Just Dial",
-    "Online",
-    "Others",
-    "Referral",
-    "Snapchat",
-    "Telephone",
-    "Walk-in",
-    "Website",
-    "Whatsapp",
-  ];
-  const priority = ["General query", "Hot Query"];
-  const assignto = ["Data added", "will be added", "hello"];
+  
 
-  //service
-  const service = [
-    "Activities Only",
-    "Flight only",
-    "Hotel + Flight",
-    "Visa only",
-    "Transport Only",
-    "Hotel + Transport",
-  ];
+ 
+
+
+
   const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
@@ -686,7 +857,7 @@ const items = [
  
   return (
     <div>
-      <div className="flex justify-between border-y bg-[#f5f7f9] border-slate-300 px-4">
+      <div className="flex justify-between border-y bg-[#f5f7f9] border-slate-300 px-4 ">
         <div className="flex flex-row px-1 items-center">
           <div className="font-[500]"> Query ID 12345 </div>
         </div>
@@ -700,16 +871,51 @@ const items = [
           <button  onClick={()=> handleOpenModal(composeModalMail)}  className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EmailOutlinedIcon style={{ fontSize: 18 }} /> Email
           </button>
-       <Link to="/queries/102498/followUps">
+      <Link to="/queries/102498/followUps">
             <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1">
             <EventAvailableOutlinedIcon style={{ fontSize: 18 }} /> Task
           </button>
 
        </Link>
-          <button className="text-xs mx-1 border px-4 py-2 hover:drop-shadow-md rounded-md flex items-center gap-1" onClick= {handleClick}>
-            <EditOutlinedIcon style={{ fontSize: 18 }} /> Edit
-          </button>
+
+
+
+  <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+    <Btn handleClicked={toggleDrawer('query', true)}>
+   <div className="flex items-center gap-1">
+   <MdModeEdit className="text-lg"/>  Edit
+   </div>
+    </Btn>
+         
+    <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
+      <div className="drawer">
+        <h2 className='dashboard-card-heading text-black'>Create Query</h2>
+
+        <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
+      </div>
+    </Drawer>
+</LocalizationProvider>
+
+
+
+
+
+
+     
+
+
+
+
+
+
+     
         </div>
+
+
+
+
+         
       </div>
 
       <div className="flex flex-col justify-start h-fit items-start mt-2 m-auto border border-slate-200 rounded-lg w-[99%]">
@@ -717,68 +923,12 @@ const items = [
           <div className="text-xs px-3 ">
             Created: 19-04-2024 | Last Updated: 19/04/2024 - 10:39 PM
           </div>
-          {/* <div className="items--container">
-            <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-              <div className="content">New</div>
-              <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-            </div>
-            <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-              <div className="content">Active</div>
-              <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-            </div>
-            <div className="item  hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-              <div className="content">No Connect</div>
-              <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-            </div>
-            <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-              <div className="content">Hot Lead</div>
-              <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-            </div>
-            <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-              <div className="content">Proposal Sent</div>
-              <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-            </div>
-            <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-              <div className="content">Follow Up</div>
-              <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-            </div>
-            <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-              <div className="content">Confirmed</div>
-              <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-            </div>
-            <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-              <div className="content">Cancelled</div>
-              <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-            </div>
-            <div className="item hover:!cursor-pointer group">
-              <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-              <div className="content group-hover:bg-[#cecece]">Invalid</div>
-              <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-            </div>
-          </div> */}
+          
 
-{/* <div className="items--container">
-      {["New", "Active", "No Connect", "Hot Lead", "Proposal Sent", "Follow Up", "Confirmed", "Cancelled", "Invalid"].map((item, index) => (
-        <div className={`item hover:!cursor-pointer group ${activeItem === index ? 'active' : ''}`} key={index} onClick={() => handleItemClick(index)}>
-          <div className={`arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} style={{ backgroundColor: activeItem === index ? 'yellow' : '' }} />
-          <div className={`content ${activeItem === index ? 'active' : ''}`}>{item}</div>
-          <div className={`arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} style={{ backgroundColor: activeItem === index ? 'yellow' : '' }} />
-        </div>
-      ))}
-    
-    </div> */}
-  
-  
 
-<div className="items--container">
+
+
+    <div className="items--container">
       {items.map((item, index) => (
         <div 
           key={index} 
@@ -795,10 +945,10 @@ const items = [
     </div>
 
 
-
         </div>
         <div className="flex flex-row w-full"> 
           <div className="w-[20%] h-full flex flex-col border-r py-1 border-slate-300 bg-[#f5f7f9]">
+
             {querypage.map((item, index) => {
               return (
                 <Link key={index} to={item.link}>
@@ -823,7 +973,7 @@ const items = [
               <Route path="/followUps" element={<FollowUps />} />
               <Route path="/guestDocs" element={<GuestDocuments />} />
               <Route path="/mail" element={<Mail />} />
-              <Route path="/voucher" element={<Voucher/>} />
+              <Route path="/voucher" element={<Voucher />} />
               <Route
                 path="/supplierCommunication"
                 element={<SupplierCommunication />}
@@ -837,584 +987,23 @@ const items = [
               <Route path="/feedBack" element={<FeedBack />} />
             </Routes>
           </div>
-          {/* <div className="w-[80%] ">
-            <div className="bg-[#f7f7f7] px-1 rounded-md mx-2 py-1 font-[600] mt-2">
-              Client Information
-            </div>
-            <div className="flex  flex-row w-full items-center justify-start mx-2 ">
-              <div className="flex-1 mt-2 text-xs">Clirnt Name</div>
-              <div className="flex-1 mt-2 text-xs"> Mobile</div>
-              <div className="flex-1 mt-2 text-xs">Email</div>
-              <div className="flex-1" ></div>
-            </div>
-            <div className="flex flex-row w-full items-center justify-start mx-2">
-              <div className="flex-1 font-[550] text-sm">Mr. Nayan</div>
-              <div className="flex-1 font-[550] text-sm">09608829897</div>
-              <div className="flex-1 font-[550] text-sm">
-                info@krkhospitality.com
-              </div>
-              <div className="flex-1" ></div>
-            </div>
-            <div className="bg-[#f7f7f7] px-1 rounded-md mx-2 py-1 font-[600] mt-4">
-              Querry Information
-            </div>
-            <div className="flex mt-2 flex-row w-full items-center justify-start mx-2">
-              <div className="flex-1 text-xs">Destination</div>
-              <div className="flex-1 text-xs">From Date</div>
-              <div className="flex-1 text-xs">To Date</div>
-              <div className="flex-1 text-xs">Travel Month</div>
-            </div>
-            <div className="flex flex-row w-full items-center justify-start mx-2">
-              <div className="flex-1 font-[550] text-sm">Dubai</div>
-              <div className="flex-1 font-[550] text-sm">01-05-2024</div>
-              <div className="flex-1 font-[550] text-sm">05-05-2024</div>
-              <div className="flex-1 font-[550] text-sm">May</div>
-            </div>
-            <div className="flex mt-4 flex-row w-full items-center justify-start mx-2">
-              <div className="flex-1 text-xs"> Lead Source</div>
-              <div className="flex-1 text-xs">Services</div>
-              <div className="flex-1 text-xs">Pax</div>
-              <div className="flex-1 text-xs">Assign To</div>
-            </div>
-            <div className="flex flex-row w-full items-center justify-start mx-2">
-              <div className="flex-1 font-[550] text-sm"> Walk-In</div>
-              <div className="flex-1 font-[550] text-sm">Full package</div>
-              <div className="flex-1 font-[550] text-sm">
-                Adult: 2 - Child: 0 - Infant: 0
-              </div>
-              <div className="flex-1 font-[550] text-sm">
-                TravBizz IT Solutions
-              </div>
-            </div>
-            <div className="bg-[#f7f7f7] px-1 rounded-md mx-2 py-1 font-[600] mt-4 flex flex-row justify-between">
-              <div>Notes</div>
-              <div>
-                {" "}
-                <button className="flex items-center text-xs rounded-md bg-[blue] text-white px-2 py-1">
-                  <AddIcon style={{ fontSize: 15 }} /> Add Notes{" "}
-                </button>{" "}
-              </div>
-            </div>
-            <div className="mx-2 mt-2">
-              <Textarea
-                name="Outlined"
-                placeholder="Type in here…"
-                variant="outlined"
-              />
-            </div>
-          </div> */}
-        </div>
-      </div>
-      <Modal
-        keepMounted
-        onClose={() => {
-          handleClose("PROPOSAL");
-        }}
-        open={proposalModal}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description"
-      >
-        <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[95%] md:w-[70%] h-fit"></div>
-      </Modal>
-
-      <Menu
-      id="basic-menu"
-      anchorEl={anchorEl}
-      open={open}
-      MenuListProps={{
-        'aria-labelledby': 'basic-button',
-      }}
-      PaperProps={{
-          style: {
-            borderRadius: 10, // Adjust this value as per your preference
-            // backgroundColor: "#2d2f31",
-            width:"100vh",
-            height: "200vh",
-            padding: "3px",
-          },
-        }}
-        sx={{height:"115vh",marginLeft:"20px",marginTop:"13px"}}
-    >
-      <div className="flex justify-center">
-        <div className="p-6 rounded-md bg-white">
-          <div
-            className={` flex justify-between mb-5  `} 
-          >
-            <div className="font-bold text-lg"> Edit Query </div>
-            <div
-              className="cursor-pointer"
-              onClick={handleClose}
-            >
-              <CloseIcon />
-            </div>
-          </div>
-          <div className="flex justify-between w-full mt-2 h-[90%]">
-            <div className="w-full">
-              <div>
-                <select
 
 
-
-                  className={`px-2  focus:outline-none w-full border h-10  focus:border  ${
-                    errors.name === "meal_plan_id"
-                      ? "border-red-600"
-                      : "hover:border-black border-[#d8d8d8]"
-                  }  rounded-md`}
-                  defaultValue={"DEFAULT"}
-                  name="type"
-                  value={type}
-                  onChange={handlefields}
-                 
 
           
-                >
-                  <option value={"DEFAULT"} disabled={true}>
-                    Type
-                  </option>
-                  <option value="CLIENT">Client</option>
-                  <option value="AGENT">Agent</option>
-                  <option value="CORPORATE">Corporate</option>
-                </select>
-                <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
-                  {errors.name === "meal_plan_id" && errors.helperTxt}
-                </p>
-              </div>
-
-              <div className="mt-4">
-                <div className="  w-full flex gap-5 justify-between items-center">
-                  <div className="">
-                    <select   
-
-
-
-
-
-
-                      className={`px-2 w-[200px] focus:outline-none  border h-10  focus:border  ${
-                        errors.name === "meal_plan_id"
-                          ? "border-red-600"
-                          : "hover:border-black border-[#d8d8d8]"
-                      }  rounded-md`}
-                      defaultValue={"DEFAULT"}
-                    >
-
-                      
-                      <option value="DEFAULT" disabled={true}>
-                        Title
-                      </option>
-                      <option value="Mr">Mr.</option>
-                      <option value="Mrs">Mrs.</option>
-                      <option value="Ms">Ms.</option>
-                      <option value="Dr">Dr.</option>
-                      <option value="Prof">Prof.</option>
-                    </select>
-                  </div>
-                  <div className="w-full">
-                    <div className="flex border-1 rounded-md">
-                      <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                        <FaPerson className="px-1 w-5 h-5 " />
-                      </div>
-                      <TextField
-                        id="outlined-basic"
-                        size="small"
-                        error={errors.name === "single"}
-                        label={" Name"}
-                        variant="outlined"
-                        sx={{ width: "100%" }}
-
-
-
-
-
-                        
-
-                      />
-                    </div>
-                  </div>
-                </div>
-                <p className="text-[0.6rem] text-red-600 h-2 flex items-start">
-                  {errors.name === "meal_plan_id" && errors.helperTxt}
-                </p>
-              </div>
-
-              {/*phone / email */}
-              <div className="flex w-full justify-between">
-                {/*phone number */}
-                <div className="mt-4">
-                  <div className="flex justify-center items-center border-2 rounded-md w-full">
-                    <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                      <MdOutlineSmartphone className="px-1 w-5 h-5 " />
-                    </div>
-                    <div>
-                      <input
-                        type="number"
-                        value={phoneNumber}
-                        onChange={handleChange}
-                        onFocus={() => setIsInputFocused(true)}
-                        onBlur={() => setIsInputFocused(false)}              
-                        className=" py-2 px-2 w-full"
-                        placeholder="Phone/Mobile"
-
-
-
-
-
-
-
-
-                      />
-                      {isInputFocused && (
-                        <div className="dropdown-content">
-                          {searchResults.length > 0 ? (
-                            searchResults.map((result, index) => (
-                              <div key={index} className="dropdown-item">
-                                {result.name}{" "}
-                                {/* Assuming result contains name of the user */}
-                              </div>
-                            ))
-                          ) : (
-                            <p>No results found</p>
-                            
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                {/*email */}
-                <div className="mt-4">
-                  <div className="flex justify-center items-center border-2 rounded-md w-full">
-                    <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                      <MdEmail className="px-1 w-5 h-5 " />
-                    </div>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={handlefields}
-                      className=" py-2 px-2 w-full"
-
-
-
-
-
-               
-
-                      
-
-
-
-                    />
-                  </div>
-                </div>
-              </div>
-              {/*Agent company and GST */}
-              {type === "AGENT" || type === "CORPORATE" ? (
-                <div className="flex gap-5 mt-3 justify-between">
-                  {/* company */}
-                  <div className="">
-                    <label htmlFor="company">Company</label>
-                    <input
-                      type="text"
-                      name="company"
-                      id="company"
-                      placeholder="company name"
-                      className="border-2 px-[19px] py-2 rounded-md w-full"
-
-
-             
-
-
-                      
-                    />
-                  </div>
-                  {/* GST */}
-                  <div>
-                    <label htmlFor="gst">GST</label>
-                    <input
-                      type="text"
-                      name="gst"
-                      id="gst"
-                      placeholder="GST"
-                      className="border-2 px-4 py-2 rounded-md w-full"
-                    />
-                  </div>
-                </div>
-              ) : (
-                ""
-              )}
-              <div className="flex justify-between w-full gap-4">
-                {/* destination */}
-                <div className="mt-2 w-full">
-                  <label htmlFor="fromdate ">Travel Destination</label>
-
-                  <div className="mt-2">
-                    <select
-                      name="destination"
-                      className="border-2 rounded-md px-3 py-2 w-full"
-                      id="dstionation"
-                      value={destination}
-                      
-                      onChange={handlefields}
-                      
-                    >
-                      <option value="Destination">Select Destination</option>
-                      <option value="kashmir">Kashmir</option>
-                      <option value="ladakh">Ladakh</option>
-                      <option value="kashmir + ladakh">
-                        Kashmir + Ladakh
-                      </option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* months */}
-                <div className="mt-2 w-full">
-                  <label htmlFor="fromdate ">Travel month</label>
-                  <div className="mt-2">
-                    <select
-                      name="month"
-                      className="border-2 rounded-md px-6 py-2 w-full"
-                      id="month"
-                      onChange={handleChange}
-                      value={selectedMonth}
-                    >
-                      <option value="">Select Month</option>
-                      {months.map((month, index) => (
-                        <option key={index} value={month}>
-                          {month}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              {/* from date to date start*/}
-
-              <div className="">
-                {/* from date to date */}
-                <div className="flex gap-4 w-full justify-between">
-                  <div className="mt-4">
-                    <label htmlFor="fromdate">From Date</label>
-                    <input
-                      type="date"
-                      value={fromDate}
-                      onChange={(e) => setFromDate(e.target.value)}
-                      className="border-2 rounded-md text-sm px-3 py-2 w-full "
-                      placeholder="from date"
-                    />
-                  </div>
-                  <div className="mt-4">
-                    <label htmlFor="todate">To Date</label>
-                    <input
-                      type="date"
-                      value={toDate}
-                      onChange={(e) => setToDate(e.target.value)}
-                      className="border-2 rounded-md text-sm px-3 py-2 w-full"
-                      placeholder="to date"
-                    />
-                  </div>
-
-                  {/* Difference days */}
-                  <div className="mt-4">
-                    <label htmlFor="days">Package Duration</label>
-                    <input
-                      type="text"
-                      value={
-                        (nights !== 0 ? `${nights} Nights, ` : "") +
-                        days +
-                        " Days"
-                      }
-                      className="border-2 rounded-md text-sm px-3 py-2 w-full"
-                      placeholder="days"
-                      readOnly
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Adult child infant */}
-              <div className="flex gap-3 mt-5">
-                {/* Adult */}
-                <div>
-                  <label htmlFor="adultage">Adult</label>
-                  <div className="flex justify-center items-center border-2 rounded-md">
-                    <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                      <FaPerson className="px-1 w-5 h-5 " />
-                    </div>
-                    <input
-                      type="number"
-                      name="adultage"
-                      id="adultage"
-                      min="0" 
-                      onChange={handlefields}
-                      value={selectAdultage}
-                      className=" px-3 text-sm py-2 w-full"
-                    />
-                  </div>
-                </div>
-                {/* Child */}
-                <div>
-                  <label htmlFor="childage">Child </label>
-                  <div className="border-2 rounded-md flex">
-                    <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                      <FaPerson className="px-1 w-5 h-5 " />
-                    </div>
-                    <input
-                      type="number"
-                      name="childage"
-                      id="childage"
-                      min="0"
-                      onChange={handlefields}
-                      value={selectChildage}
-                      className=" px-3 py-2 w-full"
-                    />
-                  </div>
-                </div>
-                {/*infant  */}
-              <div>
-                  <label htmlFor="infantage">Infant </label>
-                      <div className="border-2 rounded-md flex">
-                  <div className="h-10 w-10 flex items-center bg-gray-300 justify-center">
-                      <FaPerson className="px-1 w-5 h-5 " />
-
-
-                    </div>
-                    <input  name="infantage"
-                      id="infantage"
-                      min="0"
-                      onChange={handlefields}
-                      value={selectInfantage}
-                      className=" px-5 py-2 w-full" type="number" />
-                  </div>
-                </div>
-              </div>
-
-              {/* source priority Assign-to */}
-              <div className="flex gap-3 mt-5 justify-between">
-                {/* source */}
-                <div>
-                  <label htmlFor="source">Lead Source</label>
-                  <select
-                    name="source"
-                    id="source"
-                    className="border-2 rounded-md px-1 py-2 w-full"
-                    onChange={handlefields}
-                    value={selectSource}
-                  >
-                    <option value="">Select</option>
-                    {source.map((item, index) => (
-                      <option value={item} key={index}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {/* priority */}
-                <div>
-                  <label htmlFor="priority">Priority</label>
-                  <select
-                    name="priority"
-                    id="priority"
-                    className="border-2 rounded-md px-2 py-2 w-full"
-                    onChange={handlefields}
-                    value={selectPriority}
-                  >
-                    {priority.map((item, key) => (
-                      <option value={item} key={key}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {/* assignto */}
-                <div>
-                  <label htmlFor="assignto">Assign To</label>
-                  <select
-                    name="assignto"
-                    id="assignto"
-                    className="border-2 rounded-md px-4 py-2 w-full"
-                    onChange={handlefields}
-                    value={selectAssign}
-                  >
-                    {assignto.map((item, key) => (
-                      <option value={item} key={key}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Service */}
-              <div className="mt-5 flex flex-col">
-                <label htmlFor="service">Service</label>
-                <select
-                  name="service"
-                  id="service"
-                  className="border-2 rounded-md px-2 py-2 w-full"
-                  onChange={handlefields}
-                  value={selectService}
-                >
-                  {service.map((item, index) => (
-                    <option value={item} key={index}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              {/* Remarks */}
-              <div className="mt-7">
-                <textarea
-                  name="remarks"
-                  id="remarks"
-                  placeholder="remarks"
-                  className="border-2 h-[100px] w-full p-3 rounded-md"
-                  onChange={handlefields}
-                  value={remarks}
-                ></textarea>
-              </div>
-            </div>
-            {/*<div className="w-[49%]"></div>*/}
-          </div>
-          <div className="mt-1 flex gap-8 justify-evenly px-8 items-center w-full">
-            <div
-              onClick={() => {
-                handleClose("QUERY");
-              }}
-              className=" rounded-md h-10 w-full"
-            >
-              <button
-                disabled={able}
-                className="hover:bg-[#c22626] w-full rounded-md  text-white bg-[#e51d27] h-full flex items-center justify-center"
-              >
-                Cancel
-              </button>
-            </div>
-
-            <div
-              onClick={(e) => {
-                submitHandler(e);
-              }}
-              className=" rounded-md h-10 w-full "
-            >
-              <button
-                disabled={able}
-                className=" rounded-md w-full h-full flex hover:bg-[#1a8d42] items-center justify-center text-white bg-[#04AA6D]"
-              >
-                Save
-              </button>
-            </div>
-          </div>
+          
         </div>
       </div>
-      </Menu>
 
 
+
+
+
+
+      
       <CenterModal open={modalOpen} onClose={handleCloseModal} data={modalContent}/>
+
+
 
     </div>
   );
