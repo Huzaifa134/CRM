@@ -33,3 +33,25 @@
 
 
 
+
+/* .drawer-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.drawer-form {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 60px; 
+}
+
+.buttons {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 45%;
+  background: rgb(226, 0, 0);
+  padding: 0.5rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+} */
