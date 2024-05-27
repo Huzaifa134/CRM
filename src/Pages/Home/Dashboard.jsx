@@ -74,6 +74,16 @@ const theme = createTheme({
 });
 
 export default function Dashboard() {
+  const data = [
+    { id: 25455, name: 'Ammazing Dubai Tour (5 Nights / 6 Days)', assigned: "Mr. Meten Ranjani 4 Adults | 2 Child", confirmed: "Day 2 (02/jan/2024) | Srinagar To Gulmarg Early Morning proceed to Gulmarg Via Tangmarg Road , driving past willow trees , fast flowoing streams ansd lush green meadows. Gulmarg- the meadows of flowers is an apt tem ...." ,detail:"Driver name: Naveed Mustufa , Mobile Number : +912222333 , Vechile No : Jkl 556 , Vehicle with : Non Ac" },
+    // { id: 25455, name: 'Ajay kumar', assigned: 212, confirmed: 140 },
+    // { id: 3, name: 'Faizan Raza Khan', assigned: 90, confirmed: 55 },
+    // { id: 4, name: 'ratan kumar', assigned: 83, confirmed: 22 },
+    // { id: 5, name: 'Mohd Imran', assigned: 81, confirmed: 43 },
+    // { id: 6, name: 'Aazim Khaki', assigned: 75, confirmed: 42 },
+    // { id: 7, name: 'Avesh Tyagi', assigned: 58, confirmed: 34 },
+    // { id: 8, name: 'BK BK', assigned: 47, confirmed: 15 },
+];
   const numberFormatter = new Intl.NumberFormat('en-PK', { style: 'currency', currency: 'PKR', minimumFractionDigits: 0 });
 
   const [drawerOpen, setDrawerOpen] = useState({
@@ -184,20 +194,36 @@ export default function Dashboard() {
           </article>
 
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-tours'>
-            <h2 className="dashboard-card-heading text-[#4a4a69]">
+            {/* <h2 className="dashboard-card-heading text-[#4a4a69]">
               Today's tours
-            </h2>
+            </h2> */}
+            <div className="overflow-x-auto">
+            <table className="min-w-full bg-white">
+                <thead>
+                    <tr>
+                        <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-600">Query ID</th>
+                        <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-600">Tour Details</th>
+                        <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-600">Client Details</th>
+                        <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-600">Transportation Details</th>
+                        <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-600">Night Stay At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map(row => (
+                        <tr key={row.id} className="hover:bg-gray-100">
+                            <td className="py-2 px-4 border-b border-gray-200">{row.id}</td>
+                            <td className="py-2 px-4 border-b border-gray-200">{row.name}</td>
+                            <td className="py-2 px-4 border-b border-gray-200">{row.assigned}</td>
+                            <td className="py-2 px-4 border-b border-gray-200">{row.confirmed}</td>
+                            <td className="py-2 px-4 border-b border-gray-200">{row.detail}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
 
             <div>
-              {tours.length ?
-                <ul>
-                  <li><p>{/* TODO */}</p></li>
-                </ul>
-                :
-                <p style={{ marginTop: '1rem', textAlign: 'center' }}>
-                  No Tours Today
-                </p>
-              }
+           
 
               <Btn>
                 View all tours
