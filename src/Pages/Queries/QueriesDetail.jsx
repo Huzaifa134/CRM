@@ -124,7 +124,17 @@ useEffect(() => {
 }, [fromDate, toDate, location.pathname]);
 
 
+// proposal  
+const [activeItem, setActiveItem] = useState(null);
 
+const handleItemClick = (index) => {
+  setActiveItem(index);
+};  
+const items = [
+  "New", "Active", "No Connect", "Hot Lead", 
+  "Proposal Sent", "Follow Up", "Confirmed", 
+  "Cancelled", "Invalid"
+];
 
 // drawerOpen function
 const [drawerOpen, setDrawerOpen] = useState({
@@ -911,26 +921,25 @@ function AddQueryForm({ closeDrawer }) {
 
 
 
-<div className="items--container">
-      {buttonData.map((button, index) => (
-        <div
-          key={index}
-          className={`item group hover:!cursor-pointer ${
-            activeButton === index ? 'active' : ''
-          }`}
-          style={{
-            backgroundColor: activeButton === index ? button.color : '',
-          }}
-          onClick={() => handleClick(index)}
+    <div className="items--container">
+      {items.map((item, index) => (
+        <div 
+          key={index} 
+          className={`item hover:!cursor-pointer group ${activeItem === index ? 'active' : ''}`} 
+          onClick={() => handleItemClick(index)}
         >
-          <div className="arrow top group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
-          <div className="content">{button.label}</div>
-          <div className="arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece]" />
+          <div className={`arrow top group-hover:bg-[#cecece]  group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} />
+          <div className={`content ${activeItem === index ? 'active' : ''}`} style={{ color: activeItem === index ? '#cecece' : '' }}>
+            {item}
+          </div>
+          <div className={`arrow bottom group-hover:bg-[#cecece] group-hover:!border-[#cecece] ${activeItem === index ? 'active' : ''}`} />
         </div>
       ))}
     </div>
+
+
         </div>
-        <div className="flex flex-row w-full h-[68vh] "> 
+        <div className="flex flex-row w-full "> 
           <div className="w-[20%] h-full flex flex-col border-r py-1 bordr-slate-300 bg-[#f5f7f9]">
             {querypage.map((item, index) => {
               return (
