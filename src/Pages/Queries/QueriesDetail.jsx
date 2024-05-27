@@ -55,7 +55,7 @@ import Editor from "../../Components/Editor";
 import ReactDOMServer from 'react-dom/server';
 import logo from "../../assets/images/logo.png"
 import CenterModal from "./ViewProposal/CenterModal";
-import { DatePicker } from "@mui/lab";
+import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import PostAddIcon from '@mui/icons-material/PostAdd';
