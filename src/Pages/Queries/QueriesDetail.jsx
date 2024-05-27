@@ -17,7 +17,7 @@ import TextsmsIcon from "@mui/icons-material/Textsms";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import ArticleIcon from "@mui/icons-material/Article";
 import "./queryDetail.css";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import Details from "./pages/Details";
 import Billing from "./pages/Billing";
 import FollowUps from "./pages/FollowUps";
@@ -63,6 +63,7 @@ import "./ActiveAnimation.css"
 
 
 
+
 function QueriesDetail() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -81,6 +82,7 @@ function QueriesDetail() {
   const [type, setType] = useState("");
   const [errors, setErrors] = useState({ name: null, helperTxt: null });
   // const [activeItem, setActiveItem] = useState(null);
+
 
 
 
@@ -794,8 +796,8 @@ const items = [
 
 
         </div>
-        <div className="flex flex-row w-full h-[68vh] "> 
-          <div className="w-[20%] h-full flex flex-col border-r py-1 bordr-slate-300 bg-[#f5f7f9]">
+        <div className="flex flex-row w-full"> 
+          <div className="w-[20%] h-fit flex flex-col border-r py-1 border-slate-300 bg-[#f5f7f9]">
             {querypage.map((item, index) => {
               return (
                 <Link key={index} to={item.link}>
@@ -820,7 +822,7 @@ const items = [
               <Route path="/followUps" element={<FollowUps />} />
               <Route path="/guestDocs" element={<GuestDocuments />} />
               <Route path="/mail" element={<Mail />} />
-              <Route path="/voucher" element={<Voucher />} />
+              <Route path="/voucher" element={<Voucher/>} />
               <Route
                 path="/supplierCommunication"
                 element={<SupplierCommunication />}

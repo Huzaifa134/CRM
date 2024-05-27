@@ -1,5 +1,5 @@
 import  { useState } from "react";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider, useLocation, useParams } from "react-router-dom";
 import Clients from "./Pages/Clients/Clients";
 import Agents from "./Pages/Agents/Agents";
 import Navbar from "./Components/Navbar/Navbar";
@@ -63,10 +63,16 @@ import New from "./Pages/Queries/NavButtons/New";
 import NoConnect from "./Pages/Queries/NavButtons/NoConnect";
 import Canceled from "./Pages/Queries/NavButtons/Canceled";
 import EmailInbox from "./Components/Navbar/EmailInbox";
+import DownloadVoucher from "./Pages/Queries/pages/DownloadVoucher";
 
 const App = () => {
   const Layout = () => {
     const [show, setShow] = useState(true);
+
+    const location = useLocation();
+
+    // console.log(location.pathname);
+
 
     const getStatusFromSideBar = (click) => {
       setShow(click);
@@ -77,25 +83,31 @@ const App = () => {
     };
 
     return (
-      <div className="main h-screen w-full flex flex-col ">
-        <Navbar sendDataToApp={getStatusFromSideBar} />
-        <div className="wrapper flex flex-1 !overflow-y-hidden ">
-          <div
-            className={`sideBar-Wrapper md:block ${
-              show ? "hidden" : ""
-            } w-[3.7rem] md:static absolute z-20  bg-[#12344d] text-white`}
-          >
-            <SideBar />
+      <>
+     
+          <div className="main h-screen w-full flex flex-col ">
+            {location.pathname === "/downloadVoucher" ? "" : <Navbar sendDataToApp={getStatusFromSideBar} />}
+            <div className="wrapper flex flex-1 !overflow-y-hidden ">
+            {location.pathname === "/downloadVoucher" ? "" : <div
+                className={`sideBar-Wrapper md:block ${
+                  show ? "hidden" : ""
+                } w-[3.7rem] md:static absolute z-20  bg-[#12344d] text-white`}
+              >
+                <SideBar />
+              </div>}
+  
+              <div className="content-Wrapper flex-1 w-full overflow-y-auto  ">
+                <Outlet />
+              </div>
+            </div>
+            <ToastContainer position="bottom-right" autoClose={2000} />
+            {location.pathname === "/downloadVoucher" ? "" : <Footer />}
           </div>
-
-          <div className="content-Wrapper flex-1 w-full overflow-y-auto  ">
-            <Outlet />
-          </div>
-        </div>
-        <ToastContainer position="bottom-right" autoClose={2000} />
-        <Footer/>
-      </div>
+    
+      </>
     );
+
+    
   };
 
   const router = createBrowserRouter([
@@ -172,6 +184,7 @@ const App = () => {
         { path: "/currency", element: <Currency /> },
         { path: "/queriesDetail", element: <QueriesDetail/> },
         { path: "/emailInbox", element: <EmailInbox/> },
+        { path: "/downloadVoucher", element: <DownloadVoucher/> },
       ],
     },
   ]);
