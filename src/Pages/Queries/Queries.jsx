@@ -317,7 +317,7 @@ function Queries() {
         <TextField label="Remark" variant="outlined" size='small' multiline />
   
         <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
-          <BtnOutlined handleClick={closeDrawer}>Cancel</BtnOutlined>
+          <BtnOutlined handleClicked={closeDrawer}>Cancel</BtnOutlined>
           <Btn variant='contained' sx={{ backgroundColor: '#000', '&:hover': { backgroundColor: '#0d47a1c0' } }} size='medium' handleClick={() => { }}>Save</Btn>
         </FormGroup>
       </form>

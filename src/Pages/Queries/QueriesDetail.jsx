@@ -58,6 +58,8 @@ import CenterModal from "./ViewProposal/CenterModal";
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import { MdModeEdit } from "react-icons/md";
+
 
 
 
@@ -864,7 +866,9 @@ function AddQueryForm({ closeDrawer }) {
   <LocalizationProvider dateAdapter={AdapterDayjs}>
 
     <Btn handleClicked={toggleDrawer('query', true)}>
-      Add Queries
+   <div className="flex items-center gap-1">
+   <MdModeEdit className="text-lg"/>  Edit
+   </div>
     </Btn>
          
     <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
