@@ -83,7 +83,8 @@ function QueriesDetail() {
   const [errors, setErrors] = useState({ name: null, helperTxt: null });
   // const [activeItem, setActiveItem] = useState(null);
 
-
+  const params = useParams()
+console.log(params.queryId);
 
 
 
@@ -797,7 +798,7 @@ const items = [
 
         </div>
         <div className="flex flex-row w-full"> 
-          <div className="w-[20%] h-fit flex flex-col border-r py-1 border-slate-300 bg-[#f5f7f9]">
+          <div className="w-[20%] h-full flex flex-col border-r py-1 border-slate-300 bg-[#f5f7f9]">
             {querypage.map((item, index) => {
               return (
                 <Link key={index} to={item.link}>
