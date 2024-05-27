@@ -931,7 +931,7 @@ function AddQueryForm({ closeDrawer }) {
  
   return (
     <div>
-      <div className="flex justify-between border-y bg-[#f5f7f9] border-slate-300 px-4">
+      <div className="flex justify-between border-y bg-[#f5f7f9] border-slate-300 px-4 ">
         <div className="flex flex-row px-1 items-center">
           <div className="font-[500]"> Query ID 12345 </div>
         </div>
