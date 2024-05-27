@@ -12,7 +12,13 @@ body {
   .dashboard-grid-item-col2 {
     grid-column: span 2;
   }
-  
+
+  .dashboard-grid-item-col3 {
+    grid-column: span 3;
+  }
+  .dashboard-grid-item-col6 {
+    grid-column: span 6;
+  }
   @media screen and (max-width: 1280px) {
     .dashboard-container {
       grid-template-columns: repeat(2, 1fr);

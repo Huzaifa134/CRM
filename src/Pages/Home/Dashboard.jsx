@@ -134,7 +134,7 @@ export default function Dashboard() {
             <a href='#'><span>Open</span></a>
           </article>
 
-          <article className="dashboard-card dashboard-grid-item-col2 dashboard-create">
+          <article className="dashboard-card dashboard-grid-item-col3 dashboard-create">
             <div>
               <p style={{ color: "#38cab3"}}>Good Morning</p>
               <p>Time to Travel</p>
@@ -183,7 +183,7 @@ export default function Dashboard() {
             </div>
           </article>
 
-          <article className="dashboard-card dashboard-grid-item-col2 dashboard-task">
+          <article className="dashboard-card dashboard-grid-item-col3 dashboard-task">
             <h2 className="dashboard-card-heading text-[#4a4a69]">
               Task/Followups
             </h2>
@@ -193,7 +193,7 @@ export default function Dashboard() {
             </p>
           </article>
 
-          <article className='dashboard-card dashboard-grid-item-col2 dashboard-tours'>
+          <article className='dashboard-card dashboard-grid-item-col6 dashboard-tours'>
             {/* <h2 className="dashboard-card-heading text-[#4a4a69]">
               Today's tours
             </h2> */}
@@ -210,7 +210,7 @@ export default function Dashboard() {
                 </thead>
                 <tbody>
                     {data.map(row => (
-                        <tr key={row.id} className="hover:bg-gray-100">
+                        <tr key={row.id} className="align-top">
                             <td className="py-2 px-4 border-b border-gray-200">{row.id}</td>
                             <td className="py-2 px-4 border-b border-gray-200">{row.name}</td>
                             <td className="py-2 px-4 border-b border-gray-200">{row.assigned}</td>
@@ -222,10 +222,11 @@ export default function Dashboard() {
             </table>
         </div>
 
-            <div>
+            <div className='mt-5'>
            
 
               <Btn>
+                
                 View all tours
               </Btn>
             </div>
