@@ -278,7 +278,7 @@ function ClientsGroup() {
             aria-labelledby="keep-mounted-modal-title"
             aria-describedby="keep-mounted-modal-description"
           >
-            <div className="p-6 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[60%] h-fit">
+            <div className="p-6 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-[800px]:w-[90%] transition-all bg-white w-[60%] h-fit">
               <div className="flex justify-between items-center h-[10%] px-2">
                 <div className="font-bold text-lg">
                   {" "}

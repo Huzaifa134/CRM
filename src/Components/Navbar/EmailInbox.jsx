@@ -1,7 +1,7 @@
 import { RiPencilFill } from "react-icons/ri";
 import MoveToInboxIcon from '@mui/icons-material/MoveToInbox';
 import CenterModal from "./ComposeModel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Toolbar from "./EmailToolbar";
 import SendIcon from '@mui/icons-material/Send';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
@@ -11,10 +11,29 @@ import FadeMenu from "./MenuBar";
 import { MdDelete } from "react-icons/md";
 import PaginationRanges from "./Pagination";
 
-
-
 const EmailInbox = () => {
-  // Create arrays with messages for different sections
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+  const [currentSection, setCurrentSection] = useState("inbox");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 550);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 550);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const truncateText = (text, wordLimit) => {
+    const words = text.split(' ');
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(' ') + ' ...';
+    }
+    return text;
+  };
+
   const inboxMessages = Array(20).fill({
     text: 'Inbox message: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita, recusandae.',
     time: '4:00pm',
@@ -29,10 +48,6 @@ const EmailInbox = () => {
     text: 'Draft message: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita, recusandae.',
     time: '2:00pm',
   });
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState("");
-  const [currentSection, setCurrentSection] = useState("inbox");
 
   const handleOpenModal = (content) => {
     setModalContent(content);
@@ -66,7 +81,7 @@ const EmailInbox = () => {
   );
 
   const getButtonClassName = (section) => {
-    return `flex w-56 justify-between p-2 rounded-xl mt-2 cursor-pointer ${
+    return `flex w-56 max-[700px]:w-full justify-between transition-all p-2 rounded-xl mt-2 cursor-pointer ${
       currentSection === section ? 'bg-blue-500 text-white' : 'hover:bg-[#dadada]'
     }`;
   };
@@ -81,24 +96,22 @@ const EmailInbox = () => {
       messages = draftMessages;
     }
 
-
-  
     return messages.map((message, index) => (
       <div key={index} className="mb-4">
         <div className="flex justify-between">
-          <input type="checkbox" />
-          <p className="font-semibold">{message.text}</p>
-          <p>{message.time}</p>
+          <input type="checkbox" className="mr-3" />
+          <p className="font-semibold max-[600px]:font-normal max-[550px]:text-xs">
+            {isMobile ? truncateText(message.text, 7) : message.text}
+          </p>
+          <p className="max-[550px]:text-xs max-[550px]:text-gray-800 ml-3">{message.time}</p>
         </div>
-        <hr className="border-[1px] border-[#f3f2f2] mt-2" />
+        <hr className="border-[1px] border-[#f3f2f2] mt-2 " />
       </div>
     ));
   };
 
   return (
     <div className="bg-[#f6f8fc] h-auto">
-
-      
       <div className="flex">
         <div className="p-3 bg-[#f6f8fc]">
           <div>
@@ -106,7 +119,7 @@ const EmailInbox = () => {
               className="flex items-center font-semibold bg-[#c2e7ff] gap-3 px-3 p-4 rounded-xl transition-all hover:shadow-lg"
               onClick={() => handleOpenModal(data1)}
             >
-              <RiPencilFill className="text-xl" /> Compose
+              <RiPencilFill className="text-xl" /> <p className="max-[700px]:hidden">Compose</p>
             </button>
           </div>
 
@@ -115,10 +128,10 @@ const EmailInbox = () => {
             onClick={() => setCurrentSection("inbox")}
           >
             <button className="flex items-center gap-6 font-semibold text-base">
-              <MoveToInboxIcon /> Inbox
+              <MoveToInboxIcon /> <p className="max-[700px]:hidden transition-all">Inbox</p>
             </button>
             <div>
-              <p className="text-sm">4%</p>
+              <p className="text-sm max-[700px]:hidden transition-all">4%</p>
             </div>
           </div>
 
@@ -127,7 +140,7 @@ const EmailInbox = () => {
             onClick={() => setCurrentSection("sent")}
           >
             <button className="flex items-center font-semibold gap-6">
-              <SendIcon /> Sent
+              <SendIcon /> <p className="max-[700px]:hidden transition-all">Sent</p>
             </button>
           </div>
 
@@ -136,23 +149,22 @@ const EmailInbox = () => {
             onClick={() => setCurrentSection("draft")}
           >
             <button className="flex items-center font-semibold gap-6">
-              <SaveAsIcon /> Draft
+              <SaveAsIcon /> <p className="max-[700px]:hidden transition-all">Draft</p>
             </button>
           </div>
         </div>
 
         <div className="bg-[#ffff] w-full p-3 mx-5 mt-3 rounded-3xl">
-
-        <div className="flex items-center justify-between">
-         <div className="flex gap-5">
-         <TbReload className="text-4xl p-2 hover:bg-gray-200"/>
-            <MdDelete  className="text-4xl p-2 hover:bg-gray-200"/>
-         </div>
-          <div className="flex">
-          <FadeMenu />
-            <PaginationRanges />
+          <div className="flex items-center justify-between">
+            <div className="flex gap-5">
+              <TbReload className="text-4xl p-2 hover:bg-gray-200 rounded-lg"/>
+              <MdDelete className="text-4xl p-2 hover:bg-gray-200 rounded-lg"/>
+            </div>
+            <div className="flex">
+              <FadeMenu />
+              <PaginationRanges/>
+            </div>
           </div>
-        </div>
           <div>{renderMessages()}</div>
         </div>
       </div>
