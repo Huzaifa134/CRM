@@ -365,7 +365,7 @@ const Clients = () => {
             aria-labelledby="keep-mounted-modal-title"
             aria-describedby="keep-mounted-modal-description"
           >
-            <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[48%] h-fit">
+            <div className="p-4 rounded-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-[48%] max-[800px]:w-[90%] transition-all h-fit ">
               <div className="flex justify-between items-center h-[10%] px-2">
                 <div className="font-bold text-lg">{stat} Client</div>
                 <div className="cursor-pointer" onClick={handleClose}>
@@ -373,8 +373,8 @@ const Clients = () => {
                 </div>
               </div>
 
-              <div className="flex mt-4 justify-between h-[90%]">
-                <div className="w-[48%] ">
+              <div className="flex mt-4 max-[500px]:flex-wrap max-[500px]:gap-3 justify-between h-[90%]">
+                <div className="w-[48%] max-[500px]:w-full">
                   <select
                     value={fields.title}
                     name="title"
@@ -391,8 +391,8 @@ const Clients = () => {
                     <option value="Prof.">Prof.</option>
                   </select>
 
-                  <div className="flex items-center justify-between">
-                    <div className="mt-4 w-[49%]">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="mt-4 w-[49%] max-[500px]:w-full ">
                       <TextField
                         fullWidth
                         id="outlined-basic"
@@ -407,7 +407,7 @@ const Clients = () => {
                       />
                     </div>
 
-                    <div className="mt-4 w-[49%]">
+                    <div className="mt-4 w-[49%] max-[500px]:w-full ">
                       <TextField
                         fullWidth
                         id="outlined-basic"
@@ -465,7 +465,7 @@ const Clients = () => {
                     />
                   </div>
                 </div>
-                <div className="w-[48%]">
+                <div className="w-[48%] max-[500px]:w-full">
                   <div>
                     <PhoneInput
                       defaultCountry="IN"
@@ -546,19 +546,19 @@ const Clients = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 flex justify-between items-center">
+              <div className="mt-4 flex justify-between items-center max-[500px]:flex-wrap max-[500px]:gap-3">
                 <div
                   onClick={stat === "Edit" ? handleDelete : handleClose}
-                  className=" w-[49%] rounded-md h-10"
+                  className=" w-[49%] max-[500px]:w-full rounded-md h-10"
                 >
                   <button
-                    className={` bg-red-600 hover:bg-red-900 w-full rounded-md  text-white h-full flex items-center justify-center`}
+                    className={` bg-red-600 hover:bg-red-900 w-full rounded-md   text-white h-full flex items-center justify-center`}
                   >
                     {stat === "Edit" ? "Delete" : "Cancel"}
                   </button>
                 </div>
 
-                <div className=" w-[48%] rounded-md h-10  ">
+                <div className=" w-[48%] max-[500px]:w-full rounded-md h-10  ">
                   <button
                     disabled={able}
                     onClick={stat === "Edit" ? handleUpdate : handleSave}

@@ -30,37 +30,32 @@ const SideBar = () => {
     setVisibleTooltip(index);
   };
 
-  const handleMouseLeave = () => {
-    // setVisibleTooltip(null);
+  const handleClickIcon = (index) => {
+    setVisibleTooltip(visibleTooltip === index ? null : index);
   };
 
-  const handleClickIcon = () => {
-    setVisibleTooltip(null);
-  };
   return (
     <div ref={sidebarRef} className="w-[4%] justify-center ml-7 flex flex-col items-center mt-3">
-    <Link to={"/"} onClick={handleClickIcon}>
-      <div
-        className="group flex"
-        onMouseEnter={() => handleMouseEnter(0)}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="p-2 m-1 cursor-pointer hover:bg-slate-600 rounded-md">
-          <SpaceDashboardOutlinedIcon />
-        </div>
-        {visibleTooltip === 0 && (
-          <div className="rounded-lg visible self-center flex items-center justify-center left-16 absolute h-7 w-fit text-sm p-2 bg-black text-white">
-            Dashboard
+      <Link to={"/"} onClick={() => handleClickIcon(0)}>
+        <div
+          className="group flex"
+          onMouseEnter={() => handleMouseEnter(0)}
+        >
+          <div className="p-2 m-1 cursor-pointer hover:bg-slate-600 rounded-md">
+            <SpaceDashboardOutlinedIcon />
           </div>
-        )}
-      </div>
-    </Link>
+          {visibleTooltip === 0 && (
+            <div className="rounded-lg visible self-center flex items-center justify-center left-16 absolute h-7 w-fit text-sm p-2 bg-black text-white">
+              Dashboard
+            </div>
+          )}
+        </div>
+      </Link>
 
-      <Link to={"/queries"} onClick={handleClickIcon}>
+      <Link to={"/queries"} onClick={() => handleClickIcon(1)}>
         <div
           className="group flex"
           onMouseEnter={() => handleMouseEnter(1)}
-          onMouseLeave={handleMouseLeave}
         >
           <div className="p-2 m-1 cursor-pointer hover:bg-slate-600 rounded-md">
             <ListAltOutlinedIcon />
@@ -73,11 +68,10 @@ const SideBar = () => {
         </div>
       </Link>
 
-      <Link to={"/itineraries"} onClick={handleClickIcon}>
+      <Link to={"/itineraries"} onClick={() => handleClickIcon(2)}>
         <div
           className="group flex"
           onMouseEnter={() => handleMouseEnter(2)}
-          onMouseLeave={handleMouseLeave}
         >
           <div className="p-2 m-1 cursor-pointer hover:bg-slate-600 rounded-md">
             <DepartureBoardOutlinedIcon />
@@ -90,11 +84,10 @@ const SideBar = () => {
         </div>
       </Link>
 
-      <Link to={"/clients"} onClick={handleClickIcon}>
+      <Link to={"/clients"} onClick={() => handleClickIcon(3)}>
         <div
           className="group flex"
           onMouseEnter={() => handleMouseEnter(3)}
-          onMouseLeave={handleMouseLeave}
         >
           <div className="p-2 m-1 cursor-pointer hover:bg-slate-600 rounded-md">
             <AccountCircleOutlinedIcon />
@@ -107,11 +100,10 @@ const SideBar = () => {
         </div>
       </Link>
 
-      <Link to={"/agents"} onClick={handleClickIcon}>
+      <Link to={"/agents"} onClick={() => handleClickIcon(4)}>
         <div
           className="group flex"
           onMouseEnter={() => handleMouseEnter(4)}
-          onMouseLeave={handleMouseLeave}
         >
           <div className="p-2 m-1 cursor-pointer hover:bg-slate-600 rounded-md">
             <SupportAgentOutlinedIcon />
@@ -124,11 +116,10 @@ const SideBar = () => {
         </div>
       </Link>
 
-      <Link to={"/corporate"} onClick={handleClickIcon}>
+      <Link to={"/corporate"} onClick={() => handleClickIcon(5)}>
         <div
           className="group flex"
           onMouseEnter={() => handleMouseEnter(5)}
-          onMouseLeave={handleMouseLeave}
         >
           <div className="p-2 m-1 cursor-pointer hover:bg-slate-600 rounded-md">
             <ApartmentOutlinedIcon />
@@ -144,8 +135,7 @@ const SideBar = () => {
       <div
         className="group w-[120%] flex justify-center"
         onMouseEnter={() => handleMouseEnter(6)}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleClickIcon}
+        onClick={() => handleClickIcon(6)}
       >
         <div className="flex items-center">
           <div className="p-2 m-1 cursor-pointer hover:bg-slate-600 rounded-md">
@@ -209,8 +199,7 @@ const SideBar = () => {
       <div
         className="group w-[120%] flex justify-center"
         onMouseEnter={() => handleMouseEnter(7)}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleClickIcon}
+        onClick={() => handleClickIcon(7)}
       >
         <div className="flex items-center">
           <div className="p-2 m-1 cursor-pointer hover:bg-slate-600 rounded-md">
