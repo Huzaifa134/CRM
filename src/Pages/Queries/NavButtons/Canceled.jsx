@@ -155,19 +155,18 @@ function BtnOutlined({ handleClicked, children }) {
   return (
     <Button onClick={handleClicked} variant='outlined'
       sx={{
-        borderColor: '#0d47a1',
-        color: '#0d47a1',
+        color: '#fff',
+         backgroundColor: "#dc2626",
         '&:hover': {
-          color: '#0d47a1c0',
-          borderColor: '#0d47a1c0',
-          backgroundColor: '#0d47a110'
+          color: '#fff',
+          borderColor: '#dc2626',
+          backgroundColor: '#7f1d1d'
         }
       }}>
       {children}
     </Button>
   )
 }
-
 
 
 
@@ -322,10 +321,10 @@ function AddQueryForm({ closeDrawer }) {
       <TextField label="Remark" variant="outlined" size='small' multiline />
 
     
-   <div className="buttons">
-   <FormGroup row sx={{ gap: '0.5rem',  flexWrap: 'nowrap', '& > *': { flex: 1 },  }}>
-        <BtnOutlined handleClicked={closeDrawer}>Cancel</BtnOutlined>
-        <Btn handleClicked={() => { }}> <Link to="./queriesDetail">Save</Link> </Btn>
+      <div className="buttons">
+   <FormGroup  FormGroup row sx={{ gap: '0.5rem',  flexWrap: 'nowrap', '& > *': { flex: 1 }, color: "red" }}>
+        <BtnOutlined  handleClicked={closeDrawer}>Cancel</BtnOutlined>
+        <button className="bg-[#16a34a] hover:bg-green-900 text-[#ffff]"> <Link to="./queriesDetail">Save</Link> </button>
       </FormGroup>
    </div>
    

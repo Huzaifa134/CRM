@@ -170,23 +170,30 @@ const handleTypeChange = (event) => {
 function Btn({ handleClicked, children, className }) {
   return (
     <Button 
-      onClick={handleClicked}  
-      className={className} 
-      size='medium'
-      sx={{ 
-        backgroundColor: '#000', 
-        color: '#fff',
-       
-        '&:hover': {
-          backgroundColor: '#333', // Optional: Slightly lighter shade for hover effect
-        },
-        textTransform: 'none', // Disable uppercase transformation
-        boxShadow: 'none', // Remove default box-shadow
-      }}
-      variant="contained" // Ensures the button has a solid background
-    >
-      {children}
-    </Button>
+    onClick={handleClicked}  
+    className={className} 
+    size='small' // Adjust size to 'small' to match the example
+    sx={{ 
+      backgroundColor: 'transparent', 
+      color: '#000',
+      border: "1px solid #b1b1b1", // Ensure the border is solid
+      px: 2, // Padding left and right
+     // Padding top and bottom
+      borderRadius: '0.375rem', // Border radius for rounded corners
+      display: 'flex', // Flex display
+      alignItems: 'center', // Center items vertically
+      gap: 1, // Gap between icon and text
+      fontSize: '0.75rem', // Set the font size to text-xs
+      textTransform: 'none', // Disable uppercase transformation
+
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 0, 0.04)', // Slightly lighter shade for hover effect
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Shadow effect on hover
+      },
+    }}
+  >
+    {children}
+  </Button>
   );
 }
 
@@ -197,12 +204,12 @@ function BtnOutlined({ handleClicked, children }) {
   return (
     <Button onClick={handleClicked} variant='outlined'
       sx={{
-        borderColor: '#0d47a1',
-        color: '#0d47a1',
+        color: '#fff',
+         backgroundColor: "#dc2626",
         '&:hover': {
-          color: '#0d47a1c0',
-          borderColor: '#0d47a1c0',
-          backgroundColor: '#0d47a110'
+          color: '#fff',
+          borderColor: '#dc2626',
+          backgroundColor: '#7f1d1d'
         }
       }}>
       {children}
@@ -363,9 +370,9 @@ function AddQueryForm({ closeDrawer }) {
 
     
    <div className="buttons">
-   <FormGroup row sx={{ gap: '0.5rem',  flexWrap: 'nowrap', '& > *': { flex: 1 },  }}>
-        <BtnOutlined handleClicked={closeDrawer}>Cancel</BtnOutlined>
-        <Btn handleClicked={() => { }}> <Link to="./queriesDetail">Save</Link> </Btn>
+   <FormGroup row sx={{ gap: '0.5rem',  flexWrap: 'nowrap', '& > *': { flex: 1 }, color: "red" }}>
+        <BtnOutlined  handleClicked={closeDrawer}>Cancel</BtnOutlined>
+        <button className="bg-[#16a34a] hover:bg-green-900 text-[#ffff]"> <Link to="./queriesDetail">Save</Link> </button>
       </FormGroup>
    </div>
    
@@ -882,15 +889,15 @@ function AddQueryForm({ closeDrawer }) {
 
   <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-    <Btn handleClicked={toggleDrawer('query', true)}>
-   <div className="flex items-center gap-1">
-   <MdModeEdit className="text-lg"/>  Edit
-   </div>
+  <Btn handleClicked={toggleDrawer('query', true)}>
+      <div className="flex items-center gap-1">
+        <MdModeEdit className="text-lg"/>  Edit
+      </div>
     </Btn>
          
     <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
       <div className="drawer">
-        <h2 className='dashboard-card-heading text-black'>Create Query</h2>
+        <h2 className='dashboard-card-heading text-black'>Edit Query</h2>
 
         <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
       </div>

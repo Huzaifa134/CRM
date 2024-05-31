@@ -64,6 +64,7 @@ import NoConnect from "./Pages/Queries/NavButtons/NoConnect";
 import Canceled from "./Pages/Queries/NavButtons/Canceled";
 import EmailInbox from "./Components/Navbar/EmailInbox";
 import DownloadVoucher from "./Pages/Queries/pages/DownloadVoucher";
+import ReiviewCampaign from "./Pages/createCampaign/ReiviewCampaign";
 
 const App = () => {
   const Layout = () => {
@@ -157,6 +158,7 @@ const App = () => {
        
         { path: "/campagins", element: <Campagins /> },
         { path: "/campagins/createCampaigns", element: <CreateCampaign /> },
+        { path: "/campagins/createCampaigns/reviewCampaign", element: <ReiviewCampaign /> },
         { path: "/landingPages", element: <LandingPages /> },
         { path: "/landingPages/create", element: <CreateLandingPage /> },
         { path: "/ledgerReport", element: <LedgerReport /> },

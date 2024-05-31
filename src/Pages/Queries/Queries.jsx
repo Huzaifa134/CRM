@@ -154,12 +154,12 @@ function Queries() {
     return (
       <Button onClick={handleClicked} variant='outlined'
         sx={{
-          borderColor: '#0d47a1',
-          color: '#0d47a1',
+          color: '#fff',
+           backgroundColor: "#dc2626",
           '&:hover': {
-            color: '#0d47a1c0',
-            borderColor: '#0d47a1c0',
-            backgroundColor: '#0d47a110'
+            color: '#fff',
+            borderColor: '#dc2626',
+            backgroundColor: '#7f1d1d'
           }
         }}>
         {children}
@@ -316,10 +316,12 @@ function Queries() {
   
         <TextField label="Remark" variant="outlined" size='small' multiline />
   
-        <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
-          <BtnOutlined handleClicked={closeDrawer}>Cancel</BtnOutlined>
-          <Btn variant='contained' sx={{ backgroundColor: '#000', '&:hover': { backgroundColor: '#0d47a1c0' } }} size='medium' handleClick={() => { }}>Save</Btn>
-        </FormGroup>
+        <div className="buttons">
+   <FormGroup  FormGroup row sx={{ gap: '0.5rem',  flexWrap: 'nowrap', '& > *': { flex: 1 }, color: "red" }}>
+        <BtnOutlined  handleClicked={closeDrawer}>Cancel</BtnOutlined>
+        <button className="bg-[#16a34a] hover:bg-green-900 text-[#ffff]"> <Link to="./queriesDetail">Save</Link> </button>
+      </FormGroup>
+   </div>
       </form>
     )
   }
@@ -990,7 +992,7 @@ function Queries() {
 
 
 
-<div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
+<div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row  ">
       {buttons.map((button) => (
         <div
           key={button.label}
@@ -998,7 +1000,7 @@ function Queries() {
             setActiveButton(button.path);
             navigate(button.path);
           }}
-          className={`flex flex-col items-center m-1 h-12 w-[8.5vw] cursor-pointer shadow-xl rounded-md justify-center ${
+          className={`flex flex-col items-center m-1 h-12 w-[120px] cursor-pointer shadow-xl rounded-md justify-center ${
             activeButton === button.path ? `active-animation ${button.color}` : button.color
           }`}
         >
