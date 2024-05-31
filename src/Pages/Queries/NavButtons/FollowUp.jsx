@@ -18,7 +18,7 @@ import axios from "axios";
 import _ from "lodash";
 import { FaCalendarDays } from "react-icons/fa6";
 import { FaPerson } from "react-icons/fa6";
-import { MdOutlineSmartphone } from "react-icons/md";
+import { MdOutlineSmartphone, MdRemoveRedEye } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { FormGroup, Drawer , MenuItem, Button} from "@mui/material";
 import { IoClose } from "react-icons/io5";
@@ -770,7 +770,7 @@ function goToQueries() {
               <div className=" w-full h-8 flex items-center">
                 <Link to={`/queries/${params.data.id}`}>
                   <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 rounded-full flex justify-center items-center">
-                    <NorthEastIcon
+                    <MdRemoveRedEye  
                       className="group-hover:text-white"
                       style={{ fontSize: 17 }}
                     />
@@ -789,8 +789,9 @@ function goToQueries() {
                     style={{ fontSize: 17 }}
                   />
                 </div>
+                <Link to={`/queries/${params.data.id}`}>
                 <div
-                  onClick={editHandler}
+               
                   className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center"
                 >
                   <EditOutlinedIcon
@@ -798,7 +799,8 @@ function goToQueries() {
                     style={{ fontSize: 17 }}
                   />
                 </div>
-                <div
+                </Link>
+                {/* <div
                   onClick={() => {
                     setProposalModal(true);
                   }}
@@ -808,7 +810,7 @@ function goToQueries() {
                     className="group-hover:text-white"
                     style={{ fontSize: 17 }}
                   />
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -892,61 +894,56 @@ function goToQueries() {
       
       `}</style>
        <div>
-      <div className="flex justify-between items-center h-16 sm:h-12 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#f5f7f9]">
-        <div className="font-[700] flex-shrink-0">Follow Up</div>
-        <div className="flex justify-end items-center gap-3 h-full w-full sm:w-auto">
-          <input
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              quickFilter(e.target.value);
-            }}
-            className="border border-slate-300 h-[80%] px-2 rounded-md text-sm flex-grow max-w-[300px] focus:outline-none focus:border focus:border-black"
-            placeholder="Search by anything...."
-          />
+       <div className="flex justify-between items-center h-16 sm:h-12 flex-row px-2 border-t border-slate-300 border-b bg-[#f5f7f9] overflow-x-auto whitespace-nowrap">
+  <div className="font-[700] flex-shrink-0 mr-3">Follow Up</div>
+  <div className="flex items-center gap-3 h-full flex-nowrap">
+    <input
+      value={search}
+      onChange={(e) => {
+        setSearch(e.target.value);
+        quickFilter(e.target.value);
+      }}
+      className="border border-slate-300 h-[80%] px-2 rounded-md text-sm flex-grow max-w-[300px] focus:outline-none focus:border focus:border-black flex-shrink-0"
+      placeholder="Search by anything...."
+    />
 
-
-
-
-<LocalizationProvider dateAdapter={AdapterDayjs}>
-
-<Btn handleClicked={toggleDrawer('query', true)}>
-   Add Queries
- </Btn>
-
-<Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
-<div className="drawer">
-  <h2 className='dashboard-card-heading text-black'>Create Query</h2>
-
-<AddQueryForm closeDrawer={toggleDrawer('query', false)} />
-</div>
-</Drawer>
-</LocalizationProvider>
-
-
-
-
-
-
-          <button className="border-[1px] px-2 py-2 w-36 border-gray-400 rounded-md text-black flex-shrink-0 flex items-center justify-center h-[80%]">Load Leads</button>
-          <select onChange={(e) => {
-    if (e.target.value === "import") {
-      handleOpenModal(importModal);
-    }
-  }} value="Options" className="border-[1px] px-2 py-2 border-gray-400 rounded-md text-black bg-transparent w-24 flex-shrink-0 h-[80%]">
-          <option value="default" className="hidden">Options</option>
-            <option value="">Download Excel Format</option>
-            <option value="import">Import Excel</option>
-            <option value="">Export Data</option>
-          </select>
-          <button
-            className="border-[1px] px-2 py-2 w-24 border-gray-400 rounded-md text-black flex-shrink-0 h-[80%] flex items-center justify-center gap-1"
-            onClick={toggleDropdown}
-          >
-            <FaFilter className="text-sm" /> Filter
-          </button>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Btn handleClicked={toggleDrawer('query', true)} className="h-[80%] flex-shrink-0">
+        Add Queries
+      </Btn>
+      <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
+        <div className="drawer">
+          <h2 className='dashboard-card-heading text-black'>Create Query</h2>
+          <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
         </div>
-      </div>
+      </Drawer>
+    </LocalizationProvider>
+
+    <button className="border-[1px] px-2 py-2 w-36 border-gray-400 rounded-md text-black flex-shrink-0 flex items-center justify-center h-[80%]">
+      Load Leads
+    </button>
+    <select
+      onChange={(e) => {
+        if (e.target.value === "import") {
+          handleOpenModal(importModal);
+        }
+      }}
+      value="Options"
+      className="border-[1px] px-2 py-2 border-gray-400 rounded-md text-black bg-transparent w-24 flex-shrink-0 h-[80%]"
+    >
+      <option value="default" className="hidden">Options</option>
+      <option value="">Download Excel Format</option>
+      <option value="import">Import Excel</option>
+      <option value="">Export Data</option>
+    </select>
+    <button
+      className="border-[1px] px-2 py-2 w-24 border-gray-400 rounded-md text-black flex-shrink-0 h-[80%] flex items-center justify-center gap-1"
+      onClick={toggleDropdown}
+    >
+      <FaFilter className="text-sm" /> Filter
+    </button>
+  </div>
+</div>
 
       {/* dropdown div */}
       <div style={dropdownStyles} className="w-full h-12 bg-[#f5f7f9] p-2 flex gap-2 px-2 dropdown-Div ">
@@ -1041,23 +1038,24 @@ function goToQueries() {
       </div> */}
 
 
-<div className="h-fit py-1 px-2 flex items-center justify-evenly w-full flex-row flex-wrap">
-      {buttons.map((button) => (
-        <div
-          key={button.label}
-          onClick={() => {
-            setActiveButton(button.path);
-            navigate(button.path);
-          }}
-          className={`flex flex-col items-center m-1 h-12 w-[8.5vw] cursor-pointer shadow-xl rounded-md justify-center ${
-            activeButton === button.path ? `active-animation ${button.color}` : button.color
-          }`}
-        >
-          <div className="text-white text-xl">{button.count}</div>
-          <div className="text-white text-[0.65rem] font-[700]">{button.label}</div>
-        </div>
-      ))}
+<div className="h-fit py-1 px-2 flex items-center justify-evenly w-full overflow-x-auto">
+  {buttons.map((button) => (
+    <div
+      key={button.label}
+      onClick={() => {
+        setActiveButton(button.path);
+        navigate(button.path);
+      }}
+      className={`flex flex-col items-center m-1 h-12 w-[120px] cursor-pointer shadow-xl rounded-md justify-center ${
+        activeButton === button.path ? `active-animation ${button.color}` : button.color
+      }`}
+      style={{ flexShrink: 0 }} // Prevent buttons from shrinking
+    >
+      <div className="text-white text-xl">{button.count}</div>
+      <div className="text-white text-[0.65rem] font-[700]">{button.label}</div>
     </div>
+  ))}
+</div>
 
       <div className="h-[80%] w-full mt-[6px] px-5 overflow-x-auto ">
         <div className="ag-theme-quartz h-full xl:w-full  w-[1200px]">

@@ -1,9 +1,19 @@
 import React, { useState } from "react";
-import { FaUser, FaPlusSquare } from "react-icons/fa";
+import { FaUser, FaPlusSquare, FaMoon } from "react-icons/fa";
 import { IoMoonOutline } from "react-icons/io5";
 import { CiBullhorn, CiStickyNote } from "react-icons/ci";
 import { RiDeleteBinFill } from "react-icons/ri";
 import FooterModal from "./FooterModal";
+import UpdateModal from "./UpdateModal";
+import moon from "../../assets/images/moon.png"
+import UpdateCard from "./UpdateCard";
+import noteBook from "../../assets/images/noteBook.png"
+import landingPage from "../../assets/images/landingPage.png"
+import uiUpdate from "../../assets/images/ui-update.png"
+import systemUpdate from "../../assets/images/systemUpdate.png"
+import { FaComputer } from "react-icons/fa6";
+import { MdOutlineBrowserUpdated, MdOutlineStickyNote2 } from "react-icons/md";
+import { GrUpdate } from "react-icons/gr";
 
 const Footer = () => {
   const usersArr = [
@@ -164,6 +174,54 @@ const Footer = () => {
       </div>
     </div>
   );
+
+
+  const updateModalObj = [
+    {
+      img: <FaMoon /> ,
+      head: "Night Theme",
+      pera: "The idea behind night theme is that it reduces the light emitted by device screens while maintaining the minimum colour contrast ratios required for readability.",
+      date: "Updated: 21 Apr 2022"
+    },
+    {
+      img: <MdOutlineStickyNote2 /> ,
+      head: "Notebook",
+      pera: "Now you can create your notes and save your anonymous content. Save your things in one place.",
+      date: "Updated: 21 Apr 2022"
+    },
+    {
+      img: <FaComputer /> ,
+      head: "Landing Pages",
+      pera: "Create unlimited landing pages with stored itineraries for your google adwords or latest deals for your customers.",
+      date: "Updated: 21 Apr 2022"
+    },
+    {
+      img: <MdOutlineBrowserUpdated /> ,
+      head: "UI Updates",
+      pera: "System user interface update for best performance.",
+      date: "Updated: 21 Apr 2022"
+    },
+    {
+      img: <GrUpdate /> ,
+      head: "System Updates",
+      pera: "System functionality and security update.",
+      date: "Updated: 21 Apr 2022"
+    }
+  ]
+
+
+  const updateModal = (
+  <div>
+      <div className="bg-black text-white w-full p-5 rounded-md">
+        <p className="text-xl text-center font-semibold">What's new in recent updates</p>
+      </div>
+      
+     <div className="flex flex-col gap-5 pt-5 px-3 overflow-y-auto h-[400px] pb-3">
+         {updateModalObj.map((item)=>{
+          return <UpdateCard image={item.img} head={item.head} pera={item.pera} date={item.date}/>
+         })}
+     </div>
+  </div>)
   
 
   const [textFields, setTextFields] = useState([]);
@@ -200,7 +258,8 @@ const Footer = () => {
           </button> */}
           <button className="text-[12px] font-semibold border-r-1 px-3 border-gray-300 flex items-center gap-1 hover:bg-gray-100">
             <CiBullhorn />
-            UPDATES
+            <UpdateModal btnName={"UPDATES"} data={updateModal} width="w-[500px]" marginLeft="ml-[-8vw]"/>
+            
           </button>
           <button className="text-[12px] font-semibold border-x-2 px-3 border-gray-300 flex items-center gap-1 hover:bg-gray-100">
             <CiStickyNote />

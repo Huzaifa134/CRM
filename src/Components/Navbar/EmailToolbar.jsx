@@ -90,7 +90,7 @@ const Toolbar = () => {
         ></textarea>
       </div>
 
-      <div className="flex items-center text-sm space-x-2 p-2 border-b border-gray-300 bg-white shadow-sm">
+      <div className="flex items-center text-sm space-x-2 p-2 border-b border-gray-300 bg-white shadow-sm w-full overflow-x-auto">
         <button className="p-2 hover:bg-gray-200" onClick={handleUndo}>
           <i className="fas fa-undo"></i>
         </button>

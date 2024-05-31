@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
+import { HiSortDescending } from 'react-icons/hi';
 
 export default function FadeMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,7 +24,12 @@ export default function FadeMenu() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        ASCEN-DESCEN
+        <p className='flex items-center'>
+          <span className='hidden sm:inline-block'>ASCEN-DESCEN</span>
+          <span className='inline-block sm:hidden text-2xl'>
+            <HiSortDescending />
+          </span>
+        </p>
       </Button>
       <Menu
         id="fade-menu"

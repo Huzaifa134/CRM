@@ -17,7 +17,7 @@ import TextsmsIcon from "@mui/icons-material/Textsms";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import ArticleIcon from "@mui/icons-material/Article";
 import "./queryDetail.css";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import Details from "./pages/Details";
 import Billing from "./pages/Billing";
 import FollowUps from "./pages/FollowUps";
@@ -217,7 +217,8 @@ function BtnOutlined({ handleClicked, children }) {
   )
 }
 
-
+//   const params = useParams()
+// console.log(params.queryId);
 
 
 
@@ -409,11 +410,10 @@ function AddQueryForm({ closeDrawer }) {
   const [modalContent, setModalContent] = useState("");
 
   const handleOpenModal = (content) => {
+    console.log("email clicked");
     setModalContent(content);
     setModalOpen(true);
-    if (content === exportModal) {
-      return console.log("Export");
-    }
+   
   };
 
 
@@ -953,8 +953,9 @@ function AddQueryForm({ closeDrawer }) {
 
 
         </div>
-        <div className="flex flex-row w-full "> 
-          <div className="w-[20%] h-full flex flex-col border-r py-1 bordr-slate-300 bg-[#f5f7f9]">
+        <div className="flex flex-row w-full"> 
+          <div className="w-[20%] h-full flex flex-col border-r py-1 border-slate-300 bg-[#f5f7f9]">
+
             {querypage.map((item, index) => {
               return (
                 <Link key={index} to={item.link}>
@@ -1007,7 +1008,7 @@ function AddQueryForm({ closeDrawer }) {
 
 
       
-
+      <CenterModal open={modalOpen} onClose={handleCloseModal} data={modalContent}/>
 
 
 
