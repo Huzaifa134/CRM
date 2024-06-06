@@ -78,7 +78,7 @@ const ClientDetail = () => {
           </div>
 
           <div className='bg-white w-full shadow rounded-md p-7 mt-5'>
-            <h3 className='font-semibold'>Followup's</h3>
+            <h3 className='font-semibold mb-4'>Followup's</h3>
 
             <table className='border w-full'>
               <tr className='bg-[#f5f7f9] border w-full'>

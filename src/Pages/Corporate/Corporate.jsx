@@ -158,15 +158,15 @@ function Corporate() {
       },
     },
     {
-      headerName: "GST",
-      field: "gst",
-      flex: 0.4,
-    },
-    {
-      headerName: "Name",
+      headerName: "Company Name",
       valueGetter: (params) => {
         return `${params.data.title} ${params.data.first_name} ${params.data.last_name}`;
       },
+    },
+    {
+      headerName: "GST",
+      field: "gst",
+      flex: 0.4,
     },
     { headerName: "Number", field: "mob" },
     {
