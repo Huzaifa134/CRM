@@ -179,15 +179,7 @@ export default function Dashboard() {
 
   
 
-          <div className='dashboard-card dashboard-grid-item-col6 dashboard-task'>
-        <div className='flex justify-evenly'> 
-        <WeatherCard/>
-            <WeatherCard/>
-            <WeatherCard/>
-            <WeatherCard/>
-        </div>
-        </div>
-
+      
 
 
 
@@ -221,6 +213,16 @@ export default function Dashboard() {
               </Table>
             </TableContainer>
           </article>
+
+          <div className=' dashboard-grid-item-col6 dashboard-task'>
+        <div className='flex justify-between flex-wrap'> 
+        <WeatherCard/>
+            <WeatherCard/>
+            <WeatherCard/>
+            <WeatherCard/>
+        </div>
+        </div>
+
           
 
 
@@ -367,10 +369,7 @@ export default function Dashboard() {
 
           
 
-          <article className='dashboard-card dashboard-grid-item-col2 dashboard-report'>
-            <h2 className="dashboard-card-heading text-[#4a4a69]">
-              Finance Report
-            </h2>
+         
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-report bg-white'>
   <h2 className="dashboard-card-heading text-[#4a4a69]">
     Finance Report

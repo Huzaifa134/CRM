@@ -640,7 +640,7 @@ function goToQueries() {
     {
       cellRenderer: (params) => {
 
-        return (
+  
 
        if (params.data.section === "big-section") {
         return (<Link to={"/queries/proposalSent/viewProposal"}><div className="flex items-center justify-start "><button>View Proposal</button></div></Link>)
