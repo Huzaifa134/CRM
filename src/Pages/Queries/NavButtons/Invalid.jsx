@@ -586,16 +586,31 @@ function goToQueries() {
       id: "102498",
     },
     {
+      section: "big-section"
+    },
+    {
       id: "102499",
+    },
+    {
+      section: "big-section"
     },
     {
       id: "102500",
     },
     {
+      section: "big-section"
+    },
+    {
       id: "102501",
     },
     {
+      section: "big-section"
+    },
+    {
       id: "102502",
+    },
+    {
+      section: "big-section"
     },
   ];
 
@@ -606,15 +621,25 @@ function goToQueries() {
   const [column, setColumn] = useState([
     {
       headerCheckboxSelection: true,
-      checkboxSelection: true,
+      checkboxSelection: (params) => params.data.section !== "big-section", // Set checkboxSelection dynamically
       sortable: false,
       filter: false,
       flex: 0.2,
       cellClass: 'custom-checkbox', // Add this line to apply the custom class
+      // colspan: (params) =>{
+      //   if (params.data.section === "big-section") {
+          
+      //     return 8
+      //   }else{
+      //     return 1
+      //   }
+      // }
     },
     {
       cellRenderer: (params) => {
-        return (
+       if (params.data.section === "big-section") {
+        return (<Link to={"/queries/proposalSent/viewProposal"}><div className="flex items-center justify-start "><button>View Proposal</button></div></Link>)
+       } return (
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly   h-[45%]">
               <p className="h-5 text-blue-600 text-base hover:text-blue-800 font-semibold cursor-pointer">
@@ -642,6 +667,9 @@ function goToQueries() {
     },
     {
       cellRenderer: (params) => {
+        if (params.data.section === "big-section") {
+          return ""
+         }
         return (
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
@@ -668,6 +696,9 @@ function goToQueries() {
     },
     {
       cellRenderer: (params) => {
+        if (params.data.section === "big-section") {
+          return ""
+         }
         return (
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
@@ -697,6 +728,9 @@ function goToQueries() {
     },
     {
       cellRenderer: (params) => {
+        if (params.data.section === "big-section") {
+          return ""
+         }
         return (
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
@@ -731,6 +765,9 @@ function goToQueries() {
     },
     {
       cellRenderer: (params) => {
+        if (params.data.section === "big-section") {
+          return ""
+         }
         return (
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
@@ -765,9 +802,14 @@ function goToQueries() {
     },
     {
       cellRenderer: (params) => {
+        if (params.data.section === "big-section") {
+          return ""
+         }
         return (
+
           <div className="flex flex-col h-full w-full ml-[30%]">
             <div className="flex w-full flex-col justify-center items-start  h-[45%]">
+
               <div className=" w-full h-8 flex items-center">
                 <Link to={`/queries/${params.data.id}`}>
                 <div className="border px-2 p-1 text-xs bg-gradient-to-t from-[#e9e4e4]  to-[#fff] hover:bg-gradient-to-b from-[#f3f3f3]  to-[#e9e4e4]-md  flex items-center gap-1">
@@ -834,6 +876,7 @@ function goToQueries() {
         );
       },
     },
+ 
   ]);
 
   const [row, setRow] = useState(data);
@@ -1056,7 +1099,7 @@ function goToQueries() {
   ))}
 </div>
 
-      <div className="h-[80%] w-full mt-[6px] px-5 overflow-x-auto ">
+<div className="h-[80%] w-full mt-[6px] px-5 overflow-x-auto ">
         <div className="ag-theme-quartz h-full xl:w-full  w-[1200px]">
           <AgGridReact
             onGridReady={onGridReady}
@@ -1069,8 +1112,10 @@ function goToQueries() {
             suppressColumnHeaders={true}
             rowSelection="multiple"
             className="Grid"
-            rowHeight={120}
+            // rowHeight={120}
+            getRowHeight={ (params) => params.data.section === "big-section" ? 28 : 120}
           />
+          
         </div>
       </div>
 

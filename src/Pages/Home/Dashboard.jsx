@@ -27,9 +27,11 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import "./dashboard.css"
 import { RiExternalLinkFill } from 'react-icons/ri';
+
 import WeatherCard from './Weather';
 import { IoLocationSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+
 
 
 
@@ -83,6 +85,8 @@ export default function Dashboard() {
 
   const data = [
     { id: 25455, name: 'Ammazing Dubai Tour (5 Nights / 6 Days)', assigned: "Mr. Meten Ranjani 4 Adults | 2 Child", confirmed: "Day 2 (02/jan/2024) | Srinagar To Gulmarg Early Morning proceed to Gulmarg Via Tangmarg Road , driving past willow trees , fast flowoing streams ansd lush green meadows. Gulmarg- the meadows of flowers is an apt tem ...." ,detail:"Driver name: Naveed Mustufa , Mobile Number : +912222333 , Vechile No : Jkl 556 , Vehicle with : Non Ac" },
+    { id: 25455, name: 'Ammazing Dubai Tour (5 Nights / 6 Days)', assigned: "Mr. Meten Ranjani 4 Adults | 2 Child", confirmed: "Day 2 (02/jan/2024) | Srinagar To Gulmarg Early Morning proceed to Gulmarg Via Tangmarg Road , driving past willow trees , fast flowoing streams ansd lush green meadows. Gulmarg- the meadows of flowers is an apt tem ...." ,detail:"Driver name: Naveed Mustufa , Mobile Number : +912222333 , Vechile No : Jkl 556 , Vehicle with : Non Ac" },
+    { id: 25455, name: 'Ammazing Dubai Tour (5 Nights / 6 Days)', assigned: "Mr. Meten Ranjani 4 Adults | 2 Child", confirmed: "Day 2 (02/jan/2024) | Srinagar To Gulmarg Early Morning proceed to Gulmarg Via Tangmarg Road , driving past willow trees , fast flowoing streams ansd lush green meadows. Gulmarg- the meadows of flowers is an apt tem ...." ,detail:"Driver name: Naveed Mustufa , Mobile Number : +912222333 , Vechile No : Jkl 556 , Vehicle with : Non Ac" },
     // { id: 25455, name: 'Ajay kumar', assigned: 212, confirmed: 140 },
     // { id: 3, name: 'Faizan Raza Khan', assigned: 90, confirmed: 55 },
     // { id: 4, name: 'ratan kumar', assigned: 83, confirmed: 22 },
@@ -106,42 +110,13 @@ export default function Dashboard() {
   };
 
   return (
-    <div className='p-5'>
+    <div className='p-5 bg-[#f7f9fa]'>
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <main className="dashboard-container">
-          <article data-type="todaysqueries" className='dashboard-card dashboard-data' >
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-[#0cb5b5]' />Today's Queries</h2>
-            <p style={{ color: "#0cb5b5"}}>0</p>
-            <a href='#'><span>Open</span></a>
-          </article>
-          <article data-type="totalqueries" className='dashboard-card dashboard-data'>
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-violet-600' /> Total Queries</h2>
-            <p style={{ color: "#655be6"}}>2033</p>
-            <a href='#'><span>Open</span></a>
-          </article>
-          <article data-type="proposal" className='dashboard-card dashboard-data'>
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-[#0f1f3e]' />Proposal Sent</h2>
-            <p style={{ color: "#0f1f3e"}}>30</p>
-            <a href='#'><span>Open</span></a>
-          </article>
-          <article data-type="proconf" className='dashboard-card dashboard-data'>
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-[#cc00a9]' />Total Pro. Conf</h2>
-            <p style={{ color: "#cc00a9"}}>248</p>
-            <a href='#'><span>Open</span></a>
-          </article>
-          <article data-type="confirmed" className='dashboard-card dashboard-data'>
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-[#6c757d]' />Total Confirmed</h2>
-            <p style={{marginLeft: "-50px" , color: "#6c757d"}}>1002</p>
-            <a href='#'><span>Open</span></a>
-          </article>
-          <article data-type="lost" className='dashboard-card dashboard-data'>
-            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-[#f9392f]' />Total Lost</h2>
-            <p style={{ color: "#f9392f"}}>25</p>
-            <a href='#'><span>Open</span></a>
-          </article>
 
-          <article className="dashboard-card dashboard-grid-item-col3 dashboard-create">
+      
+        <article className="dashboard-card dashboard-grid-item-col2 dashboard-create h-[170px] bg-white">
             <div>
               <p style={{ color: "#38cab3"}}>Good Morning</p>
               <p>Time to Travel</p>
@@ -190,7 +165,7 @@ export default function Dashboard() {
             </div>
           </article>
 
-          <article className="dashboard-card dashboard-grid-item-col3 dashboard-task">
+          <article className="dashboard-card dashboard-grid-item-col2 dashboard-task bg-white">
             <h2 className="dashboard-card-heading text-[#4a4a69]">
               Task/Followups
             </h2>
@@ -216,14 +191,148 @@ export default function Dashboard() {
 
 
 
-          <article className='dashboard-card dashboard-grid-item-col6 dashboard-tours'>
-            {/* <h2 className="dashboard-card-heading text-[#4a4a69]">
+          
+
+          <article className="dashboard-card dashboard-grid-item-col2 dashboard-payment bg-white">
+            <h2 className="dashboard-card-heading text-[#4a4a69]">
+              Payment Collection
+            </h2>
+
+            <TableContainer sx={{ marginTop: '1.5rem', maxHeight: '300px' }}>
+              <Table size='small' aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Query ID</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Amount</TableCell>
+                    <TableCell>Status</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {payments.map((row) => (
+                    <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                      <TableCell component="th" scope="row">{row.id}</TableCell>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.amount}</TableCell>
+                      <TableCell sx={{ color: row.status === 'overdue' ? 'red' : 'black' }}> <p className='bg-[red] text-white text-center rounded-md text-xs py-1 px-2' >{row.status}</p> </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </article>
+          
+
+
+          <div class="flex items-center justify-center   dashboard-grid-item-col6">
+  <section class="grid sm:grid-cols-2 lg:grid-cols-6 gap-6 w-full ">
+    <Link to={"/queries"}>
+      <div class="relative p-4 bg-gradient-to-r from-[#636363] cursor-pointer to-[#1a1a1a] rounded-md overflow-hidden">
+        <div class="relative z-10 mb-4 text-white text-4xl leading-none font-semibold">0</div>
+        <div class="relative z-10 text-[#a1a1a1] leading-none font-semibold">Today's Queries</div>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8 text-[#000] opacity-50">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    </Link>
+    
+    <Link to={"/queries"}>
+      <div class="relative p-4 bg-gradient-to-r cursor-pointer from-blue-400 to-blue-600 rounded-md overflow-hidden">
+        <div class="relative z-10 mb-4 text-white text-4xl leading-none font-semibold">2033</div>
+        <div class="relative z-10 text-blue-200 leading-none font-semibold">Total Queries</div>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8 text-blue-700 opacity-50">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      </div>
+    </Link>
+    
+    <Link to={"/queries/proposalSent"}>
+      <div class="relative p-4 bg-gradient-to-r cursor-pointer from-[#7dcccc] to-[#0cb5b5] rounded-md overflow-hidden">
+        <div class="relative z-10 mb-4 text-white text-4xl leading-none font-semibold">30</div>
+        <div class="relative z-10 text-[#acffff] leading-none font-semibold">Proposal Sent</div>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8 text-[#106666] opacity-50">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      </div>
+    </Link>
+
+
+    <Link to={"/queries/followUp"}>
+      <div class="relative p-4 bg-gradient-to-r cursor-pointer from-yellow-400 to-yellow-600 rounded-md overflow-hidden">
+        <div class="relative z-10 mb-4 text-white text-4xl leading-none font-semibold">248</div>
+        <div class="relative z-10 text-yellow-200 leading-none font-semibold">Total Pro. Conf</div>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8 text-yellow-700 opacity-50">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      </div>
+    </Link>
+
+    <Link to={"/queries/confirmed"}>
+      <div class="relative p-4 bg-gradient-to-r cursor-pointer from-[#78ffc4] to-[#46cd93] rounded-md overflow-hidden">
+        <div class="relative z-10 mb-4 text-white text-4xl leading-none font-semibold">1002</div>
+        <div class="relative z-10 text-[#ffffff] leading-none font-semibold">Total Confirmed</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/15889/15889146.png" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8 opacity-25"/>
+      </div>
+    </Link>
+
+    <Link to={"/queries/invalid"}>
+      <div class="relative p-4 bg-gradient-to-r cursor-pointer from-[#ff8a83] to-[#f9392f] rounded-md overflow-hidden">
+        <div class="relative z-10 mb-4 text-white text-4xl leading-none font-semibold">25</div>
+        <div class="relative z-10 text-[#ffdddb] leading-none font-semibold">Total Lost</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/4221/4221551.png" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8  opacity-25"/>
+      </div>
+    </Link>
+  </section>
+</div>
+
+
+          
+
+{/* 
+          <article data-type="todaysqueries" className='dashboard-card dashboard-data bg-white' >
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-[#0cb5b5]' />Today's Queries</h2>
+            <p style={{ color: "#0cb5b5"}}>0</p>
+            <a href='#'><span>Open</span></a>
+          </article>
+          <article data-type="totalqueries" className='dashboard-card dashboard-data bg-white'>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-violet-600' /> Total Queries</h2>
+            <p style={{ color: "#655be6"}}>2033</p>
+            <a href='#'><span>Open</span></a>
+          </article>
+          <article data-type="proposal" className='dashboard-card dashboard-data bg-white'>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-3xl text-[#0f1f3e]' />Proposal Sent</h2>
+            <p style={{ color: "#0f1f3e"}}>30</p>
+            <a href='#'><span>Open</span></a>
+          </article>
+          <article data-type="proconf" className='dashboard-card dashboard-data bg-white'>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-[#cc00a9]' />Total Pro. Conf</h2>
+            <p style={{ color: "#cc00a9"}}>248</p>
+            <a href='#'><span>Open</span></a>
+          </article>
+          <article data-type="confirmed" className='dashboard-card dashboard-data bg-white'>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-[#6c757d]' />Total Confirmed</h2>
+            <p style={{marginLeft: "-50px" , color: "#6c757d"}}>1002</p>
+            <a href='#'><span>Open</span></a>
+          </article>
+          <article data-type="lost" className='dashboard-card dashboard-data bg-white'>
+            <h2 className='flex gap-2 items-center text-[#4a4a69]'><RiExternalLinkFill className='text-2xl text-[#f9392f]' />Total Lost</h2>
+            <p style={{ color: "#f9392f"}}>25</p>
+            <a href='#'><span>Open</span></a>
+          </article> */}
+
+          
+
+         
+
+          <article className='dashboard-card dashboard-grid-item-col6 dashboard-tours bg-white'>
+            <h2 className="dashboard-card-heading text-[#4a4a69] mb-3">
+
               Today's tours
-            </h2> */}
-            <div className="overflow-x-auto">
-            <table className="min-w-full bg-white">
-                <thead>
-                    <tr>
+            </h2>
+            <div className="overflow-x-auto h-72 overflow-y-scroll">
+            <table className="min-w-full bg-white  ">
+                <thead className=''>
+                    <tr className='sticky top-0'>
                         <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-600">Query ID</th>
                         <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-600">Tour Details</th>
                         <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-600">Client Details</th>
@@ -231,7 +340,7 @@ export default function Dashboard() {
                         <th className="py-2 px-4 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-600">Night Stay At</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className=''>
                     {data.map(row => (
                         <tr key={row.id} className="align-top">
                             <td className="py-2 px-4 border-b border-gray-200">{row.id}</td>
@@ -246,12 +355,12 @@ export default function Dashboard() {
         </div>
 
             <div className='mt-5'>
-           
-
-              <Btn>
-                
-                View all tours
-              </Btn>
+        
+              <Link to={"/toursReport"}>
+                <Btn>
+                  View all tours
+                </Btn>
+              </Link>
             </div>
           </article>
 
@@ -262,43 +371,52 @@ export default function Dashboard() {
             <h2 className="dashboard-card-heading text-[#4a4a69]">
               Finance Report
             </h2>
+          <article className='dashboard-card dashboard-grid-item-col2 dashboard-report bg-white'>
+  <h2 className="dashboard-card-heading text-[#4a4a69]">
+    Finance Report
+  </h2>
 
-            <div>
-              <p className='flex border-[1px] flex-col-reverse bg-[#f9f9f9]'>
-                <span>2024 Sales</span>
-                <span style={{color: "#4a4a69"}}>{numberFormatter.format(financialReport.yearlySales)}</span>
-              </p>
-              <p className='flex border-[1px] flex-col-reverse bg-[#f9f9f9]'>
-                <span>2024 Collections</span>
-                <span style={{color: "#4a4a69"}}>{numberFormatter.format(financialReport.yearlyCollections)}</span>
-              </p>
-            </div>
+  <div className='flex flex-col'>
+    
+    <div className='flex flex-col gap-2'>
+      <p style={{backgroundColor:"#d2f1ff"}}>
+        <span style={{fontWeight: "600" , color: "#4a4a69" , fontSize: "15px"}}>This Month Sales</span>
+        <span style={{fontWeight: "600" , color: "black" , fontSize: "17px"}}>{numberFormatter.format(financialReport.monthlySales)}</span>
+      </p>
+      <p style={{backgroundColor:"#d2ffc1"}}>
+        <span style={{fontWeight: "600" , color: "#4a4a69" , fontSize: "15px"}} >This Month Collections</span>
+        <span style={{fontWeight: "600" , color: "black" , fontSize: "17px"}}>{numberFormatter.format(financialReport.monthlyCollections)}</span>
+      </p>
+      <p style={{backgroundColor:"#ffe1e1"}}>
+        <span style={{fontWeight: "600" , color: "#4a4a69" , fontSize: "15px"}} >Total Pending Collection</span>
+        <span style={{fontWeight: "600" , color: "black" , fontSize: "17px"}}>{numberFormatter.format(financialReport.pendingCollections)}</span>
+      </p>
+      <p style={{backgroundColor:"#ffeeb3"}}>
+        <span style={{fontWeight: "600" , color: "#4a4a69" , fontSize: "15px"}} >Total Supplier Pending</span>
+        <span style={{fontWeight: "600" , color: "black" , fontSize: "17px"}}>{numberFormatter.format(financialReport.totalSupplierPending)}</span>
+      </p>
+      <p style={{backgroundColor:"#eee1ff"}}>
+        <span style={{fontWeight: "600" , color: "#4a4a69" , fontSize: "15px"}} >This Month Expense</span>
+        <span style={{fontWeight: "600" , color: "black" , fontSize: "17px"}}>{numberFormatter.format(financialReport.monthlyExpense)}</span>
+      </p>
+    </div>
 
-            <div>
-              <p style={{backgroundColor:"#d2f1ff"}}>
-                <span style={{fontWeight: "600" , color: "#4a4a69"}}>This Month Sales</span>
-                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.monthlySales)}</span>
-              </p>
-              <p style={{backgroundColor:"#d2ffc1"}}>
-                <span style={{fontWeight: "600" , color: "#4a4a69"}} >This Month Collections</span>
-                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.monthlyCollections)}</span>
-              </p>
-              <p style={{backgroundColor:"#ffe1e1"}}>
-                <span style={{fontWeight: "600" , color: "#4a4a69"}} >Total Pending Collection</span>
-                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.pendingCollections)}</span>
-              </p>
-              <p style={{backgroundColor:"#ffeeb3"}}>
-                <span style={{fontWeight: "600" , color: "#4a4a69"}} >Total Supplier Pending</span>
-                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.totalSupplierPending)}</span>
-              </p>
-              <p style={{backgroundColor:"#eee1ff"}}>
-                <span style={{fontWeight: "600" , color: "#4a4a69"}} >This Month Expense</span>
-                <span style={{fontWeight: "600" , color: "black"}}>{numberFormatter.format(financialReport.monthlyExpense)}</span>
-              </p>
-            </div>
-          </article>
+    <div className='flex justify-between mt-1'>
+      <p className='flex flex-col-reverse border-[1px] bg-[#f9f9f9]'>
+        <span>2024 Sales</span>
+        <span style={{color: "#4a4a69"}}>{numberFormatter.format(financialReport.yearlySales)}</span>
+      </p>
+      <p className='flex flex-col-reverse border-[1px] bg-[#f9f9f9]'>
+        <span>2024 Collections</span>
+        <span style={{color: "#4a4a69"}}>{numberFormatter.format(financialReport.yearlyCollections)}</span>
+      </p>
+    </div>
 
-          <article className='dashboard-card dashboard-grid-item-col2 dashboard-chart'>
+  </div>
+</article>
+
+
+          <article className='dashboard-card dashboard-grid-item-col2 dashboard-chart bg-white'>
             <h2 className="dashboard-card-heading text-[#4a4a69]">
               This year queries
             </h2>
@@ -321,7 +439,7 @@ export default function Dashboard() {
 
 
 
-          <article className='dashboard-card dashboard-grid-item-col2 dashboard-chart'>
+          <article className='dashboard-card dashboard-grid-item-col2 dashboard-chart bg-white'>
             <h2 className="dashboard-card-heading text-[#4a4a69]">
               Queries by status
             </h2>
@@ -405,7 +523,8 @@ export default function Dashboard() {
         </div>
 
 
-          <article className='dashboard-card dashboard-grid-item-col2 dashboard-sales'>
+
+          <article className='dashboard-card dashboard-grid-item-col2 dashboard-sales bg-white'>
             <h2 className="dashboard-card-heading text-[#4a4a69]">
               Sales Rep
             </h2>
@@ -434,7 +553,7 @@ export default function Dashboard() {
             </TableContainer>
           </article>
 
-          <article className='dashboard-card dashboard-grid-item-col2 dashboard-sales'>
+          <article className='dashboard-card dashboard-grid-item-col2 dashboard-sales bg-white'>
             <h2 className="dashboard-card-heading text-[#4a4a69]">
               Top Lead Sources
             </h2>
@@ -463,34 +582,7 @@ export default function Dashboard() {
             </TableContainer>
           </article>
 
-          <article className="dashboard-card dashboard-grid-item-col2 dashboard-payment">
-            <h2 className="dashboard-card-heading text-[#4a4a69]">
-              Payment Collection
-            </h2>
-
-            <TableContainer sx={{ marginTop: '1.5rem', maxHeight: '300px' }}>
-              <Table size='small' aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Query ID</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Amount</TableCell>
-                    <TableCell>Status</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {payments.map((row) => (
-                    <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                      <TableCell component="th" scope="row">{row.id}</TableCell>
-                      <TableCell>{row.name}</TableCell>
-                      <TableCell>{row.amount}</TableCell>
-                      <TableCell sx={{ color: row.status === 'overdue' ? 'red' : 'black' }}> <p className='bg-[red] text-white text-center rounded-md text-xs ' >{row.status}</p> </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </article>
+          
         </main>
       </LocalizationProvider>
     </ThemeProvider>
