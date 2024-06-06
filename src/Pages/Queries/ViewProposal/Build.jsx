@@ -963,7 +963,7 @@ const changePhotoModal = <div>
         </Menu>
 
 
-        <CenterModal open={modalOpen} onClose={handleCloseModal} data={iconModal3}/>
+        <CenterModal open={modalOpen} onClose={handleCloseModal} data={modalOpen}/>
 
        
         

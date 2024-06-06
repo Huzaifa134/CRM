@@ -65,6 +65,7 @@ import Canceled from "./Pages/Queries/NavButtons/Canceled";
 import EmailInbox from "./Components/Navbar/EmailInbox";
 import DownloadVoucher from "./Pages/Queries/pages/DownloadVoucher";
 import ReiviewCampaign from "./Pages/createCampaign/ReiviewCampaign";
+import Activity from "./Pages/Settings/AdminSettingPages/Activity";
 
 const App = () => {
   const Layout = () => {
@@ -184,6 +185,7 @@ const App = () => {
         { path: "/manageProfile/editProfile", element: <EditProfile />},
         { path: "/weatherSetting", element: <WeatherSetting /> },
         { path: "/currency", element: <Currency /> },
+        { path: "/activity", element: <Activity /> },
         { path: "/queriesDetail", element: <QueriesDetail/> },
         { path: "/emailInbox", element: <EmailInbox/> },
         { path: "/downloadVoucher", element: <DownloadVoucher/> },

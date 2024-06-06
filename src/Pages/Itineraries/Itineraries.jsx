@@ -172,7 +172,7 @@ function Itineraries() {
       },
     },
     {
-      headerName: "Website Cost",
+      headerName: "Update In",
       field: "websitecost",
       flex: 0.5,
       cellStyle: { display: "flex", alignItems: "center" },
@@ -184,50 +184,50 @@ function Itineraries() {
         );
       },
     },
+    // {
+    //   headerName: "Website",
+    //   field: "website",
+    //   flex: 0.5,
+    //   cellStyle: { display: "flex", alignItems: "center" },
+    //   cellRenderer: (params) => {
+    //     return (
+    //       <div className="flex items-center justify-center w-full h-10">
+    //         <div
+    //           className={`flex items-center justify-center w-14 ${
+    //             params.value === "Active".toLocaleLowerCase()
+    //               ? "bg-green-700"
+    //               : "bg-[#f9392f]"
+    //           }  text-white rounded-md h-[70%]`}
+    //         >
+    //           Yes
+    //         </div>
+    //       </div>
+    //     );
+    //   },
+    // },
+    // {
+    //   headerName: "Market Place",
+    //   field: "Marketplace",
+    //   flex: 0.5,
+    //   cellStyle: { display: "flex", alignItems: "center" },
+    //   cellRenderer: (params) => {
+    //     return (
+    //       <div className="flex items-center justify-center w-full h-10">
+    //         <div
+    //           className={`flex items-center justify-center w-14 ${
+    //             params.value === "Active".toLocaleLowerCase()
+    //               ? "bg-green-700"
+    //               : "bg-[#f9392f]"
+    //           }  text-white rounded-md h-[70%]`}
+    //         >
+    //           Shared
+    //         </div>
+    //       </div>
+    //     );
+    //   },
+    // },
     {
-      headerName: "Website",
-      field: "website",
-      flex: 0.5,
-      cellStyle: { display: "flex", alignItems: "center" },
-      cellRenderer: (params) => {
-        return (
-          <div className="flex items-center justify-center w-full h-10">
-            <div
-              className={`flex items-center justify-center w-14 ${
-                params.value === "Active".toLocaleLowerCase()
-                  ? "bg-green-700"
-                  : "bg-[#f9392f]"
-              }  text-white rounded-md h-[70%]`}
-            >
-              Yes
-            </div>
-          </div>
-        );
-      },
-    },
-    {
-      headerName: "Market Place",
-      field: "Marketplace",
-      flex: 0.5,
-      cellStyle: { display: "flex", alignItems: "center" },
-      cellRenderer: (params) => {
-        return (
-          <div className="flex items-center justify-center w-full h-10">
-            <div
-              className={`flex items-center justify-center w-14 ${
-                params.value === "Active".toLocaleLowerCase()
-                  ? "bg-green-700"
-                  : "bg-[#f9392f]"
-              }  text-white rounded-md h-[70%]`}
-            >
-              Shared
-            </div>
-          </div>
-        );
-      },
-    },
-    {
-      headerName: "Updated",
+      headerName: "Updated It",
       field: "updated",
       flex: 0.5,
       cellStyle: { display: "flex", alignItems: "center" },

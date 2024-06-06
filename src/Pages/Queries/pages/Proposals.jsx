@@ -506,6 +506,11 @@ const sharePublicly = <div>
                 <td>By: Time to..</td>
                 <td>Created:09/05/2024</td>
               </tr>
+         
+              <tr >
+                <td  className="pt-5">Package duration</td>
+                <td  className="pt-5">04 days & 03 Nights</td>
+              </tr>
             </tbody>
           </table>
         </div>

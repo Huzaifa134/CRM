@@ -14,6 +14,8 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CommuteIcon from '@mui/icons-material/Commute';
 import { Link } from "react-router-dom";
 import "./adminSetting.css";
+import NaturePeopleIcon from '@mui/icons-material/NaturePeople';
+
 
 export default function AdminSetting() {
   return (
@@ -89,6 +91,11 @@ export default function AdminSetting() {
         <Link   target="_blank" className="w-[48%] md:w-[30%]" to={"/currency"}>
           <AttachMoneyIcon fontSize="large" />
           Currency
+        </Link>
+
+        <Link   target="_blank" className="w-[48%] md:w-[30%]" to={"/activity"}>
+          < NaturePeopleIcon fontSize="large" />
+          Activity
         </Link>
       </section>
     </main>

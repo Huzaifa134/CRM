@@ -8,7 +8,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import { FaEye, FaFilter, FaSearch, FaWhatsapp } from "react-icons/fa";
+import { FaEye, FaFilter, FaRegEye, FaSearch, FaWhatsapp } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import CloseIcon from "@mui/icons-material/Close";
@@ -31,6 +31,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { IoClose } from "react-icons/io5";
 import CenterModal from "./ViewProposal/CenterModal";
+import { IoIosEye } from "react-icons/io";
+
 
 
 
@@ -75,6 +77,7 @@ function Queries() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
+
 
   const handleOpenModal = (content) => {
     console.log("Opening modal with content:", content);
@@ -319,7 +322,9 @@ function Queries() {
         <div className="buttons">
    <FormGroup  FormGroup row sx={{ gap: '0.5rem',  flexWrap: 'nowrap', '& > *': { flex: 1 }, color: "red" }}>
         <BtnOutlined  handleClicked={closeDrawer}>Cancel</BtnOutlined>
-        <button className="bg-[#16a34a] hover:bg-green-900 text-[#ffff]"> <Link to="./queriesDetail">Save</Link> </button>
+        <Link to="./queriesDetail">
+      <button className="bg-[#16a34a] w-64 p-2 transition-all hover:bg-green-900 text-[#ffff]"> Save</  button>
+    </Link>
       </FormGroup>
    </div>
       </form>
@@ -593,6 +598,7 @@ function Queries() {
     {
       id: "102502",
     },
+   
   ];
 
   const onGridReady = (params) => {
@@ -611,26 +617,34 @@ function Queries() {
     {
       cellRenderer: (params) => {
         return (
-          <div className="flex flex-col h-full w-full">
-            <div className="flex w-full flex-col justify-evenly   h-[45%]">
-              <p className="h-5 text-blue-600 text-base hover:text-blue-800 font-semibold cursor-pointer">
-                {params.data.id}
-              </p>
-              <div className="w-fit h-5 px-2 flex justify-center items-center  rounded-md bg-[#0cb5b5]">
-                <span className="text-xs font-bold text-white">Active</span>
-              </div>
-            </div>
-            <div className="flex flex-col h-[45%]">
-              <div className=" h-6 text-slate-600 flex items-center">
-                Requirement
-              </div>
-              <div className=" h-2 flex items-center font-bold text-sm  ">
-                Hotel + Flight
-              </div>
-            </div>
+      <div>
+            <div className="flex flex-col h-full w-full">
+    <div className="flex w-full flex-col justify-evenly h-[45%]">
+      <p className="h-5 text-blue-600 text-base hover:text-blue-800 font-semibold cursor-pointer">
+        <Link to={`/queries/${params.data.id}`}>
+          {params.data.id}
+        </Link>
+      </p>
+      <div className="w-fit h-5 px-2 flex justify-center items-center rounded-md bg-[#0cb5b5]">
+        <span className="text-xs font-bold text-white">Active</span>
+      </div>
+    </div>
+    <div className="flex flex-col h-[45%]">
+      <div className="h-6 text-slate-600 flex items-center">
+        Requirement
+      </div>
+      <div className="h-2 flex items-center font-bold text-sm">
+        Hotel + Flight
+      </div>
+    </div>
+    <div className="h-[10%]"></div>
+  </div>
 
-            <div className="h-[10%]"></div>
-          </div>
+
+      </div>
+
+
+          
         );
       },
     },
@@ -695,10 +709,8 @@ function Queries() {
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
               <span className="h-2 flex items-center">
-                <CardGiftcardOutlinedIcon
-                  style={{ color: "gray", fontSize: 17 }}
-                />
-                <span className="text-xs text-slate-600">10-04-2024</span>
+                <CalendarMonthOutlinedIcon style={{ color: "gray", fontSize: 17 }}  />
+                <span className="text-xs text-slate-600 ml-1">10-04-2024</span>
               </span>
               <span className="h-1 flex items-center">
                 Till :
@@ -729,25 +741,25 @@ function Queries() {
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
               <span className="h-2 flex items-center">
-                <CalendarMonthOutlinedIcon
-                  style={{ color: "gray", fontSize: 17 }}
-                />
-                <span className="text-xs text-slate-600">10-04-2024</span>
+              
+                <span className="text-xs text-slate-600 ">No Task</span>
               </span>
               <span className="h-1 flex items-center">
                 <TextSnippetOutlinedIcon
                   style={{ color: "#ffa500", fontSize: 17 }}
                 />
-                <span className="text-xs text-slate-600">&nbsp;No Notes</span>
+                <span className="text-xs text-slate-600 ml-1">&nbsp;No Notes</span>
               </span>
             </div>
             <div className="flex flex-col h-[45%]">
-              <span className="h-5 flex items-center">
+            <p className="">
+            <span className="h-5 flex items-center">
                 <AccessTimeOutlinedIcon
                   style={{ color: "gray", fontSize: 17 }}
                 />
-                <span className="text-xs text-slate-600">Created</span>
+                <span className="text-xs text-slate-600 ml-2">Created</span>
               </span>
+            </p>
               <span className="h-4 flex items-center">
                 <span className="text-xs text-slate-600">10-04-2024</span>
               </span>
@@ -762,25 +774,25 @@ function Queries() {
     {
       cellRenderer: (params) => {
         return (
-          <div className="flex flex-col h-full w-full">
+          <div className="flex flex-col h-full w-full ml-[30%]">
             <div className="flex w-full flex-col justify-center items-start  h-[45%]">
               <div className=" w-full h-8 flex items-center">
                 <Link to={`/queries/${params.data.id}`}>
-                  <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 rounded-full flex justify-center items-center">
-                    <MdRemoveRedEye  
+                <div className="border px-2 p-1 text-xs bg-gradient-to-t from-[#e9e4e4]  to-[#fff] hover:bg-gradient-to-b from-[#f3f3f3]  to-[#e9e4e4]-md  flex items-center gap-1">
+                    <FaRegEye  
                       className="group-hover:text-white"
                       style={{ fontSize: 17 }}
                     />
                   </div>
                 </Link>
 
-                <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
+                <div className="border px-2 p-1 text-xs bg-gradient-to-t from-[#e9e4e4]  to-[#fff] hover:bg-gradient-to-b from-[#f3f3f3]  to-[#e9e4e4]-md  flex items-center gap-1">
                   <FaWhatsapp
                     className="group-hover:text-white"
                     style={{ fontSize: 17 }}
                   />
                 </div>
-                <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
+                <div className="border px-2 p-1 text-xs bg-gradient-to-t from-[#e9e4e4]  to-[#fff] hover:bg-gradient-to-b from-[#f3f3f3]  to-[#e9e4e4]-md  flex items-center gap-1">
                   <EmailOutlinedIcon
                     className="group-hover:text-white"
                     style={{ fontSize: 17 }}
@@ -789,10 +801,10 @@ function Queries() {
                 <Link to={`/queries/${params.data.id}`}>
                 <div
                
-                  className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center"
+                  className="border px-2 p-1 text-xs bg-gradient-to-t from-[#e9e4e4]  to-[#fff] hover:bg-gradient-to-b from-[#f3f3f3]  to-[#e9e4e4]-md  flex items-center gap-1"
                 >
                   <EditOutlinedIcon
-                    className="group-hover:text-white"
+                    className=""
                     style={{ fontSize: 17 }}
                   />
                 </div>
@@ -828,8 +840,11 @@ function Queries() {
             <div className="h-[10%]"></div>
           </div>
         );
+        
       },
+      
     },
+ 
   ]);
 
   const [row, setRow] = useState(data);

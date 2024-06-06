@@ -26,6 +26,8 @@ import { IoClose } from "react-icons/io5";
 import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import {  LocalizationProvider } from '@mui/x-date-pickers';
+import { FaRegEye } from "react-icons/fa";
+
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 let destinations = [];
@@ -328,7 +330,9 @@ function AddQueryForm({ closeDrawer }) {
       <div className="buttons">
    <FormGroup  FormGroup row sx={{ gap: '0.5rem',  flexWrap: 'nowrap', '& > *': { flex: 1 }, color: "red" }}>
         <BtnOutlined  handleClicked={closeDrawer}>Cancel</BtnOutlined>
-        <button className="bg-[#16a34a] hover:bg-green-900 text-[#ffff]"> <Link to="./queriesDetail">Save</Link> </button>
+        <Link to="/queries/ProposalSent/detail">
+      <button className="bg-[#16a34a] w-64 p-2 transition-all hover:bg-green-900 text-[#ffff]"> SAVE</  button>
+    </Link>
       </FormGroup>
    </div>
    
@@ -613,11 +617,12 @@ function goToQueries() {
     {
       cellRenderer: (params) => {
         return (
-         <>
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly   h-[45%]">
               <p className="h-5 text-blue-600 text-base hover:text-blue-800 font-semibold cursor-pointer">
+              <Link to={`/queries/${params.data.id}`}>
                 {params.data.id}
+              </Link>
               </p>
               <div className="w-fit h-5 px-2 flex justify-center items-center  rounded-md bg-[#0cb5b5]">
                 <span className="text-xs font-bold text-white">Active</span>
@@ -634,17 +639,8 @@ function goToQueries() {
 
             <div className="h-[10%]"></div>
           </div>
-             <div>
-             <button>Grapes</button>
-         </div>
-         </>
         );
-     
       },
-   
-    
-
-    
     },
     {
       cellRenderer: (params) => {
@@ -675,7 +671,6 @@ function goToQueries() {
     {
       cellRenderer: (params) => {
         return (
-         <>
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
               <p className="text-sm font-semibold h-3">Destination</p>
@@ -699,8 +694,6 @@ function goToQueries() {
 
             <div className="h-[10%]"></div>
           </div>
-        
-         </>
         );
       },
     },
@@ -710,10 +703,10 @@ function goToQueries() {
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
               <span className="h-2 flex items-center">
-                <CardGiftcardOutlinedIcon
+                <CalendarMonthOutlinedIcon
                   style={{ color: "gray", fontSize: 17 }}
                 />
-                <span className="text-xs text-slate-600">10-04-2024</span>
+                <span className="text-xs text-slate-600 ml-1">10-04-2024</span>
               </span>
               <span className="h-1 flex items-center">
                 Till :
@@ -744,16 +737,14 @@ function goToQueries() {
           <div className="flex flex-col h-full w-full">
             <div className="flex w-full flex-col justify-evenly  h-[45%]">
               <span className="h-2 flex items-center">
-                <CalendarMonthOutlinedIcon
-                  style={{ color: "gray", fontSize: 17 }}
-                />
-                <span className="text-xs text-slate-600">10-04-2024</span>
+              
+                <span className="text-xs text-slate-600">No Task</span>
               </span>
               <span className="h-1 flex items-center">
                 <TextSnippetOutlinedIcon
                   style={{ color: "#ffa500", fontSize: 17 }}
                 />
-                <span className="text-xs text-slate-600">&nbsp;No Notes</span>
+                <span className="text-xs text-slate-600 ml-1">&nbsp;No Notes</span>
               </span>
             </div>
             <div className="flex flex-col h-[45%]">
@@ -761,7 +752,7 @@ function goToQueries() {
                 <AccessTimeOutlinedIcon
                   style={{ color: "gray", fontSize: 17 }}
                 />
-                <span className="text-xs text-slate-600">Created</span>
+                <span className="text-xs text-slate-600 ml-2">Created</span>
               </span>
               <span className="h-4 flex items-center">
                 <span className="text-xs text-slate-600">10-04-2024</span>
@@ -777,25 +768,25 @@ function goToQueries() {
     {
       cellRenderer: (params) => {
         return (
-          <div className="flex flex-col h-full w-full">
+          <div className="flex flex-col h-full w-full ml-[30%]">
             <div className="flex w-full flex-col justify-center items-start  h-[45%]">
               <div className=" w-full h-8 flex items-center">
                 <Link to={`/queries/${params.data.id}`}>
-                  <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 rounded-full flex justify-center items-center">
-                    <MdRemoveRedEye  
+                <div className="border px-2 p-1 text-xs bg-gradient-to-t from-[#e9e4e4]  to-[#fff] hover:bg-gradient-to-b from-[#f3f3f3]  to-[#e9e4e4]-md  flex items-center gap-1">
+                    <FaRegEye  
                       className="group-hover:text-white"
                       style={{ fontSize: 17 }}
                     />
                   </div>
                 </Link>
 
-                <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
+                <div className="border px-2 p-1 text-xs bg-gradient-to-t from-[#e9e4e4]  to-[#fff] hover:bg-gradient-to-b from-[#f3f3f3]  to-[#e9e4e4]-md  flex items-center gap-1">
                   <FaWhatsapp
                     className="group-hover:text-white"
                     style={{ fontSize: 17 }}
                   />
                 </div>
-                <div className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center">
+                <div className="border px-2 p-1 text-xs bg-gradient-to-t from-[#e9e4e4]  to-[#fff] hover:bg-gradient-to-b from-[#f3f3f3]  to-[#e9e4e4]-md  flex items-center gap-1">
                   <EmailOutlinedIcon
                     className="group-hover:text-white"
                     style={{ fontSize: 17 }}
@@ -804,10 +795,10 @@ function goToQueries() {
                 <Link to={`/queries/${params.data.id}`}>
                 <div
                
-                  className="group cursor-pointer hover:bg-black border border-black h-6 w-6 ml-1 rounded-full flex justify-center items-center"
+                  className="border px-2 p-1 text-xs bg-gradient-to-t from-[#e9e4e4]  to-[#fff] hover:bg-gradient-to-b from-[#f3f3f3]  to-[#e9e4e4]-md  flex items-center gap-1"
                 >
                   <EditOutlinedIcon
-                    className="group-hover:text-white"
+                    className=""
                     style={{ fontSize: 17 }}
                   />
                 </div>
@@ -837,14 +828,11 @@ function goToQueries() {
                 <span className="text-xs text-slate-600">
                   10-04-2024 - 07:42 PM
                 </span>
-                
               </span>
             </div>
 
             <div className="h-[10%]"></div>
-        
           </div>
-          
         );
       },
     },
@@ -961,41 +949,9 @@ function goToQueries() {
             <FaFilter className="text-sm" /> Filter
           </button>
 
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Btn handleClicked={toggleDrawer('query', true)} className="h-[80%] flex-shrink-0">
-        Add Queries
-      </Btn>
-      <Drawer anchor='right' open={drawerOpen['query']} onClose={toggleDrawer('query', false)}>
-        <div className="drawer">
-          <h2 className='dashboard-card-heading text-black'>Create Query</h2>
-          <AddQueryForm closeDrawer={toggleDrawer('query', false)} />
-        </div>
-      </Drawer>
-    </LocalizationProvider>
 
-    <button className="border-[1px] px-2 py-2 w-36 border-gray-400 rounded-md text-black flex-shrink-0 flex items-center justify-center h-[80%]">
-      Load Leads
-    </button>
-    <select
-      onChange={(e) => {
-        if (e.target.value === "import") {
-          handleOpenModal(importModal);
-        }
-      }}
-      value="Options"
-      className="border-[1px] px-2 py-2 border-gray-400 rounded-md text-black bg-transparent w-24 flex-shrink-0 h-[80%]"
-    >
-      <option value="default" className="hidden">Options</option>
-      <option value="">Download Excel Format</option>
-      <option value="import">Import Excel</option>
-      <option value="">Export Data</option>
-    </select>
-    <button
-      className="border-[1px] px-2 py-2 w-24 border-gray-400 rounded-md text-black flex-shrink-0 h-[80%] flex items-center justify-center gap-1"
-      onClick={toggleDropdown}
-    >
-      <FaFilter className="text-sm" /> Filter
-    </button>
+
+    
   </div>
 </div>
 

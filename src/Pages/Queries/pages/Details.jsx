@@ -107,11 +107,26 @@ function Details() {
               <div className="text-xs">Travel Month</div>
               <div className="text-sm mt-1 font-[550]">June</div>
             </div>
+
             <div className="w-full mt-5">
               <div className="text-xs">Assign To</div>
               <div className="text-sm mt-1 font-[550]">
                 TravBizz IT Solutions
               </div>
+            </div>
+          </div>
+
+          <div className="w-[20%]">
+            <div className="w-full">
+              <div className="text-xs">Duration</div>
+              <div className="text-sm mt-1 font-[550]">3 Days</div>
+            </div>
+
+            <div className="w-full mt-5">
+              {/* <div className="text-xs">Assign To</div>
+              <div className="text-sm mt-1 font-[550]">
+                TravBizz IT Solutions
+              </div> */}
             </div>
           </div>
         </div>

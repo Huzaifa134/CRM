@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
@@ -27,6 +27,12 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import "./dashboard.css"
 import { RiExternalLinkFill } from 'react-icons/ri';
+import WeatherCard from './Weather';
+import { IoLocationSharp } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
+
+
+
 
 const theme = createTheme({
   components: {
@@ -74,6 +80,7 @@ const theme = createTheme({
 });
 
 export default function Dashboard() {
+
   const data = [
     { id: 25455, name: 'Ammazing Dubai Tour (5 Nights / 6 Days)', assigned: "Mr. Meten Ranjani 4 Adults | 2 Child", confirmed: "Day 2 (02/jan/2024) | Srinagar To Gulmarg Early Morning proceed to Gulmarg Via Tangmarg Road , driving past willow trees , fast flowoing streams ansd lush green meadows. Gulmarg- the meadows of flowers is an apt tem ...." ,detail:"Driver name: Naveed Mustufa , Mobile Number : +912222333 , Vechile No : Jkl 556 , Vehicle with : Non Ac" },
     // { id: 25455, name: 'Ajay kumar', assigned: 212, confirmed: 140 },
@@ -193,6 +200,22 @@ export default function Dashboard() {
             </p>
           </article>
 
+
+
+  
+
+          <div className='dashboard-card dashboard-grid-item-col6 dashboard-task'>
+        <div className='flex justify-evenly'> 
+        <WeatherCard/>
+            <WeatherCard/>
+            <WeatherCard/>
+            <WeatherCard/>
+        </div>
+        </div>
+
+
+
+
           <article className='dashboard-card dashboard-grid-item-col6 dashboard-tours'>
             {/* <h2 className="dashboard-card-heading text-[#4a4a69]">
               Today's tours
@@ -231,6 +254,9 @@ export default function Dashboard() {
               </Btn>
             </div>
           </article>
+
+
+          
 
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-report'>
             <h2 className="dashboard-card-heading text-[#4a4a69]">
@@ -290,6 +316,11 @@ export default function Dashboard() {
             />
           </article>
 
+
+
+
+
+
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-chart'>
             <h2 className="dashboard-card-heading text-[#4a4a69]">
               Queries by status
@@ -325,6 +356,54 @@ export default function Dashboard() {
             />
     
           </article>
+
+
+
+          <div className='dashboard-card dashboard-grid-item-col6 dashboard-task'>
+        <div className='flex justify-evenly'> 
+       
+      <Link to="/queries">
+          <div className='bg-blue-500  cursor-pointer p-2 w-48 justify-center rounded-lg 
+                text-[#fff] flex items-center border shadow-md '>
+                  <p className='text-base font-normal flex items-center'> 
+                  <IoLocationSharp className='font-normal'/>Top Destinations
+                  </p>
+          </div>
+      </Link>
+
+      <Link to="/queries">
+              <div className='bg-[#ffe1e1]  cursor-pointer p-2 w-48 text-center rounded-lg text-[#000] border-[1px] border-[#dadada] shadow-md'>
+              <p className='text-base font-normal'> Dubai (975)</p>
+              </div>
+      </Link>
+
+      <Link to="/queries">
+          <div className='bg-[#ffe1e1] p-2  w-48 cursor-pointer text-center rounded-lg text-[#000] border-[1px] border-[#dadada] shadow-md'>
+          <p className='text-base font-normal'> Kashmir (93)</p>
+          </div>
+      </Link>
+
+      <Link to="/queries">
+          <div className='bg-[#ffe1e1] p-2 w-48  cursor-pointer text-center rounded-lg text-[#000] border-[1px] border-[#dadada] shadow-md'>
+          <p className='text-base font-normal'> Manali (77)</p>
+          </div>
+      </Link>
+
+      <Link to="/queries">
+          <div className='bg-[#ffe1e1] p-2 w-48  cursor-pointer text-center rounded-lg text-[#000] border-[1px] border-[#dadada] shadow-md'>
+          <p className='text-base font-normal'> Kerala (63)</p>
+          </div>
+      </Link>
+
+      <Link to="/queries">
+          <div className='bg-[#fff] p-2 w-48 cursor-pointer text-center rounded-lg text-[#000]  border-[1px] border-[#dadada] shadow-md  '>
+          <p className='text-base font-normal'> Thailand (50)</p>
+          </div>
+      </Link>
+
+        </div>
+        </div>
+
 
           <article className='dashboard-card dashboard-grid-item-col2 dashboard-sales'>
             <h2 className="dashboard-card-heading text-[#4a4a69]">
@@ -427,23 +506,23 @@ function Btn({ handleClick, children, className }) {
   )
 }
 
-function BtnOutlined({ handleClick, children }) {
+// BtnOutlined
+function BtnOutlined({ handleClicked, children }) {
   return (
-    <Button onClick={handleClick} variant='outlined'
+    <Button onClick={handleClicked} variant='outlined'
       sx={{
-        borderColor: '#0d47a1',
-        color: '#0d47a1',
+        color: '#fff',
+         backgroundColor: "#dc2626",
         '&:hover': {
-          color: '#0d47a1c0',
-          borderColor: '#0d47a1c0',
-          backgroundColor: '#0d47a110'
+          color: '#fff',
+          borderColor: '#dc2626',
+          backgroundColor: '#7f1d1d'
         }
       }}>
       {children}
     </Button>
   )
 }
-
 function AddClientForm({ closeDrawer }) {
   return (
     <form className="drawer-form">
@@ -467,22 +546,180 @@ function AddClientForm({ closeDrawer }) {
 
       <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
         <BtnOutlined handleClick={closeDrawer}>Cancel</BtnOutlined>
-        <Btn handleClick={() => { }}>Save</Btn>
-      </FormGroup>
+        <button className="bg-[#16a34a] transition-all hover:bg-green-900 text-[#ffff]"> <Link to="./queriesDetail">Save</Link> </button>      </FormGroup>
     </form>
   )
 }
 
+// function AddQueryForm({ closeDrawer }) {
+//   return (
+//     <form className="drawer-form">
+//       <FormControl sx={{ width: '100%' }}>
+//         <TextField select defaultValue="client" size='small' label="Type" >
+//           <MenuItem value="client">Client</MenuItem>
+//           <MenuItem value="agent">Agent</MenuItem>
+//           <MenuItem value="corporate">Corporate</MenuItem>
+//         </TextField>
+//       </FormControl>
+
+//       <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+//         <TextField label="Mobile" variant="outlined" size='small' required />
+//         <TextField label="Email" variant="outlined" size='small' required type='email' />
+//       </FormGroup>
+//       <FormGroup row sx={{ gap: '0.5rem' }}>
+//         <FormControl>
+//           <TextField select defaultValue="mr" size='small'>
+//             <MenuItem value="mr">Mr.</MenuItem>
+//             <MenuItem value="mrs">Mrs.</MenuItem>
+//             <MenuItem value="ms">Ms.</MenuItem>
+//             <MenuItem value="dr">Dr.</MenuItem>
+//             <MenuItem value="prof">Prof.</MenuItem>
+//           </TextField>
+//         </FormControl>
+//         <TextField label="Client name" variant="outlined" size='small' required sx={{ flex: 1 }} />
+//       </FormGroup>
+
+//       <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+//         <TextField label="Destinations" variant="outlined" size='small' required />
+//         <FormControl>
+//           <TextField select defaultValue="january" size='small' label="Travel month" fullWidth>
+//             <MenuItem value="january">January</MenuItem>
+//             <MenuItem value="february">February</MenuItem>
+//             <MenuItem value="march">March</MenuItem>
+//             <MenuItem value="april">April</MenuItem>
+//             <MenuItem value="may">May</MenuItem>
+//             <MenuItem value="june">June</MenuItem>
+//             <MenuItem value="july">July</MenuItem>
+//             <MenuItem value="august">August</MenuItem>
+//             <MenuItem value="september">September</MenuItem>
+//             <MenuItem value="october">October</MenuItem>
+//             <MenuItem value="november">November</MenuItem>
+//             <MenuItem value="december">December</MenuItem>
+//           </TextField>
+//         </FormControl>
+//       </FormGroup>
+
+//       <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+//         <DatePicker label="From Date" size="small" slotProps={{ textField: { size: 'small' } }} />
+//         <DatePicker label="To Date" size="small" slotProps={{ textField: { size: 'small' } }} />
+//       </FormGroup>
+
+//       <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+//         <TextField label="Adult" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 1, max: 24 } }} required />
+//         <TextField label="Child" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 12 } }} />
+//         <TextField label="Infant" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 6 } }} />
+//       </FormGroup>
+
+//       <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
+//         <FormControl>
+//           <TextField select defaultValue="16" size='small' label="Lead source" required>
+//             <MenuItem value="advertisment">Advertisment</MenuItem>
+//             <MenuItem value="agent">Agent</MenuItem>
+//             <MenuItem value="akbartravel">AkbarTravel</MenuItem>
+//             <MenuItem value="chat">Chat</MenuItem>
+//             <MenuItem value="facebook">Facebook</MenuItem>
+//             <MenuItem value="hellotravel">Hello Travel</MenuItem>
+//             <MenuItem value="instagram">Instagram</MenuItem>
+//             <MenuItem value="justdial">Justdial</MenuItem>
+//             <MenuItem value="online">Online</MenuItem>
+//             <MenuItem value="others">Others</MenuItem>
+//             <MenuItem value="referral">Referral</MenuItem>
+//             <MenuItem value="snapchat">snapchat</MenuItem>
+//             <MenuItem value="telephone">Telephone</MenuItem>
+//             <MenuItem value="walk-in">Walk-In</MenuItem>
+//             <MenuItem value="website">Website</MenuItem>
+//             <MenuItem value="whatsapp">WhatsApp</MenuItem>
+//           </TextField>
+//         </FormControl>
+//         <FormControl>
+//           <TextField select defaultValue="hot" size='small' label="Priority" required>
+//             <MenuItem value="general">General Query</MenuItem>
+//             <MenuItem value="hot">Hot Query</MenuItem>
+//           </TextField>
+//         </FormControl>
+//         <FormControl>
+//           <TextField select defaultValue="me" size='small' label="Assign To" required>
+//             <MenuItem value="me">Assign to me</MenuItem>
+//           </TextField>
+//         </FormControl>
+//       </FormGroup>
+
+//       <FormControl sx={{ width: '100%' }}>
+//         <TextField select defaultValue="activitiesonly" size='small' label="Select service">
+//           <MenuItem value="activitiesonly">Activities only</MenuItem>
+//           <MenuItem value="flightonly">Flight only</MenuItem>
+//           <MenuItem value="fullpackage">Full package</MenuItem>
+//           <MenuItem value="hotelflight">Hotel + Flight</MenuItem>
+//           <MenuItem value="hoteltransport">Hotel + Transport</MenuItem>
+//           <MenuItem value="hotelonly">Hotel only</MenuItem>
+//           <MenuItem value="transportonly">Transport only</MenuItem>
+//           <MenuItem value="visaonly">Visa only</MenuItem>
+//         </TextField>
+//       </FormControl>
+
+//       <TextField label="Remark" variant="outlined" size='small' multiline />
+
+//       <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
+//         <BtnOutlined handleClick={closeDrawer}>Cancel</BtnOutlined>
+//         <Btn handleClick={() => { }}>Save</Btn>
+//       </FormGroup>
+//     </form>
+//   )
+// }
+
+
 function AddQueryForm({ closeDrawer }) {
+const [type, setType] = useState("client");
+
+// type change function
+const handleTypeChange = (event) => {
+  setType(event.target.value);
+};
+
+
+// Calculate days and Night
+const [fromDate, setFromDate] = useState("");
+const [toDate, setToDate] = useState("");
+const [days, setDays] = useState(0);
+const [nights, setNights] = useState(0);
+
+useEffect(() => {
+  if (fromDate && toDate) {
+    const from = new Date(fromDate);
+    const to = new Date(toDate);
+
+    // Calculate the difference in milliseconds
+    const difference = to.getTime() - from.getTime();
+
+    // Convert milliseconds to days
+    const daysDifference = Math.ceil(difference / (1000 * 3600 * 24));
+
+    const nightsDifference = Math.max(0, daysDifference - 1); // Subtract one day for nights calculation
+
+    setDays(daysDifference);
+    setNights(nightsDifference);
+  } else {
+    setDays('');
+    setNights('');
+  }
+}, [fromDate, toDate, location.pathname]);
+
   return (
     <form className="drawer-form">
-      <FormControl sx={{ width: '100%' }}>
-        <TextField select defaultValue="client" size='small' label="Type" >
-          <MenuItem value="client">Client</MenuItem>
-          <MenuItem value="agent">Agent</MenuItem>
-          <MenuItem value="corporate">Corporate</MenuItem>
-        </TextField>
-      </FormControl>
+       <FormControl sx={{ width: '100%' }} value={"DEFAULT"} disabled={true}>
+      <TextField
+        select
+        value={type}
+        onChange={handleTypeChange}
+        defaultValue="client"
+        size='small'
+        label="Type"
+      >
+        <MenuItem value="client">Client</MenuItem>
+        <MenuItem value="agent">Agent</MenuItem>
+        <MenuItem value="corporate">Corporate</MenuItem>
+      </TextField>
+    </FormControl>
 
       <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
         <TextField label="Mobile" variant="outlined" size='small' required />
@@ -501,6 +738,13 @@ function AddQueryForm({ closeDrawer }) {
         <TextField label="Client name" variant="outlined" size='small' required sx={{ flex: 1 }} />
       </FormGroup>
 
+     {type === 'agent' || type === 'corporate' ? (
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+        <TextField label="Company" variant="outlined" size='small' required />
+        <TextField label="GST" variant="outlined" size='small' required type='email' />
+      </FormGroup>
+    ) : null}
+  
       <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
         <TextField label="Destinations" variant="outlined" size='small' required />
         <FormControl>
@@ -521,12 +765,36 @@ function AddQueryForm({ closeDrawer }) {
         </FormControl>
       </FormGroup>
 
-      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
-        <DatePicker label="From Date" size="small" slotProps={{ textField: { size: 'small' } }} />
-        <DatePicker label="To Date" size="small" slotProps={{ textField: { size: 'small' } }} />
-      </FormGroup>
+
+
 
       <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }}>
+    <DatePicker
+      value={fromDate}
+      onChange={(date) => setFromDate(date)}
+      label="From Date"
+      size="small"
+      slotProps={{ textField: { size: 'small' } }}
+    />
+    <DatePicker
+      value={toDate}
+      onChange={(date) => setToDate(date)}
+      label="To Date"
+      size="small"
+      slotProps={{ textField: { size: 'small' } }}
+    />
+    <TextField
+      value={(nights !== 0 ? `${nights} Nights, ` : '') + days + ' Days'}
+      label="Package Duration"
+      variant="outlined"
+      size="small"
+      required
+      sx={{ flex: 1, width: 24 }}
+    />
+  </FormGroup>
+
+      <FormGroup row sx={{ gap: '0.5rem', '&>*': { flex: 1 } }} >
+        
         <TextField label="Adult" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 1, max: 24 } }} required />
         <TextField label="Child" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 12 } }} />
         <TextField label="Infant" variant="outlined" size='small' type='number' InputProps={{ inputProps: { min: 0, max: 6 } }} />
@@ -581,10 +849,14 @@ function AddQueryForm({ closeDrawer }) {
 
       <TextField label="Remark" variant="outlined" size='small' multiline />
 
-      <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
-        <BtnOutlined handleClick={closeDrawer}>Cancel</BtnOutlined>
-        <Btn handleClick={() => { }}>Save</Btn>
-      </FormGroup>
+      <div className="buttons">
+ <FormGroup  FormGroup row sx={{ gap: '0.5rem',  flexWrap: 'nowrap', '& > *': { flex: 1 }, color: "red" }}>
+      <BtnOutlined  handleClicked={closeDrawer}>Cancel</BtnOutlined>
+    <Link to="./queriesDetail">
+      <button className="bg-[#16a34a] w-64 p-2 transition-all hover:bg-green-900 text-[#ffff]"> Save</  button>
+    </Link> 
+    </FormGroup>
+ </div>
     </form>
   )
 }
@@ -631,8 +903,7 @@ function AddItineraryForm({ closeDrawer }) {
 
       <FormGroup row sx={{ gap: '0.5rem', flexWrap: 'nowrap', '& > *': { flex: 1 } }}>
         <BtnOutlined handleClick={closeDrawer}>Cancel</BtnOutlined>
-        <Btn handleClick={() => { }}>Save</Btn>
-      </FormGroup>
+        <button className="bg-[#16a34a] transition-all hover:bg-green-900 text-[#ffff]"> <Link to="./queriesDetail">Save</Link> </button>      </FormGroup>
     </form>
   )
 }

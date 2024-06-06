@@ -79,7 +79,7 @@ function Hotel() {
   });
 
   const [search, setSearch] = useState("");
-  const [row, setRow] = useState();
+  // const [row, setRow] = useState();
   const [open, setOpen] = useState(false);
   const [tarifOpen, setTarifOpen] = useState(false);
   const [hotelName, sethotelName] = useState("");
@@ -88,6 +88,16 @@ function Hotel() {
 
   const [reload, setReload] = useState(false);
   const [click, setClick] = useState(true);
+
+
+
+  const row = [
+    {
+      name: "xyz hotel",
+      hotel_img_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpj1SJX9-JuzPvw5jwkWZUIyQZ9crza2K279VJ_ntNaAqBABQDpzaB5G4wPWsXsx2Q-RE&usqp=CAU",
+      Destination: "Manali"
+    }
+  ]
 
   const [column, setColumn] = useState([
     {
