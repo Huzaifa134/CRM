@@ -220,8 +220,8 @@ function CollectionReport() {
   };
 
   return (
-    <div className="h-screen flex flex-col">
-      <div className="flex justify-between items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
+    <div className="h-full flex flex-col">
+      <div className="flex justify-between items-center h-16 sm:h-14 sm:flex-row py-2 flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Collection Report </div>
         <div className="flex justify-center w-full sm:w-1/2 items-center gap-3 h-full">
           <div className="custom-date-picker">
@@ -246,22 +246,22 @@ function CollectionReport() {
               setSearch(e.target.value);
               quickFilter();
             }}
-            className="border border-slate-300 h-[80%] px-2 rounded-md text-sm w-[50%] focus:outline-none focus:border focus:border-black"
+            className="border border-slate-300 h-[40px] px-2 rounded-md text-sm w-[50%] focus:outline-none focus:border focus:border-black"
             placeholder="Search by anything...."
           />
         </div>
       </div>
 
-      <div className="flex sm:flex-row flex-col justify-evenly px-2 py-1 items-center h-fit sm:h-[4.5rem]">
-        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#655be6] rounded-md">
+      <div className="flex sm:flex-row flex-col justify-evenly px-2 py-2 items-center h-fit sm:h-[4.5rem]">
+        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[52px] flex flex-col justify-center items-center bg-[#655be6] rounded-md">
           <div className="text-white font-bold text-2xl">₹1,637,211</div>
           <div className="text-white font-bold text-[0.6rem]">TOTAL AMOUNT</div>
         </div>
-        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#0cb5b5] rounded-md">
+        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[52px] flex flex-col justify-center items-center bg-[#0cb5b5] rounded-md">
           <div className="text-white font-bold text-2xl">₹1,637,211</div>
           <div className="text-white font-bold text-[0.6rem]">RECEIVED</div>
         </div>
-        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[80%] flex flex-col justify-center items-center bg-[#e45555] rounded-md">
+        <div className="sm:mt-0 mt-3 w-[95%] sm:w-[32%] h-[52px] flex flex-col justify-center items-center bg-[#e45555] rounded-md">
           <div className="text-white font-bold text-2xl">₹1,637,211</div>
           <div className="text-white font-bold text-[0.6rem]">PENDING</div>
         </div>

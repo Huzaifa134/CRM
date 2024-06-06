@@ -310,7 +310,7 @@ function ProfitLossReport() {
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-full flex flex-col">
       <div className="flex justify-between items-center h-16 sm:h-14 sm:flex-row flex-col px-2 border-t border-slate-300 border-b bg-[#eff3f7]">
         <div className="font-bold"> Profit / Loss Report </div>
         <div className="flex justify-center w-full sm:w-1/2 items-center gap-3 h-full">
